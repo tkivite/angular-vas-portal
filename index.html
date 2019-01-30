@@ -43,9 +43,9 @@
                         <div id="collapseOne" class="panel-collapse collapse show" role="tabpanel" aria-labelledby="headingOne">
                             <div class="panel-body">
                                  <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><a class="nav-link" href="#">Sales</a></li>
-                                    <li class="list-group-item"><a class="nav-link" href="#">Notifications</a></li>
-                                    <li class="list-group-item"><a class="nav-link" href="#">Released Items</a></li>
+                                    <li class="list-group-item"><a class="nav-link" href="#">Sales <i class="fa fa-money-bill-alt" style="color:#88b840"></i></a></li>
+                                    <li class="list-group-item"><a class="nav-link" href="#">Notifications <i class="fa fa-envelope" style="color:#88b840"></i></a></li>
+                                    <li class="list-group-item"><a class="nav-link" href="#">Released Items <i class="fa fa-list" style="color:#88b840"></i></a></li>
                                   </ul>
                             </div>
                         </div>
@@ -60,13 +60,13 @@
                                 </a>
                             </h4>
                         </div>
-                        <div id="collapseTwo" class="panel-collapse collapse show" role="tabpanel" aria-labelledby="headingTwo">
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                             <div class="panel-body">
                                
                                  <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><a class="nav-link" href="#">Manage Users</a></li>
-                                    <li class="list-group-item"><a class="nav-link" href="#">Confirm Collection</a></li>
-                                    <li class="list-group-item"><a class="nav-link" href="#">Send Invoice</a></li>
+                                    <li class="list-group-item"><a class="nav-link" href="#">Manage Users <i class="fa fa-users" style="color:#88b840"></i></a></li>
+                                    <li class="list-group-item"><a class="nav-link" href="#">Confirm Collection <i class="fa fa-envelope" style="color:#88b840"></i></a></li>
+                                    <li class="list-group-item"><a class="nav-link" href="#">Send Invoice <i class="fa fa-envelope" style="color:#88b840"></i></a></li>
                                   </ul>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
         <div id="content">
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
+                <div class="container-fluid topbar">
 
                    <button type="button" id="sidebarCollapse" class="btn" style="background: #7386D5; color:white; margin-left: -60px">
                        
@@ -108,20 +108,20 @@
                         <ul class="nav navbar-nav ml-auto">
                            
                             <li class="nav-item">
-                                <a class="nav-link all-tasks-link" href="#">Home</a>
+                                <a class="top-link " href="#"><i class="fa fa-home" style="color:#88b840"></i> Home</a>
                             </li>
                            
                             <li class="nav-item">
-                                <a class="nav-link" href="#" onclick="dataCategory('Completed')">Sales</a>
+                                <a class="top-link" href="#" onclick="dataCategory('Completed')"><i class="fa fa-money-bill-alt" style="color:#88b840"></i> Sales</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" onclick="dataCategory('Completed')">Released</a>
+                                <a class="top-link" href="#" onclick="dataCategory('Completed')"><i class="fa fa-list" style="color:#88b840"></i> Released</a>
                             </li>
                              <li class="nav-item">
-                                <a class="nav-link" href="#" onclick="dataCategory('Overdue')">Notifications </a>
+                                <a class="top-link" href="#" onclick="dataCategory('Overdue')"><i class="fa fa-envelope" style="color:#88b840"></i> Notifications </a>
                             </li>
                              <li class="nav-item">
-                                <a class="nav-link" href="# onclick="dataCategory('Cancelled')">My Account</a>
+                                <a class="top-link" href="#" onclick="dataCategory('Cancelled')"><i class="fa fa-user" style="color:#88b840"></i> My Account</a>
                             </li>
                         </ul>
                     </div>

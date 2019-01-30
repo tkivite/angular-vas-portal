@@ -24,12 +24,21 @@ a:focus {
     transition: all 0.3s;
 }
 
+.dynamicContent{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.topbar {
+    
+    padding-right: 0px !important;
+    }
+
 .navbar {
-    padding: 15px 10px;
     background: #fff;
+    padding:0px !important;
     border: none;
     border-radius: 0;
-    margin-bottom: 40px;
+    margin-bottom: 21px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -38,12 +47,28 @@ a:focus {
     outline: none !important;
     border: none;
 }
+#navbarSupportedContent{
+    line-height: 1.0em;
+}
 
 .line {
     width: 100%;
     height: 1px;
     border-bottom: 1px dashed #ddd;
     margin: 40px 0;
+}
+
+.top-link, .top-link:visited {
+   background-color: #F1F3F6;
+   color: #1635e0;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.top-link:hover, .top-link:active {
+   background-color: #FAFAFA;
 }
 
 /* ---------------------------------------------------
@@ -99,6 +124,11 @@ a[aria-expanded="true"] {
     color: #fff;
     background: #6d7fcc;
 }
+
+  #sidebar ul li svg:not(:root).svg-inline--fa {
+         float: right;
+        
+     }
 
 a[data-toggle="collapse"] {
     position: relative;
@@ -182,7 +212,6 @@ a.article:hover {
     background: #ffffff;
     border-top: 5px solid #d2d6de;
     margin-bottom: 20px;
-    margin-left: 15px;
     width: 100%;
     box-shadow: 0 1px 1px rgba(0,0,0,0.1);
     min-height: 450px;
@@ -273,3 +302,22 @@ a.article:hover {
         display: block;
     }
 
+.login-panel {
+    margin-bottom: 20px;
+    margin-top: 25%;
+    background-color: #fff;
+    border: 1px solid transparent;       
+    border-radius: 4px;
+    
+}
+.login-panel>.panel-heading {
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+        border-bottom-color: transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    }
+
+    .login-panel>.panel-body {
+    padding: 15px
+    }
