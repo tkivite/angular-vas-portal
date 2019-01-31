@@ -28,6 +28,10 @@ a:focus {
     margin-left: 0px;
     margin-right: 0px;
 }
+.row{
+    width:100% !important;
+}
+
 .topbar {
     
     padding-right: 0px !important;
@@ -49,6 +53,7 @@ a:focus {
 }
 #navbarSupportedContent{
     line-height: 1.0em;
+    padding-left: 25px;
 }
 
 .line {
@@ -321,3 +326,69 @@ a.article:hover {
     .login-panel>.panel-body {
     padding: 15px
     }
+
+   .dataTable{
+        font-size: 0.9em;
+    }
+  
+.table td  {
+    padding: .3em !important;
+    vertical-align: middle !important;   
+}
+.table th {
+    margin-top: .5em !important;
+    vertical-align: bottom !important;
+    border-top: 1px solid #dee2e6;
+}
+ .dataTable button{
+        padding: 0.3em !important;
+        line-height: 0.3em !important;
+    }
+
+.page-title{
+    font-size: 1.6em;    
+    color: #255fb6;
+    font-weight: 500;
+}
+.store-name{
+    font-size: 1.6em;
+    margin-right: px;
+    position: relative;
+    margin-top: 10px;
+}
+.dataTables_length{
+    height: 40px;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+      background-color: #F1F3F6;
+}
+.dataTables_paginate .paginate_button.disabled{
+    cursor: not-allowed;
+    background: rgba(0,0,0,.05);
+ }
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled{
+    cursor: not-allowed;
+    background: rgba(0,0,0,.05);
+ }
+.dataTables_paginate .paginate_button.disabled a{
+    cursor: not-allowed;
+ }
+
+ .dataTables_wrapper .dataTables_paginate .paginate_button.active{
+    background-color: white;
+ }
+ .alert.confirmed {
+    position: relative;
+    padding: 0px;
+    margin-bottom: 0px;
+}
+#cccform{
+    border: 2px dashed #ddd;
+    padding: 10px;
+    border-radius: 5px;
+}
+#div-dashboard{
+    border: 2px dashed #ddd;
+    padding-top: 30px;
+    border-radius: 5px;
+}

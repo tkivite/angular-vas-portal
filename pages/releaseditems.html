@@ -1,0 +1,102 @@
+<div class="box box-primary">
+    
+    <div class="box-body">
+        <span id="responseText"></span>
+        <table class="table table-striped" id="releasetable">
+        	<thead>
+                <tr class="header">                    
+                    <th>Customer Name</th>
+                    <th>Id Number</th>
+                    <th>Item(s)</th>
+                    <th>Amount Approved</th>
+                    <th>Status</th>
+                     <th>Time Applied</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                    <tr class="">
+                    <td>Jackson Kiarie</td>
+                    <td>9876543</td>
+                    <td>Dining Table</td>
+                    <td>KES 25,000</td>
+                    <td>Released</td>
+                    <td>12 Jan 2019 10.08 AM</td>
+                    <td>
+                        <button type="button" class="btn btn-xs btn-primary" onclick="editTask(1)">    <i class="fa fa-eye"></i>                    
+                        </button>  
+                    </td>
+                </tr>
+                <tr class="">
+                    <td>Purity Maina</td>
+                    <td>10293847</td>
+                    <td>Bean Bag</td>
+                    <td>KES 35,000</td>
+                    <td>Released</td>
+                    <td>25 Jan 2019 10.08 AM</td>
+                    <td>
+                        <button type="button" class="btn btn-xs btn-primary" onclick="editTask(1)">    <i class="fa fa-eye"></i>                    
+                        </button>  
+                    </td>
+                </tr>
+                 <tr class="">
+                    <td>Titus Kivite</td>
+                    <td>3492882</td>
+                    <td>Samsung TV</td>
+                    <td>KES 25,000</td>
+                    <td>Released</td>
+                    <td>19 Jan 2019 12.08 PM</td>
+                    <td>
+                        <button type="button" class="btn btn-xs btn-primary" onclick="editTask(1)">    <i class="fa fa-eye"></i>                    
+                        </button>  
+                    </td>
+                </tr>
+                 <tr class="">
+                    <td>Jackson Kiarie</td>
+                    <td>9876543</td>
+                    <td>Dining Table</td>
+                    <td>KES 25,000</td>
+                    <td>Released</td>
+                    <td>12 Jan 2019 10.08 AM</td>
+                    <td>
+                        <button type="button" class="btn btn-xs btn-primary" onclick="editTask(1)">    <i class="fa fa-eye"></i>                    
+                        </button>  
+                    </td>
+                </tr>
+                <tr class="">
+                    <td>Purity Maina</td>
+                    <td>10293847</td>
+                    <td>Bean Bag</td>
+                    <td>KES 35,000</td>
+                    <td>Released</td>
+                    <td>25 Jan 2019 10.08 AM</td>
+                    <td>
+                        <button type="button" class="btn btn-xs btn-primary" onclick="editTask(1)">    <i class="fa fa-eye"></i>                    
+                        </button>  
+                    </td>
+                </tr>
+                 <tr class="">
+                    <td>Titus Kivite</td>
+                    <td>3492882</td>
+                    <td>Samsung TV</td>
+                    <td>KES 25,000</td>
+                    <td>Released</td>
+                    <td>19 Jan 2019 12.08 PM</td>
+                    <td>
+                        <button type="button" class="btn btn-xs btn-primary" onclick="editTask(1)">    <i class="fa fa-eye"></i>                    
+                        </button>  
+                    </td>
+                </tr>
+            </tbody>
+         </table>
+    </div>
+</div>
+
+ <script>
+    $(document).ready(function() {
+        $('.table').dataTable().fnDestroy();
+        $('#releasetable').DataTable();
+        $('#releasetable_length').html('<p class="page-title">Released Items</p>');
+    } );
+    </script>

@@ -7,14 +7,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>LipaLater Partners</title>
+    <!-- Datatable CSS CDN -->
+    <link rel="stylesheet" href="datatables/jquery.dataTables.min.css">
     <link rel="stylesheet" href="datatables/dataTables.bootstrap.css"> 
-    <!-- Bootstrap CSS CDN -->
+      <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="global/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="style.css">
 
-    <!-- Font Awesome JS -->
+   
+    <!-- Solid JS -->
     <script defer src="global/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+     <!-- Font Awesome JS -->
     <script defer src="global/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>    
     
 </head>
@@ -24,7 +28,7 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">                
-                <img src="global/logo.png"/>
+                <img src="global/logo.png"/>               
             </div>
 
             <div class="container demo">
@@ -43,9 +47,9 @@
                         <div id="collapseOne" class="panel-collapse collapse show" role="tabpanel" aria-labelledby="headingOne">
                             <div class="panel-body">
                                  <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><a class="nav-link" href="#">Sales <i class="fa fa-money-bill-alt" style="color:#88b840"></i></a></li>
-                                    <li class="list-group-item"><a class="nav-link" href="#">Notifications <i class="fa fa-envelope" style="color:#88b840"></i></a></li>
-                                    <li class="list-group-item"><a class="nav-link" href="#">Released Items <i class="fa fa-list" style="color:#88b840"></i></a></li>
+                                    <li class="list-group-item"><a class="nav-link sales-link" href="#">Sales <i class="fa fa-money-bill-alt" style="color:#88b840"></i></a></li>
+                                    <li class="list-group-item"><a class="nav-link notification-link" href="#">Notifications <i class="fa fa-envelope" style="color:#88b840"></i></a></li>
+                                    <li class="list-group-item"><a class="nav-link released-link" href="#">Released Items <i class="fa fa-list" style="color:#88b840"></i></a></li>
                                   </ul>
                             </div>
                         </div>
@@ -64,9 +68,9 @@
                             <div class="panel-body">
                                
                                  <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><a class="nav-link" href="#">Manage Users <i class="fa fa-users" style="color:#88b840"></i></a></li>
-                                    <li class="list-group-item"><a class="nav-link" href="#">Confirm Collection <i class="fa fa-envelope" style="color:#88b840"></i></a></li>
-                                    <li class="list-group-item"><a class="nav-link" href="#">Send Invoice <i class="fa fa-envelope" style="color:#88b840"></i></a></li>
+                                    <li class="list-group-item"><a class="nav-link users-link" href="#">Manage Users <i class="fa fa-users" style="color:#88b840"></i></a></li>
+                                    <li class="list-group-item"><a class="nav-link verify-collection-link" href="#">Confirm Collection <i class="fa fa-envelope" style="color:#88b840"></i></a></li>
+                                    <li class="list-group-item"><a class="nav-link invoice-link" href="#">Send Invoice <i class="fa fa-envelope" style="color:#88b840"></i></a></li>
                                   </ul>
                             </div>
                         </div>
@@ -105,30 +109,34 @@
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav ml-auto">
+                        <div >                            
+                            <h2 class="store-name">Game -Garden City</h2>
+                        </div>
+
+                        <ul class="nav navbar-nav ml-auto"> 
+                            <li class="nav-item">
+                                <a class="top-link home-link" href="#"><i class="fa fa-home" style="color:#88b840"></i> Home</a>
+                            </li>
                            
                             <li class="nav-item">
-                                <a class="top-link " href="#"><i class="fa fa-home" style="color:#88b840"></i> Home</a>
-                            </li>
-                           
-                            <li class="nav-item">
-                                <a class="top-link" href="#" onclick="dataCategory('Completed')"><i class="fa fa-money-bill-alt" style="color:#88b840"></i> Sales</a>
+                                <a class="top-link sales-link" href="#" ><i class="fa fa-money-bill-alt" style="color:#88b840"></i> Sales</a>
                             </li>
                             <li class="nav-item">
-                                <a class="top-link" href="#" onclick="dataCategory('Completed')"><i class="fa fa-list" style="color:#88b840"></i> Released</a>
+                                <a class="top-link released-link" href="#"><i class="fa fa-list" style="color:#88b840"></i> Released</a>
                             </li>
                              <li class="nav-item">
-                                <a class="top-link" href="#" onclick="dataCategory('Overdue')"><i class="fa fa-envelope" style="color:#88b840"></i> Notifications </a>
+                                <a class="top-link notification-link" href="#" ><i class="fa fa-envelope" style="color:#88b840"></i> Notifications </a>
                             </li>
                              <li class="nav-item">
-                                <a class="top-link" href="#" onclick="dataCategory('Cancelled')"><i class="fa fa-user" style="color:#88b840"></i> My Account</a>
+                                <a class="top-link myaccount-link" href="#" ><i class="fa fa-user" style="color:#88b840"></i> My Account</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </nav>
             <div class ="row dynamicContent">
-                  <div class="box box-primary">
+                 <div w3-include-html="dashboard.html"></div> 
+               <!--    <div class="box box-primary">
                             <div class="panel-heading panel-primary row">
                                 <h2 class="panel-title col-sm-10 col-sm-offset-2"></h2>
                             </div>
@@ -143,7 +151,7 @@
                             </div>      
                         
                             
-                    </div>
+                    </div> -->
             </div>
 
                     
@@ -154,8 +162,7 @@
     <!-- jQuery CDN - Slim version (=without AJAX) -->
   <!--  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <!-- Popper.JS -->
-    <script src="jQuery/jQuery-2.1.4.min.js"></script>
-    
+    <script src="jQuery/jQuery-2.1.4.min.js"></script>  
 
 
     <script src="datatables/jquery.dataTables.min.js"></script>
