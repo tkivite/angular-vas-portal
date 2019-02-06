@@ -1,16 +1,18 @@
-# LipalaterVasPortal
+# Lipalater Vas Portal
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.0.
 
 ## Prepare development environment- what you will need:
- # Node.js version 8.x or 10.x  run node -v in a terminal to check your version.
-    To get Node.js, go to nodejs.org. 
-    On Debian distro I did the following as root:
-    curl -sL https://deb.nodesource.com/setup_10.x | bash -
-    apt-get install -y nodejs
+   Node.js version 8.x or 10.x  run node -v in a terminal to check your version.
+   to get Node.js, go to nodejs.org.
+   On Debian distro I did the following as root:
+   curl -sL https://deb.nodesource.com/setup_10.x | bash -
+   apt-get install -y nodejs
 
-# Npm package manager- to download and install libraries and packages. run npm -v in a terminal to check if installed
-    pm client command line interface is installed with Node.js by default.
+  
+# Npm package manager
+  To download and install libraries and packages. run npm -v in a terminal to check if installed
+    npm client command line interface is installed with Node.js by default.
 # Angular CLI
     npm install -g @angular/cli
 
