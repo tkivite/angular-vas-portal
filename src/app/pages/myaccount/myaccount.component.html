@@ -1,3 +1,45 @@
-<p>
-  myaccount works!
-</p>
+<div class="box box-primary">
+	<div class="panel-heading panel-primary row">
+		<h2 class="panel-title col-sm-10 col-sm-offset-2"></h2>
+	</div>
+	<div class="box-body">
+		<span id="responseText"></span>
+		<div id ="myaccform">
+   			<form autocomplete="off" [formGroup]="formAdd" (ngSubmit)="onUserSubmit(formAdd)">
+	            <div class="row">
+	                <div class="col-sm-12">
+	                    <div class="form-group">
+	                        <label for="inputName">Entity File</label>
+	                        <input formControlName="fileName" class="form-control validation-field" id="inputName" placeholder="Name" type="text">
+	                        <small class="text-danger" *ngIf="formAdd.get('fileName').touched && formAdd.get('fileName').hasError('required')"> Entity File is required</small>
+	                    </div>
+	                </div>
+	                <div class="col-sm-12">
+	                    <div class="form-group">
+	                        <label for="inputName"> File </label>
+	                        <input id="selectFile" name="selectFile" formControlName="datafile" class="form-control validation-field" placeholder=" File" type="file">
+	                    </div>
+	                </div>
+	            </div>
+
+	                  <div class="row mb-4">
+	                <div class="col-sm-12">
+	                    <div class="card">
+	                        <div class="card-header">
+	                            <div class="row align-items-right">
+                                    <button [disabled]="!formAdd.valid" class="btn btn-danger" type="submit">Submit</button>
+                                </div>
+	                        </div>
+	                        <div class="card-block">
+	                            <div class="row">
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+			</form>
+		</div>
+	</div>
+</div>
+
+

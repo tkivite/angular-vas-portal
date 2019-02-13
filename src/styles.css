@@ -406,7 +406,7 @@ div.card-body{
     padding: 0px;
     margin-bottom: 0px;
 }
-#cccform{
+#cccform,#myaccform{
     border: 2px dashed #ddd;
     padding: 10px;
     border-radius: 5px;

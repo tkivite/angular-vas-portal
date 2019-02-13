@@ -1,0 +1,22 @@
+{
+  "users": [
+    { "id": 1, "store":{"id": 33,"name":"Gem - Garden City"},
+    "firstname": "Titus", "lastname": "kivite" , "email": "tkivite@gmail.com", 
+    "phoneNumber": "0725475051", "status": "Active",
+     "lastLoginDate": "2019-02-07 22:22:22", 
+    "lastPasswordChangeDate": "2019-02-07 22:22:22","createdBy":"tkivite","updatedBy":"tkivite","timeCreated":"","timeUpdated":""},
+    { "id": 2, "store":{"id": 33,"name":"Gem - Garden City"},"firstname": "Titus", "lastname": "kivite" , "email": "tkivite@gmail.com", "phoneNumber": "0725475051", "status": "Active", "lastLoginDate": "2019-02-07 22:22:22", 
+    "lastPasswordChangeDate": "2019-02-07 22:22:22","createdBy":"tkivite","updatedBy":"tkivite","timeCreated":"","timeUpdated":""},
+    { "id": 3, "store":{"id": 33,"name":"Gem - Garden City"},"firstname": "Titus", "lastname": "kivite" , "email": "tkivite@gmail.com", "phoneNumber": "0725475051", "status": "Active", "lastLoginDate": "2019-02-07 22:22:22", 
+    "lastPasswordChangeDate": "2019-02-07 22:22:22","createdBy":"tkivite","updatedBy":"tkivite","timeCreated":"","timeUpdated":""}
+  ],
+  "released": [
+    { "id": 1, "itemCategory": "Electronic", "itemType": "Laptop", "itemBrand": "HP" , "timeReleased": "","customer":{"id":"34","name":"Titus Kivite","idNumber":"23850236"},"externalId":"" },
+    { "id": 2, "itemCategory": "Electronic", "itemType": "Laptop", "itemBrand": "HP" , "timeReleased": "","customer":{"id":"34","name":"Titus Kivite","idNumber":"23850236"},"externalId":"" },
+    { "id": 3, "itemCategory": "Electronic", "itemType": "Laptop", "itemBrand": "HP" , "timeReleased": "","customer":{"id":"34","name":"Titus Kivite","idNumber":"23850236"},"externalId":"" }
+  ],
+  "stores": [{ "id": 33,"storeName": "Gem Garden City" ,"country": "Kenya","city": "Mombasa","geocordinates": "132323323,23232323"},
+  	         { "id": 32,"storeName": "Gem Garden City" ,"country": "Kenya","city": "Mombasa","geocordinates": "132323323,23232323"},
+  	         { "id": 31,"storeName": "Gem Garden City" ,"country": "Kenya","city": "Mombasa","geocordinates": "132323323,23232323"}
+]
+}
