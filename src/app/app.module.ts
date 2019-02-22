@@ -2,15 +2,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {DataTableModule} from "angular-6-datatable";
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import {DataTablesModule} from 'angular-datatables';
 import { HttpClientModule } from '@angular/common/http';
 
-import { UploadService } from './services/fileuploader.service';
+import { SweetAlertService } from 'angular-sweetalert-service';
 
 
 import { AppRoutingModule } from './app-routing.module';
+import { BlockUIModule } from 'ng-block-ui';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { ToastrModule } from 'ngx-toastr';
+import { DatePipe } from '@angular/common';
+
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SalesComponent } from './pages/sales/sales.component';
@@ -26,8 +31,11 @@ import { HeaderComponent } from './theme/header/header.component';
 import { FooterComponent } from './theme/footer/footer.component';
 import { SidebarComponent } from './theme/sidebar/sidebar.component';
 import { LoginComponent } from './pages/login/login.component';
-
-
+import { BusinessentityComponent } from './pages/businessentity/businessentity.component';
+import { CreateBeComponent } from './pages/businessentity/create/create.component';
+import { UpdateComponent } from './pages/businessentity/update/update.component';
+import { StoreComponent } from './pages/stores/store.component';
+import { CreateStoreComponent }      from './pages/stores/create/create.component';
 
 @NgModule({
   declarations: [
@@ -45,17 +53,25 @@ import { LoginComponent } from './pages/login/login.component';
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
-    LoginComponent
+    LoginComponent,
+    BusinessentityComponent,
+    CreateBeComponent,
+    UpdateComponent,
+    StoreComponent,
+    CreateStoreComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
     HttpClientModule,
     AngularFontAwesomeModule,
-    DataTableModule,FormsModule, ReactiveFormsModule,NgxDatatableModule, 
+    DataTablesModule,FormsModule, ReactiveFormsModule, 
+    BlockUIModule.forRoot(),
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(),
     AppRoutingModule
   ],
-  providers: [UploadService],
+  providers: [SweetAlertService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

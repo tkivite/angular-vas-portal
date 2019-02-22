@@ -1,7 +1,7 @@
 <div class="wrapper">
   <nav id="sidebar">
   <div class="sidebar-header">                
-    <img src="logo.png"/>               
+    <img src="./assets/logo.png"/>               
   </div>
     <div class="container demo">
       <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" class="panel-group">
@@ -15,6 +15,16 @@
           </ng-template>
           <ng-template ngbPanelContent>
             <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <a class="nav-link sales-link"  routerLink="/onboarding">Businesses 
+                  <i class="fa fa-money-bill" style="color:#88b840"></i>
+                </a>
+              </li>
+               <li class="list-group-item">
+                <a class="nav-link sales-link"  routerLink="/store">Stores 
+                  <i class="fa fa-shopping-cart" style="color:#88b840"></i>
+                </a>
+              </li>
               <li class="list-group-item">
                 <a class="nav-link sales-link"  routerLink="/sales">Sales 
                   <i class="fa fa-money-bill" style="color:#88b840"></i>
@@ -121,6 +131,7 @@
       </div>
     </nav>
     <div class ="row dynamicContent">
+      
      
       <router-outlet></router-outlet>
 

@@ -25,8 +25,8 @@ a:focus {
 }
 
 .dynamicContent{
-    margin-left: 0px;
-    margin-right: 0px;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
 }
 .row{
     width:100% !important;
@@ -417,6 +417,17 @@ div.card-body{
     border-radius: 5px;
 }
 
-app-notifications,app-sales,app-users,app-released,app-myaccount,app-deliveries,app-collections,app-invoicing,app-dashboard{
+app-notifications,app-create,app-store,app-businessentity,app-sales,app-users,app-released,app-myaccount,app-deliveries,app-collections,app-invoicing,app-dashboard{
     width:100%;
 }
+.datatable-row-wrapper {
+    cursor: pointer;
+    cursor: hand;
+}
+.widget-controls,.card-header {
+    margin-bottom: 10px !important;
+}
+.card-header {
+    margin-bottom: 30px !important;
+}
+$swal2-width: 25em !default;
