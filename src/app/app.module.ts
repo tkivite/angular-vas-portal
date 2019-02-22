@@ -36,6 +36,7 @@ import { CreateBeComponent } from './pages/businessentity/create/create.componen
 import { UpdateComponent } from './pages/businessentity/update/update.component';
 import { StoreComponent } from './pages/stores/store.component';
 import { CreateStoreComponent }      from './pages/stores/create/create.component';
+import { UpdateStoreComponent }      from './pages/stores/update/update.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { CreateStoreComponent }      from './pages/stores/create/create.componen
     CreateBeComponent,
     UpdateComponent,
     StoreComponent,
-    CreateStoreComponent
+    CreateStoreComponent,
+    UpdateStoreComponent
   ],
   imports: [
     BrowserModule,

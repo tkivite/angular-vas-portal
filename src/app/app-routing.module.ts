@@ -14,6 +14,7 @@ import { BusinessentityComponent }      from './pages/businessentity/businessent
 import { CreateBeComponent }      from './pages/businessentity/create/create.component';
 import { StoreComponent }      from './pages/stores/store.component';
 import { CreateStoreComponent }      from './pages/stores/create/create.component';
+import { UpdateStoreComponent }      from './pages/stores/update/update.component';
 
 
 
