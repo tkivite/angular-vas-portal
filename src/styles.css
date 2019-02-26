@@ -70,7 +70,9 @@ a:focus {
   text-align: center;
   text-decoration: none;
   display: inline-block;
+  font-size: 1em;
 }
+
 
 .top-link:hover, .top-link:active {
    background-color: #FAFAFA;
@@ -428,6 +430,6 @@ app-notifications,app-create,app-store,app-businessentity,app-sales,app-users,ap
     margin-bottom: 10px !important;
 }
 .card-header {
-    margin-bottom: 30px !important;
+    margin-bottom: 0px !important;
 }
 $swal2-width: 25em !default;

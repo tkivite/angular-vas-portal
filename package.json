@@ -27,7 +27,7 @@
     "@swimlane/ngx-datatable": "13.1.0",
     "angular-6-datatable": "^0.8.0",
     "angular-datatables": "^7.0.0",
-    "angular-font-awesome": "^3.1.2",
+    "angular-font-awesome": "5.7.2",
     "angular-sweetalert-service": "^2.0.2",
     "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
