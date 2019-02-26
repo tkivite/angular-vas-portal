@@ -3,13 +3,13 @@
   <div class="sidebar-header">                
     <img src="./assets/logo.png"/>               
   </div>
-    <div class="container demo">
+    <div class="container demo d-none d-md-block">
       <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" class="panel-group">
         <ngb-panel class="panel-default">
           <ng-template ngbPanelTitle class="panel-heading">
             <h4 class="panel-title">
               <a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapseOne">
-              <i class="more-less fa fa-plus"></i>Views
+              <i class="more-less fa fa-plus"></i>Navigation
               </a>
             </h4>
           </ng-template>
@@ -25,63 +25,40 @@
                   <i class="fa fa-shopping-cart" style="color:#88b840"></i>
                 </a>
               </li>
-              <li class="list-group-item">
-                <a class="nav-link sales-link"  routerLink="/sales">Sales 
+               <li class="list-group-item">
+                <a class="nav-link sales-link"  routerLink="/pending">Pending 
                   <i class="fa fa-cart-plus" style="color:#88b840"></i>
                 </a>
               </li>
               <li class="list-group-item">
-                <a class="nav-link notification-link" routerLink="/notifications" >Notifications 
-                  <i class="fa fa-envelope" style="color:#88b840"></i>
+                <a class="nav-link sales-link"  routerLink="/collections">Collection 
+                  <i class="fa fa-cart-plus" style="color:#88b840"></i>
                 </a>
               </li>
+             
+            
               <li class="list-group-item">
                 <a class="nav-link released-link" routerLink="/released" >Released Items 
                   <i class="fa fa-list" style="color:#88b840"></i>
                 </a>
               </li>
               <li class="list-group-item">
-                <a class="nav-link released-link" routerLink="/payments" >Payments 
+                <a class="nav-link released-link" routerLink="/sales" >Sales 
                   <i class="fa fa-list" style="color:#88b840"></i>
                 </a>
               </li>
               <li class="list-group-item">
-                <a class="nav-link released-link" routerLink="/deliveries" >Deliveries 
+                <a class="nav-link released-link" routerLink="/myaccount" >My Account 
                   <i class="fa fa-list" style="color:#88b840"></i>
                 </a>
               </li>
+              
+              
             </ul>
           </ng-template>
         </ngb-panel>  
 
-        <ngb-panel class="panel-default">
-          <ng-template ngbPanelTitle class="panel-heading">
-            <h4 class="panel-title">
-              <a role="button" data-toggle="collapse" data-parent="#accordion"  aria-expanded="true" aria-controls="collapseOne">
-              <i class="more-less fa fa-plus"></i>Actions
-              </a>
-            </h4>
-          </ng-template>
-          <ng-template ngbPanelContent>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <a class="nav-link users-link" routerLink="/users">Manage Users 
-                  <i class="fa fa-users" style="color:#88b840"></i>
-                </a>
-              </li>
-              <li class="list-group-item">
-                <a class="nav-link verify-collection-link" routerLink="/collections">Confirm Collection 
-                  <i class="fa fa-envelope" style="color:#88b840"></i>
-                </a>
-              </li>
-              <li class="list-group-item">
-                <a class="nav-link invoice-link" routerLink="/invoicing">Send Invoice 
-                  <i class="fa fa-envelope" style="color:#88b840"></i>
-                </a>
-              </li>
-            </ul>
-          </ng-template>
-        </ngb-panel>
+      
       </ngb-accordion>
       <hr/>
     </div><!-- container -->
@@ -103,12 +80,17 @@
           <ul class="nav navbar-nav ml-auto"> 
             <li class="nav-item">
               <a class="top-link home-link" routerLink="/dashboard">
-                <i class="fa fa-home" style="color:#88b840"></i> Home
+                <i class="fa fa-home" style="color:#88b840"></i> Dashboard
               </a>
             </li>
             <li class="nav-item">
-              <a class="top-link sales-link" routerLink="/sales" >
-                <i class="fa fa-cart-plus" style="color:#88b840"></i> Sales
+              <a class="top-link sales-link" routerLink="/pending" >
+                <i class="fa fa-cart-plus" style="color:#88b840"></i> Pending
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="top-link notification-link" routerLink="/collections" >
+                <i class="fa fa-envelope" style="color:#88b840"></i> Collections 
               </a>
             </li>
             <li class="nav-item">
@@ -116,9 +98,10 @@
                 <i class="fa fa-list" style="color:#88b840"></i> Released
               </a>
             </li>
-            <li class="nav-item">
-              <a class="top-link notification-link" routerLink="/notifications" >
-                <i class="fa fa-envelope" style="color:#88b840"></i> Notifications 
+            
+             <li class="nav-item">
+              <a class="top-link sales-link" routerLink="/sales" >
+                <i class="fa fa-cart-plus" style="color:#88b840"></i> Sales
               </a>
             </li>
             <li class="nav-item">

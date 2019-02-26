@@ -21,6 +21,7 @@ import { UpdateStoreComponent }      from './pages/stores/update/update.componen
 
 const routes: Routes = [
 { path: 'sales', component: SalesComponent },
+{ path: 'pending', component: PendingComponent },
 { path: 'onboarding', component: BusinessentityComponent },
 { path: 'onboarding/create', component: CreateBeComponent },
 { path: 'store', component: StoreComponent },

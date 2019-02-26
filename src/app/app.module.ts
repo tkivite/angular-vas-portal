@@ -37,6 +37,7 @@ import { UpdateComponent } from './pages/businessentity/update/update.component'
 import { StoreComponent } from './pages/stores/store.component';
 import { CreateStoreComponent }      from './pages/stores/create/create.component';
 import { UpdateStoreComponent }      from './pages/stores/update/update.component';
+import { PendingComponent } from './pages/pending/pending.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { UpdateStoreComponent }      from './pages/stores/update/update.componen
     UpdateComponent,
     StoreComponent,
     CreateStoreComponent,
-    UpdateStoreComponent
+    UpdateStoreComponent,
+    PendingComponent
   ],
   imports: [
     BrowserModule,
