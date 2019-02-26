@@ -3,7 +3,7 @@
   <div class="sidebar-header">                
     <img src="./assets/logo.png"/>               
   </div>
-    <div class="container demo d-none d-md-block">
+    <div class="container demo d-none d-md-block" *ngIf="currentUser">
       <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" class="panel-group">
         <ngb-panel class="panel-default">
           <ng-template ngbPanelTitle class="panel-heading">
@@ -71,15 +71,17 @@
     </div><!-- container -->
   </nav>
   <div id="content">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="currentUser" >
       <div class="container-fluid topbar">
         <button type="button" id="sidebarCollapse" class="btn" style="background: #7386D5; color:white; margin-left: -60px">
           <i class="fa fa-angle-double-left"></i>
           <i class="fa fa-angle-double-right"></i>
         </button>     
         <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-align-justify"></i>
+        <i class="fa fa-align-justify"></i>
+
         </button>
+        <!--navbar-toggler-icon -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <div>                            
           <h2 class="store-name">Game -Garden City</h2>
