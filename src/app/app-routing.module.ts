@@ -15,6 +15,7 @@ import { CreateBeComponent }      from './pages/businessentity/create/create.com
 import { StoreComponent }      from './pages/stores/store.component';
 import { CreateStoreComponent }      from './pages/stores/create/create.component';
 import { UpdateStoreComponent }      from './pages/stores/update/update.component';
+import { PendingComponent }      from './pages/pending/pending.component';
 
 
 
