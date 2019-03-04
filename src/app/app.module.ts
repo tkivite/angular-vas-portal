@@ -5,8 +5,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {DataTablesModule} from 'angular-datatables';
-import { HttpClientModule } from '@angular/common/http';
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SweetAlertService } from 'angular-sweetalert-service';
 
 
@@ -15,6 +14,11 @@ import { BlockUIModule } from 'ng-block-ui';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { ToastrModule } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
+
+
+import { AlertComponent } from './components';
+import { fakeBackendProvider, JwtInterceptor, ErrorInterceptor } from './helpers';
+
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -27,9 +31,9 @@ import { PaymentsComponent } from './pages/payments/payments.component';
 import { DeliveriesComponent } from './pages/deliveries/deliveries.component';
 import { UsersComponent } from './pages/users/users.component';
 import { InvoicingComponent } from './pages/invoicing/invoicing.component';
-import { HeaderComponent } from './theme/header/header.component';
-import { FooterComponent } from './theme/footer/footer.component';
-import { SidebarComponent } from './theme/sidebar/sidebar.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { LoginComponent } from './pages/login/login.component';
 import { BusinessentityComponent } from './pages/businessentity/businessentity.component';
 import { CreateBeComponent } from './pages/businessentity/create/create.component';
@@ -38,6 +42,7 @@ import { StoreComponent } from './pages/stores/store.component';
 import { CreateStoreComponent }      from './pages/stores/create/create.component';
 import { UpdateStoreComponent }      from './pages/stores/update/update.component';
 import { PendingComponent } from './pages/pending/pending.component';
+import { CreateComponent } from './pages/users/create/create.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +67,9 @@ import { PendingComponent } from './pages/pending/pending.component';
     StoreComponent,
     CreateStoreComponent,
     UpdateStoreComponent,
-    PendingComponent
+    PendingComponent,
+    CreateComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +82,10 @@ import { PendingComponent } from './pages/pending/pending.component';
     ToastrModule.forRoot(),
     AppRoutingModule
   ],
-  providers: [SweetAlertService, DatePipe],
+  providers: [SweetAlertService, DatePipe,
+               { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+               { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+                 fakeBackendProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

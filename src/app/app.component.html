@@ -1,9 +1,9 @@
 <div class="wrapper">
-  <nav id="sidebar">
+  <nav id="sidebar" *ngIf="currentUser">
   <div class="sidebar-header">                
     <img src="./assets/logo.png"/>               
   </div>
-    <div class="container demo d-none d-md-block" *ngIf="currentUser">
+    <div class="container demo d-none d-md-block" >
       <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" class="panel-group">
         <ngb-panel class="panel-default">
           <ng-template ngbPanelTitle class="panel-heading">
@@ -17,7 +17,7 @@
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
                 <a class="nav-link sales-link"  routerLink="/onboarding">Partners 
-                  <fa-icon [icon]="handshake"></fa-icon><i class="fas fa-handshake" style="color:#88b840"></i>
+                  <i class="fas fa-handshake" style="color:#88b840"></i>
                 </a>
               </li>
                <li class="list-group-item">
@@ -48,7 +48,7 @@
                 </a>
               </li>
               <li class="list-group-item">
-                <a class="nav-link released-link" routerLink="/myaccount" >My Account 
+                <a class="nav-link released-link" routerLink="/users" >Users 
                   <i class="fa fa-list" style="color:#88b840"></i>
                 </a>
               </li>
@@ -124,7 +124,7 @@
     </nav>
     <div class ="row dynamicContent">
       
-     
+     <alert></alert>
       <router-outlet></router-outlet>
 
     </div>

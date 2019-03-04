@@ -8,7 +8,7 @@ NOTE: While technically it's possible to bypass this client side authentication 
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
-import { AuthenticationService } from '@app/_services';
+import { AuthenticationService } from '@app/services';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {

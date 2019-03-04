@@ -2,7 +2,10 @@
     id: number;
     username: string;
     password: string;
-    firstName: string;
-    lastName: string;
+    firstname: string;
+    lastname: string;
+    status: string;
+    phone: string;
+    email: string;
     token: string;
 }
