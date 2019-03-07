@@ -1,0 +1,11 @@
+{
+  "/api": {
+    "target": "https://partner-portal-backend.herokuapp.com/",
+    "secure": false,
+    "pathRewrite": {
+      "^/api": ""
+    },
+    "changeOrigin": true,  
+    "logLevel": "debug"
+  }
+}

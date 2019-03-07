@@ -64,7 +64,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "lipalater-vas-portal:build"
+            "browserTarget": "lipalater-vas-portal:build",
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
