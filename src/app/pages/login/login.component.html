@@ -1,3 +1,64 @@
-<p>
-  login works!
-</p>
+<block-ui>
+	<div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="login-panel panel panel-default" style="border-color: #0d98ba;">
+                    <div class="panel-heading" con>
+                        <img src="./assets/logo.png"  alt="Login Image">
+
+                    </div>
+                    <div class="panel-body">
+				    	
+						<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+							<fieldset>
+							<alert></alert>
+						    <div class="form-group">
+						       
+						        <input type="text" placeholder="Username" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+						        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+						            <div *ngIf="f.username.errors.required">Username is required</div>
+						        </div>
+						    </div>
+						    <div class="form-group">
+						        
+						        <input type="password" formControlName="password" class="form-control" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+						        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+						            <div *ngIf="f.password.errors.required">Password is required</div>
+						        </div>
+						    </div>
+						    <div class="form-group">
+                                    <input type="hidden" class="form-control" id="store" placeholder="Store Name" name="store"  value="">
+                                </div>     
+                                <div class="form-group">
+                                        <div class="card card-outline-success">
+                                            <div class="card-body" style="padding: 2px;">
+                                                <blockquote class="card-bodyquote" >
+                                                    <p style="height: 80px; font-size: 0.8em;color:black; padding: 2px; overflow-y: scroll;">
+                                                    By logging into the LipaLater partners portal, you agree to abide by the terms of the LipaLater IT Security Policy. Access is limited to authorized services. Unauthorized access to or misuse of these services is prohibited and strictly monitored.</p>
+                                                </blockquote>
+                                            </div>
+                                        </div>
+                                    </div>                   
+                                                               
+                                
+                               <!-- <div class="checkbox">
+                                    <label>
+                                        <span style=" text-align: right; padding:5px;">
+                                            <a  href="forgotpassword" style=" text-decoration: none; color: blue; text-align: right; " title="Forgot Password"  onclick="ForgotPassword()">Forgot Password?</a></span> <br/>
+                                    </label>
+
+                                </div>-->
+						    <div class="form-group">
+						        <button [disabled]="loading" class="btn btn-primary">Login</button>
+						        <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+						        <a routerLink="/register" class="btn btn-link">Forgot Password ?</a>
+						    </div>
+						</fieldset>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+</div>
+</block-ui>

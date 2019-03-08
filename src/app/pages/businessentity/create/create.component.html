@@ -1,8 +1,7 @@
 <block-ui>
-<div class="box box-primary">
+  <div class="box box-primary">
     <div class="box-body">
-
-    <div class="row mb-4" *ngIf="currentActive === 'DISABLED'">
+      <div class="row mb-4" *ngIf="currentActive === 'DISABLED'">
         <div class="col">
             <div class="card border-0 box-shadow" widget="">
                 <div class="card-header transparent border-0 text-muted">
@@ -12,169 +11,117 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                              <span aria-hidden="true">×</span>
-                          </button>
+                              <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                                <span aria-hidden="true">×</span>
+                              </button>
                                 <strong>Error!</strong> You Do not have access to this page.
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
     <div widget class="card border-0 box-shadow" *ngIf="currentActive === 'ENABLED'">
-        <div id ="cccform">
-            <div class="row card-header transparent border-0 text-muted">
-                <h5 class="col-sm-8 ">Add Business Orgnisation</h5>
-                <div class="col-sm-4  ">
-                    <a class="btn btn-danger btn-sm float-sm-right" routerLink="/onboarding" type="button"><i class="fa fa-bars"></i> Business Organisations List</a>
-                </div>
-            </div>
-            <div class="card-block pt-0 widget-body">
-                <form>
-  <div class="form-group row">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">Business Name</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputEmail3" placeholder="Business Name">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">Country</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputPassword3" placeholder="Country">
-    </div>
-  </div>
-  <fieldset class="form-group">
-    <div class="row">
-      <legend class="col-form-label col-sm-2 pt-0">Speciality</legend>
-      <div class="col-sm-10">
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-          <label class="form-check-label" for="gridRadios1">
-            Mobile Phones
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-          <label class="form-check-label" for="gridRadios2">
-            Electronics
-          </label>
-        </div>
-        <div class="form-check disabled">
-          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" >
-          <label class="form-check-label" for="gridRadios3">
-            Home Appliances
-          </label>
-        </div>
-        <div class="form-check disabled">
-          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="option4" >
-          <label class="form-check-label" for="gridRadios4">
-            General
-          </label>
-        </div>
-      </div>
-    </div>
-  </fieldset>
-
-   <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">Head Office phone</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputPassword3" placeholder="Phone Number">
-    </div>
-  </div>
-   <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">Head Office Email</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputPassword3" placeholder="Email">
-    </div>
-  </div>
-  
-  <div class="form-group row">
-    <div class="col-sm-10">
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-  </div>
-</form>
-                <form style= "display:none" autocomplete="off" [formGroup]="formAdd" (ngSubmit)="onAddSubmit(formAdd)">
-
-                                    
-                            <div class="row form-group">
-                                <label class="col-sm-3" for="inputName">Name</label>
-                                <input  formControlName="entityName" class="col-sm-5 form-control validation-field" id="inputName" placeholder="Name" type="text">
-                                <small class="text-danger" *ngIf="formAdd.get('entityName').touched && formAdd.get('entityName').hasError('required')">Name is required</small>
-                                <small class="text-danger" *ngIf="formAdd.get('entityName').touched && formAdd.get('entityName').hasError('pattern')">Invalid Name</small>
-                            </div>
-                        
-                            <div class="row form-group">
-                                <label class="col-sm-3" for="inputName">Notification Short Name</label>
-                                <input class="col-sm-5" formControlName="notificationShortName" class="form-control validation-field" id="inputName" placeholder="Notification Short Name" type="text">
-                                <small class="text-danger" *ngIf="formAdd.get('notificationShortName').touched && formAdd.get('notificationShortName').hasError('required')">Notification Short Name is required</small>
-                                <small class="text-danger" *ngIf="formAdd.get('notificationShortName').touched && formAdd.get('notificationShortName').hasError('minlength')">Notification Short Name isn't long enough, minimum of 4 characters</small>
-                                <small class="text-danger" *ngIf="formAdd.get('notificationShortName').touched && formAdd.get('notificationShortName').hasError('maxlength')">Notification Short Name can only have maximum of 7 characters</small>
-                            </div>
-                            
-                        
-                            <div class="row form-group">
-                                <label class="col-sm-3" for="inputCategory">Category</label>
-                                <select class="col-sm-5" formControlName="entityCategory" class="form-control validation-field" id="inputCategory">
-                                    <option selected="selected" value="">Select Category</option>
-                                    <option *ngFor="let o of businessCategoriesList" [value]="o.id">{{o.name}}</option>
-                                </select>
-                                <small class="text-danger" *ngIf="formAdd.get('entityCategory').touched && formAdd.get('entityCategory').hasError('required')">Category is required</small>
-                            </div>
+      <div id ="cccform" class="container">
+          <div class="row form-heading">
+            <div class="col-md-1"></div>
+            <h4 class="col-md-11">Adding New Partner</h4>
+          </div>
+        <div class="row">
+         
+            
+            <div class="col-md-1"></div>
+                <form  [formGroup]="beFormAdd" (ngSubmit)="onSubmit()" class="col-md-11 form-horizontal">
+                   
+                  <div class="row form-group">
+                      <label class="control-label col-sm-3" for="title"> Registered Name</label>
+                      <div class="col-sm-7">
+                        <input type="text" formControlName="orgName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.orgName.errors }" />
                        
-                            <div class="row form-group">
-                                <label class="col-sm-3" for="inputRegion">Region</label>
-                                <select formControlName="entityRegion" class="form-control validation-field" id="inputRegion">
-                                    <option selected="selected" value="">Select Region</option>
-                                    <option *ngFor="let o of regionList" [value]="o.id">{{o.name}}</option>
-                                </select>
-                                <small class="text-danger" *ngIf="formAdd.get('entityRegion').touched && formAdd.get('entityRegion').hasError('required')">Region is required</small>
-                            </div>
+                        <div *ngIf="submitted && f.orgName.errors" class="invalid-feedback">
+                          <div *ngIf="f.orgName.errors.required">Name is required</div>
+                        </div>   
                       
-                            <div class="row form-group">
-                                <label class="col-sm-3" for="inputContacts">Payment Model</label>
-                                <select formControlName="entityPaymentModel" class="form-control validation-field" id="inputentityPaymentModel">
-                                    <option selected="selected" value="">Select Payment Model</option>
-                                    <option *ngFor="let o of paymentModel" [value]="o.status">{{o.status}}</option>
-                                </select>
-                                <small class="text-danger" *ngIf="formAdd.get('entityPaymentModel').touched && formAdd.get('entityPaymentModel').hasError('required')">Status is required</small>
-                            </div>
-                      
-                            <div class="row form-group">
-                                <label class="col-sm-3" for="inputContactsLoc">Email Contact</label>
-                                <input clasS="col-Sm-5" formControlName="entityEmail" class="form-control validation-field" id="inputContactsLoc" placeholder="Email" type="email">
-                                <small class="text-danger" *ngIf="formAdd.get('entityEmail').touched && formAdd.get('entityEmail').hasError('required')">Email Contact is required</small>
-                                <small class="text-danger" *ngIf="formAdd.get('entityEmail').touched && formAdd.get('entityEmail').hasError('email')">Invalid email address</small>
-                            </div>
-                      
-                            <div class="row form-group">
-                                <label class="col-sm-3" for="inputContacts">Location</label>
-
-                                <select formControlName="location" class="form-control validation-field" id="inputContacts">
-                                    <option selected="selected" value="">Select Location</option>
-                                    <option *ngFor="let o of masterLocations" [ngValue]="o.id">{{o.name}}</option>
-                                </select>
-                                <small class="text-danger" *ngIf="formAdd.get('location').touched && formAdd.get('location').hasError('required')">Location is required</small>
-                            </div>
-                                          
+                      </div>
+                  </div>
+                  
                  
-                        
+                    <div class="row form-group">
+                        <label class="control-label col-sm-3" for="title"> Mobile </label>
+                      <div class="col-sm-7">                          
+                          <input type="text" formControlName="orgMobile" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.orgMobile.errors }" />
+                          <div *ngIf="submitted && f.orgMobile.errors" class="invalid-feedback">
+                          <div *ngIf="f.orgMobile.errors.required">Mobile is required</div>
+                        </div>
+                      </div>
+                    </div>                    
+
+                    <div class="row form-group">
+                      <label class="control-label col-sm-3" for="title"> Telephone</label>
+                      <div class="col-sm-7">
+                        <input type="text" formControlName="orgTelephone" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.orgTelephone.errors }" />
+                        <div *ngIf="submitted && f.orgTelephone.errors" class="invalid-feedback">
+                          <div *ngIf="f.orgTelephone.errors.required">Telephone is required</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <label class="control-label col-sm-3" for="title"> Email</label>
+                        <div class="col-sm-7">
+                          <input type="text" formControlName="orgEmail" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.orgEmail.errors }" />
+                          <div *ngIf="submitted && f.orgEmail.errors" class="invalid-feedback">
+                            <div *ngIf="f.orgEmail.errors.required">Email is required</div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="control-label col-sm-3" for="title"> Telephone</label>
+                        <div class="col-sm-7">
+                          <input type="text" formControlName="orgTelephone" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.orgTelephone.errors }" />
+                          <div *ngIf="submitted && f.orgTelephone.errors" class="invalid-feedback">
+                            <div *ngIf="f.orgTelephone.errors.required">Telephone is required</div>
+                          </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <label class="control-label col-sm-3" for="title">Year of Incorporation</label>
+                        <div class="col-sm-7">
+                          <input type="text" formControlName="orgYearsOfOperation" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.orgYearsOfOperation.errors }" />
+                          <div *ngIf="submitted && f.orgYearsOfOperation.errors" class="invalid-feedback">
+                            <div *ngIf="f.orgYearsOfOperation.errors.required">Years of Incorporation</div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-7">
+
                     <div *ngIf="errorMessage !== 'SHOWERROR'" class="alert alert-danger alert-dismissible fade show" role="alert">
                         <button aria-label="Close" class="close" data-dismiss="alert" type="button">
                           <span aria-hidden="true">×</span>
                       </button>
                         <strong>Error!</strong> {{errorMessage}}
                     </div>
-                    <div class="row align-items-right">
-                        <button [disabled]="!formAdd.valid" class="btn btn-danger" type="submit">Submit</button>
                     </div>
-                </form>
-            </div>
-    </div>
-    </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-7">
+                          <div class="row align-items-right">
+                              <button [disabled]="!beFormAdd.valid" class="btn btn-success" type="submit">Submit</button>
+                          </div>
+                        </div></div>
+                    
+                 
+                  </form>
+            
+    </div>    
 </div>
 </div>
+</div>
+</div>
+
 </block-ui>

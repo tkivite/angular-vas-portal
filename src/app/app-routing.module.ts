@@ -15,12 +15,20 @@ import { CreateBeComponent }      from './pages/businessentity/create/create.com
 import { StoreComponent }      from './pages/stores/store.component';
 import { CreateStoreComponent }      from './pages/stores/create/create.component';
 import { UpdateStoreComponent }      from './pages/stores/update/update.component';
-
-
+import { PendingComponent }      from './pages/pending/pending.component';
+import { AuthGuard } from './guards';
+import { LoginComponent }      from './pages/login/login.component';
+import { CreateComponent }      from './pages/users/create/create.component';
 
 
 const routes: Routes = [
+//{ path: '', component: LoginComponent },
+//{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+{ path: 'login', component: LoginComponent },
+{ path: 'register', component: CreateComponent },
+
 { path: 'sales', component: SalesComponent },
+{ path: 'pending', component: PendingComponent },
 { path: 'onboarding', component: BusinessentityComponent },
 { path: 'onboarding/create', component: CreateBeComponent },
 { path: 'store', component: StoreComponent },

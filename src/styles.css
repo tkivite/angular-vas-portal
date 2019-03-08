@@ -70,7 +70,14 @@ a:focus {
   text-align: center;
   text-decoration: none;
   display: inline-block;
+  font-size: 1em !important;
 }
+
+.top-link>.fa {
+     font-size: 0.8em !important;
+ }
+
+
 
 .top-link:hover, .top-link:active {
    background-color: #FAFAFA;
@@ -417,7 +424,7 @@ div.card-body{
     border-radius: 5px;
 }
 
-app-notifications,app-create,app-store,app-businessentity,app-sales,app-users,app-released,app-myaccount,app-deliveries,app-collections,app-invoicing,app-dashboard{
+app-notifications,app-login,app-create,app-store,app-businessentity,app-sales,app-users,app-released,app-myaccount,app-deliveries,app-collections,app-invoicing,app-dashboard{
     width:100%;
 }
 .datatable-row-wrapper {
@@ -428,6 +435,10 @@ app-notifications,app-create,app-store,app-businessentity,app-sales,app-users,ap
     margin-bottom: 10px !important;
 }
 .card-header {
-    margin-bottom: 30px !important;
+    margin-bottom: 0px !important;
 }
-$swal2-width: 25em !default;
+.form-heading {
+font-size: 1.2em;
+margin-bottom: 30px;
+margin-top: 20px;
+}

@@ -1,0 +1,100 @@
+<block-ui>
+    <div class="d-flex justify-content-center align-items-center w-100 h-100 login-container" style="background-image: url('assets/img/app/safback.jpg')">
+        <div class="col-xl-3 col-md-6 col-10 text-center displaytablecell">
+            <h2><span>M-PESA Payments Portal</span></h2>
+            <h3 style="color:#fff">Login to your Account</h3>
+
+            <div class="card border-0 box-shadow rounded-5">
+                <div class="card-block text-center pb-1" *ngIf="currentActive === 'LOGIN'">
+                    <div *ngIf="errorMessage !== 'SHOWERROR'" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <strong>Error!</strong> {{errorMessage}}
+                    </div>
+                    <form [formGroup]="form" (ngSubmit)="onSubmit(form)" class="text-left mt-4">
+                        <div *ngIf="showCaps" class="card card-primary mb-1 p-1 text-center">
+                            <div class="card-body">
+                                <h4 class="card-title">CAPS LOCK IS ON</h4>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>USERNAME</label>
+                            <input formControlName="username" class="form-control validation-field" placeholder="Username" type="text">
+                            <small class="text-danger" *ngIf="form.get('username').touched && form.get('username').hasError('required')">Username is required</small>
+                        </div>
+                        <div class="form-group">
+                            <label>PASSWORD</label>
+                            <input formControlName="password" class="form-control validation-field" placeholder="Password" type="password">
+                            <small class="text-danger" *ngIf="form.get('password').touched && form.get('password').hasError('required')">Password is required</small>
+                            <small class="text-danger" *ngIf="form.get('password').touched && form.get('password').hasError('minlength')">Password isn't long enough, minimum of 6 characters</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Entity CODE</label>
+                            <input formControlName="businessCode" class="form-control validation-field" placeholder="Organization" type="text">
+                            <small class="text-danger" *ngIf="form.get('businessCode').touched && form.get('businessCode').hasError('required')">Organization is required</small>
+                        </div>
+                        <div class="form-group">
+                            <div class="card card-outline-success">
+                                <div class="card-body">
+                                    <blockquote class="card-bodyquote">
+                                        <p style="height: 50px; overflow-y: scroll;">You are about to access Safaricom services and you should have appropriate authorization from concerned authority before using these services. Your access is strictly limited to applicable services of the system
+                                            for which you have obtained written authorization and will be governed by the security policy of Safaricom. Unauthorized access to or misuse of these services is prohibited and monitored.</p>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </div>
+                       >
+
+                        <div class="form-group">
+                            <a data-toggle="modal" data-target="#success-modal" style="margin-bottom:10px; cursor: pointer;">Terms & Conditions</a>
+                            <a class="transition pull-right" (click)="forgotPass()" style="margin-bottom:10px; cursor: pointer;">Forgot password?</a>
+                        </div>
+                        <div class="form-group">
+                            <button [disabled]="!form.valid" class="btn btn-block" type="submit" style="color:#fff;">Agree and Sign In</button>
+                        </div>
+                    </form>
+                </div>
+               <!-- <div class="card-block text-center pb-1" *ngIf="currentActive === 'OTP'">
+                    <div *ngIf="errorMessage !== 'SHOWERROR'" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <strong>Error!</strong> {{errorMessage}}
+                    </div>
+                    <form [formGroup]="formOTP" (ngSubmit)="onSubmitOTP(formOTP)" class="text-left mt-4">
+                        <div class="form-group">
+                            <label>A one time pin has been sent to your registered phone number.
+                             Enter it below to verify your account.  {{otp}} </label>
+                            <input formControlName="otp" class="form-control validation-field" placeholder="OTP" type="text">
+                            <small class="text-danger" *ngIf="formOTP.get('otp').touched && formOTP.get('otp').hasError('required')">OTP is required</small>
+                            <small class="text-danger" *ngIf="formOTP.get('otp').touched && formOTP.get('otp').hasError('minlength')">OTP isn't long enough, minimum of 4 characters</small>
+                            <small class="text-danger" *ngIf="formOTP.get('otp').touched && formOTP.get('otp').hasError('maxlength')">OTP can only have maximum of 4 characters</small>
+                        </div>
+                        <div class="form-group">
+                            <button [disabled]="!formOTP.valid" class="btn btn-block" type="submit" style="color:#fff;">VALIDATE OTP AND SIGN IN</button>
+                        </div>
+                    </form>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="modal-success-label" style="display: none;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header state modal-success">
+                    <h4 class="modal-title" id="modal-success-label"><i class="fa fa-check"></i>Terms and Conditions</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <p>You are about to access Safaricom services and you should have appropriate authorization from concerned authority before using these services. Your access is strictly limited to applicable services of the system for which you have
+                        obtained written authorization and will be governed by the security policy of Safaricom. Unauthorized access to or misuse of these services is prohibited and monitored.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</block-ui>
