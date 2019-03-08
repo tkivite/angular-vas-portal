@@ -70,8 +70,13 @@ a:focus {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 1em;
+  font-size: 1em !important;
 }
+
+.top-link>.fa {
+     font-size: 0.8em !important;
+ }
+
 
 
 .top-link:hover, .top-link:active {
@@ -432,4 +437,8 @@ app-notifications,app-login,app-create,app-store,app-businessentity,app-sales,ap
 .card-header {
     margin-bottom: 0px !important;
 }
-$swal2-width: 25em !default;
+.form-heading {
+font-size: 1.2em;
+margin-bottom: 30px;
+margin-top: 20px;
+}

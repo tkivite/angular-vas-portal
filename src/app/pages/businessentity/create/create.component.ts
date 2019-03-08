@@ -4,6 +4,8 @@ import { FormGroup, FormControl, AbstractControl, FormBuilder, Validators, FormA
 import { CustomValidators } from 'ng2-validation';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { ToastrService } from 'ngx-toastr';
+import { AlertService, AuthenticationService } from '../../../services';
+import { ApiService } from '../../../services/api.service';
 
 @Component({
   selector: 'app-create',
@@ -19,7 +21,7 @@ export class CreateBeComponent implements OnInit {
   public FormItem: FormArray;
   public errorMessage: any = 'SHOWERROR';
   
-  constructor(router: Router, fb: FormBuilder, public toastrService: ToastrService) {
+  constructor(router: Router, fb: FormBuilder, public toastrService: ToastrService,  public dataservice: ApiService) {
     this.router = router;    
     const namePattern = /^[a-zA-Z ']{2,45}$/;
     const kenyanMobileNoPattern = '^(254|0)(7([0-9]{8}))$';
@@ -29,7 +31,7 @@ export class CreateBeComponent implements OnInit {
       orgEmail:    ['', Validators.compose([Validators.required, CustomValidators.email])],
       orgTelephone:['', Validators.compose([Validators.required])],
       orgMobile:   ['', Validators.compose([ Validators.required,Validators.pattern(kenyanMobileNoPattern)])],
-      orgYearsOfOperation:['', Validators.compose([Validators.required])],
+      orgYearsOfOperation:['', Validators.compose([Validators.required,CustomValidators.number])],
      });
     
     this.activeInactive = 'ENABLED'    
@@ -45,6 +47,7 @@ export class CreateBeComponent implements OnInit {
       const strParams = encodeURIComponent(JSON.stringify(searchParams));
       this.blockUI.stop();
   }
+  get f() { return this.beFormAdd.controls; }
   // Submitting Add Entity
   public onAddSubmit(form: FormGroup) {
     if (form.valid) {
@@ -62,29 +65,21 @@ export class CreateBeComponent implements OnInit {
         timeCreated: new Date(),
         updatedBy: 0
       };
+      this.dataservice
+        .postData('partners', postFormData, ).subscribe( data => {
+          this.blockUI.stop();
+          if (data.status === 200) {
+            this.toastrService.success(data.message);
+            this.router.navigate(['onboarding']);
+          } else {
+            this.toastrService.error(data.message);
+          }
+        });
+       
     }
   }
   // On List
   onList() {
-    this.router.navigate(['pages/businessorg']);
-  }
-  
-  addContact() {
-    this.FormItem = <FormArray>this.beFormAdd.controls['contacts'];
-    this.FormItem.push(
-      new FormGroup({
-        name: new FormControl('', Validators.compose([Validators.required])),
-        type: new FormControl('', Validators.compose([Validators.required])),
-        value: new FormControl('', Validators.compose([Validators.required])),
-      })
-    );
-    this.beFormAdd.get('contacts')['controls'].forEach((contact, i) => {
-      this.subscribeChanges(contact);
-    });
-  }
-  removeContact(i) {
-    console.log(i);
-    this.FormItem = <FormArray>this.beFormAdd.controls['contacts'];
-    this.FormItem.removeAt(i);
+    this.router.navigate(['onboarding']);
   }
 }

@@ -43,6 +43,7 @@ import { CreateStoreComponent }      from './pages/stores/create/create.componen
 import { UpdateStoreComponent }      from './pages/stores/update/update.component';
 import { PendingComponent } from './pages/pending/pending.component';
 import { CreateComponent } from './pages/users/create/create.component';
+import { ApiService } from './services/api.service';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,7 @@ import { CreateComponent } from './pages/users/create/create.component';
     ToastrModule.forRoot(),
     AppRoutingModule
   ],
-  providers: [SweetAlertService, DatePipe,
+  providers: [SweetAlertService, DatePipe,ApiService,
                { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
                { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
                  fakeBackendProvider],
