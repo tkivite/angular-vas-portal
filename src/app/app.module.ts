@@ -44,6 +44,8 @@ import { UpdateStoreComponent }      from './pages/stores/update/update.componen
 import { PendingComponent } from './pages/pending/pending.component';
 import { CreateComponent } from './pages/users/create/create.component';
 import { ApiService } from './services/api.service';
+import { HomeComponent } from './pages/home/home.component';
+import { UpdateUserComponent } from './pages/users/update/update.component';
 
 @NgModule({
   declarations: [
