@@ -32,7 +32,7 @@
          
             
             <div class="col-md-1"></div>
-                <form  [formGroup]="beFormAdd" (ngSubmit)="onSubmit()" class="col-md-11 form-horizontal">
+                <form  [formGroup]="beFormAdd" (ngSubmit)="onAddSubmit(beFormAdd)" class="col-md-11 form-horizontal">
                    
                   <div class="row form-group">
                       <label class="control-label col-sm-3" for="title"> Registered Name</label>
@@ -41,7 +41,9 @@
                        
                         <div *ngIf="submitted && f.orgName.errors" class="invalid-feedback">
                           <div *ngIf="f.orgName.errors.required">Name is required</div>
-                        </div>   
+                        </div>
+                        <small class="text-danger" *ngIf="beFormAdd.get('orgName').touched && beFormAdd.get('orgName').hasError('required')">Business Name is required</small>   
+                        <small class="text-danger" *ngIf="beFormAdd.get('orgName').touched && beFormAdd.get('orgName').hasError('pattern')">Invalid Business Name </small>   
                       
                       </div>
                   </div>
@@ -58,11 +60,11 @@
                     </div>                    
 
                     <div class="row form-group">
-                      <label class="control-label col-sm-3" for="title"> Telephone</label>
+                      <label class="control-label col-sm-3" for="title"> Location</label>
                       <div class="col-sm-7">
-                        <input type="text" formControlName="orgTelephone" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.orgTelephone.errors }" />
-                        <div *ngIf="submitted && f.orgTelephone.errors" class="invalid-feedback">
-                          <div *ngIf="f.orgTelephone.errors.required">Telephone is required</div>
+                        <input type="text" formControlName="orgLocation" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.orgLocation.errors }" />
+                        <div *ngIf="submitted && f.orgLocation.errors" class="invalid-feedback">
+                          <div *ngIf="f.orgLocation.errors.required">Location is required</div>
                         </div>
                       </div>
                     </div>
@@ -74,6 +76,8 @@
                           <div *ngIf="submitted && f.orgEmail.errors" class="invalid-feedback">
                             <div *ngIf="f.orgEmail.errors.required">Email is required</div>
                           </div>
+                          <small class="text-danger" *ngIf="beFormAdd.get('orgEmail').touched && beFormAdd.get('orgEmail').hasError('required')">Email is required</small>
+                          <small class="text-danger" *ngIf="beFormAdd.get('orgEmail').touched && beFormAdd.get('orgEmail').hasError('email')">Invalid email address</small>
                         </div>
                     </div>
                     <div class="row form-group">
@@ -96,6 +100,26 @@
                         </div>
                     </div>
                     <div class="row form-group">
+                      <label class="control-label col-sm-3" for="title">Speciality</label>
+                      <div class="col-sm-2" *ngFor="let item of specialityOptions">
+                      <label>
+                        <input type="radio" value="{{item.name}}" class="form-control" formControlName="orgSpeciality">
+                          <span>{{item.name}}</span>
+                      </label>
+                      </div>
+                      
+                  </div>
+                  <div class="row form-group" formArrayName="orgSpeciality" *ngFor="let item of beFormAdd.controls['orgSpeciality'].controls; let i = index;">
+                    <label class="control-label col-sm-3" for="title"></label>
+                     <div [formGroupName]="i" class="col-sm-7">
+                        <label class="custom-control custom-checkbox">
+                          <input formControlName="speciality" class=" checkbox-main checkbox-danger" type="checkbox">
+                          <span class="custom-control-indicator"></span>
+                          <span class="custom-control-description align-middle">{{ beFormAdd.controls['orgSpeciality'].controls[i].controls.name.value }}</span>
+                      </label>
+                    </div>
+                </div>
+                    <div class="row form-group">
                         <div class="col-sm-3"></div>
                         <div class="col-sm-7">
 
@@ -111,7 +135,7 @@
                         <div class="col-sm-3"></div>
                         <div class="col-sm-7">
                           <div class="row align-items-right">
-                              <button [disabled]="!beFormAdd.valid" class="btn btn-success" type="submit">Submit</button>
+                              <button  class="btn btn-success" type="submit">Submit</button>
                           </div>
                         </div></div>
                     

@@ -20,11 +20,23 @@ export class CreateBeComponent implements OnInit {
   public currentActive: any = 'DISABLED';
   public FormItem: FormArray;
   public errorMessage: any = 'SHOWERROR';
+  public specialityOptions: any;
+  //public specialityArray: any;
+  //public rolesSelected: any[] = [];
+
   
   constructor(router: Router, fb: FormBuilder, public toastrService: ToastrService,  public dataservice: ApiService) {
     this.router = router;    
     const namePattern = /^[a-zA-Z ']{2,45}$/;
     const kenyanMobileNoPattern = '^(254|0)(7([0-9]{8}))$';
+
+    this.specialityOptions = [
+      {id:"1",name:"Electronics"},
+      {id:"2",name:"Phones"},
+      {id:"3",name:"Furniture"},
+      {id:"4",name:"General"}];
+    //const specialityArray: FormArray = new FormArray([]);
+   
     this.beFormAdd = fb.group({
       orgName:     ['', Validators.compose([Validators.required, Validators.pattern(namePattern)])],
       orgLocation: ['', Validators.compose([Validators.required])],
@@ -32,7 +44,18 @@ export class CreateBeComponent implements OnInit {
       orgTelephone:['', Validators.compose([Validators.required])],
       orgMobile:   ['', Validators.compose([ Validators.required,Validators.pattern(kenyanMobileNoPattern)])],
       orgYearsOfOperation:['', Validators.compose([Validators.required,CustomValidators.number])],
+      orgSpeciality: ['', Validators.required]
      });
+
+   /*  this.specialityOptions.forEach(spec => {
+     this.FormItem = <FormArray>this.beFormAdd.controls['orgSpeciality'];
+     this.FormItem.push(
+       new FormGroup({
+         id: new FormControl(spec.id),
+         name: new FormControl(spec.name)
+       })
+     );
+     });*/
     
     this.activeInactive = 'ENABLED'    
   }
@@ -50,9 +73,11 @@ export class CreateBeComponent implements OnInit {
   get f() { return this.beFormAdd.controls; }
   // Submitting Add Entity
   public onAddSubmit(form: FormGroup) {
+    console.log(form);
     if (form.valid) {
       this.errorMessage  = 'SHOWERROR';
       this.blockUI.start('Adding Business Entity');   
+      
       const postFormData = {
         email: form.value.orgEmail,
         location: form.value.orgLocation,  
@@ -63,7 +88,8 @@ export class CreateBeComponent implements OnInit {
         name: form.value.orgName,
         status: 0,
         timeCreated: new Date(),
-        updatedBy: 0
+        updatedBy: 0,
+        speciality: form.value.orgSpeciality
       };
       this.dataservice
         .postData('partners', postFormData, ).subscribe( data => {
