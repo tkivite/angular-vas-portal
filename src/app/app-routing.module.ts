@@ -12,6 +12,7 @@ import { MyaccountComponent }      from './pages/myaccount/myaccount.component';
 import { InvoicingComponent }      from './pages/invoicing/invoicing.component';
 import { BusinessentityComponent }      from './pages/businessentity/businessentity.component';
 import { CreateBeComponent }      from './pages/businessentity/create/create.component';
+import { UpdateBeComponent }      from './pages/businessentity/update/update.component';
 import { StoreComponent }      from './pages/stores/store.component';
 import { CreateStoreComponent }      from './pages/stores/create/create.component';
 import { UpdateStoreComponent }      from './pages/stores/update/update.component';
@@ -31,6 +32,7 @@ const routes: Routes = [
 { path: 'pending', component: PendingComponent },
 { path: 'onboarding', component: BusinessentityComponent },
 { path: 'onboarding/create', component: CreateBeComponent },
+{ path: 'onboarding/update', component: UpdateBeComponent },
 { path: 'store', component: StoreComponent },
 { path: 'store/create', component: CreateStoreComponent },
 { path: 'dashboard', component: DashboardComponent },
