@@ -4,7 +4,7 @@ import { FormGroup, FormControl, AbstractControl, FormBuilder, Validators, FormA
 import { CustomValidators } from 'ng2-validation';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { ToastrService } from 'ngx-toastr';
-import { AlertService, AuthenticationService } from '../../../services';
+//import { AlertService, AuthenticationService } from '../../../services';
 import { ApiService } from '../../../services/api.service';
 
 @Component({
@@ -73,10 +73,10 @@ export class CreateBeComponent implements OnInit {
   get f() { return this.beFormAdd.controls; }
   // Submitting Add Entity
   public onAddSubmit(form: FormGroup) {
-    console.log(form);
+    
     if (form.valid) {
       this.errorMessage  = 'SHOWERROR';
-      this.blockUI.start('Adding Business Entity');   
+      this.blockUI.start('Adding Business Organization');   
       
       const postFormData = {
         email: form.value.orgEmail,
@@ -92,15 +92,18 @@ export class CreateBeComponent implements OnInit {
         speciality: form.value.orgSpeciality
       };
       this.dataservice
-        .postData('partners', postFormData, ).subscribe( data => {
-          this.blockUI.stop();
-          if (data.status === 200) {
+        .postData('partners', postFormData).subscribe( data => {
+          
+          
+          if (data.status === 201) {
             this.toastrService.success(data.message);
             this.router.navigate(['onboarding']);
+            this.blockUI.stop();
           } else {
             this.toastrService.error(data.message);
+            this.blockUI.stop();
           }
-        });
+        }, err => {console.log("Bad things happened");  this.blockUI.stop();});
        
     }
   }
