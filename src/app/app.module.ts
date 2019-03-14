@@ -71,7 +71,9 @@ import { UpdateUserComponent } from './pages/users/update/update.component';
     UpdateStoreComponent,
     PendingComponent,
     CreateComponent,
-    AlertComponent
+    AlertComponent,
+    HomeComponent,
+    UpdateUserComponent
   ],
   imports: [
     BrowserModule,

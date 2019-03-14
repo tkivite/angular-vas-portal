@@ -19,4 +19,4 @@
   	         { "id": 32,"storeName": "Gem Garden City" ,"country": "Kenya","city": "Mombasa","geocordinates": "132323323,23232323"},
   	         { "id": 31,"storeName": "Gem Garden City" ,"country": "Kenya","city": "Mombasa","geocordinates": "132323323,23232323"}
 ]
-}
+}"target": "https://partner-portal-backend.herokuapp.com/",
