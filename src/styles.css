@@ -28,9 +28,7 @@ a:focus {
     margin-left: 0px !important;
     margin-right: 0px !important;
 }
-.row{
-    width:100% !important;
-}
+
 
 .topbar {
     
@@ -415,8 +413,9 @@ div.card-body{
 }
 #cccform,#myaccform{
     border: 2px dashed #ddd;
-    padding: 10px;
     border-radius: 5px;
+    background-color: aliceblue;
+
 }
 #div-dashboard{
     border: 2px dashed #ddd;
@@ -424,7 +423,7 @@ div.card-body{
     border-radius: 5px;
 }
 
-app-notifications,app-login,app-create,app-store,app-businessentity,app-sales,app-users,app-released,app-myaccount,app-deliveries,app-collections,app-invoicing,app-dashboard{
+app-be-update,app-notifications,app-login,app-create,app-store,app-businessentity,app-sales,app-users,app-released,app-myaccount,app-deliveries,app-collections,app-invoicing,app-dashboard{
     width:100%;
 }
 .datatable-row-wrapper {
@@ -438,7 +437,21 @@ app-notifications,app-login,app-create,app-store,app-businessentity,app-sales,ap
     margin-bottom: 0px !important;
 }
 .form-heading {
-font-size: 1.2em;
-margin-bottom: 30px;
-margin-top: 20px;
+    padding-top: 10px;
+    background-color: #d0e2ec;
+    margin-bottom: -15px;
+
+}
+
+.form-heading>h4 {
+font-size: 1.4em !important;
+color: mediumblue;
+}
+hr {  
+    border-top: 2px solid rgba(0,0,0,.1) !important;
+    /* color: blue; */
+    background-color: blue;
+    width: auto;
+    margin-left: -15px;
+    margin-right: -15px;
 }

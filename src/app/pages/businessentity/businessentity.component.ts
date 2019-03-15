@@ -27,8 +27,6 @@ export class BusinessentityComponent implements OnInit {
   constructor(
     router: Router,
     public toastrService: ToastrService,
-    public datePipe: DatePipe,
-    private sanitizer: DomSanitizer,
     private dataservice: ApiService
   ) {
     this.router = router;
@@ -52,28 +50,47 @@ export class BusinessentityComponent implements OnInit {
   // Load Grid Data
   getData() {
     this.blockUI.start('Loading Business Organisations');    
-    //load data
+  
     this.loadingIndicator = true;
     this.dataservice
-        .fetchData('partners').subscribe( data => {
-          console.log(data);
-          this.data = data;
-         /* this.blockUI.stop();
+        .fetchData('partners').subscribe( data => {         
+          
           if (data.status === 200) {
-            this.data = data.result;
-            
+             console.log(data.body);
+             this.data = data.body;
+             this.blockUI.stop();            
           } else {
+          this.blockUI.stop();
             this.toastrService.error(data.message);
-          }*/
-        });
+          }
+        }, err => {console.log("Bad things happened");  this.blockUI.stop();});
     this.noDataDisplay.emptyMessage = "No data to display";
-    this.blockUI.stop();
+    this.toastrService.error('Something Went Wrong');
+   // this.blockUI.stop();
     this.loadingIndicator = false;
   }
   onEdit(data) {
-    // console.log(data);
-   // this.dataService.EditFormData = data;
+    console.log(data);
+    this.dataservice.EditFormData = data;
     this.router.navigate(['onboarding/update']);
+  }
+  onDelete(record) {
+    console.log(record);
+   this.blockUI.start('Deleting Business Organisation ........');    
+  
+    this.dataservice
+        .deleteRecord('partners',record.id).subscribe( data => {       
+           console.log(data);
+          if (data.status === 200) {
+             console.log(data.body);
+             this.data = data.body;
+             this.blockUI.stop();            
+          } else {
+          this.blockUI.stop();
+            this.toastrService.error(data.message);
+          }
+        }, err => {console.log("Bad things happened");  this.blockUI.stop();});  
+       //this.router.navigate(['onboarding']);
   }
 
   onAdd() {

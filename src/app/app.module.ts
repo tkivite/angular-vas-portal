@@ -17,7 +17,6 @@ import { DatePipe } from '@angular/common';
 
 
 import { AlertComponent } from './components';
-import { fakeBackendProvider, JwtInterceptor, ErrorInterceptor } from './helpers';
 
 
 import { AppComponent } from './app.component';
@@ -37,7 +36,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { LoginComponent } from './pages/login/login.component';
 import { BusinessentityComponent } from './pages/businessentity/businessentity.component';
 import { CreateBeComponent } from './pages/businessentity/create/create.component';
-import { UpdateComponent } from './pages/businessentity/update/update.component';
+import { UpdateBeComponent } from './pages/businessentity/update/update.component';
 import { StoreComponent } from './pages/stores/store.component';
 import { CreateStoreComponent }      from './pages/stores/create/create.component';
 import { UpdateStoreComponent }      from './pages/stores/update/update.component';
@@ -66,13 +65,15 @@ import { UpdateUserComponent } from './pages/users/update/update.component';
     LoginComponent,
     BusinessentityComponent,
     CreateBeComponent,
-    UpdateComponent,
+    UpdateBeComponent,
     StoreComponent,
     CreateStoreComponent,
     UpdateStoreComponent,
     PendingComponent,
     CreateComponent,
-    AlertComponent
+    AlertComponent,
+    HomeComponent,
+    UpdateUserComponent
   ],
   imports: [
     BrowserModule,
@@ -85,10 +86,7 @@ import { UpdateUserComponent } from './pages/users/update/update.component';
     ToastrModule.forRoot(),
     AppRoutingModule
   ],
-  providers: [SweetAlertService, DatePipe,ApiService,
-               { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-               { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-                 fakeBackendProvider],
+  providers: [ DatePipe,ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

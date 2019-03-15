@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
 
   activeIds: string[] =[];
   panels = [0, 1,2,3]
+  public currentActive: any = 'DISABLED';
 
   public itemsList: Object[] = [
     {
