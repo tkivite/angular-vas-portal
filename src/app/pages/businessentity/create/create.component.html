@@ -122,7 +122,7 @@
                           <div class="float-right ">
                             <button  class="btn btn-danger " type="cancel" style="margin-right: 10px;
     min-width: 100px;" routerLink="/onboarding/">Cancel</button>
-                            <button  class="btn btn-success " type="submit" style="min-width: 100px;">Submit</button>
+                            <button  [disabled]="beFormAdd.invalid" class="btn btn-success " type="submit" style="min-width: 100px;">Submit</button>
                           </div>
                         </div>
                       </div>
