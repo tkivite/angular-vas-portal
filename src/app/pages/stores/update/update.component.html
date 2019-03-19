@@ -1,3 +1,312 @@
-<p>
-  update works!
-</p>
+<block-ui>
+  <div class="box box-primary">
+    <div class="box-body">
+      <div class="row mb-4" *ngIf="currentActive === 'DISABLED'">
+        <div class="col">
+            <div class="card border-0 box-shadow" widget="">
+                <div class="card-header transparent border-0 text-muted">
+                    <h5 class="mb-0">Access Denied</h5>
+                </div>
+                <div class="card-block pt-0 widget-body">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                              <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                                <span aria-hidden="true">×</span>
+                              </button>
+                                <strong>Error!</strong> You Do not have access to this page.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div widget class="card border-0 box-shadow" *ngIf="currentActive === 'ENABLED'">
+      <div id ="cccform" class="container">
+          <div class="row form-heading">
+            <div class="col-md-1"></div>
+            <h4 class="col-md-11">Adding New Store</h4>
+          </div>
+          <hr>
+        <div class="row">
+         
+            
+            <div class="col-md-1"></div>
+                <form  [formGroup]="storeFormAdd" (ngSubmit)="onEditSubmit(storeFormAdd)" class="col-md-11 form-horizontal">
+                    <div class="row form-group">
+                      <label class="control-label col-sm-3" for="title"><span class="float-right"> Partner: </span></label>
+                      <div class="col-sm-7">
+                        <select formControlName="storePartner" class="form-control validation-field">
+                            <option value="">Select Partner</option>
+                            <option *ngFor="let o of PartnerOptions" [ngValue]="o.id">{{o.name}}</option>
+                        </select>
+                              <small class="text-danger" *ngIf="storeFormAdd.get('storePartner').touched && storeFormAdd.get('storePartner').hasError('required')">Partner is required</small>
+                      </div>                                          
+                  </div>  
+                  
+                  <div class="row form-group">
+                        <label class="control-label col-sm-3" for="title"><span class="float-right"> Partner: </span></label>
+                        <div class="col-sm-7">
+                          <input type="text" formControlName="storeName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.storeName.errors }"  placeholder="enter store name" />
+                         
+                          <div *ngIf="submitted && f.storeName.errors" class="invalid-feedback">
+                            <div *ngIf="f.storeName.errors.required">Name is required</div>
+                          </div>
+                          <small class="text-danger" *ngIf="storeFormAdd.get('storeName').touched && storeFormAdd.get('storeName').hasError('required')">Store Name is required</small>   
+                          <small class="text-danger" *ngIf="storeFormAdd.get('storeName').touched && storeFormAdd.get('storeName').hasError('pattern')">Invalid Store Name </small>   
+                        
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                      <label class="control-label col-sm-3" for="title"> <span class="float-right"> source identifier: </span></label>
+                      <div class="col-sm-7">
+                        <input type="text" formControlName="storeSourceid" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.storeSourceid.errors }" placeholder="sourceid"/>
+                        <div *ngIf="submitted && f.storeSourceid.errors" class="invalid-feedback">
+                          <div *ngIf="f.storeSourceid.errors.required">Location is required</div>
+                        </div>
+                         <small class="text-danger" *ngIf="storeFormAdd.get('storeSourceid').touched && storeFormAdd.get('storeSourceid').hasError('required')">Source Id is required</small>  
+                      </div>
+                    </div>
+                    <div class="row form-group">
+                      <label class="control-label col-sm-3" for="title"> <span class="float-right"> source identifier: </span></label>
+                      <div class="col-sm-7">
+                        <input type="text" formControlName="storeDisburseEmail" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.storeDisburseEmail.errors }" placeholder="disburse email"/>
+                        <div *ngIf="submitted && f.storeDisburseEmail.errors" class="invalid-feedback">
+                          <div *ngIf="f.storeDisburseEmail.errors.required">Location is required</div>
+                        </div>
+                         <small class="text-danger" *ngIf="storeFormAdd.get('storeDisburseEmail').touched && storeFormAdd.get('storeDisburseEmail').hasError('required')">Disburse Email is required</small>  
+                      </div>
+                    </div>
+
+                    <div class="row form-group">
+                      <label class="control-label col-sm-3" for="title"> <span class="float-right"> Store Location: </span></label>
+                      <div class="col-sm-7">
+                        <input type="text" formControlName="storeLocation" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.storeLocation.errors }" placeholder="store location"/>
+                        <div *ngIf="submitted && f.storeLocation.errors" class="invalid-feedback">
+                          <div *ngIf="f.storeLocation.errors.required">Location is required</div>
+                        </div>
+                         <small class="text-danger" *ngIf="storeFormAdd.get('storeLocation').touched && storeFormAdd.get('storeLocation').hasError('required')">Location is required</small>  
+                      </div>
+                    </div>
+
+
+                    <div class="row form-group">
+                      <label class="control-label col-sm-3" for="title"> <span class="float-right"> Store Target: </span></label>
+                      <div class="col-sm-7">
+                        <input type="text" formControlName="storeTarget" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.storeTarget.errors }" placeholder="store target"/>
+                        <div *ngIf="submitted && f.storeTarget.errors" class="invalid-feedback">
+                          <div *ngIf="f.storeTarget.errors.required">Location is required</div>
+                        </div>
+                         <small class="text-danger" *ngIf="storeFormAdd.get('storeTarget').touched && storeFormAdd.get('storeTarget').hasError('required')">Target is required</small>  
+                      </div>
+                    </div>
+
+                    <!--Contact details-->
+                  <div class="row form-group">
+                      <label class="control-label col-sm-3" for="title"><span class="float-right"> Store Manager: </span></label>
+                      <div class="col-sm-7">
+                        <input type="text" formControlName="storeManager" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.storeManager.errors }"  placeholder="store manager name" />
+                       
+                        <div *ngIf="submitted && f.storeManager.errors" class="invalid-feedback">
+                          <div *ngIf="f.storeManager.errors.required">Name is required</div>
+                        </div>
+                        <small class="text-danger" *ngIf="storeFormAdd.get('storeManager').touched && storeFormAdd.get('storeManager').hasError('required')">Store Manager is required</small>   
+                        <small class="text-danger" *ngIf="storeFormAdd.get('storeManager').touched && storeFormAdd.get('storeManager').hasError('pattern')">Invalid Store Manager Name </small>   
+                      
+                      </div>
+                  </div>
+
+                  
+                 
+                    <div class="row form-group">
+                        <label class="control-label col-sm-3" for="title"> <span class="float-right"> Manager Mobile: </span> </label>
+                      <div class="col-sm-7">                          
+                          <input type="text" formControlName="storeManagerMobile" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.storeManagerMobile.errors }"  placeholder="manager phone number 2547......."/>
+                          <div *ngIf="submitted && f.storeManagerMobile.errors" class="invalid-feedback">
+                            <div *ngIf="f.storeManagerMobile.errors.required">Mobile is required</div>
+                          </div>
+                          <small class="text-danger" *ngIf="storeFormAdd.get('storeManagerMobile').touched && storeFormAdd.get('storeManagerMobile').hasError('required')">Manager Mobile is required</small>   
+                           <small class="text-danger" *ngIf="storeFormAdd.get('storeManagerMobile').touched && storeFormAdd.get('storeManagerMobile').hasError('pattern')">Invalid Mobile Number </small> 
+                      </div>
+                    </div>      
+                    
+                    <div class="row form-group">
+                        <label class="control-label col-sm-3" for="title"> <span class="float-right"> Email: </span></label>
+                        <div class="col-sm-7">
+                          <input type="text" formControlName="storeManagerEmail" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.storeManagerEmail.errors }" placeholder="manager email address"/>
+                          <div *ngIf="submitted && f.storeManagerEmail.errors" class="invalid-feedback">
+                            <div *ngIf="f.storeManagerEmail.errors.required">Manager Email is required</div>
+                          </div>
+                          <small class="text-danger" *ngIf="storeFormAdd.get('storeManagerEmail').touched && storeFormAdd.get('storeManagerEmail').hasError('required')">Manager Email is required</small>
+                          <small class="text-danger" *ngIf="storeFormAdd.get('storeManagerEmail').touched && storeFormAdd.get('storeManagerEmail').hasError('email')">Invalid email address</small>
+                        </div>
+                    </div>          
+                    
+                    
+                    <div class="row form-group">
+                        <label class="control-label col-sm-3" for="title"><span class="float-right"> Store Contact Person: </span></label>
+                        <div class="col-sm-7">
+                          <input type="text" formControlName="storeContact" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.storeContact.errors }"  placeholder="contact name" />
+                         
+                          <div *ngIf="submitted && f.storeContact.errors" class="invalid-feedback">
+                            <div *ngIf="f.storeContact.errors.required">Name is required</div>
+                          </div>
+                          <small class="text-danger" *ngIf="storeFormAdd.get('storeContact').touched && storeFormAdd.get('storeContact').hasError('required')">Contact person is required</small>   
+                          <small class="text-danger" *ngIf="storeFormAdd.get('storeContact').touched && storeFormAdd.get('storeContact').hasError('pattern')">Invalid contact person Name </small>   
+                        
+                        </div>
+                    </div>
+                    
+                   
+                      <div class="row form-group">
+                          <label class="control-label col-sm-3" for="title"> <span class="float-right"> Contact Person Mobile: </span> </label>
+                        <div class="col-sm-7">                          
+                            <input type="text" formControlName="storeContactMobile" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.storeContactMobile.errors }"  placeholder="contact person phone number 2547......."/>
+                            <div *ngIf="submitted && f.storeContactMobile.errors" class="invalid-feedback">
+                              <div *ngIf="f.storeContactMobile.errors.required">Mobile is required</div>
+                            </div>
+                            <small class="text-danger" *ngIf="storeFormAdd.get('storeContactMobile').touched && storeFormAdd.get('storeContactMobile').hasError('required')">Contact Person Mobile is required</small>   
+                             <small class="text-danger" *ngIf="storeFormAdd.get('storeContactMobile').touched && storeFormAdd.get('storeContactMobile').hasError('pattern')">Invalid Mobile Number </small> 
+                        </div>
+                      </div>      
+                      
+                      <div class="row form-group">
+                          <label class="control-label col-sm-3" for="title"> <span class="float-right"> Contact Person Email: </span></label>
+                          <div class="col-sm-7">
+                            <input type="text" formControlName="storeContactEmail" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.storeContactEmail.errors }" placeholder="contact person email address"/>
+                            <div *ngIf="submitted && f.storeContactEmail.errors" class="invalid-feedback">
+                              <div *ngIf="f.storeContactEmail.errors.required">Contact Person Email is required</div>
+                            </div>
+                            <small class="text-danger" *ngIf="storeFormAdd.get('storeContactEmail').touched && storeFormAdd.get('storeContactEmail').hasError('required')">Contact Person Email is required</small>
+                            <small class="text-danger" *ngIf="storeFormAdd.get('storeContactEmail').touched && storeFormAdd.get('storeContactEmail').hasError('email')">Invalid contact person email address</small>
+                          </div>
+                      </div>
+
+                      <!--<div class="row form-group">
+                        <label class="control-label col-sm-3" for="title"> <span class="float-right"> Contact Person Email: </span></label>
+                        <div class="col-sm-7">
+                          <input type="text" formControlName="storeContactEmail" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.storeContactEmail.errors }" placeholder="enter the contact email address"/>
+                          <div *ngIf="submitted && f.storeContactEmail.errors" class="invalid-feedback">
+                            <div *ngIf="f.storeContactEmail.errors.required">Manager Email is required</div>
+                          </div>
+                          <small class="text-danger" *ngIf="storeFormAdd.get('storeContactEmail').touched && storeFormAdd.get('storeContactEmail').hasError('required')">Contact Email is required</small>
+                          <small class="text-danger" *ngIf="storeFormAdd.get('storeContactEmail').touched && storeFormAdd.get('storeContactEmail').hasError('email')">Invalid contact email address</small>
+                        </div>
+                    </div>-->
+                      
+                      
+
+                   
+                    <!--End of Contact Details-->
+
+                   
+                    <!--Bank Details-->
+
+                    <div class="row form-group">
+                      <label class="control-label col-sm-3" for="title"> <span class="float-right"> Bank: </span> </label>
+                    <div class="col-sm-7">                          
+                        <input type="text" formControlName="storeBank" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.storeBank.errors }"  placeholder="bank name"/>
+                        <div *ngIf="submitted && f.storeBank.errors" class="invalid-feedback">
+                          <div *ngIf="f.storeBank.errors.required">Contact Person Mobile is required</div>
+                        </div>
+                        <small class="text-danger" *ngIf="storeFormAdd.get('storeBank').touched && storeFormAdd.get('storeBank').hasError('required')">Bank Name is required</small>   
+                         <small class="text-danger" *ngIf="storeFormAdd.get('storeBank').touched && storeFormAdd.get('storeBank').hasError('pattern')">Invalid Bank Name </small> 
+                    </div>
+                  </div> 
+
+                  <div class="row form-group">
+                    <label class="control-label col-sm-3" for="title"> <span class="float-right"> Bank Account Number: </span> </label>
+                  <div class="col-sm-7">                          
+                      <input type="text" formControlName="storeBankAccount" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.storeBankAccount.errors }"  placeholder="bank account name"/>
+                      <div *ngIf="submitted && f.storeBankAccount.errors" class="invalid-feedback">
+                        <div *ngIf="f.storeBankAccount.errors.required">Mobile is required</div>
+                      </div>
+                      <small class="text-danger" *ngIf="storeFormAdd.get('storeBankAccount').touched && storeFormAdd.get('storeBankAccount').hasError('required')">Bank Account Number is required</small>   
+                       <small class="text-danger" *ngIf="storeFormAdd.get('storeBankAccount').touched && storeFormAdd.get('storeBankAccount').hasError('pattern')">Invalid Account Number </small> 
+                  </div>
+                </div>
+
+
+                <div class="row form-group">
+                  <label class="control-label col-sm-3" for="title"> <span class="float-right"> Bank Account Name: </span> </label>
+                <div class="col-sm-7">                          
+                    <input type="text" formControlName="storeBankAccountName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.storeBankAccountName.errors }"  placeholder="contact phone number 2547......."/>
+                    <div *ngIf="submitted && f.storeBankAccountName.errors" class="invalid-feedback">
+                      <div *ngIf="f.storeBankAccountName.errors.required">Mobile is required</div>
+                    </div>
+                    <small class="text-danger" *ngIf="storeFormAdd.get('storeBankAccountName').touched && storeFormAdd.get('storeBankAccountName').hasError('required')">Bank Account Name is required</small>   
+                     <small class="text-danger" *ngIf="storeFormAdd.get('storeBankAccountName').touched && storeFormAdd.get('storeBankAccountName').hasError('pattern')">Invalid Bank Account Name </small> 
+                </div>
+              </div>
+
+              <div class="row form-group">
+                <label class="control-label col-sm-3" for="title"> <span class="float-right"> Bank Branch: </span> </label>
+              <div class="col-sm-7">                          
+                  <input type="text" formControlName="storeBankBranch" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.storeBankBranch.errors }"  placeholder="bank branch"/>
+                  <div *ngIf="submitted && f.storeBankBranch.errors" class="invalid-feedback">
+                    <div *ngIf="f.storeBankBranch.errors.required">Bank branch is required</div>
+                  </div>
+                  <small class="text-danger" *ngIf="storeFormAdd.get('storeBankBranch').touched && storeFormAdd.get('storeBankBranch').hasError('required')">Bank Branch is required</small>   
+                   <small class="text-danger" *ngIf="storeFormAdd.get('storeBankBranch').touched && storeFormAdd.get('storeBankAccountName').hasError('pattern')">Invalid Bank Branch Name </small> 
+              </div>
+            </div>
+
+
+
+
+                    <!--End of Bank Details-->
+
+                     <!--Mpesa Details-->
+
+                     <div class="row form-group">
+                      <label class="control-label col-sm-3" for="title"> <span class="float-right"> Till Number: </span> </label>
+                    <div class="col-sm-7">                          
+                        <input type="text" formControlName="storeMpesaTillNumber" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.storeMpesaTillNumber.errors }"  placeholder="mpesa till number"/>
+                        <div *ngIf="submitted && f.storeMpesaTillNumber.errors" class="invalid-feedback">
+                          <div *ngIf="f.storeMpesaTillNumber.errors.required">Mobile is required</div>
+                        </div>
+                        <small class="text-danger" *ngIf="storeFormAdd.get('storeMpesaTillNumber').touched && storeFormAdd.get('storeMpesaTillNumber').hasError('required')">Mpesa Till Number is required</small>   
+                         <small class="text-danger" *ngIf="storeFormAdd.get('storeMpesaTillNumber').touched && storeFormAdd.get('storeMpesaTillNumber').hasError('pattern')">Invalid Mpesa Till Number </small> 
+                    </div>
+                  </div>
+
+                  <div class="row form-group">
+                    <label class="control-label col-sm-3" for="title"> <span class="float-right"> PayBill Number: </span> </label>
+                  <div class="col-sm-7">                          
+                      <input type="text" formControlName="storeMpesaPaybillNumber" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.storeMpesaPaybillNumber.errors }"  placeholder="mpesa till number"/>
+                      <div *ngIf="submitted && f.storeMpesaPaybillNumber.errors" class="invalid-feedback">
+                        <div *ngIf="f.storeMpesaPaybillNumber.errors.required">Mobile is required</div>
+                      </div>
+                      <small class="text-danger" *ngIf="storeFormAdd.get('storeMpesaPaybillNumber').touched && storeFormAdd.get('storeMpesaPaybillNumber').hasError('required')">Mobile is required</small>   
+                       <small class="text-danger" *ngIf="storeFormAdd.get('storeMpesaPaybillNumber').touched && storeFormAdd.get('storeMpesaPaybillNumber').hasError('pattern')">Invalid Mpesa Paybill Number </small> 
+                  </div>
+                </div>
+                    <!--End of Mpesa Details-->              
+            
+                
+                 
+                    
+                    <div class="row form-group">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-7">
+                          <div class="float-right ">
+                            <button  class="btn btn-danger " type="cancel" style="margin-right: 10px;
+    min-width: 100px;" routerLink="/stores/">Cancel</button>
+                            <button disabled=[storeFormAdd.invalid]  class="btn btn-success " type="submit" style="min-width: 100px;">Submit</button>
+                          </div>
+                        </div>
+                      </div>
+                    
+                 
+                  </form>
+            
+    </div>    
+</div>
+</div>
+</div>
+</div>
+
+</block-ui>
+
