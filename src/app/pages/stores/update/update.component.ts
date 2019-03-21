@@ -31,7 +31,7 @@ export class UpdateStoreComponent implements OnInit {
     const namePattern = /^[a-zA-Z ']{2,45}$/;
     const kenyanMobileNoPattern = '^(254|0)(7([0-9]{8}))$';
     const kenyanTillNoPattern = /^[0-9]{5,7}$/;
-
+    this.blockUI.start('Fetching Store Data'); 
     this.dataservice
       .fetchData('partners').subscribe( data => {         
         

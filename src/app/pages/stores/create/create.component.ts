@@ -40,7 +40,7 @@ export class CreateStoreComponent implements OnInit {
         this.blockUI.stop();
           this.toastrService.error(data.message);
         }
-      }, err => {console.log("Bad things happened");  this.blockUI.stop();});
+      }, err => {console.log("Problems in downloading partners");  this.blockUI.stop();});
    
     this.storeFormAdd = fb.group({
       

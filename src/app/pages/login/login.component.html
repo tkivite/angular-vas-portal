@@ -10,7 +10,7 @@
                     </div>
                     <div class="panel-body">
 				    	
-						<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+						<form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
 							<fieldset>
 							<alert></alert>
 						    <div class="form-group">

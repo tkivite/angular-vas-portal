@@ -6,6 +6,7 @@ import {Observable} from "rxjs/index";
 export class ApiService {
 
  public EditFormData: any;
+ public currentLoggedInUser: any;
 
   constructor(private http: HttpClient) { }
   baseUrl: string = '/api/';
@@ -27,6 +28,9 @@ export class ApiService {
   }
   deleteRecord(resource,id): Observable<any> {
     return this.http.delete<any>(this.baseUrl + resource + '/'+id, {observe: 'response'});
+  }
+  login(resource,payload): Observable<any> {
+    return this.http.post<any>(this.baseUrl + resource, payload,{observe: 'response'});
   }
 }
 

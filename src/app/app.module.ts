@@ -41,7 +41,7 @@ import { StoreComponent } from './pages/stores/store.component';
 import { CreateStoreComponent }      from './pages/stores/create/create.component';
 import { UpdateStoreComponent }      from './pages/stores/update/update.component';
 import { PendingComponent } from './pages/pending/pending.component';
-import { CreateComponent } from './pages/users/create/create.component';
+import { CreateUserComponent } from './pages/users/create/create.component';
 import { ApiService } from './services/api.service';
 import { HomeComponent } from './pages/home/home.component';
 import { UpdateUserComponent } from './pages/users/update/update.component';
@@ -70,7 +70,7 @@ import { UpdateUserComponent } from './pages/users/update/update.component';
     CreateStoreComponent,
     UpdateStoreComponent,
     PendingComponent,
-    CreateComponent,
+    CreateUserComponent,
     AlertComponent,
     HomeComponent,
     UpdateUserComponent

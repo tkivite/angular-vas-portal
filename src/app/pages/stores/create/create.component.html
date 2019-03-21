@@ -33,8 +33,14 @@
          
             
             <div class="col-md-1"></div>
-                <form  [formGroup]="storeFormAdd" (ngSubmit)="onAddSubmit(storeFormAdd)" class="col-md-11 form-horizontal">
-                    <div class="row form-group">
+                
+            <form  [formGroup]="storeFormAdd" (ngSubmit)="onAddSubmit(storeFormAdd)" class="col-md-11 form-horizontal">
+             
+              <ngb-tabset>
+                <ngb-tab title="Basic Details">
+                    <ng-template ngbTabContent>
+              
+              <div class="row form-group">
                       <label class="control-label col-sm-3" for="title"><span class="float-right"> Partner: </span></label>
                       <div class="col-sm-7">
                         <select formControlName="storePartner" class="form-control validation-field">
@@ -46,7 +52,7 @@
                   </div>  
                   
                   <div class="row form-group">
-                        <label class="control-label col-sm-3" for="title"><span class="float-right"> Partner: </span></label>
+                        <label class="control-label col-sm-3" for="title"><span class="float-right"> Name: </span></label>
                         <div class="col-sm-7">
                           <input type="text" formControlName="storeName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.storeName.errors }"  placeholder="enter store name" />
                          
@@ -60,7 +66,7 @@
                     </div>
 
                     <div class="row form-group">
-                      <label class="control-label col-sm-3" for="title"> <span class="float-right"> source identifier: </span></label>
+                      <label class="control-label col-sm-3" for="title"> <span class="float-right"> Source identifier: </span></label>
                       <div class="col-sm-7">
                         <input type="text" formControlName="storeSourceid" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.storeSourceid.errors }" placeholder="sourceid"/>
                         <div *ngIf="submitted && f.storeSourceid.errors" class="invalid-feedback">
@@ -70,11 +76,11 @@
                       </div>
                     </div>
                     <div class="row form-group">
-                      <label class="control-label col-sm-3" for="title"> <span class="float-right"> source identifier: </span></label>
+                      <label class="control-label col-sm-3" for="title"> <span class="float-right"> Disburse email: </span></label>
                       <div class="col-sm-7">
                         <input type="text" formControlName="storeDisburseEmail" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.storeDisburseEmail.errors }" placeholder="disburse email"/>
                         <div *ngIf="submitted && f.storeDisburseEmail.errors" class="invalid-feedback">
-                          <div *ngIf="f.storeDisburseEmail.errors.required">Location is required</div>
+                          <div *ngIf="f.storeDisburseEmail.errors.required">Disburse email is required</div>
                         </div>
                          <small class="text-danger" *ngIf="storeFormAdd.get('storeDisburseEmail').touched && storeFormAdd.get('storeDisburseEmail').hasError('required')">Disburse Email is required</small>  
                       </div>
@@ -91,7 +97,6 @@
                       </div>
                     </div>
 
-
                     <div class="row form-group">
                       <label class="control-label col-sm-3" for="title"> <span class="float-right"> Store Target: </span></label>
                       <div class="col-sm-7">
@@ -102,8 +107,13 @@
                          <small class="text-danger" *ngIf="storeFormAdd.get('storeTarget').touched && storeFormAdd.get('storeTarget').hasError('required')">Target is required</small>  
                       </div>
                     </div>
+                    </ng-template>
+                    </ngb-tab>
 
                     <!--Contact details-->
+                    <ngb-tab title="Contact Details">
+                      
+                            <ng-template ngbTabContent>
                   <div class="row form-group">
                       <label class="control-label col-sm-3" for="title"><span class="float-right"> Store Manager: </span></label>
                       <div class="col-sm-7">
@@ -197,12 +207,15 @@
                     </div>-->
                       
                       
-
-                   
+</ng-template>
+                   </ngb-tab>
                     <!--End of Contact Details-->
 
                    
                     <!--Bank Details-->
+
+                    <ngb-tab title="Payment Details">
+                        <ng-template ngbTabContent>
 
                     <div class="row form-group">
                       <label class="control-label col-sm-3" for="title"> <span class="float-right"> Bank: </span> </label>
@@ -285,9 +298,9 @@
                 </div>
                     <!--End of Mpesa Details-->              
             
-                
-                 
-                    
+                </ng-template>
+                 </ngb-tab>
+                </ngb-tabset>  
                     <div class="row form-group">
                         <div class="col-sm-3"></div>
                         <div class="col-sm-7">
@@ -297,10 +310,9 @@
                             <button disabled=[storeFormAdd.invalid]  class="btn btn-success " type="submit" style="min-width: 100px;">Submit</button>
                           </div>
                         </div>
-                      </div>
-                    
-                 
-                  </form>
+                      </div> 
+                                   
+                     </form>
             
     </div>    
 </div>
