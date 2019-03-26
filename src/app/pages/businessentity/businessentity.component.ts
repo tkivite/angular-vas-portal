@@ -2,8 +2,6 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
-import { DomSanitizer } from '@angular/platform-browser';
-import { DatePipe } from '@angular/common';
 import { ApiService } from '../../services/api.service';
 import * as $ from 'jquery';
 

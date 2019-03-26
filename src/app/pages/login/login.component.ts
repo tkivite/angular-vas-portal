@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-
-import { AlertService, AuthenticationService } from '../../services';
-
+import { ToastrService } from 'ngx-toastr';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import {AuthenticationService } from '../../services';
+import {ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-login',
@@ -12,18 +13,20 @@ import { AlertService, AuthenticationService } from '../../services';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+    @BlockUI() blockUI: NgBlockUI;
     loginForm: FormGroup;
     loading = false;
     submitted = false;
     returnUrl: string;
-
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
+        private dataservice: ApiService,
+        public toastrService: ToastrService,
+        public alertService: ToastrService,
         private authenticationService: AuthenticationService,
-        private alertService: AlertService
-    ) {
+        ) {
         // redirect to home if already logged in
         if (this.authenticationService.currentUserValue) { 
             this.router.navigate(['dashboard']);
@@ -32,36 +35,38 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
-            username: ['', Validators.required],
-            password: ['', Validators.required]
+            username: ['', Validators.compose([Validators.required])],
+            password: ['', Validators.compose([Validators.required])],
         });
-
-        // get return url from route parameters or default to '/'
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
-
     // convenience getter for easy access to form fields
     get f() { return this.loginForm.controls; }
-
-    onSubmit() {
-
-        this.submitted = true;
-
-        // stop here if form is invalid
-        if (this.loginForm.invalid) {
-            return;
-        }
-
-        this.loading = true;
-        this.authenticationService.login(this.f.username.value, this.f.password.value)
+    //submit login
+    public onSubmit(form: FormGroup) {
+      this.blockUI.start('Taking you home ....');
+      const postFormData = {
+            email: this.f.username.value,
+            password: this.f.password.value
+          };
+      this.authenticationService.login(postFormData)
             .pipe(first())
             .subscribe(
                 data => {
-                    this.router.navigate(['dashboard']);
+                  console.log(data);
+                   // this.router.navigate([this.returnUrl]);
+                  this.router.navigate(['dashboard']);
+                  const firstname = data.user.firstname;
+                  this.blockUI.stop();
+                  this.toastrService.success('Login Successful', 'Welcome'+firstname, {
+                      timeOut: 10000
+                    });
                 },
                 error => {
-                    this.alertService.error(error);                    
-                    this.loading = false;
-                });
-    }
-}
+                  console.log(error);
+                  this.blockUI.stop();
+                  this.toastrService.error(error.error.error.user_authentication[0], 'Login Unsuccessful', {
+                      timeOut: 10000
+                    });
+                  });
+        }
+      }

@@ -1,58 +1,100 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { first } from 'rxjs/operators';
-
-import { User } from '../../models';
-import { UserService, AuthenticationService } from '../../services';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { Component, OnInit,ViewChild } from '@angular/core';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { DomSanitizer } from '@angular/platform-browser';
+import { DatePipe } from '@angular/common';
+import { ApiService } from '../../services/api.service';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersComponent implements OnInit, OnDestroy  {
-
-    currentUser: User;
-    currentUserSubscription: Subscription;
-    users: User[] = [];
-    dtOptions: DataTables.Settings = {};
-
-    constructor(
-        private authenticationService: AuthenticationService,
-        private userService: UserService
-    ) {
-        this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
-            this.currentUser = user;
+export class UsersComponent implements  OnInit {
+      @BlockUI() blockUI: NgBlockUI;
+      public router: Router;
+      public data = [];
+      public currentActive: any = 'GRID';
+      public noDataDisplay: any = { emptyMessage: 'No data to display' };
+      public recordCount = 0;
+      
+      loadingIndicator: any = false;
+      title = 'angulardatatables';
+      dtOptions: DataTables.Settings = {};
+      @ViewChild('myTable') table: any;
+      constructor(
+        router: Router,
+        public toastrService: ToastrService,
+        private dataservice: ApiService
+      ) {
+        this.router = router;
+        this.getData();   
+      }
+    
+      ngOnInit() {
+       $(document).ready(function(){
+          $('.dataTables_empty').html('');
+          $('.dataTables_info').html('');
+          $('.dataTables_length').html('<a class="btn btn-infor btn-sm mb-1" (click)="onAdd()" type="button"><i class="fa fa-plus"></i> Add user</a>');
         });
-    }
-
-    ngOnInit() {
-        this.loadAllUsers();
         this.dtOptions = {
-	      pagingType: 'full_numbers',
-	      dom: 'rtip',
-	      pageLength: 10,
-	      processing: true
-	   };
+          pagingType: 'full_numbers',
+          dom: 'rtip',
+          pageLength: 10,
+          processing: true
+        };
+    
+      }
+      // Load Grid Data
+      getData() {
+        this.blockUI.start('Loading Users');    
+      
+        this.loadingIndicator = true;
+        this.dataservice
+            .fetchData('users').subscribe( data => {         
+              
+              if (data.status === 200) {
+                 console.log(data.body);
+                 this.data = data.body;
+                 this.blockUI.stop();            
+              } else {
+              this.blockUI.stop();
+                this.toastrService.error(data.message);
+              }
+            }, err => {console.log("Something went wrong!");  this.blockUI.stop();});
+        this.noDataDisplay.emptyMessage = "No data to display";
+        this.toastrService.error('Something Went Wrong');
+       // this.blockUI.stop();
+        this.loadingIndicator = false;
+      }
+      onEdit(data) {
+        console.log(data);
+        this.dataservice.EditFormData = data;
+        this.router.navigate(['users/update']);
+      }
+      onDelete(record) {
+        console.log(record);
+       this.blockUI.start('Deleting User ........');    
+      
+        this.dataservice
+            .deleteRecord('users',record.id).subscribe( data => {       
+               console.log(data);
+              if (data.status === 200) {
+                 console.log(data.body);
+                 this.data = data.body;
+                 this.blockUI.stop();            
+              } else {
+              this.blockUI.stop();
+                this.toastrService.error(data.message);
+              }
+            }, err => {console.log("Something went wrong!..I dont know what...do you?");  this.blockUI.stop();});  
+           //this.router.navigate(['onboarding']);
+      }
+    
+      onAdd() {
+        this.router.navigate(['users/create']);
+      }
     }
-
-    ngOnDestroy() {
-        // unsubscribe to ensure no memory leaks
-        this.currentUserSubscription.unsubscribe();
-    }
-
-    deleteUser(id: number) {
-        this.userService.delete(id).pipe(first()).subscribe(() => {
-            this.loadAllUsers()
-        });
-    }
-
-    private loadAllUsers() {
-        this.userService.getAll().pipe(first()).subscribe(users => {
-            this.users = users;
-        });
-    }
-
-}
-
-
+       

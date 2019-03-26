@@ -1,43 +1,162 @@
 <block-ui>
-	<div class="box box-primary">
-    	<div class="box-body">	
-			<h2>New User</h2>
-			<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-			    <div class="form-group">
-			        <label for="firstName">First Name</label>
-			        <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
-			        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
-			            <div *ngIf="f.firstName.errors.required">First Name is required</div>
-			        </div>
-			    </div>
-			    <div class="form-group">
-			        <label for="lastName">Last Name</label>
-			        <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
-			        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
-			            <div *ngIf="f.lastName.errors.required">Last Name is required</div>
-			        </div>
-			    </div>
-			    <div class="form-group">
-			        <label for="username">Username</label>
-			        <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-			        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-			            <div *ngIf="f.username.errors.required">Username is required</div>
-			        </div>
-			    </div>
-			    <div class="form-group">
-			        <label for="password">Password</label>
-			        <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-			        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-			            <div *ngIf="f.password.errors.required">Password is required</div>
-			            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
-			        </div>
-			    </div>
-			    <div class="form-group">
-			        <button [disabled]="loading" class="btn btn-primary">Create</button>
-			        <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-			        <a routerLink="/login" class="btn btn-link">Cancel</a>
-			    </div>
-			</form>
-		</div>
-	</div>
+        <div class="box box-primary">
+          <div class="box-body">
+            <div class="row mb-4" *ngIf="currentActive === 'DISABLED'">
+              <div class="col">
+                  <div class="card border-0 box-shadow" widget="">
+                      <div class="card-header transparent border-0 text-muted">
+                          <h5 class="mb-0">Access Denied</h5>
+                      </div>
+                      <div class="card-block pt-0 widget-body">
+                          <div class="row">
+                              <div class="col-xl-12">
+                                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                                      <span aria-hidden="true">×</span>
+                                    </button>
+                                      <strong>Error!</strong> You Do not have access to this page.
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div widget class="card border-0 box-shadow" *ngIf="currentActive === 'ENABLED'">
+            <div id ="cccform" class="container">
+                <div class="row form-heading">
+                  <div class="col-md-1"></div>
+                  <h4 class="col-md-11">Adding New User</h4>
+                </div>
+                <hr>
+              <div class="row">
+               
+                  
+                  <div class="col-md-1"></div>
+
+            <form autocomplete="off" [formGroup]="userFormAdd" (ngSubmit)="onAddSubmit(userFormAdd)" class="col-md-11 form-horizontal">
+           
+
+                    <div class="row form-group">
+                       
+                            <label class="control-label col-sm-3" for="inputName">First Name</label> 
+                            <div class="col-sm-7">
+                            <input formControlName="firstname" class="form-control validation-field" placeholder="First Name" type="text">
+                            <small class="text-danger" *ngIf="userFormAdd.get('firstname').touched && userFormAdd.get('firstname').hasError('required')">First Name is required</small>
+                            <small class="text-danger" *ngIf="userFormAdd.get('firstname').touched && userFormAdd.get('firstname').hasError('pattern')">Invalid First Name</small>
+                            <small class="text-danger" *ngIf="userFormAdd.get('firstname').touched && userFormAdd.get('firstname').hasError('minlength')">First Name should be at least 3 characters</small>
+                            <small class="text-danger" *ngIf="userFormAdd.get('firstname').touched && userFormAdd.get('firstname').hasError('maxlength')">First Name should be at most 45 characters</small>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                       
+                            <label class="control-label col-sm-3" for="inputName">Last Name</label>  
+                                                         <div class="col-sm-7">
+                            <input formControlName="lastname" class="form-control validation-field" placeholder="Last Name" type="text">
+                            <small class="text-danger" *ngIf="userFormAdd.get('lastname').touched && userFormAdd.get('lastname').hasError('required')">Last Name is required</small>
+                            <small class="text-danger" *ngIf="userFormAdd.get('lastname').touched && userFormAdd.get('lastname').hasError('pattern')">Invalid Last Name</small>
+                            <small class="text-danger" *ngIf="userFormAdd.get('lastname').touched && userFormAdd.get('lastname').hasError('minlength')">Last Name should be at least 3 characters</small>
+                            <small class="text-danger" *ngIf="userFormAdd.get('lastname').touched && userFormAdd.get('lastname').hasError('maxlength')">Last Name should be at most 45 characters</small>
+                        </div>
+                    </div>
+                   <!---- <div class="row form-group">
+                       
+                            <label class="control-label col-sm-3" for="inputName">User Name</label>  
+                                                         <div class="col-sm-7">
+                            <input formControlName="userName" class="form-control validation-field" placeholder="User Name" type="text">
+                            <small class="text-danger" *ngIf="userFormAdd.get('userName').touched && userFormAdd.get('userName').hasError('required')">User Name is required</small>
+                            <small class="text-danger" *ngIf="userFormAdd.get('userName').touched && userFormAdd.get('userName').hasError('pattern')">Invalid User Name</small>
+                            <small class="text-danger" *ngIf="userFormAdd.get('userName').touched && userFormAdd.get('userName').hasError('minlength')">Last Name should be at least 3 characters</small>
+                            <small class="text-danger" *ngIf="userFormAdd.get('userName').touched && userFormAdd.get('userName').hasError('maxlength')">Last Name should be at most 45 characters</small>
+                        </div>
+                    </div>-->
+                    <div class="row form-group">
+                       
+                            <label class="control-label col-sm-3" for="inputName">Email</label>  
+                                                         <div class="col-sm-7">
+                            <input formControlName="email" class="form-control validation-field" placeholder="Email" type="email">
+                            <small class="text-danger" *ngIf="userFormAdd.get('email').touched && userFormAdd.get('email').hasError('required')">Email is required</small>
+                            <small class="text-danger" *ngIf="userFormAdd.get('email').touched && userFormAdd.get('email').hasError('email')">Invalid email address</small>
+                        </div>
+					</div>
+					
+					<div class="row form-group">
+                       
+                            <label class="control-label col-sm-3" for="inputName">Id Number</label>  
+                                                         <div class="col-sm-7">
+                            <input formControlName="id_number" class="form-control validation-field" placeholder="Id Number" type="id_number">
+                            <small class="text-danger" *ngIf="userFormAdd.get('id_number').touched && userFormAdd.get('id_number').hasError('required')">Id Number is required</small>
+                            <small class="text-danger" *ngIf="userFormAdd.get('id_number').touched && userFormAdd.get('id_number').hasError('id_number')">Id Number</small>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                       
+                            <label class="control-label col-sm-3" for="inputName">Phone Number</label>
+                                                           <div class="col-sm-7">
+                            <input formControlName="mobile" class="form-control validation-field" placeholder="Phone Number" type="text">
+                            <small class="text-danger" *ngIf="userFormAdd.get('mobile').touched && userFormAdd.get('mobile').hasError('required')">Phone Number is required</small>
+                            <small class="text-danger" *ngIf="userFormAdd.get('mobile').touched && userFormAdd.get('mobile').hasError('pattern')">Format should be either 2547XXXXXXX or 07XXXXXXXX</small>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                       
+                            <label class="control-label col-sm-3" for="inputContacts">Gender</label>   
+                                                        <div class="col-sm-7">
+                            <select formControlName="gender" class="form-control validation-field">
+                                <option value="">Select Gender</option>
+                      <option *ngFor="let o of genderList" [value]="o.name">{{o.name}}</option>
+                  </select>
+                            <small class="text-danger" *ngIf="userFormAdd.get('gender').touched && userFormAdd.get('gender').hasError('required')">Gender is required</small>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                       
+                            <label class="control-label col-sm-3" for="inputContacts">Store</label>   
+                                                        <div class="col-sm-7">
+                            <select formControlName="store_id" class="form-control validation-field">
+                                <option value="">Select Store</option>
+                      <option *ngFor="let o of storeOptions" [value]="o.id">{{o.name}}</option>
+                  </select>
+                            <small class="text-danger" *ngIf="userFormAdd.get('store_id').touched && userFormAdd.get('store_id').hasError('required')">Store is required</small>
+                        </div>
+                    </div>
+                    <div class="row form-group">                       
+                            <label class="control-label col-sm-3" for="inputName">Role</label> 
+                            <div class="col-sm-7">
+                            <select formControlName="role" class="form-control validation-field" id="inputStatus">
+                                <option value="">Select Role</option>
+                          <option *ngFor="let o of roleList" [value]="o.name">{{o.name}}</option>
+                      </select>
+                            <small class="text-danger" *ngIf="userFormAdd.get('role').touched && userFormAdd.get('role').hasError('required')">Language is required</small>
+                        </div>
+                    </div>
+                
+           
+             <!---   <div class="row align-roles-right">
+                    <button [disabled]="!userFormAdd.valid" class="btn btn-danger" type="submit">Submit</button>
+                </div>-->
+                <div class="row form-group">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-7">
+                          <div class="float-right ">
+                            <button  class="btn btn-danger " type="cancel" style="margin-right: 10px;
+    min-width: 100px;" routerLink="/users/">Cancel</button>
+                            <button disabled=[userFormAdd.invalid]  class="btn btn-success " type="submit" style="min-width: 100px;">Submit</button>
+                          </div>
+                        </div>
+                      </div> 
+            </form>
+            <div *ngIf="errorMessage !== 'SHOWERROR'" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <strong>Error!</strong> {{errorMessage}}small
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    
 </block-ui>

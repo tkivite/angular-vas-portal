@@ -2,7 +2,7 @@
     <div class="box box-primary">
         <div class="box-body">
            <div class="widget-controls">
-               <a  class="btn btn-info btn-sm mb-1" routerLink="/store/create"><i class="fa fa-plus"></i> Add Store</a>
+               <a  class="btn btn-info btn-sm mb-1" routerLink="/stores/create"><i class="fa fa-plus"></i> Add Store</a>
                
             </div>
             <span id="responseText"></span>
@@ -10,19 +10,22 @@
                 <thead>
                   <tr>
                     <th>Name</th>
-                    <th>Country</th>
-                    <th>Telephone</th>
-                    <th>Email</th>
-                    <th>Status</th>
+                    <th>Partner</th>
+                    <th>Disburse Email</th>
+                    <th>Contact Person</th>
+                    <th>Contact Person Mobile</th>
+                    
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                 <tr *ngFor="let group of data">
-                       <td>{{group.name}}</td>
-                       <td>{{group.country}}</td>
-                       <td>{{group.telephone}}</td>
-                       <td>{{group.email}}</td>
-                       <td>{{group.status}}</td>
+                 <tr *ngFor="let item of data; let i = index" title="{{item.id}}">
+                       <td>{{item.name}}</td>
+                       <td>{{item.partner}}</td>
+                       <td>{{item.disburse_email}}</td>
+                       <td>{{item.contact_person}}</td>
+                       <td>{{item.contact_person_mobile}}</td>
+                        <td> <div class="float-right"> <button type="button" class="btn btn-xs btn-info" title="View details" style="margin-right: 5px"> <i class="fa fa-eye"></i></button><button type="button" class="btn btn-xs btn-warning" title="Edit this business details" style="margin-right: 5px" (click)="onEdit(item)"> <i  class="fa fa-pencil"></i></button><button type="button" class="btn btn-xs btn-danger" title="Trash this Business details" (click)="onDelete(item)"> <i class="fa fa-trash"></i></button> </div></td>
                    </tr>
                 </tbody>
               </table>
@@ -30,4 +33,6 @@
         </div>
     </div>
 </block-ui>
+
+
                 

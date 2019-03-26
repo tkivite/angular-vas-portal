@@ -5,8 +5,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {DataTablesModule} from 'angular-datatables';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { SweetAlertService } from 'angular-sweetalert-service';
+//import {ErrorInterceptor,JwtInterceptor} from './helpers';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -41,7 +42,7 @@ import { StoreComponent } from './pages/stores/store.component';
 import { CreateStoreComponent }      from './pages/stores/create/create.component';
 import { UpdateStoreComponent }      from './pages/stores/update/update.component';
 import { PendingComponent } from './pages/pending/pending.component';
-import { CreateComponent } from './pages/users/create/create.component';
+import { CreateUserComponent } from './pages/users/create/create.component';
 import { ApiService } from './services/api.service';
 import { HomeComponent } from './pages/home/home.component';
 import { UpdateUserComponent } from './pages/users/update/update.component';
@@ -70,7 +71,7 @@ import { UpdateUserComponent } from './pages/users/update/update.component';
     CreateStoreComponent,
     UpdateStoreComponent,
     PendingComponent,
-    CreateComponent,
+    CreateUserComponent,
     AlertComponent,
     HomeComponent,
     UpdateUserComponent
@@ -86,7 +87,10 @@ import { UpdateUserComponent } from './pages/users/update/update.component';
     ToastrModule.forRoot(),
     AppRoutingModule
   ],
-  providers: [ DatePipe,ApiService],
+  providers: [ DatePipe,ApiService,
+  //  { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  //  { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

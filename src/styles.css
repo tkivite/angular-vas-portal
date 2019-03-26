@@ -3,6 +3,7 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import '~font-awesome/css/font-awesome.css';
+@import '~ngx-toastr/toastr.css';
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
@@ -423,7 +424,7 @@ div.card-body{
     border-radius: 5px;
 }
 
-app-be-update,app-notifications,app-login,app-create,app-store,app-businessentity,app-sales,app-users,app-released,app-myaccount,app-deliveries,app-collections,app-invoicing,app-dashboard{
+app-be-update,app-update,app-notifications,app-login,app-create,app-store,app-businessentity,app-sales,app-users,app-released,app-myaccount,app-deliveries,app-collections,app-invoicing,app-dashboard{
     width:100%;
 }
 .datatable-row-wrapper {
@@ -454,4 +455,12 @@ hr {
     width: auto;
     margin-left: -15px;
     margin-right: -15px;
+}
+ngb-tabset>.nav-tabs {
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+.navbar-expand-lg .navbar-nav .dropdown-menu {
+    position: relative !important;
 }

@@ -19,28 +19,32 @@ import { UpdateStoreComponent }      from './pages/stores/update/update.componen
 import { PendingComponent }      from './pages/pending/pending.component';
 import { AuthGuard } from './guards';
 import { LoginComponent }      from './pages/login/login.component';
-import { CreateComponent }      from './pages/users/create/create.component';
+import { CreateUserComponent }      from './pages/users/create/create.component';
+import { UpdateUserComponent }      from './pages/users/update/update.component';
 
 
 const routes: Routes = [
 //{ path: '', component: LoginComponent },
-//{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 { path: 'login', component: LoginComponent },
-{ path: 'register', component: CreateComponent },
+{ path: 'register', component: CreateUserComponent },
 
 { path: 'sales', component: SalesComponent },
 { path: 'pending', component: PendingComponent },
 { path: 'onboarding', component: BusinessentityComponent },
 { path: 'onboarding/create', component: CreateBeComponent },
 { path: 'onboarding/update', component: UpdateBeComponent },
-{ path: 'store', component: StoreComponent },
-{ path: 'store/create', component: CreateStoreComponent },
+{ path: 'stores', component: StoreComponent },
+{ path: 'stores/create', component: CreateStoreComponent },
+{ path: 'stores/update', component: UpdateStoreComponent },
 { path: 'dashboard', component: DashboardComponent },
 { path: 'notifications', component: NotificationsComponent },
 { path: 'collections', component: CollectionsComponent },
 { path: 'released', component: ReleasedComponent },
 { path: 'payments', component: PaymentsComponent },
 { path: 'users', component: UsersComponent },
+{ path: 'users/create', component: CreateUserComponent },
+{ path: 'users/update', component: UpdateUserComponent },
 { path: 'deliveries', component: DeliveriesComponent },
 { path: 'myaccount', component: MyaccountComponent },
 { path: 'invoicing', component: InvoicingComponent }
