@@ -4,10 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
-
-import { AlertService } from '../../services';
+import {AuthenticationService } from '../../services';
 import {ApiService } from '../../services/api.service';
-
 
 @Component({
   selector: 'app-login',
@@ -26,46 +24,49 @@ export class LoginComponent implements OnInit {
         private router: Router,
         private dataservice: ApiService,
         public toastrService: ToastrService,
-    ) {
+        public alertService: ToastrService,
+        private authenticationService: AuthenticationService,
+        ) {
         // redirect to home if already logged in
-        if (this.dataservice.currentLoggedInUser) { 
+        if (this.authenticationService.currentUserValue) { 
             this.router.navigate(['dashboard']);
         }
     }
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
-            username: ['', Validators.required],
-            password: ['', Validators.required]
+            username: ['', Validators.compose([Validators.required])],
+            password: ['', Validators.compose([Validators.required])],
         });
-
-        // get return url from route parameters or default to '/'
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
-
     // convenience getter for easy access to form fields
     get f() { return this.loginForm.controls; }
+    //submit login
     public onSubmit(form: FormGroup) {
-             
-          const postFormData = {
+      this.blockUI.start('Taking you home ....');
+      const postFormData = {
             email: this.f.username.value,
             password: this.f.password.value
           };
-          //{"email":"tkivite@gmail5.com","password":"123456"}
-          this.dataservice
-            .postData('authenticate', postFormData).subscribe( data => {              
-              console.log(data)
-              if (data.status === 200) {
-                this.toastrService.success(data.message);
-                this.router.navigate(['users']);
-                this.blockUI.stop();
-              } else {
-                this.toastrService.error(data.message);
-                this.blockUI.stop();
-              }
-            }, err => {console.log("Something went wrong");  this.blockUI.stop();});
-           
+      this.authenticationService.login(postFormData)
+            .pipe(first())
+            .subscribe(
+                data => {
+                  console.log(data);
+                   // this.router.navigate([this.returnUrl]);
+                  this.router.navigate(['dashboard']);
+                  const firstname = data.user.firstname;
+                  this.blockUI.stop();
+                  this.toastrService.success('Login Successful', 'Welcome'+firstname, {
+                      timeOut: 10000
+                    });
+                },
+                error => {
+                  console.log(error);
+                  this.blockUI.stop();
+                  this.toastrService.error(error.error.error.user_authentication[0], 'Login Unsuccessful', {
+                      timeOut: 10000
+                    });
+                  });
         }
-      
-  
-}
+      }

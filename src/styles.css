@@ -3,6 +3,7 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import '~font-awesome/css/font-awesome.css';
+@import '~ngx-toastr/toastr.css';
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
@@ -459,4 +460,7 @@ ngb-tabset>.nav-tabs {
     border-bottom: 1px solid #dee2e6;
     margin-bottom: 30px;
     font-size: 16px;
+}
+.navbar-expand-lg .navbar-nav .dropdown-menu {
+    position: relative !important;
 }

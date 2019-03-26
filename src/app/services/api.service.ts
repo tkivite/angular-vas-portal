@@ -1,36 +1,44 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {Observable} from "rxjs/index";
+import { HttpClient,HttpHeaders } from '@angular/common/http';
+import {Observable} from 'rxjs/index';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable()
-export class ApiService {
 
+export class ApiService {
+ currentUser: any;
+ headers: any;
  public EditFormData: any;
  public currentLoggedInUser: any;
 
-  constructor(private http: HttpClient) { }
-  baseUrl: string = '/api/';
+ constructor(private http: HttpClient,private  authenticationService: AuthenticationService){
+  this.authenticationService.currentUser.subscribe(x => {
+    this.currentUser = x;
+    this.headers = new HttpHeaders().set('Authorization', this.currentUser.auth_token);
+  });
+ }
+  baseUrl = '/api/';
 
-  fetchData(resource): Observable<any> {
-    return this.http.get<any>(this.baseUrl+resource, {observe: 'response'});
-  }
+  fetchData( resource ): Observable<any> {
+    return this.http.get<any>(this.baseUrl + resource, {headers: this.headers, observe: 'response'});
+   }
 
-  getRecordById(resource,id): Observable<any> {
-    return this.http.get<any>(this.baseUrl + resource + '/'+id, {observe: 'response'});
+  getRecordById( resource, id ): Observable<any> {
+    return this.http.get<any>(this.baseUrl + resource + '/' + id, { headers: this.headers, observe: 'response'});
   }
 
   postData(resource,payload): Observable<any> {
-    return this.http.post<any>(this.baseUrl + resource, payload,{observe: 'response'});
+    return this.http.post<any>(this.baseUrl + resource, payload, { headers: this.headers, observe: 'response'});
   }
 
   updateRecord(resource,id,record): Observable<any> {
-    return this.http.put<any>(this.baseUrl + resource + '/'+id, record,{observe: 'response'});
+    return this.http.put<any>(this.baseUrl + resource + '/' + id, record,{headers: this.headers, observe: 'response'});
   }
   deleteRecord(resource,id): Observable<any> {
-    return this.http.delete<any>(this.baseUrl + resource + '/'+id, {observe: 'response'});
+    return this.http.delete<any>(this.baseUrl + resource + '/' + id, {headers: this.headers, observe: 'response'});
   }
   login(resource,payload): Observable<any> {
-    return this.http.post<any>(this.baseUrl + resource, payload,{observe: 'response'});
+    return this.http.post<any>(this.baseUrl + resource, payload, { headers: this.headers, observe: 'response'});
   }
 }
 

@@ -61,10 +61,8 @@ export class StoreComponent implements OnInit {
           this.blockUI.stop();
             this.toastrService.error(data.message);
           }
-        }, err => {console.log("Bad things happened");  this.blockUI.stop();});
-    this.noDataDisplay.emptyMessage = "No data to display";
-    this.toastrService.error('Something Went Wrong');
-   // this.blockUI.stop();
+        }, err => {this.toastrService.error('Could not Load Stores Data');  this.blockUI.stop();});
+
     this.loadingIndicator = false;
   }
   onEdit(data) {

@@ -25,7 +25,7 @@ import { UpdateUserComponent }      from './pages/users/update/update.component'
 
 const routes: Routes = [
 //{ path: '', component: LoginComponent },
-//{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 { path: 'login', component: LoginComponent },
 { path: 'register', component: CreateUserComponent },
 
