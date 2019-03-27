@@ -30,16 +30,16 @@
                 </div>
                 <hr>
               <div class="row">
-               
-                  
+
+
                   <div class="col-md-1"></div>
 
             <form autocomplete="off" [formGroup]="userFormAdd" (ngSubmit)="onAddSubmit(userFormAdd)" class="col-md-11 form-horizontal">
-           
+
 
                     <div class="row form-group">
-                       
-                            <label class="control-label col-sm-3" for="inputName">First Name</label> 
+
+                            <label class="control-label col-sm-3" for="inputName">First Name</label>
                             <div class="col-sm-7">
                             <input formControlName="firstname" class="form-control validation-field" placeholder="First Name" type="text">
                             <small class="text-danger" *ngIf="userFormAdd.get('firstname').touched && userFormAdd.get('firstname').hasError('required')">First Name is required</small>
@@ -49,8 +49,8 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                       
-                            <label class="control-label col-sm-3" for="inputName">Last Name</label>  
+
+                            <label class="control-label col-sm-3" for="inputName">Last Name</label>
                                                          <div class="col-sm-7">
                             <input formControlName="lastname" class="form-control validation-field" placeholder="Last Name" type="text">
                             <small class="text-danger" *ngIf="userFormAdd.get('lastname').touched && userFormAdd.get('lastname').hasError('required')">Last Name is required</small>
@@ -60,8 +60,8 @@
                         </div>
                     </div>
                    <!---- <div class="row form-group">
-                       
-                            <label class="control-label col-sm-3" for="inputName">User Name</label>  
+
+                            <label class="control-label col-sm-3" for="inputName">User Name</label>
                                                          <div class="col-sm-7">
                             <input formControlName="userName" class="form-control validation-field" placeholder="User Name" type="text">
                             <small class="text-danger" *ngIf="userFormAdd.get('userName').touched && userFormAdd.get('userName').hasError('required')">User Name is required</small>
@@ -71,18 +71,18 @@
                         </div>
                     </div>-->
                     <div class="row form-group">
-                       
-                            <label class="control-label col-sm-3" for="inputName">Email</label>  
+
+                            <label class="control-label col-sm-3" for="inputName">Email</label>
                                                          <div class="col-sm-7">
                             <input formControlName="email" class="form-control validation-field" placeholder="Email" type="email">
                             <small class="text-danger" *ngIf="userFormAdd.get('email').touched && userFormAdd.get('email').hasError('required')">Email is required</small>
                             <small class="text-danger" *ngIf="userFormAdd.get('email').touched && userFormAdd.get('email').hasError('email')">Invalid email address</small>
                         </div>
 					</div>
-					
+
 					<div class="row form-group">
-                       
-                            <label class="control-label col-sm-3" for="inputName">Id Number</label>  
+
+                            <label class="control-label col-sm-3" for="inputName">Id Number</label>
                                                          <div class="col-sm-7">
                             <input formControlName="id_number" class="form-control validation-field" placeholder="Id Number" type="id_number">
                             <small class="text-danger" *ngIf="userFormAdd.get('id_number').touched && userFormAdd.get('id_number').hasError('required')">Id Number is required</small>
@@ -90,7 +90,7 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                       
+
                             <label class="control-label col-sm-3" for="inputName">Phone Number</label>
                                                            <div class="col-sm-7">
                             <input formControlName="mobile" class="form-control validation-field" placeholder="Phone Number" type="text">
@@ -99,8 +99,8 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                       
-                            <label class="control-label col-sm-3" for="inputContacts">Gender</label>   
+
+                            <label class="control-label col-sm-3" for="inputContacts">Gender</label>
                                                         <div class="col-sm-7">
                             <select formControlName="gender" class="form-control validation-field">
                                 <option value="">Select Gender</option>
@@ -111,8 +111,8 @@
                     </div>
 
                     <div class="row form-group">
-                       
-                            <label class="control-label col-sm-3" for="inputContacts">Store</label>   
+
+                            <label class="control-label col-sm-3" for="inputContacts">Store</label>
                                                         <div class="col-sm-7">
                             <select formControlName="store_id" class="form-control validation-field">
                                 <option value="">Select Store</option>
@@ -121,8 +121,8 @@
                             <small class="text-danger" *ngIf="userFormAdd.get('store_id').touched && userFormAdd.get('store_id').hasError('required')">Store is required</small>
                         </div>
                     </div>
-                    <div class="row form-group">                       
-                            <label class="control-label col-sm-3" for="inputName">Role</label> 
+                    <div class="row form-group">
+                            <label class="control-label col-sm-3" for="inputName">Role</label>
                             <div class="col-sm-7">
                             <select formControlName="role" class="form-control validation-field" id="inputStatus">
                                 <option value="">Select Role</option>
@@ -131,8 +131,8 @@
                             <small class="text-danger" *ngIf="userFormAdd.get('role').touched && userFormAdd.get('role').hasError('required')">Language is required</small>
                         </div>
                     </div>
-                
-           
+
+
              <!---   <div class="row align-roles-right">
                     <button [disabled]="!userFormAdd.valid" class="btn btn-danger" type="submit">Submit</button>
                 </div>-->
@@ -142,10 +142,10 @@
                           <div class="float-right ">
                             <button  class="btn btn-danger " type="cancel" style="margin-right: 10px;
     min-width: 100px;" routerLink="/users/">Cancel</button>
-                            <button disabled=[userFormAdd.invalid]  class="btn btn-success " type="submit" style="min-width: 100px;">Submit</button>
+                            <button [disabled]="userFormAdd.invalid"  class="btn btn-success " type="submit" style="min-width: 100px;">Submit</button>
                           </div>
                         </div>
-                      </div> 
+                      </div>
             </form>
             <div *ngIf="errorMessage !== 'SHOWERROR'" class="alert alert-danger alert-dismissible fade show" role="alert">
                 <button aria-label="Close" class="close" data-dismiss="alert" type="button">
@@ -158,5 +158,5 @@
     </div>
     </div>
     </div>
-    
+
 </block-ui>

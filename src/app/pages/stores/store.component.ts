@@ -1,6 +1,6 @@
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { ApiService } from '../../services/api.service';
 import * as $ from 'jquery';
@@ -17,7 +17,7 @@ export class StoreComponent implements OnInit {
   public currentActive: any = 'GRID';
   public noDataDisplay: any = { emptyMessage: 'No data to display' };
   public recordCount = 0;
-  
+
   loadingIndicator: any = false;
   title = 'angulardatatables';
   dtOptions: DataTables.Settings = {};
@@ -28,16 +28,17 @@ export class StoreComponent implements OnInit {
     private dataservice: ApiService
   ) {
     this.router = router;
-    this.getData();   
+    this.getData();
   }
 
   ngOnInit() {
-   $(document).ready(function(){
+   $(document).ready( function() {
       $('.dataTables_empty').html('');
       $('.dataTables_info').html('');
-      $('.dataTables_length').html('<a class="btn btn-infor btn-sm mb-1" (click)="onAdd()" type="button"><i class="fa fa-plus"></i> Create a New Store</a>');
+      $('.dataTables_length').
+      html('<a class="btn btn-infor btn-sm mb-1" (click)="onAdd()" type="button"><i class="fa fa-plus"></i> Create a New Store</a>');
     });
-    this.dtOptions = {
+   this.dtOptions = {
       pagingType: 'full_numbers',
       dom: 'rtip',
       pageLength: 10,
@@ -47,23 +48,27 @@ export class StoreComponent implements OnInit {
   }
   // Load Grid Data
   getData() {
-    this.blockUI.start('Loading Stores');    
-  
+    this.blockUI.start('Loading Stores');
+
     this.loadingIndicator = true;
     this.dataservice
-        .fetchData('stores').subscribe( data => {         
-          console.log(data)
+        .fetchData('stores').subscribe( data => {
+          console.log(data);
           if (data.status === 200) {
-             console.log(data.body);
-             this.data = data.body;
-             this.blockUI.stop();            
-          } else {
-          this.blockUI.stop();
-            this.toastrService.error(data.message);
-          }
-        }, err => {this.toastrService.error('Could not Load Stores Data');  this.blockUI.stop();});
+            console.log(data.body);
+            this.data = data.body;
+            this.blockUI.stop();
+         } else {
+         this.blockUI.stop();
+         this.toastrService.error('Something Went Wrong, We could not complete the request');
+         }
+       }, err =>
+       {
+         console.log('Something Went Wrong, We could not complete the request');
+         this.blockUI.stop();
+         this.toastrService.error('Something Went Wrong, We could not complete the request');
+       });
 
-    this.loadingIndicator = false;
   }
   onEdit(data) {
     console.log(data);
@@ -72,25 +77,30 @@ export class StoreComponent implements OnInit {
   }
   onDelete(record) {
     console.log(record);
-   this.blockUI.start('Deleting Store ........');    
-  
+    this.blockUI.start('Deleting Store Record ........');
+
     this.dataservice
-        .deleteRecord('stores',record.id).subscribe( data => {       
+        .deleteRecord('stores', record.id).subscribe( data => {
            console.log(data);
-          if (data.status === 200) {
-             console.log(data.body);
-             this.data = data.body;
-             this.blockUI.stop();            
-          } else {
-          this.blockUI.stop();
-            this.toastrService.error(data.message);
-          }
-        }, err => {console.log("Bad things happened");  this.blockUI.stop();});  
-       //this.router.navigate(['onboarding']);
+           if (data.status === 200) {
+            console.log(data.body);
+            this.data = data.body;
+            this.blockUI.stop();
+            this.toastrService.success('Record has been trashed');
+         } else {
+         this.blockUI.stop();
+         this.toastrService.error('Something Went Wrong, We could not complete the request')
+         }
+       }, err =>
+       {
+         console.log('Something Went Wrong, We could not complete the request');
+         this.blockUI.stop();
+         this.toastrService.error('Something Went Wrong, We could not complete the request');
+       });
+       // this.router.navigate(['onboarding']);
   }
 
   onAdd() {
     this.router.navigate(['stores/create']);
   }
 }
-   

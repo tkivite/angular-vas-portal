@@ -4,7 +4,6 @@ import { FormGroup, FormControl, AbstractControl, FormBuilder, Validators, FormA
 import { CustomValidators } from 'ng2-validation';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { ToastrService } from 'ngx-toastr';
-//import { AlertService, AuthenticationService } from '../../../services';
 import { ApiService } from '../../../services/api.service';
 
 @Component({
@@ -24,21 +23,21 @@ export class CreateUserComponent implements OnInit {
   public storeOptions: any;
   public genderList: any;
   public roleList: any;
-  
+
   constructor(router: Router, fb: FormBuilder, public toastrService: ToastrService,  public dataservice: ApiService) {
-    this.router = router;    
-    
-    
+    this.router = router;
+
+
     this.genderList = [
-        {id:"1",name:"Male"},
-        {id:"2",name:"Female"}];
+        {id: '1', name: 'Male'},
+        {id: '2', name: 'Female'}];
 
     this.roleList = [
-        {id:"1",name:"Store user"},
-        {id:"2",name:"Partner admin"},
-        {id:"3",name:"Lipalater admin"},
-        {id:"4",name:"Lipalater delivery"},    
-    ];    
+        {id: '1', name: 'Store user'},
+        {id: '2', name: 'Partner admin'},
+        {id: '3', name: 'Lipalater admin'},
+        {id: '4', name: 'Lipalater delivery'},
+    ];
 
 
     const namePattern = /^[a-zA-Z ']{2,45}$/;
@@ -48,23 +47,15 @@ export class CreateUserComponent implements OnInit {
         if (data.status === 200) {
            console.log(data.body);
            this.storeOptions = data.body;
-           this.blockUI.stop();            
+           this.blockUI.stop();
         } else {
         this.blockUI.stop();
-          this.toastrService.error(data.message);
+        this.toastrService.error(data.message);
         }
-      }, err => {console.log("Something went wrong");  this.blockUI.stop();});
-   
+      }, err => {console.log('Something went wrong');  this.blockUI.stop(); });
+
     this.userFormAdd = fb.group({
-        username: new FormControl(
-            '',
-            Validators.compose([
-              Validators.required,
-              Validators.pattern('[a-zA-Z0-9].*[s.]*$'), Validators.minLength(3),
-              Validators.maxLength(100)
-            ])
-          ),
-          firstname: new FormControl(
+            firstname: new FormControl(
             '',
             Validators.compose([
               Validators.required, Validators.minLength(3),
@@ -88,7 +79,8 @@ export class CreateUserComponent implements OnInit {
           id_number: new FormControl(
             '',
             Validators.compose([
-              Validators.pattern('^[0-9]{6-10}$'),
+              Validators.minLength(6),
+              Validators.maxLength(12),
               Validators.required
             ])
           ),
@@ -112,55 +104,71 @@ export class CreateUserComponent implements OnInit {
             ])
           )
      });
-    
-    this.activeInactive = 'ENABLED'    
+
+    this.activeInactive = 'ENABLED';
   }
 
   public ngOnInit() {
- 
+
     this.blockUI.start('Processing');
-    this.currentActive = 'ENABLED';   
-      const searchParams = {
+    this.currentActive = 'ENABLED';
+    const searchParams = {
         searchFields: [{ status: 1}]
       };
-      const strParams = encodeURIComponent(JSON.stringify(searchParams));
-      this.blockUI.stop();
+    const strParams = encodeURIComponent(JSON.stringify(searchParams));
+    this.blockUI.stop();
   }
   get f() { return this.userFormAdd.controls; }
   // Submitting Add Entity
   public onAddSubmit(form: FormGroup) {
-    
+
     if (form.valid) {
       this.errorMessage  = 'SHOWERROR';
-      this.blockUI.start('Adding Business Organization');   
-      
+      this.blockUI.start('Adding Business Organization');
+
       const postFormData = {
         email: form.value.email,
         username: form.value.email,
-        firstName: form.value.firstName,
+        firstname: form.value.firstname,
         gender: form.value.gender,
-        lastName: form.value.lastName,
-        mobile: '254' + form.value.mobile.slice(-9),
-        userName: form.value.userName,
-        password: 'Admin101',      
+        lastname: form.value.lastname,
+        mobile: '+254' + form.value.mobile.slice(-9),
+        password: 'Admin101',
         role: form.value.role,
         id_number: form.value.id_number,
-        store_id: form.value.store_id,
+        store_id: form.value.store_id
       };
       this.dataservice
         .postData('users', postFormData).subscribe( data => {
-          
-          
+
           if (data.status === 201) {
-            this.toastrService.success(data.message);
             this.router.navigate(['users']);
             this.blockUI.stop();
+            this.toastrService.success('User Record created successfully');
           } else {
-            this.toastrService.error(data.message);
             this.blockUI.stop();
+            this.toastrService.error('Something Went Wrong, We could not complete the request');
           }
-        }, err => {console.log("Something went wrong");  this.blockUI.stop();});
-       
+        }, err => {
+          console.log('Something Went Wrong, We could not complete the request');
+          console.log(err);
+          this.blockUI.stop();
+          this.toastrService.error('Something Went Wrong, We could not complete the request');
+         });
+
+    }
+    else
+    {
+      // console.log(form.errors);
+      const invalid = [];
+      const controls = form.controls;
+      console.log(controls);
+      for (const name in controls) {
+        if (controls[name].invalid) {
+            invalid.push(name);
+            console.log(name);
+        }
+    }
     }
   }
   // On List

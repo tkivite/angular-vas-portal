@@ -87,7 +87,7 @@ export class PartnerComponent implements OnInit {
              this.toastrService.success('Record has been trashed');
           } else {
           this.blockUI.stop();
-          this.toastrService.error(data.message);
+          this.toastrService.error('Something Went Wrong, We could not complete the request')
           }
         }, err =>
         {
