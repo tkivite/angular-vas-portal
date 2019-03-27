@@ -1,11 +1,11 @@
 {
   "/api": {
-    "target": "https://partner-portal-backend.herokuapp.com/",
+    "target": "http://localhost:3333/",
     "secure": false,
     "pathRewrite": {
       "^/api": ""
     },
-    "changeOrigin": true,  
+    "changeOrigin": true,
     "logLevel": "debug"
   }
 }

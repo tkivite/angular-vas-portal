@@ -1,23 +1,22 @@
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { ApiService } from '../../services/api.service';
 import * as $ from 'jquery';
 
 @Component({
-  selector: 'app-businessentity',
-  templateUrl: './businessentity.component.html',
-  styleUrls: ['./businessentity.component.css']
+  selector: 'app-partners',
+  templateUrl: './partners.component.html',
+  styleUrls: ['./partners.component.css']
 })
-export class BusinessentityComponent implements OnInit {
+export class PartnerComponent implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
   public router: Router;
   public data = [];
   public currentActive: any = 'GRID';
   public noDataDisplay: any = { emptyMessage: 'No data to display' };
   public recordCount = 0;
-  
   loadingIndicator: any = false;
   title = 'angulardatatables';
   dtOptions: DataTables.Settings = {};
@@ -28,16 +27,17 @@ export class BusinessentityComponent implements OnInit {
     private dataservice: ApiService
   ) {
     this.router = router;
-    this.getData();   
+    this.getData();
   }
 
   ngOnInit() {
-   $(document).ready(function(){
+   $(document).ready( function() {
       $('.dataTables_empty').html('');
       $('.dataTables_info').html('');
-      $('.dataTables_length').html('<a class="btn btn-infor btn-sm mb-1" (click)="onAdd()" type="button"><i class="fa fa-plus"></i> Add Business Orgnisation</a>');
+      $('.dataTables_length').
+      html('<a class="btn btn-infor btn-sm mb-1" (click)="onAdd()" type="button"><i class="fa fa-plus"></i> Add Business Orgnisation</a>');
     });
-    this.dtOptions = {
+   this.dtOptions = {
       pagingType: 'full_numbers',
       dom: 'rtip',
       pageLength: 10,
@@ -47,52 +47,57 @@ export class BusinessentityComponent implements OnInit {
   }
   // Load Grid Data
   getData() {
-    this.blockUI.start('Loading Business Organisations');    
-  
+    this.blockUI.start('Loading Partners .....');
     this.loadingIndicator = true;
     this.dataservice
-        .fetchData('partners').subscribe( data => {         
-          
+        .fetchData('partners').subscribe( data => {
           if (data.status === 200) {
              console.log(data.body);
              this.data = data.body;
-             this.blockUI.stop();            
+             this.blockUI.stop();
           } else {
           this.blockUI.stop();
-            this.toastrService.error(data.message);
+          this.toastrService.error(data.message);
           }
-        }, err => {console.log("Bad things happened");  this.blockUI.stop();});
-    this.noDataDisplay.emptyMessage = "No data to display";
-    this.toastrService.error('Something Went Wrong');
+        }, err =>
+        {
+          console.log('SSomething Went Wrong, We could not complete the request');
+          this.blockUI.stop();
+          this.toastrService.error('Something Went Wrong, We could not complete the request');
+        });
    // this.blockUI.stop();
-    this.loadingIndicator = false;
+
   }
   onEdit(data) {
     console.log(data);
     this.dataservice.EditFormData = data;
-    this.router.navigate(['onboarding/update']);
+    this.router.navigate(['partners/update']);
   }
   onDelete(record) {
     console.log(record);
-   this.blockUI.start('Deleting Business Organisation ........');    
-  
+    this.blockUI.start('Deleting Partner Record ........');
+
     this.dataservice
-        .deleteRecord('partners',record.id).subscribe( data => {       
+        .deleteRecord('partners', record.id).subscribe( data => {
            console.log(data);
-          if (data.status === 200) {
+           if (data.status === 200) {
              console.log(data.body);
              this.data = data.body;
-             this.blockUI.stop();            
+             this.blockUI.stop();
+             this.toastrService.success('Record has been trashed');
           } else {
           this.blockUI.stop();
-            this.toastrService.error(data.message);
+          this.toastrService.error(data.message);
           }
-        }, err => {console.log("Bad things happened");  this.blockUI.stop();});  
-       //this.router.navigate(['onboarding']);
+        }, err =>
+        {
+          console.log('Something Went Wrong, We could not complete the request');
+          this.blockUI.stop();
+          this.toastrService.error('Something Went Wrong, We could not complete the request');
+        });
   }
 
   onAdd() {
-    this.router.navigate(['onboarding/create']);
+    this.router.navigate(['partners/create']);
   }
 }
-   

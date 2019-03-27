@@ -12,7 +12,7 @@ import { SweetAlertService } from 'angular-sweetalert-service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { BlockUIModule } from 'ng-block-ui';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 
@@ -35,9 +35,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { LoginComponent } from './pages/login/login.component';
-import { BusinessentityComponent } from './pages/businessentity/businessentity.component';
-import { CreateBeComponent } from './pages/businessentity/create/create.component';
-import { UpdateBeComponent } from './pages/businessentity/update/update.component';
+import { PartnerComponent } from './pages/partners/partners.component';
+import { CreateBeComponent } from './pages/partners/create/create.component';
+import { UpdateBeComponent } from './pages/partners/update/update.component';
 import { StoreComponent } from './pages/stores/store.component';
 import { CreateStoreComponent }      from './pages/stores/create/create.component';
 import { UpdateStoreComponent }      from './pages/stores/update/update.component';
@@ -64,7 +64,7 @@ import { UpdateUserComponent } from './pages/users/update/update.component';
     FooterComponent,
     SidebarComponent,
     LoginComponent,
-    BusinessentityComponent,
+    PartnerComponent,
     CreateBeComponent,
     UpdateBeComponent,
     StoreComponent,
@@ -81,7 +81,7 @@ import { UpdateUserComponent } from './pages/users/update/update.component';
     NgbModule,
     HttpClientModule,
     AngularFontAwesomeModule,
-    DataTablesModule,FormsModule, ReactiveFormsModule, 
+    DataTablesModule,FormsModule, ReactiveFormsModule,
     BlockUIModule.forRoot(),
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(),
