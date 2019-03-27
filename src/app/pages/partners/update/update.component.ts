@@ -53,7 +53,7 @@ export class UpdateBeComponent implements OnInit {
       orgEmail: this.editData.email,
       orgTelephone: this.editData.telephone,
       orgMobile: this.editData.mobile,
-      orgYearsOfOperation: this.editData.age,
+      orgYearsOfOperation: this.editData.year_of_incorporation,
       orgSpeciality: this.editData.speciality,
     });
 
@@ -92,12 +92,13 @@ export class UpdateBeComponent implements OnInit {
         .updateRecord('partners', this.editData.id,postFormData).subscribe( data => {
              console.log(data);
              if (data.status === 200) {
-            this.toastrService.success(data.message);
             this.router.navigate(['partners']);
             this.blockUI.stop();
+            this.toastrService.success('Record Update was successful');
           } else {
             this.blockUI.stop();
-            this.toastrService.error(data.message);
+            this.toastrService.error('There was a problem updating the record');
+            // this.toastrService.error(data.message);
           }
         }, err => {
           console.log('Something Went Wrong, We could not complete the request');

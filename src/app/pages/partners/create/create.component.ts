@@ -82,10 +82,12 @@ export class CreateBeComponent implements OnInit {
             this.toastrService.success(data.message);
             this.router.navigate(['partners']);
             this.blockUI.stop();
+            this.toastrService.success('Record Creation was successful');
           } else {
             // this.toastrService.error(data.message);
             this.blockUI.stop();
-            this.toastrService.error(data.message);
+           // this.toastrService.error(data.message);
+            this.toastrService.success('There was a problem creating the record');
           }
         }, err =>
         {

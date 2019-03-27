@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import {Observable} from 'rxjs/index';
 import { AuthenticationService } from './authentication.service';
+import { headersToString } from 'selenium-webdriver/http';
 
 @Injectable()
 
@@ -14,7 +15,13 @@ export class ApiService {
  constructor(private http: HttpClient,private  authenticationService: AuthenticationService){
   this.authenticationService.currentUser.subscribe(x => {
     this.currentUser = x;
-    this.headers = new HttpHeaders().set('Authorization', this.currentUser.auth_token);
+    this.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': this.currentUser.auth_token
+  });
+   // this.headers.append('Authorization', this.currentUser.auth_token);
+   // this.headers.append('Content-Type', 'application/json');
   });
  }
   // baseUrl = '/api/';
@@ -32,7 +39,7 @@ export class ApiService {
     return this.http.post<any>(this.baseUrl + resource, payload, { headers: this.headers, observe: 'response'});
   }
 
-  updateRecord(resource,id,record): Observable<any> {
+  updateRecord(resource, id, record): Observable<any> {
     return this.http.put<any>(this.baseUrl + resource + '/' + id, record,{headers: this.headers, observe: 'response'});
   }
   deleteRecord(resource,id): Observable<any> {
