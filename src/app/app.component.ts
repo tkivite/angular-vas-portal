@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './services/authentication.service';
 @Component({
@@ -6,7 +6,7 @@ import { AuthenticationService } from './services/authentication.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     currentUser: any;
 
     constructor(
@@ -15,6 +15,14 @@ export class AppComponent {
         ) {
             this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
         }
+
+        public ngOnInit()
+        {
+          $(document).ready(function(){
+                  $('#sidebarCollapse').on('click', function () {
+                      $('#sidebar').toggleClass('active');
+                  }); });
+                }
     logout() {
             this.authenticationService.logout();
             this.router.navigate(['/login']);
