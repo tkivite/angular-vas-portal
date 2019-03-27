@@ -2,6 +2,10 @@
 
 # compiled output
 #/dist
+# auth files
+/src/app/services/authentication.service.ts
+/src/app/services/api.service.ts
+#temp and ouput
 /tmp
 /out-tsc
 
