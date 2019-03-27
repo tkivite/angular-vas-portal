@@ -26,41 +26,41 @@
       <div id ="cccform" class="container">
           <div class="row form-heading">
             <div class="col-md-1"></div>
-            <h4 class="col-md-11">Adding New Partner</h4>
+            <h4 class="col-md-11">Edit Partner Information</h4>
           </div>
           <hr>
         <div class="row">
-         
-            
+
+
             <div class="col-md-1"></div>
-                <form  [formGroup]="beFormAdd" (ngSubmit)="onAddSubmit(beFormAdd)" class="col-md-11 form-horizontal">
-                   
+                <form  [formGroup]="beFormAdd" (ngSubmit)="onEditSubmit(beFormAdd)" class="col-md-11 form-horizontal">
+
                   <div class="row form-group">
                       <label class="control-label col-sm-3" for="title"><span class="float-right"> Registered Name: </span></label>
                       <div class="col-sm-7">
                         <input type="text" formControlName="orgName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.orgName.errors }"  placeholder="enter business registeres name" />
-                       
+
                         <div *ngIf="submitted && f.orgName.errors" class="invalid-feedback">
                           <div *ngIf="f.orgName.errors.required">Name is required</div>
                         </div>
-                        <small class="text-danger" *ngIf="beFormAdd.get('orgName').touched && beFormAdd.get('orgName').hasError('required')">Business Name is required</small>   
-                        <small class="text-danger" *ngIf="beFormAdd.get('orgName').touched && beFormAdd.get('orgName').hasError('pattern')">Invalid Business Name </small>   
-                      
+                        <small class="text-danger" *ngIf="beFormAdd.get('orgName').touched && beFormAdd.get('orgName').hasError('required')">Business Name is required</small>
+                        <small class="text-danger" *ngIf="beFormAdd.get('orgName').touched && beFormAdd.get('orgName').hasError('pattern')">Invalid Business Name </small>
+
                       </div>
                   </div>
-                  
-                 
+
+
                     <div class="row form-group">
                         <label class="control-label col-sm-3" for="title"> <span class="float-right"> Mobile: </span> </label>
-                      <div class="col-sm-7">                          
+                      <div class="col-sm-7">
                           <input type="text" formControlName="orgMobile" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.orgMobile.errors }"  placeholder="contact phone number 2547......."/>
                           <div *ngIf="submitted && f.orgMobile.errors" class="invalid-feedback">
                             <div *ngIf="f.orgMobile.errors.required">Mobile is required</div>
                           </div>
-                          <small class="text-danger" *ngIf="beFormAdd.get('orgMobile').touched && beFormAdd.get('orgMobile').hasError('required')">Mobile is required</small>   
-                           <small class="text-danger" *ngIf="beFormAdd.get('orgMobile').touched && beFormAdd.get('orgMobile').hasError('pattern')">Invalid Mobile Number </small> 
+                          <small class="text-danger" *ngIf="beFormAdd.get('orgMobile').touched && beFormAdd.get('orgMobile').hasError('required')">Mobile is required</small>
+                           <small class="text-danger" *ngIf="beFormAdd.get('orgMobile').touched && beFormAdd.get('orgMobile').hasError('pattern')">Invalid Mobile Number </small>
                       </div>
-                    </div>                    
+                    </div>
 
                     <div class="row form-group">
                       <label class="control-label col-sm-3" for="title"> <span class="float-right"> Location: </span></label>
@@ -69,7 +69,7 @@
                         <div *ngIf="submitted && f.orgLocation.errors" class="invalid-feedback">
                           <div *ngIf="f.orgLocation.errors.required">Location is required</div>
                         </div>
-                         <small class="text-danger" *ngIf="beFormAdd.get('orgLocation').touched && beFormAdd.get('orgLocation').hasError('required')">Location is required</small>  
+                         <small class="text-danger" *ngIf="beFormAdd.get('orgLocation').touched && beFormAdd.get('orgLocation').hasError('required')">Location is required</small>
                       </div>
                     </div>
 
@@ -91,6 +91,8 @@
                           <div *ngIf="submitted && f.orgTelephone.errors" class="invalid-feedback">
                             <div *ngIf="f.orgTelephone.errors.required">Telephone is required</div>
                           </div>
+                          <small class="text-danger" *ngIf="beFormAdd.get('orgTelephone').touched && beFormAdd.get('orgTelephone').hasError('required')">Telephone is required</small>
+
                         </div>
                     </div>
 
@@ -101,6 +103,8 @@
                           <div *ngIf="submitted && f.orgYearsOfOperation.errors" class="invalid-feedback">
                             <div *ngIf="f.orgYearsOfOperation.errors.required">Years of Incorporation</div>
                           </div>
+                          <small class="text-danger" *ngIf="beFormAdd.get('orgYearsOfOperation').touched && beFormAdd.get('orgYearsOfOperation').hasError('required')">Year of Incorporation is required</small>
+
                         </div>
                     </div>
                     <div class="row form-group">
@@ -110,27 +114,27 @@
                               <option value="">Select Speciality</option>
                           <option *ngFor="let o of specialityOptions" [ngValue]="o.name">{{o.name}}</option>
                       </select>
-                            <small class="text-danger" *ngIf="beFormAdd.get('orgSpeciality').touched && beFormAdd.get('orgSpeciality').hasError('required')">Status is required</small>
-                        </div>                                          
+                            <small class="text-danger" *ngIf="beFormAdd.get('orgSpeciality').touched && beFormAdd.get('orgSpeciality').hasError('required')">Speciality is required</small>
+                        </div>
                      </div>
-                
-                 
-                    
+
+
+
                     <div class="row form-group">
                         <div class="col-sm-3"></div>
                         <div class="col-sm-7">
                           <div class="float-right ">
-                            <button  class="btn btn-danger " type="cancel" style="margin-right: 10px;
-    min-width: 100px;" routerLink="/onboarding/">Cancel</button>
+                            <a  class="btn btn-danger " type="cancel" style="margin-right: 10px;
+    min-width: 100px;" routerLink="/partners/">Cancel</a>
                             <button  [disabled]="beFormAdd.invalid" class="btn btn-success " type="submit" style="min-width: 100px;">Submit</button>
                           </div>
                         </div>
                       </div>
-                    
-                 
+
+
                   </form>
-            
-    </div>    
+
+    </div>
 </div>
 </div>
 </div>

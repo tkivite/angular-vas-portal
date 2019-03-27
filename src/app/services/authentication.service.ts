@@ -8,8 +8,8 @@ import { map } from 'rxjs/operators';
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<any>;
     public currentUser: Observable<any>;
-   // baseUrl: string = '/api/';
-    baseUrl = 'https://partner-portal-backend.herokuapp.com/';
+    baseUrl: string = '/api/';
+   // baseUrl = 'https://partner-portal-backend.herokuapp.com/';
 
     constructor(private http: HttpClient) {
         this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));

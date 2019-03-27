@@ -1,9 +1,9 @@
 <div class="wrapper">
-  <nav id="sidebar" >
-  <div class="sidebar-header">                
-    <img src="./assets/logo.png"/>               
+  <nav id="sidebar" *ngIf="currentUser" >
+  <div class="sidebar-header">
+    <img src="./assets/logo.png"/>
   </div>
-    <div class="container demo d-none d-md-block" *ngIf="currentUser">
+    <div class="container demo d-none d-md-block" >
        <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0,ngb-panel-1,ngb-panel-2" class="panel-group">
         <ngb-panel class="panel-default">
           <ng-template ngbPanelTitle class="panel-heading">
@@ -16,45 +16,45 @@
           <ng-template ngbPanelContent>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
-                <a class="nav-link sales-link"  routerLink="/onboarding">Partners 
+                <a class="nav-link sales-link"  routerLink="/partners">Partners
                   <i class="fa fa-handshake-o" style="color:#88b840"></i>
                 </a>
               </li>
                <li class="list-group-item">
-                <a class="nav-link sales-link"  routerLink="/stores">Stores 
+                <a class="nav-link sales-link"  routerLink="/stores">Stores
                   <i class="fa fa-city" style="color:#88b840"></i>
                   <i class="fa fa-industry" style="color:#88b840"></i>
                 </a>
               </li>
                <li class="list-group-item">
-                <a class="nav-link sales-link"  routerLink="/pending">Pending 
+                <a class="nav-link sales-link"  routerLink="/pending">Pending
                   <i class="fa fa-gift" style="color:#88b840"></i>
                 </a>
               </li>
               <li class="list-group-item">
-                <a class="nav-link sales-link"  routerLink="/collections">Collection 
+                <a class="nav-link sales-link"  routerLink="/collections">Collection
                   <i class="fa fa-cart-plus" style="color:#88b840"></i>
                 </a>
               </li>
-             
-            
+
+
               <li class="list-group-item">
-                <a class="nav-link released-link" routerLink="/released" >Released Items 
+                <a class="nav-link released-link" routerLink="/released" >Released Items
                   <i class="fa fa-sign-out" style="color:#88b840"></i>
                 </a>
               </li>
               <li class="list-group-item">
-                <a class="nav-link released-link" routerLink="/sales" >Sales 
+                <a class="nav-link released-link" routerLink="/sales" >Sales
                   <i class="fa fa-list" style="color:#88b840"></i>
                 </a>
               </li>
               <li class="list-group-item">
-                <a class="nav-link released-link" routerLink="/users" >Users 
+                <a class="nav-link released-link" routerLink="/users" >Users
                   <i class="fa fa-users" style="color:#88b840"></i>
                 </a>
               </li>
-              
-              
+
+
             </ul>
           </ng-template>
            <ng-template ngbPanelTitle class="panel-heading">
@@ -64,9 +64,9 @@
               </a>
             </h4>
           </ng-template>
-        </ngb-panel>  
+        </ngb-panel>
 
-      
+
       </ngb-accordion>
       <hr/>
     </div><!-- container -->
@@ -77,17 +77,17 @@
         <button type="button" id="sidebarCollapse" class="btn" style="background: #7386D5; color:white; margin-left: -60px">
           <i class="fa fa-angle-double-left"></i>
           <i class="fa fa-angle-double-right"></i>
-        </button>     
+        </button>
         <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fa fa-align-justify"></i>
 
         </button>
         <!--navbar-toggler-icon -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <div>                            
+          <div>
           <h2 class="store-name">{{currentUser.user.firstname}} @ {{currentUser.store.name}}</h2>
           </div>
-          <ul class="nav navbar-nav ml-auto"> 
+          <ul class="nav navbar-nav ml-auto">
             <li class="nav-item">
               <a class="top-link home-link" routerLink="/dashboard">
                 <i class="fa fa-home" style="color:#88b840"></i> Dashboard
@@ -100,7 +100,7 @@
             </li>
             <li class="nav-item">
               <a class="top-link notification-link" routerLink="/collections" >
-                <i class="fa fa-cart-plus" style="color:#88b840"></i> Collections 
+                <i class="fa fa-cart-plus" style="color:#88b840"></i> Collections
               </a>
             </li>
             <li class="nav-item">
@@ -108,7 +108,7 @@
                 <i class="fa fa-sign-out" style="color:#88b840"></i> Released
               </a>
             </li>
-            
+
              <li class="nav-item">
               <a class="top-link sales-link" routerLink="/sales" >
                 <i class="fa fa-list" style="color:#88b840"></i> Sales
@@ -133,14 +133,14 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Separated link</a>
               </div>
-              
+
             </li-->
           </ul>
         </div>
       </div>
     </nav>
     <div class ="row dynamicContent">
-      
+
      <alert></alert>
       <router-outlet></router-outlet>
 
@@ -149,7 +149,7 @@
 </div>
 <div class ="row">
   <footer class="main-footer">
-    <b>Version</b> 1.0.0        
+    <b>Version</b> 1.0.0
     <strong>Copyright &copy; lipalater.com 2019 .</strong> All rights reserved.
   </footer>
 </div>
