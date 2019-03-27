@@ -17,8 +17,8 @@ export class ApiService {
     this.headers = new HttpHeaders().set('Authorization', this.currentUser.auth_token);
   });
  }
-  baseUrl = '/api/';
-  //baseUrl = 'https://partner-portal-backend.herokuapp.com/';
+  // baseUrl = '/api/';
+  baseUrl = 'https://partner-portal-backend.herokuapp.com/';
 
   fetchData( resource ): Observable<any> {
     return this.http.get<any>(this.baseUrl + resource, {headers: this.headers, observe: 'response'});
