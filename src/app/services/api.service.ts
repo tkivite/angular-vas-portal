@@ -20,8 +20,7 @@ export class ApiService {
       'Accept': 'application/json',
       'Authorization': this.currentUser.auth_token
   });
-   // this.headers.append('Authorization', this.currentUser.auth_token);
-   // this.headers.append('Content-Type', 'application/json');
+
   });
  }
   // baseUrl = '/api/';
