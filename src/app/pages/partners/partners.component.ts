@@ -87,7 +87,7 @@ export class PartnerComponent implements OnInit {
         console.log(record);
         this.blockUI.start("Deleting Partner Record ........");
 
-        /*  this.dataservice.deleteRecord("partners", record.id).subscribe(
+        this.dataservice.deleteRecord("partners", record.id).subscribe(
           data => {
             console.log(data);
             if (data.status === 200) {
@@ -111,7 +111,7 @@ export class PartnerComponent implements OnInit {
               "Something Went Wrong, We could not complete the request"
             );
           }
-        );*/
+        );
 
         console.log("User confirmed:", confirmed);
       })
