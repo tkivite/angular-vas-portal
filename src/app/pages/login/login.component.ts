@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
         private authenticationService: AuthenticationService,
         ) {
         // redirect to home if already logged in
-        if (this.authenticationService.currentUserValue) { 
+        if (this.authenticationService.currentUserValue) {
             this.router.navigate(['dashboard']);
         }
     }
@@ -68,5 +68,9 @@ export class LoginComponent implements OnInit {
                       timeOut: 10000
                     });
                   });
+        }
+
+    forgotPass() {
+          this.router.navigate(['forgotPassword']);
         }
       }

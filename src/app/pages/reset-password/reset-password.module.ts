@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { BlockUIModule } from 'ng-block-ui';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ChangePasswordComponent } from './change-password.component';
+import { ResetPasswordComponent } from './reset-password.component';
 export const routes = [
-  { path: '', component: ChangePasswordComponent, pathMatch: 'full' }
+  { path: '', component: ResetPasswordComponent, pathMatch: 'full' }
 ];
 @NgModule({
   imports: [
@@ -15,6 +15,6 @@ export const routes = [
     BlockUIModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ChangePasswordComponent]
+  declarations: [ResetPasswordComponent]
 })
-export class ChangePasswordModule { }
+export class ResetPasswordModule { }

@@ -424,7 +424,7 @@ div.card-body{
     border-radius: 5px;
 }
 
-app-be-update,app-update,app-notifications,app-login,app-create,app-store,app-partners,app-sales,app-users,app-released,app-myaccount,app-deliveries,app-collections,app-invoicing,app-dashboard{
+app-be-update,app-update,app-notifications,app-login,app-forgot-password,app-change-password,app-create,app-store,app-partners,app-sales,app-users,app-released,app-myaccount,app-deliveries,app-collections,app-invoicing,app-dashboard{
     width:100%;
 }
 .datatable-row-wrapper {

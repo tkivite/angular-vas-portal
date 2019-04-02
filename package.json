@@ -29,6 +29,7 @@
     "angular-6-datatable": "^0.8.0",
     "angular-datatables": "^7.0.0",
     "angular-font-awesome": "^3.1.2",
+    "angular-password-strength-meter": "0.0.4",
     "angular-sweetalert-service": "^2.0.2",
     "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
@@ -47,7 +48,8 @@
     "rxjs-compat": "6.3.3",
     "tslib": "^1.9.0",
     "typescript": "~3.2.2",
-    "zone.js": "~0.8.26"
+    "zone.js": "~0.8.26",
+    "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.0",
