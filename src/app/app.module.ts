@@ -51,7 +51,6 @@ import { UpdateUserComponent } from "./pages/users/update/update.component";
 
 import { ChangePasswordComponent } from "./pages/change-password/change-password.component";
 import { ForgotPasswordComponent } from "./pages/forgot-password/forgot-password.component";
-import { ResetPasswordComponent } from "./pages/reset-password/reset-password.component";
 
 @NgModule({
   declarations: [
@@ -83,7 +82,7 @@ import { ResetPasswordComponent } from "./pages/reset-password/reset-password.co
     UpdateUserComponent,
     ChangePasswordComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent,
+
     ConfirmationDialogComponent
   ],
   imports: [

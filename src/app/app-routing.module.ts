@@ -23,7 +23,6 @@ import { CreateUserComponent } from "./pages/users/create/create.component";
 import { UpdateUserComponent } from "./pages/users/update/update.component";
 import { ChangePasswordComponent } from "./pages/change-password/change-password.component";
 import { ForgotPasswordComponent } from "./pages/forgot-password/forgot-password.component";
-import { ResetPasswordComponent } from "./pages/reset-password/reset-password.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "dashboard", pathMatch: "full" },
@@ -31,7 +30,7 @@ const routes: Routes = [
   { path: "register", component: CreateUserComponent },
   { path: "changepassword", component: ChangePasswordComponent },
   { path: "forgotPassword", component: ForgotPasswordComponent },
-  { path: "resetPassword", component: ResetPasswordComponent },
+
   { path: "sales", component: SalesComponent },
   { path: "pending", component: PendingComponent },
   { path: "partners", component: PartnerComponent },
