@@ -10,28 +10,29 @@ import {
   Validators
 } from "@angular/forms";
 import { CustomValidators } from "ng2-validation";
+
 import { ToastrService } from "ngx-toastr";
 import { BlockUI, NgBlockUI } from "ng-block-ui";
 
 @Component({
-  selector: "app-change-password",
-  templateUrl: "./change-password.component.html",
-  styleUrls: ["./change-password.component.scss"],
+  selector: "app-forgot-password",
+  templateUrl: "./forgot-password.component.html",
+  styleUrls: ["./forgot-password.component.scss"],
   encapsulation: ViewEncapsulation.None
 })
-export class ChangePasswordComponent {
+export class ForgotPasswordComponent {
   @BlockUI() blockUI: NgBlockUI;
   public router: Router;
   public form: FormGroup;
   public formOTP: FormGroup;
-  public webApiBaseUrl: string;
   public otp: any;
   public sub: any;
   public token: any;
-  public passwordList: any = [];
   public securityQuestionsList: any;
+  public retryConfig = 3;
   public retries: number;
   public retriesRemaining: number;
+  public errorMessage: any = "SHOWERROR";
   public fsubmitted = false;
   public fsubmittedwitherrors = false;
   constructor(
@@ -44,35 +45,13 @@ export class ChangePasswordComponent {
   ) {
     this.router = router;
     this.authenticationService.logout();
-
-    //const passpattern = /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[d]){1,})(?=(.*[W]){1,})(?!.*s).{8,}$/;
-    // "^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{8,20}$";
-
-    this.form = fb.group(
-      {
-        passwordRepeat: ["", Validators.compose([Validators.required])],
-        password: [
-          "",
-          Validators.compose([
-            Validators.required,
-            // 2. check whether the entered password has a number
-            Validators.pattern(/\d/),
-            // 3. check whether the entered password has upper case letter
-            Validators.pattern(/[A-Z]/),
-            // 4. check whether the entered password has a lower-case letter
-            Validators.pattern(/[a-z]/),
-            // 5. check whether the entered password has a special character
-            // 6. Has a minimum length of 8 characters
-            Validators.minLength(8),
-            Validators.maxLength(20)
-          ])
-        ],
-        securityQuestion: ["", Validators.compose([Validators.required])],
-        securityQuestionAnswer: ["", Validators.compose([Validators.required])]
-      },
-      { validator: matchingPasswords("password", "passwordRepeat") }
-    );
+    this.form = fb.group({
+      userName: ["", Validators.compose([Validators.required])],
+      securityQuestion: ["", Validators.compose([Validators.required])],
+      securityQuestionAnswer: ["", Validators.compose([Validators.required])]
+    });
     this.retriesRemaining = 0;
+    // read
 
     this.securityQuestionsList = [
       {
@@ -96,38 +75,32 @@ export class ChangePasswordComponent {
         question: "What was the name of your elementary or primary school?"
       }
     ];
-    // get password Policy
 
     this.route.queryParams.subscribe(params => {
       this.token = params;
-      // this.blockUI.start('Processing');
-      const postdata = {
-        token: this.token.token
-      };
     });
   }
 
-  public onPasswordStrengthChanged(strength) {
-    console.log("====================================");
-    console.log("onPasswordStrengthChanged", strength);
-    console.log("====================================");
+  public forgotPass() {
+    this.fsubmitted = false;
+    this.fsubmittedwitherrors = false;
   }
-  get password() {
-    return this.form.get("password");
+
+  public login() {
+    this.router.navigate(["login"]);
   }
+
   public onSubmit(form: FormGroup) {
     if (this.form.valid) {
-      this.blockUI.start("Changing Password");
+      this.blockUI.start("Submitting Forgot Password");
+      this.errorMessage = "SHOWERROR";
       const postdata = {
-        token: this.token.token,
-        passwordRepeat: form.value.passwordRepeat,
-        new_password: form.value.password,
+        email: form.value.userName,
         security_question: form.value.securityQuestion,
-
         security_answer: form.value.securityQuestionAnswer
       };
 
-      this.dataService.changepassword(postdata).subscribe(
+      this.dataService.forgotpassword(postdata).subscribe(
         data => {
           if (data.status === 200) {
             // this.toastrService.success(data.message);
@@ -166,17 +139,6 @@ export class ChangePasswordComponent {
           }
         }
       );
-    } else {
-      // console.log(form.errors);
-      const invalid = [];
-      const controls = form.controls;
-      console.log(controls);
-      for (const name in controls) {
-        if (controls[name].invalid) {
-          invalid.push(name);
-          console.log(name);
-        }
-      }
     }
   }
 }
@@ -192,5 +154,3 @@ export function matchingPasswords(
     }
   };
 }
-
-//$2a$10$rEjrp8vG0oBg6yexqE3fKuKI.D/oldsgF5Lke9cbj7Ymtp2/QvEki
