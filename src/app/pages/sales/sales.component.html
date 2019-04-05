@@ -11,18 +11,21 @@
             <th>Cust ID</th>
             <th>Customer Mobile</th>
             <th>Item</th>
-            <th>Pick up type</th>
+            <th>Delivery Option</th>
             <th>Date approved</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let item of data; let i = index" title={{item.id}}>
             <td>{{i+1}}</td>
-            <td>{{item.cust}}</td>
-            <td>{{item.id_number}}</td>
-            <td>{{item.item}}</td>
-            <td>{{item.pick_up}}</td>
+            <td>{{item.customer_names}}</td>
+            <td>{{item.customer_id_number}}</td>
+            <td>{{item.customer_phone_number}}</td>
+            <td>{{item.item_description}}</td>
+            <td>{{item.pick_up_type}}</td>
             <td>{{item.approved_at}}</td>
+            <td>{{item.status}}</td>
 
           </tr>
         </tbody>
@@ -31,3 +34,26 @@
     </div>
   </div>
 </block-ui>
+
+<!--
+approved_amount: "35000.0"
+buying_price: "25000.0"
+created_at: "2019-04-03T16:48:08.404Z"
+created_by: null
+customer_email: "test@dummy111.com"
+customer_id_number: "32150682"
+customer_names: "Jackson Doe"
+customer_phone_number: "725958640"
+id: "48af6006-02c5-4821-b43e-3c1b3f2b75db"
+item: null
+item_description: "television sony black"
+item_type: "television sony black"
+pick_up_option: "pickup"
+pick_up_type: "store_pickup"
+sales_agent: null
+source_id: "jkiarie"
+status: "pending"
+store: "jkiarie"
+string: null
+updated_at: "2019-04-03T16:48:08.404Z"
+-->
