@@ -4,6 +4,8 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { BlockUI, NgBlockUI } from "ng-block-ui";
 import { ApiService } from "../../services/api.service";
 import * as $ from "jquery";
+import { ConfirmationDialogService } from "@app/services/confirmation-dialog/confirmation-dialog.service";
+import { routerNgProbeToken } from "@angular/router/src/router_module";
 
 @Component({
   selector: "app-sales",
@@ -24,7 +26,8 @@ export class SalesComponent implements OnInit {
   constructor(
     router: Router,
     public toastrService: ToastrService,
-    private dataservice: ApiService
+    private dataservice: ApiService,
+    private confirmationDialogService: ConfirmationDialogService
   ) {
     this.router = router;
     this.getData();
@@ -47,7 +50,7 @@ export class SalesComponent implements OnInit {
   }
   // Load Grid Data
   getData() {
-    this.blockUI.start("Loading Partners .....");
+    this.blockUI.start("Loading All Sales .....");
     this.loadingIndicator = true;
     this.dataservice.fetchData("sales").subscribe(
       data => {
@@ -61,50 +64,60 @@ export class SalesComponent implements OnInit {
         }
       },
       err => {
-        console.log("Something Went Wrong, We could not complete the request");
-        this.blockUI.stop();
-        this.toastrService.error(
-          "Something Went Wrong, We could not complete the request"
-        );
-      }
-    );
-    // this.blockUI.stop();
-  }
-  onEdit(data) {
-    console.log(data);
-    this.dataservice.EditFormData = data;
-    this.router.navigate(["sales/update"]);
-  }
-  onDelete(record) {
-    console.log(record);
-    this.blockUI.start("Deleting Partner Record ........");
-
-    this.dataservice.deleteRecord("sales", record.id).subscribe(
-      data => {
-        console.log(data);
-        if (data.status === 200) {
-          console.log(data.body);
-          this.data = data.body;
-          this.blockUI.stop();
-          this.toastrService.success("Record has been trashed");
+        if (err.status == 401) {
+          this.router.navigate(["login"]);
         } else {
+          console.log(
+            "Something Went Wrong, We could not complete the request"
+          );
           this.blockUI.stop();
           this.toastrService.error(
             "Something Went Wrong, We could not complete the request"
           );
         }
-      },
-      err => {
-        console.log("Something Went Wrong, We could not complete the request");
-        this.blockUI.stop();
-        this.toastrService.error(
-          "Something Went Wrong, We could not complete the request"
-        );
       }
     );
+    // this.blockUI.stop();
   }
-
-  onAdd() {
-    this.router.navigate(["sales/create"]);
+  downloadApps() {
+    this.blockUI.start("Downloading recent sales .....");
+    this.loadingIndicator = true;
+    this.dataservice.fetchData("sales/fetchapps").subscribe(
+      data => {
+        console.log(data);
+        if (data.status === 200) {
+          //console.log(data.body);
+          //this.data = data.body;
+          this.getData();
+          this.blockUI.stop();
+          this.toastrService.success(data.body.msg);
+        } else if (data.status === 204) {
+          console.log(data.body);
+          this.data = data.body;
+          this.getData();
+          this.blockUI.stop();
+          this.toastrService.info("There are no recent sales");
+        } else {
+          this.getData();
+          this.blockUI.stop();
+          this.toastrService.warning(
+            "We could not download recent sales.Check the connection to core."
+          );
+        }
+      },
+      err => {
+        if (err.status == 401) {
+          this.router.navigate(["login"]);
+        } else {
+          console.log(err);
+          console.log("Something Went Wrong");
+          this.blockUI.stop();
+          this.toastrService.warning(
+            "We could not download recent sales.Check the connection to core."
+          );
+        }
+      }
+    );
+    // this.blockUI.stop();
   }
 }
