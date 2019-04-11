@@ -29,6 +29,8 @@ export class UpdateBeComponent implements OnInit {
   public specialityOptions: any;
   public editData: any;
 
+  public UserOptions: any;
+
   selectedSpeciality = [];
   dropdownSettings = {};
 
@@ -52,6 +54,24 @@ export class UpdateBeComponent implements OnInit {
       { speciality_id: "3", speciality_name: "Furniture" },
       { speciality_id: "4", speciality_name: "General" }
     ];
+
+    this.blockUI.start("Fetching Users");
+    this.dataservice.fetchData("users").subscribe(
+      data => {
+        if (data.status === 200) {
+          console.log(data.body);
+          this.UserOptions = data.body;
+          this.blockUI.stop();
+        } else {
+          this.blockUI.stop();
+          this.toastrService.error(data.message);
+        }
+      },
+      err => {
+        console.log("Problems in downloading users");
+        this.blockUI.stop();
+      }
+    );
 
     this.selectedSpeciality = this.specialityOptions.filter(
       x => specialityData.indexOf(x.speciality_name) != -1
@@ -82,12 +102,22 @@ export class UpdateBeComponent implements OnInit {
         "",
         Validators.compose([Validators.required, CustomValidators.email])
       ],
-      orgTelephone: ["", Validators.compose([Validators.required])],
-      orgMobile: ["", Validators.compose([Validators.required])],
+      orgTelephone: [""],
+      orgMobile: [
+        "",
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(kenyanMobileNoPattern)
+        ])
+      ],
       orgYearsOfOperation: [
         "",
         Validators.compose([Validators.required, CustomValidators.number])
       ],
+      numberOfBranches: ["", Validators.compose([CustomValidators.number])],
+      paymentTerms: ["", Validators.compose([Validators.required])],
+      creditDurationInDays: ["", Validators.compose([CustomValidators.number])],
+      accountManager: ["", Validators.compose([Validators.required])],
       selectedItems: [null],
       orgSpeciality: ["", Validators.required]
     });
@@ -96,9 +126,13 @@ export class UpdateBeComponent implements OnInit {
       orgLocation: this.editData.location,
       orgEmail: this.editData.email,
       orgTelephone: this.editData.telephone,
-      orgMobile: this.editData.mobile,
+      orgMobile: this.editData.mobile.slice(-12),
       orgYearsOfOperation: this.editData.year_of_incorporation,
-      orgSpeciality: this.editData.speciality
+      orgSpeciality: this.editData.speciality,
+      accountManager: this.editData.account_manager,
+      numberOfBranches: this.editData.no_of_branches,
+      paymentTerms: this.editData.payment_terms,
+      creditDurationInDays: this.editData.credit_duration_in_days
     });
 
     this.activeInactive = "ENABLED";
@@ -126,12 +160,16 @@ export class UpdateBeComponent implements OnInit {
         email: form.value.orgEmail,
         location: form.value.orgLocation,
         telephone: form.value.orgTelephone,
-        mobile: form.value.orgMobile,
+        mobile: "+254" + form.value.orgMobile.slice(-9),
         year_of_incorporation: form.value.orgYearsOfOperation,
         name: form.value.orgName,
         speciality: this.selectedSpeciality
           .map(x => x.speciality_name)
-          .join("|")
+          .join("|"),
+        account_manager: form.value.accountManager,
+        no_of_branches: form.value.numberOfBranches,
+        payment_terms: form.value.paymentTerms,
+        credit_duration_in_days: form.value.creditDurationInDays
       };
       this.dataservice
         .updateRecord("partners", this.editData.id, postFormData)

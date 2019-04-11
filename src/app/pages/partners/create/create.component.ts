@@ -31,6 +31,8 @@ export class CreateBeComponent implements OnInit {
   selectedSpeciality = [];
   dropdownSettings = {};
 
+  public UserOptions: any;
+
   constructor(
     router: Router,
     fb: FormBuilder,
@@ -47,6 +49,23 @@ export class CreateBeComponent implements OnInit {
       { speciality_id: "3", speciality_name: "Furniture" },
       { speciality_id: "4", speciality_name: "General" }
     ];
+    this.blockUI.start("Fetching Users");
+    this.dataservice.fetchData("users").subscribe(
+      data => {
+        if (data.status === 200) {
+          console.log(data.body);
+          this.UserOptions = data.body;
+          this.blockUI.stop();
+        } else {
+          this.blockUI.stop();
+          this.toastrService.error(data.message);
+        }
+      },
+      err => {
+        console.log("Problems in downloading users");
+        this.blockUI.stop();
+      }
+    );
 
     this.dropdownSettings = {
       singleSelection: false,
@@ -83,6 +102,10 @@ export class CreateBeComponent implements OnInit {
         "",
         Validators.compose([Validators.required, CustomValidators.number])
       ],
+      numberOfBranches: ["", Validators.compose([CustomValidators.number])],
+      paymentTerms: ["", Validators.compose([Validators.required])],
+      creditDurationInDays: ["", Validators.compose([CustomValidators.number])],
+      accountManager: ["", Validators.compose([Validators.required])],
       selectedItems: [null],
       orgSpeciality: ["", Validators.required]
     });
@@ -116,8 +139,13 @@ export class CreateBeComponent implements OnInit {
         name: form.value.orgName,
         speciality: this.selectedSpeciality
           .map(x => x.speciality_name)
-          .join("|")
+          .join("|"),
+        account_manager: form.value.accountManager,
+        no_of_branches: form.value.numberOfBranches,
+        payment_terms: form.value.paymentTerms,
+        credit_duration_in_days: form.value.creditDurationInDays
       };
+
       this.dataservice.postData("partners", postFormData).subscribe(
         data => {
           if (data.status === 201) {
