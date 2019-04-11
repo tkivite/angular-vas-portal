@@ -3,141 +3,182 @@
     <div class="box-body">
       <div class="row mb-4" *ngIf="currentActive === 'DISABLED'">
         <div class="col">
-            <div class="card border-0 box-shadow" widget="">
-                <div class="card-header transparent border-0 text-muted">
-                    <h5 class="mb-0">Access Denied</h5>
-                </div>
-                <div class="card-block pt-0 widget-body">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                              <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                                <span aria-hidden="true">×</span>
-                              </button>
-                                <strong>Error!</strong> You Do not have access to this page.
-                            </div>
-                        </div>
-                    </div>
-                </div>
+          <div class="card border-0 box-shadow" widget="">
+            <div class="card-header transparent border-0 text-muted">
+              <h5 class="mb-0">Access Denied</h5>
             </div>
+            <div class="card-block pt-0 widget-body">
+              <div class="row">
+                <div class="col-xl-12">
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                    <strong>Error!</strong> You Do not have access to this page.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
-    <div widget class="card border-0 box-shadow" *ngIf="currentActive === 'ENABLED'">
-      <div id ="cccform" class="container">
+      </div>
+      <div widget class="card border-0 box-shadow" *ngIf="currentActive === 'ENABLED'">
+        <div id="cccform" class="container">
           <div class="row form-heading">
             <div class="col-md-1"></div>
             <h4 class="col-md-11">Adding New Partner</h4>
           </div>
           <hr>
-        <div class="row">
+          <div class="row">
 
 
             <div class="col-md-1"></div>
-                <form  [formGroup]="beFormAdd" (ngSubmit)="onAddSubmit(beFormAdd)" class="col-md-11 form-horizontal">
+            <form [formGroup]="beFormAdd" (ngSubmit)="onAddSubmit(beFormAdd)" class="col-md-11 form-horizontal">
 
-                  <div class="row form-group">
-                      <label class="control-label col-sm-3" for="title"><span class="float-right"> Registered Name: </span></label>
-                      <div class="col-sm-7">
-                        <input type="text" formControlName="orgName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.orgName.errors }"  placeholder="enter business registeres name" />
+              <div class="row form-group">
+                <label class="control-label col-sm-3" for="title"><span class="float-right"> Registered Name:
+                  </span></label>
+                <div class="col-sm-7">
+                  <input type="text" formControlName="orgName" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.orgName.errors }"
+                    placeholder="enter business registeres name" />
 
-                        <div *ngIf="submitted && f.orgName.errors" class="invalid-feedback">
-                          <div *ngIf="f.orgName.errors.required">Name is required</div>
-                        </div>
-                        <small class="text-danger" *ngIf="beFormAdd.get('orgName').touched && beFormAdd.get('orgName').hasError('required')">Business Name is required</small>
-                        <small class="text-danger" *ngIf="beFormAdd.get('orgName').touched && beFormAdd.get('orgName').hasError('pattern')">Invalid Business Name </small>
+                  <div *ngIf="submitted && f.orgName.errors" class="invalid-feedback">
+                    <div *ngIf="f.orgName.errors.required">Name is required</div>
+                  </div>
+                  <small class="text-danger"
+                    *ngIf="beFormAdd.get('orgName').touched && beFormAdd.get('orgName').hasError('required')">Business
+                    Name is required</small>
+                  <small class="text-danger"
+                    *ngIf="beFormAdd.get('orgName').touched && beFormAdd.get('orgName').hasError('pattern')">Invalid
+                    Business Name </small>
 
-                      </div>
+                </div>
+              </div>
+
+
+              <div class="row form-group">
+                <label class="control-label col-sm-3" for="title"> <span class="float-right"> Mobile: </span> </label>
+                <div class="col-sm-7">
+                  <input type="text" formControlName="orgMobile" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.orgMobile.errors }"
+                    placeholder="contact phone number 2547......." />
+                  <div *ngIf="submitted && f.orgMobile.errors" class="invalid-feedback">
+                    <div *ngIf="f.orgMobile.errors.required">Mobile is required</div>
+                  </div>
+                  <small class="text-danger"
+                    *ngIf="beFormAdd.get('orgMobile').touched && beFormAdd.get('orgMobile').hasError('required')">Mobile
+                    is required</small>
+                  <small class="text-danger"
+                    *ngIf="beFormAdd.get('orgMobile').touched && beFormAdd.get('orgMobile').hasError('pattern')">Invalid
+                    Mobile Number </small>
+                </div>
+              </div>
+
+              <div class="row form-group">
+                <label class="control-label col-sm-3" for="title"> <span class="float-right"> Location: </span></label>
+                <div class="col-sm-7">
+                  <input type="text" formControlName="orgLocation" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.orgLocation.errors }"
+                    placeholder="enter business HQ location" />
+                  <div *ngIf="submitted && f.orgLocation.errors" class="invalid-feedback">
+                    <div *ngIf="f.orgLocation.errors.required">Location is required</div>
+                  </div>
+                  <small class="text-danger"
+                    *ngIf="beFormAdd.get('orgLocation').touched && beFormAdd.get('orgLocation').hasError('required')">Location
+                    is required</small>
+                </div>
+              </div>
+
+              <div class="row form-group">
+                <label class="control-label col-sm-3" for="title"> <span class="float-right"> Email: </span></label>
+                <div class="col-sm-7">
+                  <input type="text" formControlName="orgEmail" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.orgEmail.errors }"
+                    placeholder="enter the business email address" />
+                  <div *ngIf="submitted && f.orgEmail.errors" class="invalid-feedback">
+                    <div *ngIf="f.orgEmail.errors.required">Email is required</div>
+                  </div>
+                  <small class="text-danger"
+                    *ngIf="beFormAdd.get('orgEmail').touched && beFormAdd.get('orgEmail').hasError('required')">Email is
+                    required</small>
+                  <small class="text-danger"
+                    *ngIf="beFormAdd.get('orgEmail').touched && beFormAdd.get('orgEmail').hasError('email')">Invalid
+                    email address</small>
+                </div>
+              </div>
+              <div class="row form-group">
+                <label class="control-label col-sm-3" for="title"> <span class="float-right"> Telephone: </span></label>
+                <div class="col-sm-7">
+                  <input type="text" formControlName="orgTelephone" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.orgTelephone.errors }" />
+                  <div *ngIf="submitted && f.orgTelephone.errors" class="invalid-feedback">
+                    <div *ngIf="f.orgTelephone.errors.required">Telephone is required</div>
                   </div>
 
+                </div>
+              </div>
 
-                    <div class="row form-group">
-                        <label class="control-label col-sm-3" for="title"> <span class="float-right"> Mobile: </span> </label>
-                      <div class="col-sm-7">
-                          <input type="text" formControlName="orgMobile" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.orgMobile.errors }"  placeholder="contact phone number 2547......."/>
-                          <div *ngIf="submitted && f.orgMobile.errors" class="invalid-feedback">
-                            <div *ngIf="f.orgMobile.errors.required">Mobile is required</div>
-                          </div>
-                          <small class="text-danger" *ngIf="beFormAdd.get('orgMobile').touched && beFormAdd.get('orgMobile').hasError('required')">Mobile is required</small>
-                           <small class="text-danger" *ngIf="beFormAdd.get('orgMobile').touched && beFormAdd.get('orgMobile').hasError('pattern')">Invalid Mobile Number </small>
-                      </div>
-                    </div>
+              <div class="row form-group">
+                <label class="control-label col-sm-3" for="title"><span class="float-right"> Year of Incorporation:
+                  </span></label>
+                <div class="col-sm-7">
+                  <input type="text" formControlName="orgYearsOfOperation" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.orgYearsOfOperation.errors }" />
+                  <div *ngIf="submitted && f.orgYearsOfOperation.errors" class="invalid-feedback">
+                    <div *ngIf="f.orgYearsOfOperation.errors.required">Year of Incorporation is required</div>
+                  </div>
+                  <small class="text-danger"
+                    *ngIf="beFormAdd.get('orgYearsOfOperation').touched && beFormAdd.get('orgYearsOfOperation').hasError('required')">Year
+                    of Incorporation is required</small>
 
-                    <div class="row form-group">
-                      <label class="control-label col-sm-3" for="title"> <span class="float-right"> Location: </span></label>
-                      <div class="col-sm-7">
-                        <input type="text" formControlName="orgLocation" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.orgLocation.errors }" placeholder="enter business HQ location"/>
-                        <div *ngIf="submitted && f.orgLocation.errors" class="invalid-feedback">
-                          <div *ngIf="f.orgLocation.errors.required">Location is required</div>
-                        </div>
-                         <small class="text-danger" *ngIf="beFormAdd.get('orgLocation').touched && beFormAdd.get('orgLocation').hasError('required')">Location is required</small>
-                      </div>
-                    </div>
+                </div>
+              </div>
+              <!---- <div class="row form-group">
+                <label class="control-label col-sm-3" for="title"><span class="float-right"> Speciality: </span></label>
+                <div class="col-sm-7">
+                  <select formControlName="orgSpeciality" class="form-control validation-field">
+                    <option value="">Select Speciality</option>
+                    <option *ngFor="let o of specialityOptions" [ngValue]="o.speciality_name">{{o.speciality_name}}
+                    </option>
+                  </select>
+                  <small class="text-danger"
+                    *ngIf="beFormAdd.get('orgSpeciality').touched && beFormAdd.get('orgSpeciality').hasError('required')">Status
+                    is required</small>
+                </div>
+              </div>-->
+              <div class="row form-group">
+                <label class="control-label col-sm-3" for="title"><span class="float-right"> Speciality: </span></label>
+                <div class="col-sm-7">
 
-                    <div class="row form-group">
-                        <label class="control-label col-sm-3" for="title"> <span class="float-right"> Email: </span></label>
-                        <div class="col-sm-7">
-                          <input type="text" formControlName="orgEmail" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.orgEmail.errors }" placeholder="enter the business email address"/>
-                          <div *ngIf="submitted && f.orgEmail.errors" class="invalid-feedback">
-                            <div *ngIf="f.orgEmail.errors.required">Email is required</div>
-                          </div>
-                          <small class="text-danger" *ngIf="beFormAdd.get('orgEmail').touched && beFormAdd.get('orgEmail').hasError('required')">Email is required</small>
-                          <small class="text-danger" *ngIf="beFormAdd.get('orgEmail').touched && beFormAdd.get('orgEmail').hasError('email')">Invalid email address</small>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <label class="control-label col-sm-3" for="title"> <span class="float-right"> Telephone: </span></label>
-                        <div class="col-sm-7">
-                          <input type="text" formControlName="orgTelephone" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.orgTelephone.errors }" />
-                          <div *ngIf="submitted && f.orgTelephone.errors" class="invalid-feedback">
-                            <div *ngIf="f.orgTelephone.errors.required">Telephone is required</div>
-                          </div>
-                          <small class="text-danger" *ngIf="beFormAdd.get('orgTelephone').touched && beFormAdd.get('orgTelephone').hasError('required')">Telephone is required</small>
-
-                        </div>
-                    </div>
-
-                    <div class="row form-group">
-                        <label class="control-label col-sm-3" for="title"><span class="float-right"> Year of Incorporation: </span></label>
-                        <div class="col-sm-7">
-                          <input type="text" formControlName="orgYearsOfOperation" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.orgYearsOfOperation.errors }" />
-                          <div *ngIf="submitted && f.orgYearsOfOperation.errors" class="invalid-feedback">
-                            <div *ngIf="f.orgYearsOfOperation.errors.required">Year of Incorporation is required</div>
-                          </div>
-                          <small class="text-danger" *ngIf="beFormAdd.get('orgYearsOfOperation').touched && beFormAdd.get('orgYearsOfOperation').hasError('required')">Year of Incorporation is required</small>
-
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                      <label class="control-label col-sm-3" for="title"><span class="float-right"> Speciality: </span></label>
-                          <div class="col-sm-7">
-                            <select formControlName="orgSpeciality" class="form-control validation-field">
-                              <option value="">Select Speciality</option>
-                          <option *ngFor="let o of specialityOptions" [ngValue]="o.name">{{o.name}}</option>
-                      </select>
-                            <small class="text-danger" *ngIf="beFormAdd.get('orgSpeciality').touched && beFormAdd.get('orgSpeciality').hasError('required')">Status is required</small>
-                        </div>
-                     </div>
+                  <ng-multiselect-dropdown [placeholder]="'Select Speciality'" [data]="specialityOptions"
+                    formControlName="selectedItems" [settings]="dropdownSettings" [(ngModel)]="selectedSpeciality"
+                    (onDeSelect)="onDeSelectSpeciality($event)" (onSelect)="onSpecialitySelect($event)"
+                    (onSelectAll)="onSelectAllSpeciality($event)">
+                  </ng-multiselect-dropdown>
+                </div>
+              </div>
 
 
-
-                    <div class="row form-group">
-                        <div class="col-sm-3"></div>
-                        <div class="col-sm-7">
-                          <div class="float-right ">
-                            <button  class="btn btn-danger " type="cancel" style="margin-right: 10px;
+              <div class="row form-group">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-7">
+                  <div class="float-right ">
+                    <button class="btn btn-danger " type="cancel" style="margin-right: 10px;
     min-width: 100px;" routerLink="/partners/">Cancel</button>
-                            <button  [disabled]="beFormAdd.invalid" class="btn btn-success " type="submit" style="min-width: 100px;">Submit</button>
-                          </div>
-                        </div>
-                      </div>
+                    <button [disabled]="beFormAdd.invalid" class="btn btn-success " type="submit"
+                      style="min-width: 100px;">Submit</button>
+                  </div>
+                </div>
+              </div>
 
 
-                  </form>
+            </form>
 
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-</div>
-</div>
-</div>
+  </div>
 
 </block-ui>
