@@ -115,10 +115,19 @@
                   <div *ngIf="submitted && f.orgTelephone.errors" class="invalid-feedback">
                     <div *ngIf="f.orgTelephone.errors.required">Telephone is required</div>
                   </div>
-                  <small class="text-danger"
-                    *ngIf="beFormAdd.get('orgTelephone').touched && beFormAdd.get('orgTelephone').hasError('required')">Telephone
-                    is required</small>
 
+                </div>
+              </div>
+
+              <div class="row form-group">
+                <label class="control-label col-sm-3" for="title"><span class="float-right"> Speciality: </span></label>
+                <div class="col-sm-7">
+
+                  <ng-multiselect-dropdown [placeholder]="'Select Speciality'" [data]="specialityOptions"
+                    formControlName="selectedItems" [settings]="dropdownSettings" [(ngModel)]="selectedSpeciality"
+                    (onDeSelect)="onDeSelectSpeciality($event)" (onSelect)="onSpecialitySelect($event)"
+                    (onSelectAll)="onSelectAllSpeciality($event)">
+                  </ng-multiselect-dropdown>
                 </div>
               </div>
 
@@ -126,7 +135,7 @@
                 <label class="control-label col-sm-3" for="title"><span class="float-right"> Year of Incorporation:
                   </span></label>
                 <div class="col-sm-7">
-                  <input type="text" formControlName="orgYearsOfOperation" class="form-control"
+                  <input type="number" formControlName="orgYearsOfOperation" class="form-control"
                     [ngClass]="{ 'is-invalid': submitted && f.orgYearsOfOperation.errors }" />
                   <div *ngIf="submitted && f.orgYearsOfOperation.errors" class="invalid-feedback">
                     <div *ngIf="f.orgYearsOfOperation.errors.required">Year of Incorporation is required</div>
@@ -134,29 +143,71 @@
                   <small class="text-danger"
                     *ngIf="beFormAdd.get('orgYearsOfOperation').touched && beFormAdd.get('orgYearsOfOperation').hasError('required')">Year
                     of Incorporation is required</small>
-                  <small class="text-danger"
-                    *ngIf="beFormAdd.get('orgYearsOfOperation').touched && beFormAdd.get('orgYearsOfOperation').hasError('max')">Year
-                    of Incorporation should be less than current year</small>
-                  <small class="text-danger"
-                    *ngIf="beFormAdd.get('orgYearsOfOperation').touched && beFormAdd.get('orgYearsOfOperation').hasError('min')">Year
-                    of Incorporation should not be earlier than 200 years ago</small>
 
                 </div>
               </div>
+
               <div class="row form-group">
-                <label class="control-label col-sm-3" for="title"><span class="float-right"> Speciality: </span></label>
+                <label class="control-label col-sm-3" for="title"><span class="float-right"> Number of Branches:
+                  </span></label>
                 <div class="col-sm-7">
-                  <select formControlName="orgSpeciality" class="form-control validation-field">
-                    <option value="">Select Speciality</option>
-                    <option *ngFor="let o of specialityOptions" [ngValue]="o.name">{{o.name}}</option>
+                  <input type="number" formControlName="numberOfBranches" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.numberOfBranches.errors }" />
+                  <div *ngIf="submitted && f.numberOfBranches.errors" class="invalid-feedback">
+                    <div *ngIf="f.numberOfBranches.errors.required">Year of Incorporation is required</div>
+                  </div>
+                  <small class="text-danger"
+                    *ngIf="beFormAdd.get('numberOfBranches').touched && beFormAdd.get('numberOfBranches').hasError('required')">Number
+                    of branches is a required field</small>
+
+                </div>
+              </div>
+
+              <div class="row form-group">
+                <label class="control-label col-sm-3" for="title"><span class="float-right"> Payment Terms:
+                  </span></label>
+                <div class="col-sm-7">
+                  <select formControlName="paymentTerms" class="form-control validation-field">
+                    <option value="Cash">Cash</option>
+                    <option value="Credit">Credit</option>
+
                   </select>
                   <small class="text-danger"
-                    *ngIf="beFormAdd.get('orgSpeciality').touched && beFormAdd.get('orgSpeciality').hasError('required')">Status
+                    *ngIf="beFormAdd.get('paymentTerms').touched && beFormAdd.get('paymentTerms').hasError('required')">Payment
+                    Terms
                     is required</small>
                 </div>
               </div>
 
+              <div class="row form-group">
+                <label class="control-label col-sm-3" for="title"><span class="float-right"> Credit Duration In Days:
+                  </span></label>
+                <div class="col-sm-7">
+                  <input type="number" formControlName="creditDurationInDays" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.creditDurationInDays.errors }" />
+                  <div *ngIf="submitted && f.creditDurationInDays.errors" class="invalid-feedback">
+                    <div *ngIf="f.creditDurationInDays.errors.required">Credit duration is required</div>
+                  </div>
+                  <small class="text-danger"
+                    *ngIf="beFormAdd.get('creditDurationInDays').touched && beFormAdd.get('creditDurationInDays').hasError('required')">Number
+                    of branches is a required field</small>
 
+                </div>
+              </div>
+
+              <div class="row form-group">
+                <label class="control-label col-sm-3" for="title"><span class="float-right"> Account Manager:
+                  </span></label>
+                <div class="col-sm-7">
+                  <select formControlName="accountManager" class="form-control validation-field">
+                    <option value="">Select Account Manager</option>
+                    <option *ngFor="let o of UserOptions" [ngValue]="o.id">{{o.firstname + ' ' + o.lastname}}</option>
+                  </select>
+                  <small class="text-danger"
+                    *ngIf="beFormAdd.get('accountManager').touched && beFormAdd.get('accountManager').hasError('required')">Account
+                    Manager is required</small>
+                </div>
+              </div>
 
               <div class="row form-group">
                 <div class="col-sm-3"></div>

@@ -28,6 +28,11 @@ export class CreateBeComponent implements OnInit {
   public errorMessage: any = "SHOWERROR";
   public specialityOptions: any;
 
+  selectedSpeciality = [];
+  dropdownSettings = {};
+
+  public UserOptions: any;
+
   constructor(
     router: Router,
     fb: FormBuilder,
@@ -36,18 +41,41 @@ export class CreateBeComponent implements OnInit {
   ) {
     this.router = router;
     const namePattern = /^[a-zA-Z ']{2,45}$/;
-    //const namep = /^[A-Z]([a-zA-Z0-9]|[- @\.#&!])*$/;
     const kenyanMobileNoPattern = "^(254|0)(7([0-9]{8}))$";
-    const currentYear = new Date().getFullYear();
-    // const kenyanMobileNoPattern = '^(\+\d{1,3}[- ]?)?\d{10}$';
 
     this.specialityOptions = [
-      { id: "1", name: "Electronics" },
-      { id: "2", name: "Phones" },
-      { id: "3", name: "Furniture" },
-      { id: "4", name: "General" }
+      { speciality_id: "1", speciality_name: "Electronics" },
+      { speciality_id: "2", speciality_name: "Phones" },
+      { speciality_id: "3", speciality_name: "Furniture" },
+      { speciality_id: "4", speciality_name: "General" }
     ];
-    // const specialityArray: FormArray = new FormArray([]);
+    this.blockUI.start("Fetching Users");
+    this.dataservice.fetchData("users").subscribe(
+      data => {
+        if (data.status === 200) {
+          console.log(data.body);
+          this.UserOptions = data.body;
+          this.blockUI.stop();
+        } else {
+          this.blockUI.stop();
+          this.toastrService.error(data.message);
+        }
+      },
+      err => {
+        console.log("Problems in downloading users");
+        this.blockUI.stop();
+      }
+    );
+
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: "speciality_id",
+      textField: "speciality_name",
+      selectAllText: "Select All",
+      unSelectAllText: "UnSelect All",
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
 
     this.beFormAdd = fb.group({
       orgName: [
@@ -62,7 +90,7 @@ export class CreateBeComponent implements OnInit {
         "",
         Validators.compose([Validators.required, CustomValidators.email])
       ],
-      orgTelephone: ["", Validators.compose([Validators.required])],
+      orgTelephone: [""],
       orgMobile: [
         "",
         Validators.compose([
@@ -72,13 +100,13 @@ export class CreateBeComponent implements OnInit {
       ],
       orgYearsOfOperation: [
         "",
-        Validators.compose([
-          Validators.required,
-          Validators.min(currentYear - 200),
-          Validators.max(currentYear),
-          CustomValidators.number
-        ])
+        Validators.compose([Validators.required, CustomValidators.number])
       ],
+      numberOfBranches: ["", Validators.compose([CustomValidators.number])],
+      paymentTerms: ["", Validators.compose([Validators.required])],
+      creditDurationInDays: ["", Validators.compose([CustomValidators.number])],
+      accountManager: ["", Validators.compose([Validators.required])],
+      selectedItems: [null],
       orgSpeciality: ["", Validators.required]
     });
     this.activeInactive = "ENABLED";
@@ -106,10 +134,16 @@ export class CreateBeComponent implements OnInit {
         email: form.value.orgEmail,
         location: form.value.orgLocation,
         telephone: form.value.orgTelephone,
-        mobile: "+" + form.value.orgMobile,
+        mobile: "+254" + form.value.orgMobile.slice(-9),
         year_of_incorporation: form.value.orgYearsOfOperation,
         name: form.value.orgName,
-        speciality: form.value.orgSpeciality
+        speciality: this.selectedSpeciality
+          .map(x => x.speciality_name)
+          .join("|"),
+        account_manager: form.value.accountManager,
+        no_of_branches: form.value.numberOfBranches,
+        payment_terms: form.value.paymentTerms,
+        credit_duration_in_days: form.value.creditDurationInDays
       };
       this.dataservice.postData("partners", postFormData).subscribe(
         data => {
@@ -143,5 +177,23 @@ export class CreateBeComponent implements OnInit {
   // On List
   onList() {
     this.router.navigate(["partners"]);
+  }
+  onSpecialitySelect(item: any) {
+    console.log(item);
+    // this.selectedSpeciality.push(item);
+    console.log(this.selectedSpeciality);
+  }
+  onSelectAllSpeciality(items: any) {
+    console.log(items);
+    // this.selectedSpeciality = this.specialityOptions;
+    console.log(this.selectedSpeciality);
+  }
+  onDeSelectSpeciality(item: any) {
+    console.log(item);
+    /* var index = this.selectedSpeciality.indexOf(item);
+    if (index > -1) {
+      this.selectedSpeciality.splice(index, 1);
+    }*/
+    console.log(this.selectedSpeciality);
   }
 }

@@ -6,11 +6,11 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DataTablesModule } from "angular-datatables";
 import { HttpClientModule } from "@angular/common/http";
-import { SweetAlertService } from "angular-sweetalert-service";
 
 import { ConfirmationDialogComponent } from "./services/confirmation-dialog/confirmation-dialog.component";
 import { ConfirmationDialogService } from "./services/confirmation-dialog/confirmation-dialog.service";
-//import {ErrorInterceptor,JwtInterceptor} from './helpers';
+
+import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 
 import { PasswordStrengthMeterModule } from "angular-password-strength-meter";
 
@@ -48,7 +48,6 @@ import { CreateUserComponent } from "./pages/users/create/create.component";
 import { ApiService } from "./services/api.service";
 import { HomeComponent } from "./pages/home/home.component";
 import { UpdateUserComponent } from "./pages/users/update/update.component";
-
 import { ChangePasswordComponent } from "./pages/change-password/change-password.component";
 import { ForgotPasswordComponent } from "./pages/forgot-password/forgot-password.component";
 
@@ -97,6 +96,7 @@ import { ForgotPasswordComponent } from "./pages/forgot-password/forgot-password
     BlockUIModule.forRoot(),
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(),
+    NgMultiSelectDropDownModule.forRoot(),
     AppRoutingModule
   ],
   providers: [

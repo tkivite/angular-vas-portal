@@ -458,10 +458,10 @@ app-be-update,
 app-update,
 app-notifications,
 app-login,
-app-pending,
+<<<<<<< HEAD app-pending,
 app-forgot-password,
 app-change-password,
-app-create,
+=======>>>>>>>onboarding-feature app-create,
 app-store,
 app-partners,
 app-sales,
@@ -524,7 +524,7 @@ ngb-tabset>.nav-tabs {
   background-color: #51A351 !important;
 }
 
-.toast-error {
+<<<<<<< HEAD .toast-error {
   background-color: #BD362F !important;
 }
 
@@ -536,4 +536,31 @@ ngb-tabset>.nav-tabs {
 .toast-warning {
   background-color: #F89406 !important;
   ;
-}
+
+  =======.toast-error {
+    background-color: #BD362F !important;
+  }
+
+  .toast-info {
+    background-color: #2F96B4 !important;
+    ;
+  }
+
+  .toast-warning {
+    background-color: #F89406 !important;
+    ;
+  }
+
+  .multiselect-dropdown[_ngcontent-c1] .dropdown-btn[_ngcontent-c1] {
+    height: 35px;
+  }
+
+  .dropdown-list[_ngcontent-c1] {
+    height: 35px;
+    margin-top: -35px !important;
+  }
+
+  .dropdown-list[_ngcontent-c1] ul[_ngcontent-c1] {
+    background-color: lavender;
+    >>>>>>>onboarding-feature
+  }
