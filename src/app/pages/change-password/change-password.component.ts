@@ -66,36 +66,12 @@ export class ChangePasswordComponent {
             Validators.minLength(8),
             Validators.maxLength(20)
           ])
-        ],
-        securityQuestion: ["", Validators.compose([Validators.required])],
-        securityQuestionAnswer: ["", Validators.compose([Validators.required])]
+        ]
       },
       { validator: matchingPasswords("password", "passwordRepeat") }
     );
     this.retriesRemaining = 0;
 
-    this.securityQuestionsList = [
-      {
-        id: "childhood_nickname",
-        question: "What was your childhood nickname?"
-      },
-      {
-        id: "city_or_town_born",
-        question: "In what city or town where you born?"
-      },
-      {
-        id: "middlename_of_best_friend",
-        question: "What is the middle name of your best friend?"
-      },
-      {
-        id: "grandma_maiden_name",
-        question: "What is your grandmother's maiden name?"
-      },
-      {
-        id: "name_of_primary_school",
-        question: "What was the name of your elementary or primary school?"
-      }
-    ];
     // get password Policy
 
     this.route.queryParams.subscribe(params => {
@@ -121,10 +97,7 @@ export class ChangePasswordComponent {
       const postdata = {
         token: this.token.token,
         passwordRepeat: form.value.passwordRepeat,
-        new_password: form.value.password,
-        security_question: form.value.securityQuestion,
-
-        security_answer: form.value.securityQuestionAnswer
+        new_password: form.value.password
       };
 
       this.dataService.changepassword(postdata).subscribe(
@@ -134,7 +107,7 @@ export class ChangePasswordComponent {
             this.router.navigate(["login"]);
             this.blockUI.stop();
             this.toastrService.success(
-              "Request submitted successfully, You will receive an email with instructions"
+              "Request to change password was successfull"
             );
             this.fsubmitted = true;
           } else {

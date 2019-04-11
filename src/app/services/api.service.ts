@@ -72,6 +72,13 @@ export class ApiService {
       observe: "response"
     });
   }
+  fetchforgotpasswordcode(payload): Observable<any> {
+    return this.http.post<any>(this.baseUrl + "passwords/send_pin", payload, {
+      headers: this.headers,
+      observe: "response"
+    });
+  }
+
   resetpassword(resource, payload): Observable<any> {
     return this.http.post<any>(this.baseUrl + "passwords/reset", payload, {
       headers: this.headers,

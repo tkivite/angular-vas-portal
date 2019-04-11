@@ -34,7 +34,9 @@ export class ForgotPasswordComponent {
   public retriesRemaining: number;
   public errorMessage: any = "SHOWERROR";
   public fsubmitted = false;
+  public rsubmitted = false;
   public fsubmittedwitherrors = false;
+  public userMobileNumber;
   constructor(
     router: Router,
     fb: FormBuilder,
@@ -47,12 +49,11 @@ export class ForgotPasswordComponent {
     this.authenticationService.logout();
     this.form = fb.group({
       userName: ["", Validators.compose([Validators.required])],
-      securityQuestion: ["", Validators.compose([Validators.required])],
-      securityQuestionAnswer: ["", Validators.compose([Validators.required])]
+      forgotPasswordCode: ["", Validators.compose([Validators.required])]
     });
     this.retriesRemaining = 0;
     // read
-
+    /*
     this.securityQuestionsList = [
       {
         id: "childhood_nickname",
@@ -75,6 +76,7 @@ export class ForgotPasswordComponent {
         question: "What was the name of your elementary or primary school?"
       }
     ];
+    */
 
     this.route.queryParams.subscribe(params => {
       this.token = params;
@@ -83,6 +85,7 @@ export class ForgotPasswordComponent {
 
   public forgotPass() {
     this.fsubmitted = false;
+    this.rsubmitted = false;
     this.fsubmittedwitherrors = false;
   }
 
@@ -96,20 +99,69 @@ export class ForgotPasswordComponent {
       this.errorMessage = "SHOWERROR";
       const postdata = {
         email: form.value.userName,
-        security_question: form.value.securityQuestion,
-        security_answer: form.value.securityQuestionAnswer
+        pin: form.value.forgotPasswordCode
       };
 
       this.dataService.forgotpassword(postdata).subscribe(
         data => {
           if (data.status === 200) {
             // this.toastrService.success(data.message);
-            this.router.navigate(["login"]);
+            //this.router.navigate(["login"]);
             this.blockUI.stop();
             this.toastrService.success(
               "Request submitted successfully, You will receive an email with instructions"
             );
             this.fsubmitted = true;
+          } else {
+            // this.toastrService.error(data.message);
+            this.blockUI.stop();
+            // this.toastrService.error(data.message);
+            this.toastrService.error("There was a problem posting the request");
+          }
+        },
+        err => {
+          console.log(
+            "Something Went Wrong, We could not complete the request"
+          );
+          console.log(err);
+          this.blockUI.stop();
+
+          if (err.status === 404) {
+            // this.toastrService.error(data.message);
+            this.blockUI.stop();
+            // this.toastrService.error(data.message);
+            this.toastrService.error(
+              "We could not find a user with search credentials"
+            );
+            this.fsubmittedwitherrors = true;
+          } else {
+            this.toastrService.error(
+              "Something Went Wrong, We could not complete the request"
+            );
+          }
+        }
+      );
+    }
+  }
+
+  getVerificationCode(form: FormGroup) {
+    if (this.form.value.userName) {
+      this.blockUI.start("Requesting verification code");
+      const postdata = {
+        email: form.value.userName
+      };
+
+      this.dataService.fetchforgotpasswordcode(postdata).subscribe(
+        data => {
+          console.log(data);
+          if (data.status === 201) {
+            this.userMobileNumber = data.body.mobile;
+            this.blockUI.stop();
+            this.toastrService.success(
+              "A text message with verification code has been sent to " +
+                this.userMobileNumber
+            );
+            this.rsubmitted = true;
           } else {
             // this.toastrService.error(data.message);
             this.blockUI.stop();
