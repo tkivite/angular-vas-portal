@@ -549,3 +549,7 @@ ngb-tabset>.nav-tabs {
 .dropdown-list[_ngcontent-c1] ul[_ngcontent-c1] {
   background-color: lavender;
 }
+
+.btn-info {
+  color: #fff !important;
+}
