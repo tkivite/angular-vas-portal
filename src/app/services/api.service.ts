@@ -91,12 +91,16 @@ export class ApiService {
       observe: "response"
     });
   }
-  updatepassword(resource, payload): Observable<any> {
-    return this.http.post<any>(this.baseUrl + "password/update", payload, {
+  fetchpickupverificationCode(payload): Observable<any> {
+    return this.http.post<any>(this.baseUrl + "customer_pickup", payload, {
+      headers: this.headers,
+      observe: "response"
+    });
+  }
+  fetchstaffverificationCode(payload): Observable<any> {
+    return this.http.post<any>(this.baseUrl + "lipalater_pickup", payload, {
       headers: this.headers,
       observe: "response"
     });
   }
 }
-
-//"$2a$10$3O3bHTm1mgQ.7d5EcOY8GuFz1nITBtO7hXWY91.0Yc2SQeYNxkL/K"

@@ -50,6 +50,8 @@ import { HomeComponent } from "./pages/home/home.component";
 import { UpdateUserComponent } from "./pages/users/update/update.component";
 import { ChangePasswordComponent } from "./pages/change-password/change-password.component";
 import { ForgotPasswordComponent } from "./pages/forgot-password/forgot-password.component";
+import { PickupComponent } from "./pages/collections/create/pickup.component";
+import { StaffPickupComponent } from "./pages/collections/lipalater/pickup.component";
 
 @NgModule({
   declarations: [
@@ -81,6 +83,8 @@ import { ForgotPasswordComponent } from "./pages/forgot-password/forgot-password
     UpdateUserComponent,
     ChangePasswordComponent,
     ForgotPasswordComponent,
+    PickupComponent,
+    StaffPickupComponent,
 
     ConfirmationDialogComponent
   ],
