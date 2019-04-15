@@ -12,6 +12,7 @@ import { CustomValidators } from "ng2-validation";
 
 import { ToastrService } from "ngx-toastr";
 import { BlockUI, NgBlockUI } from "ng-block-ui";
+import { store } from "@angular/core/src/render3";
 
 @Component({
   selector: "app-pickup",
@@ -35,8 +36,12 @@ export class StaffPickupComponent {
   public fsubmitted = false;
   public rsubmitted = false;
   public fsubmittedwitherrors = false;
+  public fusernotfound = false;
+  public fnopendingitems = false;
   public userMobileNumber;
   public customerItems;
+  public user_collecting = "";
+  selectedItems = [];
   constructor(
     router: Router,
     fb: FormBuilder,
@@ -47,7 +52,9 @@ export class StaffPickupComponent {
     this.router = router;
     this.pickupForm = fb.group({
       idNumber: ["", Validators.compose([Validators.required])],
-      verificationCode: ["", Validators.compose([Validators.required])]
+      verificationCode: ["", Validators.compose([Validators.required])],
+      pickupNotes: [""],
+      itemCode: [""]
     });
     this.retriesRemaining = 0;
 
@@ -71,8 +78,11 @@ export class StaffPickupComponent {
       this.blockUI.start("Submitting Forgot Password");
       this.errorMessage = "SHOWERROR";
       const postdata = {
-        email: form.value.idNumber,
-        pin: form.value.verificationCode
+        id_number: form.value.idNumber,
+        verification_code: form.value.verificationCode,
+        selected_items: this.selectedItems,
+        pick_up_notes: form.value.pickupNotes,
+        item_code: form.value.itemCode
       };
 
       this.dataService.forgotpassword(postdata).subscribe(
@@ -121,7 +131,8 @@ export class StaffPickupComponent {
     if (form.value.idNumber) {
       this.blockUI.start("Requesting verification code");
       const postdata = {
-        id_number: form.value.idNumber
+        id_number: form.value.idNumber,
+        store: "jkiarie"
       };
 
       this.dataService.fetchstaffverificationCode(postdata).subscribe(
@@ -130,6 +141,8 @@ export class StaffPickupComponent {
           if (data.status === 200) {
             this.userMobileNumber = data.body.mobile;
             this.customerItems = data.body.sales;
+            this.user_collecting =
+              data.body.user.firstname + " " + data.body.user.lastname;
             this.blockUI.stop();
             this.toastrService.success(
               "A text message with verification code has been sent to " +
@@ -137,12 +150,34 @@ export class StaffPickupComponent {
             );
             this.rsubmitted = true;
             this.fsubmittedwitherrors = false;
-          } else {
+            this.fusernotfound = false;
+            this.fnopendingitems = false;
+          } else if (data.status === 404) {
             // this.toastrService.error(data.message);
             this.fsubmittedwitherrors = true;
+            this.fusernotfound = true;
+            this.fnopendingitems = false;
             this.blockUI.stop();
             // this.toastrService.error(data.message);
-            this.toastrService.error("There was a problem posting the request");
+            this.toastrService.info(
+              "The id does not belong to a valid lipalater staff"
+            );
+          } else if (data.status === 204) {
+            this.fsubmittedwitherrors = true;
+            this.fusernotfound = false;
+            this.fnopendingitems = true;
+            this.blockUI.stop();
+            // this.toastrService.error(data.message);
+            this.toastrService.info("There are no pending items");
+          } else {
+            this.fsubmittedwitherrors = true;
+            this.fusernotfound = true;
+            this.fnopendingitems = false;
+            this.blockUI.stop();
+            // this.toastrService.error(data.message);
+            this.toastrService.error(
+              "There was a problem processing your request"
+            );
           }
         },
         err => {

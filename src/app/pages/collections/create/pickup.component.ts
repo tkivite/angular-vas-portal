@@ -37,6 +37,8 @@ export class PickupComponent {
   public fsubmittedwitherrors = false;
   public userMobileNumber;
   public customerItems;
+  public fnopendingitems = false;
+  selectedItems = [];
   constructor(
     router: Router,
     fb: FormBuilder,
@@ -47,7 +49,9 @@ export class PickupComponent {
     this.router = router;
     this.pickupForm = fb.group({
       idNumber: ["", Validators.compose([Validators.required])],
-      verificationCode: ["", Validators.compose([Validators.required])]
+      verificationCode: ["", Validators.compose([Validators.required])],
+      pickupNotes: [""],
+      itemCode: [""]
     });
     this.retriesRemaining = 0;
 
@@ -71,15 +75,16 @@ export class PickupComponent {
       this.blockUI.start("Submitting Forgot Password");
       this.errorMessage = "SHOWERROR";
       const postdata = {
-        email: form.value.idNumber,
-        pin: form.value.verificationCode
+        id_number: form.value.idNumber,
+        verification_code: form.value.verificationCode,
+        selected_items: this.selectedItems,
+        pick_up_notes: form.value.pickupNotes,
+        item_code: form.value.itemCode
       };
 
       this.dataService.forgotpassword(postdata).subscribe(
         data => {
           if (data.status === 200) {
-            // this.toastrService.success(data.message);
-            //this.router.navigate(["login"]);
             this.blockUI.stop();
             this.toastrService.success(
               "Request submitted successfully, You will receive an email with instructions"
@@ -89,7 +94,9 @@ export class PickupComponent {
             // this.toastrService.error(data.message);
             this.blockUI.stop();
             // this.toastrService.error(data.message);
-            this.toastrService.error("There was a problem posting the request");
+            this.toastrService.error(
+              "There was a problem processing your request"
+            );
           }
         },
         err => {
@@ -136,6 +143,12 @@ export class PickupComponent {
                 this.userMobileNumber
             );
             this.rsubmitted = true;
+            this.fsubmittedwitherrors = false;
+          } else if (data.status === 204) {
+            this.fnopendingitems = true;
+            this.blockUI.stop();
+            this.toastrService.info("There are no pending items");
+
             this.fsubmittedwitherrors = false;
           } else {
             // this.toastrService.error(data.message);

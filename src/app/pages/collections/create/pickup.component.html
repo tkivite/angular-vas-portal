@@ -24,9 +24,10 @@
       </div> -->
       <div widget class="card border-0 box-shadow">
         <div id="cccform" class="container">
+
           <div class="row form-heading">
             <div class="col-md-1"></div>
-            <h4 class="col-md-11">Initiate Pickup</h4>
+            <h4 class="col-md-11">Initiate Pickup by Customer</h4>
           </div>
           <hr>
           <div class="row">
@@ -106,6 +107,24 @@
                 </div>
 
                 <div class="form-group" *ngIf="rsubmitted">
+                  <label> Item Code </label>
+
+                  <input formControlName="itemCode" class="form-control validation-field" placeholder="Item Code"
+                    type="text">
+
+
+
+                </div>
+                <div class="form-group" *ngIf="rsubmitted">
+                  <label> Item Code </label>
+                  <textarea formControlName="pickupNotes" class="form-control validation-field"
+                    placeholder="Pickup Notes"></textarea>
+
+
+
+                </div>
+
+                <div class="form-group" *ngIf="rsubmitted">
                   <button [disabled]="!pickupForm.valid" class="btn btn-block btn-primary" type="submit">Complete
                     Pickup</button>
                 </div>
@@ -115,13 +134,23 @@
                   <h3>No Item was found</h3>
 
                   <div class="alert alert-md alert-danger">
-                    We could not find a pending item with that id number. You can try again.
+                    We could not find a pending item with that id number.
 
                   </div>
 
 
 
 
+                </div>
+
+                <div class="form-group" *ngIf="fnopendingitems">
+
+                  <h3>No pending Items</h3>
+
+                  <div class="alert alert-md alert-danger">
+                    We could not find a pending item with that id number. You can try again.
+
+                  </div>
                 </div>
 
 

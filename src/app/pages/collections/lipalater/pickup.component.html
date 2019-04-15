@@ -26,7 +26,7 @@
         <div id="cccform" class="container">
           <div class="row form-heading">
             <div class="col-md-1"></div>
-            <h4 class="col-md-11">Initiate Pickup</h4>
+            <h4 class="col-md-11">Initiate Pickup by Lipalater Staff</h4>
           </div>
           <hr>
           <div class="row">
@@ -50,6 +50,8 @@
                     number is
                     required</small>
                 </div>
+                <p *ngIf="rsubmitted">Names: {{user_collecting}} </p>
+                <p *ngIf="rsubmitted">Mobile: {{userMobileNumber}}</p>
 
                 <p *ngIf="rsubmitted">
                   A verification code has been sent to {{userMobileNumber}}. Input it below to complete the pickup
@@ -90,7 +92,7 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let item of customerItems; let i = index" title={{item.id}}>
-                        <td><input type="checkbox" value="{{item.id}}" /> </td>
+                        <td><input type="checkbox" value="{{item.id}}" [(ngModel)]="selectedItems" /> </td>
                         <td>{{item.customer_names}}</td>
                         <td>{{item.item_description}}</td>
                         <td>{{(item.pick_up_type =='store_pickup')?'customer pick up':'lipalater pick up'}}</td>
@@ -106,13 +108,31 @@
                 </div>
 
                 <div class="form-group" *ngIf="rsubmitted">
+                  <label> Item Code </label>
+
+                  <input formControlName="itemCode" class="form-control validation-field" placeholder="Item Code"
+                    type="text">
+
+
+
+                </div>
+                <div class="form-group" *ngIf="rsubmitted">
+                  <label> Item Code </label>
+                  <textarea formControlName="pickupNotes" class="form-control validation-field"
+                    placeholder="Pickup Notes"></textarea>
+
+
+
+                </div>
+
+                <div class="form-group" *ngIf="rsubmitted">
                   <button [disabled]="!pickupForm.valid" class="btn btn-block btn-primary" type="submit">Complete
                     Pickup</button>
                 </div>
 
-                <div class="form-group" *ngIf="fsubmittedwitherrors">
+                <div class="form-group" *ngIf="fusernotfound">
 
-                  <h3>No Item was found</h3>
+                  <h3>Invalid Id number</h3>
 
                   <div class="alert alert-md alert-danger">
                     The Id number does not belong to a valid lipalater pick up staff. Or We could not find a pending
@@ -125,17 +145,17 @@
 
                 </div>
 
+                <div class="form-group" *ngIf="fnopendingitems">
 
+                  <h3>No pending Items</h3>
 
-
+                  <div class="alert alert-md alert-danger">
+                    There are no pending items for collection.
+                  </div>
+                </div>
               </fieldset>
-
-
-
-
             </form>
           </div>
-
 
           <div class="panel-body" *ngIf="fsubmitted">
 
