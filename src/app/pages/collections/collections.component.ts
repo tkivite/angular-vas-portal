@@ -50,9 +50,9 @@ export class CollectionsComponent implements OnInit {
   }
   // Load Grid Data
   getData() {
-    this.blockUI.start("Loading All Sales .....");
+    this.blockUI.start("Loading All Collections .....");
     this.loadingIndicator = true;
-    this.dataservice.fetchData("sales").subscribe(
+    this.dataservice.fetchData("collections").subscribe(
       data => {
         if (data.status === 200) {
           console.log(data.body);

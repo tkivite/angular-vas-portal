@@ -103,4 +103,10 @@ export class ApiService {
       observe: "response"
     });
   }
+  completepickup(payload): Observable<any> {
+    return this.http.post<any>(this.baseUrl + "complete_pickup", payload, {
+      headers: this.headers,
+      observe: "response"
+    });
+  }
 }

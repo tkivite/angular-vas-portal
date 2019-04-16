@@ -37,8 +37,10 @@ export class PickupComponent {
   public fsubmittedwitherrors = false;
   public userMobileNumber;
   public customerItems;
+  public user_collecting;
   public fnopendingitems = false;
   selectedItems = [];
+  selectedCodes = [];
   constructor(
     router: Router,
     fb: FormBuilder,
@@ -70,6 +72,29 @@ export class PickupComponent {
     this.router.navigate(["login"]);
   }
 
+  public itemSelected(item) {
+    console.log(item);
+    if (item.target.checked === true) {
+      this.selectedItems.push(item.target.value);
+    } else {
+      let index = this.selectedItems.indexOf(item.target.value);
+      if (index > -1) {
+        this.selectedItems.splice(index, 1);
+      }
+    }
+    console.log(this.selectedItems);
+  }
+  public itemCodeValues(item) {
+    console.log(item.target.id);
+    console.log(item.target.value);
+    let index = this.selectedItems.indexOf(item.target.id);
+    if (index > -1) {
+      this.selectedCodes[index] = item.target.value;
+      //this.selectedCodes.push({ id: item.target.id, value: item.target.value });
+    }
+    console.log(this.selectedCodes);
+  }
+
   public onSubmit(form: FormGroup) {
     if (form.valid) {
       this.blockUI.start("Submitting Forgot Password");
@@ -78,24 +103,26 @@ export class PickupComponent {
         id_number: form.value.idNumber,
         verification_code: form.value.verificationCode,
         selected_items: this.selectedItems,
-        pick_up_notes: form.value.pickupNotes,
-        item_code: form.value.itemCode
+        pickup_notes: form.value.pickupNotes,
+        item_code: this.selectedCodes,
+        pickup_type: "customer",
+        collected_by_name: this.user_collecting
       };
 
-      this.dataService.forgotpassword(postdata).subscribe(
+      this.dataService.completepickup(postdata).subscribe(
         data => {
+          console.log(data);
           if (data.status === 200) {
             this.blockUI.stop();
-            this.toastrService.success(
-              "Request submitted successfully, You will receive an email with instructions"
-            );
+            this.toastrService.success("Pickup has been saved! awesome!");
             this.fsubmitted = true;
+            this.router.navigate(["collections"]);
           } else {
             // this.toastrService.error(data.message);
             this.blockUI.stop();
             // this.toastrService.error(data.message);
             this.toastrService.error(
-              "There was a problem processing your request"
+              "There was a problem processing your pickup request"
             );
           }
         },
@@ -111,7 +138,7 @@ export class PickupComponent {
             this.blockUI.stop();
             // this.toastrService.error(data.message);
             this.toastrService.error(
-              "We could not find a user with search credentials"
+              "Unable to validate code for thet id number"
             );
             this.fsubmittedwitherrors = true;
           } else {
@@ -137,6 +164,9 @@ export class PickupComponent {
           if (data.status === 200) {
             this.userMobileNumber = data.body.mobile;
             this.customerItems = data.body.sales;
+
+            let user = data.body.sales[0];
+            this.user_collecting = user.customer_names;
             this.blockUI.stop();
             this.toastrService.success(
               "A text message with verification code has been sent to " +

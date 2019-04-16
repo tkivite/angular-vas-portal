@@ -27,11 +27,11 @@ export class LoginComponent implements OnInit {
     public alertService: ToastrService,
     private authenticationService: AuthenticationService
   ) {
-    authenticationService.logout();
+    //authenticationService.logout();
     // redirect to home if already logged in
-    /*if (this.authenticationService.currentUserValue) {
-      this.router.navigate(["dashboard"]);
-    }*/
+    if (this.authenticationService.currentUserValue) {
+      this.router.navigate(["partners"]);
+    }
   }
 
   ngOnInit() {
@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
         data => {
           console.log(data);
           // this.router.navigate([this.returnUrl]);
-          this.router.navigate(["dashboard"]);
+          this.router.navigate(["partners"]);
           const firstname = data.user.firstname;
           this.blockUI.stop();
           this.toastrService.success(

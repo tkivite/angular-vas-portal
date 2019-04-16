@@ -92,13 +92,17 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let item of customerItems; let i = index" title={{item.id}}>
-                        <td><input type="checkbox" value="{{item.id}}" [(ngModel)]="selectedItems" /> </td>
+                        <td><input type="checkbox" value="{{item.id}}" (change)="itemSelected($event)" /> </td>
                         <td>{{item.customer_names}}</td>
                         <td>{{item.item_description}}</td>
                         <td>{{(item.pick_up_type =='store_pickup')?'customer pick up':'lipalater pick up'}}</td>
                         <td>{{item.store}}</td>
                         <td>{{item.created_at | date}}</td>
                         <td>{{item.status}}</td>
+                        <td> <input id="{{item.id}}" (mouseout)="itemCodeValues($event)" placeholder="Item Code"
+                            type="text"></td>
+
+                        <!--[readonly]="isCodeReadOnly()"-->
 
                       </tr>
                     </tbody>
@@ -107,15 +111,7 @@
 
                 </div>
 
-                <div class="form-group" *ngIf="rsubmitted">
-                  <label> Item Code </label>
 
-                  <input formControlName="itemCode" class="form-control validation-field" placeholder="Item Code"
-                    type="text">
-
-
-
-                </div>
                 <div class="form-group" *ngIf="rsubmitted">
                   <label> Item Code </label>
                   <textarea formControlName="pickupNotes" class="form-control validation-field"

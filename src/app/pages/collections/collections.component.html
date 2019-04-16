@@ -17,25 +17,18 @@
           <tr>
             <th></th>
             <th>Customer</th>
-            <th>Cust ID</th>
-            <th>Customer Mobile</th>
             <th>Item</th>
-            <th>Delivery Option</th>
+            <th>Collected By</th>
             <th>Store</th>
-            <th>Status</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let item of data; let i = index" title={{item.id}}>
             <td>{{i+1}}</td>
-            <td>{{item.customer_names}}</td>
-            <td>{{item.customer_id_number}}</td>
-            <td>{{item.customer_phone_number}}</td>
-            <td>{{item.item_description}}</td>
-            <td>{{(item.pick_up_type =='store_pickup')?'customer pick up':'lipalater pick up'}}</td>
+            <td>{{item.customer_names}} Id: {{item.customer_id_number}} Phone {{item.customer_phone_number}}</td>
+            <td>{{item.item}}</td>
+            <td>{{item.collected_by_name}} Id: {{item.collected_by_id_number}}</td>
             <td>{{item.store}}</td>
-            <td>{{item.status}}</td>
-
           </tr>
         </tbody>
       </table>
