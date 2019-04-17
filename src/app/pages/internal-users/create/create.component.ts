@@ -18,7 +18,7 @@ import { ApiService } from "../../../services/api.service";
   templateUrl: "./create.component.html",
   encapsulation: ViewEncapsulation.None
 })
-export class CreateUserComponent implements OnInit {
+export class CreateLipalaterUserComponent implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
   public router: Router;
   public userFormAdd: FormGroup;
@@ -41,14 +41,14 @@ export class CreateUserComponent implements OnInit {
     this.genderList = [{ id: "1", name: "Male" }, { id: "2", name: "Female" }];
 
     this.roleList = [
-      { id: "1", name: "Store user" },
-      { id: "2", name: "Store admin" },
-      { id: "3", name: "Partner admin" }
+      { id: "1", name: "Lipalater admin" },
+      { id: "2", name: "Lipalater onboarding" },
+      { id: "3", name: "Lipalater delivery" }
     ];
 
     const namePattern = /^[a-zA-Z ']{2,45}$/;
     const kenyanMobileNoPattern = "^(254|0)(7([0-9]{8}))$";
-    this.dataservice.fetchData("stores/stores").subscribe(
+    this.dataservice.fetchData("stores/lipalater").subscribe(
       data => {
         if (data.status === 200) {
           console.log(data.body);

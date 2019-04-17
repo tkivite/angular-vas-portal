@@ -29,7 +29,7 @@ export class PartnerComponent implements OnInit {
     private confirmationDialogService: ConfirmationDialogService
   ) {
     this.router = router;
-    this.getData();
+    //this.getData();
   }
 
   ngOnInit() {
