@@ -23,6 +23,9 @@ import { CreateUserComponent } from "./pages/users/create/create.component";
 import { UpdateUserComponent } from "./pages/users/update/update.component";
 import { ChangePasswordComponent } from "./pages/change-password/change-password.component";
 import { ForgotPasswordComponent } from "./pages/forgot-password/forgot-password.component";
+import { PickupComponent } from "./pages/collections/create/pickup.component";
+
+import { StaffPickupComponent } from "./pages/collections/lipalater/pickup.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "dashboard", pathMatch: "full" },
@@ -42,6 +45,8 @@ const routes: Routes = [
   { path: "dashboard", component: DashboardComponent },
   { path: "notifications", component: NotificationsComponent },
   { path: "collections", component: CollectionsComponent },
+  { path: "collections/create", component: PickupComponent },
+  { path: "collections/lipalater", component: StaffPickupComponent },
   { path: "released", component: ReleasedComponent },
   { path: "payments", component: PaymentsComponent },
   { path: "users", component: UsersComponent },

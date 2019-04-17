@@ -33,6 +33,8 @@ export class PartnerComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getData();
+
     $(document).ready(function() {
       $(".dataTables_empty").html("");
       $(".dataTables_info").html("");
@@ -57,17 +59,29 @@ export class PartnerComponent implements OnInit {
           console.log(data.body);
           this.data = data.body;
           this.blockUI.stop();
+        } else if (data.status === 401) {
+          this.router.navigate(["login"]);
+          this.blockUI.stop();
         } else {
           this.blockUI.stop();
           this.toastrService.error(data.message);
         }
       },
       err => {
-        console.log("SSomething Went Wrong, We could not complete the request");
-        this.blockUI.stop();
-        this.toastrService.error(
-          "Something Went Wrong, We could not complete the request"
-        );
+        console.log(err);
+        if (err.status === 401) {
+          this.router.navigate(["login"]);
+          this.blockUI.stop();
+        } else {
+          console.log(
+            "Something Went Wrong, We could not complete the request"
+          );
+          this.blockUI.stop();
+          this.toastrService.error(
+            err.statusText ||
+              "Something Went Wrong, We could not complete the request"
+          );
+        }
       }
     );
     // this.blockUI.stop();
