@@ -31,7 +31,6 @@ import { ReleasedComponent } from "./pages/released/released.component";
 import { MyaccountComponent } from "./pages/myaccount/myaccount.component";
 import { PaymentsComponent } from "./pages/payments/payments.component";
 import { DeliveriesComponent } from "./pages/deliveries/deliveries.component";
-import { UsersComponent } from "./pages/users/users.component";
 import { InvoicingComponent } from "./pages/invoicing/invoicing.component";
 import { HeaderComponent } from "./components/header/header.component";
 import { FooterComponent } from "./components/footer/footer.component";
@@ -44,10 +43,16 @@ import { StoreComponent } from "./pages/stores/store.component";
 import { CreateStoreComponent } from "./pages/stores/create/create.component";
 import { UpdateStoreComponent } from "./pages/stores/update/update.component";
 import { PendingComponent } from "./pages/pending/pending.component";
-import { CreateUserComponent } from "./pages/users/create/create.component";
 import { ApiService } from "./services/api.service";
 import { HomeComponent } from "./pages/home/home.component";
+import { UsersComponent } from "./pages/users/users.component";
+import { CreateUserComponent } from "./pages/users/create/create.component";
 import { UpdateUserComponent } from "./pages/users/update/update.component";
+
+import { LipalaterUsersComponent } from "./pages/internal-users/users.component";
+import { CreateLipalaterUserComponent } from "./pages/internal-users/create/create.component";
+import { UpdateLipalaterUserComponent } from "./pages/internal-users/update/update.component";
+
 import { ChangePasswordComponent } from "./pages/change-password/change-password.component";
 import { ForgotPasswordComponent } from "./pages/forgot-password/forgot-password.component";
 import { PickupComponent } from "./pages/collections/create/pickup.component";
@@ -65,6 +70,7 @@ import { StaffPickupComponent } from "./pages/collections/lipalater/pickup.compo
     PaymentsComponent,
     DeliveriesComponent,
     UsersComponent,
+    LipalaterUsersComponent,
     InvoicingComponent,
     HeaderComponent,
     FooterComponent,
@@ -80,7 +86,9 @@ import { StaffPickupComponent } from "./pages/collections/lipalater/pickup.compo
     CreateUserComponent,
     AlertComponent,
     HomeComponent,
+    UpdateLipalaterUserComponent,
     UpdateUserComponent,
+    CreateLipalaterUserComponent,
     ChangePasswordComponent,
     ForgotPasswordComponent,
     PickupComponent,

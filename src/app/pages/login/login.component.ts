@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     //authenticationService.logout();
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(["partners"]);
+      this.router.navigate(["dashboard"]);
     }
   }
 

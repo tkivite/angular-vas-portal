@@ -14,14 +14,14 @@ import { ToastrService } from "ngx-toastr";
 import { ApiService } from "../../../services/api.service";
 
 @Component({
-  selector: "app-create",
-  templateUrl: "./create.component.html",
-  encapsulation: ViewEncapsulation.None
+  selector: "app-update",
+  templateUrl: "./update.component.html",
+  styleUrls: ["./update.component.css"]
 })
-export class CreateUserComponent implements OnInit {
+export class UpdateLipalaterUserComponent implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
   public router: Router;
-  public userFormAdd: FormGroup;
+  public userFormEdit: FormGroup;
   public activeInactive: any;
   public currentActive: any = "DISABLED";
   public FormItem: FormArray;
@@ -29,6 +29,7 @@ export class CreateUserComponent implements OnInit {
   public storeOptions: any;
   public genderList: any;
   public roleList: any;
+  public editData: any;
 
   constructor(
     router: Router,
@@ -37,18 +38,18 @@ export class CreateUserComponent implements OnInit {
     public dataservice: ApiService
   ) {
     this.router = router;
-
+    this.editData = this.dataservice.EditFormData;
     this.genderList = [{ id: "1", name: "Male" }, { id: "2", name: "Female" }];
 
     this.roleList = [
-      { id: "1", name: "Store user" },
-      { id: "2", name: "Store admin" },
-      { id: "3", name: "Partner admin" }
+      { id: "1", name: "Lipalater admin" },
+      { id: "2", name: "Lipalater onboarding" },
+      { id: "3", name: "Lipalater delivery" }
     ];
 
     const namePattern = /^[a-zA-Z ']{2,45}$/;
     const kenyanMobileNoPattern = "^(254|0)(7([0-9]{8}))$";
-    this.dataservice.fetchData("stores/stores").subscribe(
+    this.dataservice.fetchData("stores/lipalater").subscribe(
       data => {
         if (data.status === 200) {
           console.log(data.body);
@@ -65,7 +66,7 @@ export class CreateUserComponent implements OnInit {
       }
     );
 
-    this.userFormAdd = fb.group({
+    this.userFormEdit = fb.group({
       firstname: new FormControl(
         "",
         Validators.compose([
@@ -93,7 +94,7 @@ export class CreateUserComponent implements OnInit {
         "",
         Validators.compose([
           Validators.minLength(6),
-          Validators.maxLength(12),
+          Validators.maxLength(10),
           Validators.required
         ])
       ),
@@ -106,6 +107,17 @@ export class CreateUserComponent implements OnInit {
       ),
       role: new FormControl("", Validators.compose([Validators.required])),
       store_id: new FormControl("", Validators.compose([Validators.required]))
+    });
+
+    this.userFormEdit.patchValue({
+      firstname: this.editData.firstname,
+      lastname: this.editData.lastname,
+      email: this.editData.email,
+      mobile: this.editData.mobile,
+      id_number: this.editData.id_number,
+      gender: this.editData.gender,
+      role: this.editData.role,
+      store_id: this.editData.store_id
     });
 
     this.activeInactive = "ENABLED";
@@ -121,51 +133,52 @@ export class CreateUserComponent implements OnInit {
     this.blockUI.stop();
   }
   get f() {
-    return this.userFormAdd.controls;
+    return this.userFormEdit.controls;
   }
   // Submitting Add Entity
   public onAddSubmit(form: FormGroup) {
     if (form.valid) {
       this.errorMessage = "SHOWERROR";
-      this.blockUI.start("Adding Business Organization");
+      this.blockUI.start("Updating User ..............");
 
       const postFormData = {
         email: form.value.email,
-        username: form.value.email,
         firstname: form.value.firstname,
         gender: form.value.gender,
         lastname: form.value.lastname,
         mobile: "+254" + form.value.mobile.slice(-9),
+        username: form.value.email,
         password: "Admin101",
         role: form.value.role,
         id_number: form.value.id_number,
-        store_id: form.value.store_id,
-        active_status: false
+        store_id: form.value.store_id
       };
-      this.dataservice.postData("users", postFormData).subscribe(
-        data => {
-          if (data.status === 201) {
-            this.router.navigate(["users"]);
-            this.blockUI.stop();
-            this.toastrService.success("User Record created successfully");
-          } else {
+      this.dataservice
+        .updateRecord("users", this.editData.id, postFormData)
+        .subscribe(
+          data => {
+            if (data.status === 200) {
+              this.router.navigate(["users"]);
+              this.blockUI.stop();
+              this.toastrService.success("User Record updated successfully");
+            } else {
+              this.blockUI.stop();
+              this.toastrService.error(
+                "Something Went Wrong, We could not complete the request"
+              );
+            }
+          },
+          err => {
+            console.log(
+              "Something Went Wrong, We could not complete the request"
+            );
+            console.log(err);
             this.blockUI.stop();
             this.toastrService.error(
               "Something Went Wrong, We could not complete the request"
             );
           }
-        },
-        err => {
-          console.log(
-            "Something Went Wrong, We could not complete the request"
-          );
-          console.log(err);
-          this.blockUI.stop();
-          this.toastrService.error(
-            "Something Went Wrong, We could not complete the request"
-          );
-        }
-      );
+        );
     } else {
       // console.log(form.errors);
       const invalid = [];

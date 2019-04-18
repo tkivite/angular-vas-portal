@@ -12,10 +12,10 @@ import * as $ from "jquery";
 
 @Component({
   selector: "app-users",
-  templateUrl: "./users.component.html",
-  styleUrls: ["./users.component.css"]
+  templateUrl: "./lipalater-users.component.html",
+  styleUrls: ["./lipalater-users.component.css"]
 })
-export class UsersComponent implements OnInit {
+export class LipalaterUsersComponent implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
   public router: Router;
   public data = [];
@@ -62,7 +62,7 @@ export class UsersComponent implements OnInit {
     this.blockUI.start("Loading Users .............");
 
     this.loadingIndicator = true;
-    this.dataservice.fetchData("users/stores").subscribe(
+    this.dataservice.fetchData("users/lipalater").subscribe(
       data => {
         if (data.status === 200) {
           console.log(data.body);
@@ -89,7 +89,7 @@ export class UsersComponent implements OnInit {
   onEdit(data) {
     console.log(data);
     this.dataservice.EditFormData = data;
-    this.router.navigate(["users/update"]);
+    this.router.navigate(["lipalater-users/update"]);
   }
   onDelete(record) {
     this.confirmationDialogService

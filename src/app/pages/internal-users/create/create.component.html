@@ -26,7 +26,7 @@
         <div id="cccform" class="container">
           <div class="row form-heading">
             <div class="col-md-1"></div>
-            <h4 class="col-md-11">Updating Store User</h4>
+            <h4 class="col-md-11">Adding Internal User</h4>
           </div>
           <hr>
           <div class="row">
@@ -34,7 +34,7 @@
 
             <div class="col-md-1"></div>
 
-            <form autocomplete="off" [formGroup]="userFormEdit" (ngSubmit)="onAddSubmit(userFormEdit)"
+            <form autocomplete="off" [formGroup]="userFormAdd" (ngSubmit)="onAddSubmit(userFormAdd)"
               class="col-md-11 form-horizontal">
 
 
@@ -45,16 +45,16 @@
                   <input formControlName="firstname" class="form-control validation-field" placeholder="First Name"
                     type="text">
                   <small class="text-danger"
-                    *ngIf="userFormEdit.get('firstname').touched && userFormEdit.get('firstname').hasError('required')">First
+                    *ngIf="userFormAdd.get('firstname').touched && userFormAdd.get('firstname').hasError('required')">First
                     Name is required</small>
                   <small class="text-danger"
-                    *ngIf="userFormEdit.get('firstname').touched && userFormEdit.get('firstname').hasError('pattern')">Invalid
+                    *ngIf="userFormAdd.get('firstname').touched && userFormAdd.get('firstname').hasError('pattern')">Invalid
                     First Name</small>
                   <small class="text-danger"
-                    *ngIf="userFormEdit.get('firstname').touched && userFormEdit.get('firstname').hasError('minlength')">First
+                    *ngIf="userFormAdd.get('firstname').touched && userFormAdd.get('firstname').hasError('minlength')">First
                     Name should be at least 3 characters</small>
                   <small class="text-danger"
-                    *ngIf="userFormEdit.get('firstname').touched && userFormEdit.get('firstname').hasError('maxlength')">First
+                    *ngIf="userFormAdd.get('firstname').touched && userFormAdd.get('firstname').hasError('maxlength')">First
                     Name should be at most 45 characters</small>
                 </div>
               </div>
@@ -65,16 +65,16 @@
                   <input formControlName="lastname" class="form-control validation-field" placeholder="Last Name"
                     type="text">
                   <small class="text-danger"
-                    *ngIf="userFormEdit.get('lastname').touched && userFormEdit.get('lastname').hasError('required')">Last
+                    *ngIf="userFormAdd.get('lastname').touched && userFormAdd.get('lastname').hasError('required')">Last
                     Name is required</small>
                   <small class="text-danger"
-                    *ngIf="userFormEdit.get('lastname').touched && userFormEdit.get('lastname').hasError('pattern')">Invalid
+                    *ngIf="userFormAdd.get('lastname').touched && userFormAdd.get('lastname').hasError('pattern')">Invalid
                     Last Name</small>
                   <small class="text-danger"
-                    *ngIf="userFormEdit.get('lastname').touched && userFormEdit.get('lastname').hasError('minlength')">Last
+                    *ngIf="userFormAdd.get('lastname').touched && userFormAdd.get('lastname').hasError('minlength')">Last
                     Name should be at least 3 characters</small>
                   <small class="text-danger"
-                    *ngIf="userFormEdit.get('lastname').touched && userFormEdit.get('lastname').hasError('maxlength')">Last
+                    *ngIf="userFormAdd.get('lastname').touched && userFormAdd.get('lastname').hasError('maxlength')">Last
                     Name should be at most 45 characters</small>
                 </div>
               </div>
@@ -83,10 +83,10 @@
                             <label class="control-label col-sm-3" for="inputName">User Name</label>
                                                          <div class="col-sm-7">
                             <input formControlName="userName" class="form-control validation-field" placeholder="User Name" type="text">
-                            <small class="text-danger" *ngIf="userFormEdit.get('userName').touched && userFormEdit.get('userName').hasError('required')">User Name is required</small>
-                            <small class="text-danger" *ngIf="userFormEdit.get('userName').touched && userFormEdit.get('userName').hasError('pattern')">Invalid User Name</small>
-                            <small class="text-danger" *ngIf="userFormEdit.get('userName').touched && userFormEdit.get('userName').hasError('minlength')">Last Name should be at least 3 characters</small>
-                            <small class="text-danger" *ngIf="userFormEdit.get('userName').touched && userFormEdit.get('userName').hasError('maxlength')">Last Name should be at most 45 characters</small>
+                            <small class="text-danger" *ngIf="userFormAdd.get('userName').touched && userFormAdd.get('userName').hasError('required')">User Name is required</small>
+                            <small class="text-danger" *ngIf="userFormAdd.get('userName').touched && userFormAdd.get('userName').hasError('pattern')">Invalid User Name</small>
+                            <small class="text-danger" *ngIf="userFormAdd.get('userName').touched && userFormAdd.get('userName').hasError('minlength')">Last Name should be at least 3 characters</small>
+                            <small class="text-danger" *ngIf="userFormAdd.get('userName').touched && userFormAdd.get('userName').hasError('maxlength')">Last Name should be at most 45 characters</small>
                         </div>
                     </div>-->
               <div class="row form-group">
@@ -95,11 +95,11 @@
                 <div class="col-sm-7">
                   <input formControlName="email" class="form-control validation-field" placeholder="Email" type="email">
                   <small class="text-danger"
-                    *ngIf="userFormEdit.get('email').touched && userFormEdit.get('email').hasError('required')">Email is
+                    *ngIf="userFormAdd.get('email').touched && userFormAdd.get('email').hasError('required')">Email is
                     required</small>
                   <small class="text-danger"
-                    *ngIf="userFormEdit.get('email').touched && userFormEdit.get('email').hasError('email')">Invalid
-                    email address</small>
+                    *ngIf="userFormAdd.get('email').touched && userFormAdd.get('email').hasError('email')">Invalid email
+                    address</small>
                 </div>
               </div>
 
@@ -110,10 +110,10 @@
                   <input formControlName="id_number" class="form-control validation-field" placeholder="Id Number"
                     type="id_number">
                   <small class="text-danger"
-                    *ngIf="userFormEdit.get('id_number').touched && userFormEdit.get('id_number').hasError('required')">Id
+                    *ngIf="userFormAdd.get('id_number').touched && userFormAdd.get('id_number').hasError('required')">Id
                     Number is required</small>
                   <small class="text-danger"
-                    *ngIf="userFormEdit.get('id_number').touched && userFormEdit.get('id_number').hasError('id_number')">Id
+                    *ngIf="userFormAdd.get('id_number').touched && userFormAdd.get('id_number').hasError('id_number')">Id
                     Number</small>
                 </div>
               </div>
@@ -124,10 +124,10 @@
                   <input formControlName="mobile" class="form-control validation-field" placeholder="Phone Number"
                     type="text">
                   <small class="text-danger"
-                    *ngIf="userFormEdit.get('mobile').touched && userFormEdit.get('mobile').hasError('required')">Phone
+                    *ngIf="userFormAdd.get('mobile').touched && userFormAdd.get('mobile').hasError('required')">Phone
                     Number is required</small>
                   <small class="text-danger"
-                    *ngIf="userFormEdit.get('mobile').touched && userFormEdit.get('mobile').hasError('pattern')">Format
+                    *ngIf="userFormAdd.get('mobile').touched && userFormAdd.get('mobile').hasError('pattern')">Format
                     should be either 2547XXXXXXX or 07XXXXXXXX</small>
                 </div>
               </div>
@@ -137,10 +137,10 @@
                 <div class="col-sm-7">
                   <select formControlName="gender" class="form-control validation-field">
                     <option value="">Select Gender</option>
-                    <option *ngFor="let o of genderList" [value]="o.id">{{o.name}}</option>
+                    <option *ngFor="let o of genderList" [value]="o.name">{{o.name}}</option>
                   </select>
                   <small class="text-danger"
-                    *ngIf="userFormEdit.get('gender').touched && userFormEdit.get('gender').hasError('required')">Gender
+                    *ngIf="userFormAdd.get('gender').touched && userFormAdd.get('gender').hasError('required')">Gender
                     is required</small>
                 </div>
               </div>
@@ -154,7 +154,7 @@
                     <option *ngFor="let o of storeOptions" [value]="o.id">{{o.name}}</option>
                   </select>
                   <small class="text-danger"
-                    *ngIf="userFormEdit.get('store_id').touched && userFormEdit.get('store_id').hasError('required')">Store
+                    *ngIf="userFormAdd.get('store_id').touched && userFormAdd.get('store_id').hasError('required')">Store
                     is required</small>
                 </div>
               </div>
@@ -166,14 +166,14 @@
                     <option *ngFor="let o of roleList" [value]="o.name">{{o.name}}</option>
                   </select>
                   <small class="text-danger"
-                    *ngIf="userFormEdit.get('role').touched && userFormEdit.get('role').hasError('required')">Language
-                    is required</small>
+                    *ngIf="userFormAdd.get('role').touched && userFormAdd.get('role').hasError('required')">Language is
+                    required</small>
                 </div>
               </div>
 
 
               <!---   <div class="row align-roles-right">
-                    <button [disabled]="!userFormEdit.valid" class="btn btn-danger" type="submit">Submit</button>
+                    <button [disabled]="!userFormAdd.valid" class="btn btn-danger" type="submit">Submit</button>
                 </div>-->
               <div class="row form-group">
                 <div class="col-sm-3"></div>
@@ -181,7 +181,7 @@
                   <div class="float-right ">
                     <button class="btn btn-danger " type="cancel" style="margin-right: 10px;
     min-width: 100px;" routerLink="/users/">Cancel</button>
-                    <button [disabled]="userFormEdit.invalid" class="btn btn-success " type="submit"
+                    <button [disabled]="userFormAdd.invalid" class="btn btn-success " type="submit"
                       style="min-width: 100px;">Submit</button>
                   </div>
                 </div>
