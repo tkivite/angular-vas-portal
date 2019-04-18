@@ -62,6 +62,10 @@ export class DashboardComponent implements OnInit {
         if (data.status === 200) {
           console.log(data.body);
           this.data = data.body;
+          this.partners = data.body.partners;
+          this.stores = data.body.stores;
+          this.store_users = data.body.store_users;
+          this.internal_users = data.body.internal_users;
           this.getSales();
           this.blockUI.stop();
         } else {
@@ -89,6 +93,13 @@ export class DashboardComponent implements OnInit {
         if (data.status === 200) {
           console.log(data.body);
           this.sales = data.body;
+          this.pending = data.body.pending;
+          this.collected = data.body.collected;
+          this.pending_count = data.body.pending_count;
+          this.pending_value = data.body.pending_value;
+          this.collected_count = data.body.collected_count;
+          this.collected_value = data.body.collected_value;
+
           this.blockUI.stop();
         } else {
           this.toastrService.error(
