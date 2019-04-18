@@ -20,6 +20,17 @@ export class DashboardComponent implements OnInit {
   public noDataDisplay: any = { emptyMessage: "No data to display" };
   public recordCount = 0;
 
+  partners: any;
+  stores: any;
+  store_users: any;
+  internal_users: any;
+  collected: any;
+  pending: any;
+  collected_count: any;
+  pending_count: any;
+  collected_value: any;
+  pending_value: any;
+
   loadingIndicator: any = false;
   title = "angulardatatables";
   dtOptions: DataTables.Settings = {};
