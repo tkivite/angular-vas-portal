@@ -6,7 +6,6 @@ import { NotificationsComponent } from "./pages/notifications/notifications.comp
 import { CollectionsComponent } from "./pages/collections/collections.component";
 import { ReleasedComponent } from "./pages/released/released.component";
 import { PaymentsComponent } from "./pages/payments/payments.component";
-import { UsersComponent } from "./pages/users/users.component";
 import { DeliveriesComponent } from "./pages/deliveries/deliveries.component";
 import { MyaccountComponent } from "./pages/myaccount/myaccount.component";
 import { InvoicingComponent } from "./pages/invoicing/invoicing.component";
@@ -19,8 +18,14 @@ import { UpdateStoreComponent } from "./pages/stores/update/update.component";
 import { PendingComponent } from "./pages/pending/pending.component";
 import { AuthGuard } from "./guards";
 import { LoginComponent } from "./pages/login/login.component";
+import { UsersComponent } from "./pages/users/users.component";
 import { CreateUserComponent } from "./pages/users/create/create.component";
 import { UpdateUserComponent } from "./pages/users/update/update.component";
+
+import { LipalaterUsersComponent } from "./pages/internal-users/users.component";
+import { CreateLipalaterUserComponent } from "./pages/internal-users/create/create.component";
+import { UpdateLipalaterUserComponent } from "./pages/internal-users/update/update.component";
+
 import { ChangePasswordComponent } from "./pages/change-password/change-password.component";
 import { ForgotPasswordComponent } from "./pages/forgot-password/forgot-password.component";
 import { PickupComponent } from "./pages/collections/create/pickup.component";
@@ -52,6 +57,11 @@ const routes: Routes = [
   { path: "users", component: UsersComponent },
   { path: "users/create", component: CreateUserComponent },
   { path: "users/update", component: UpdateUserComponent },
+
+  { path: "lipalater-users", component: LipalaterUsersComponent },
+  { path: "lipalater-users/create", component: CreateLipalaterUserComponent },
+  { path: "lipalater-users/update", component: UpdateLipalaterUserComponent },
+
   { path: "deliveries", component: DeliveriesComponent },
   { path: "myaccount", component: MyaccountComponent },
   { path: "invoicing", component: InvoicingComponent }
