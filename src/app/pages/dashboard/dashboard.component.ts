@@ -35,6 +35,7 @@ export class DashboardComponent implements OnInit {
 
     if (!this.authenticationService.currentUserValue) {
       this.router.navigate(["login"]);
+    } else {
     }
   }
   ngOnInit() {
@@ -42,7 +43,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getData() {
-    this.blockUI.start("Loading dashboaed");
+    this.blockUI.start("Loading dashboard");
 
     this.loadingIndicator = true;
     this.dataservice.fetchData("dashboard/onboarding").subscribe(
