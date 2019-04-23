@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
   public currentActive: any = "GRID";
   public noDataDisplay: any = { emptyMessage: "No data to display" };
   public recordCount = 0;
+  reloadAttempts = 0;
 
   loadingIndicator: any = false;
   title = "angulardatatables";
