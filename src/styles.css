@@ -4,6 +4,7 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import '~font-awesome/css/font-awesome.css';
 @import '~ngx-toastr/toastr.css';
+@import '~intl-tel-input/build/css/intlTelInput.css';
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -582,4 +583,8 @@ ngb-tabset>.nav-tabs {
 
 .btn-info {
   color: #fff !important;
+}
+
+.intl-tel-input {
+  width: 100%;
 }

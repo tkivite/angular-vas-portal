@@ -39,7 +39,8 @@ export class UpdateStoreComponent implements OnInit {
     this.router = router;
     this.editData = this.dataservice.EditFormData;
     const namePattern = /^[a-zA-Z ']{2,45}$/;
-    const kenyanMobileNoPattern = "^(254|0)(7([0-9]{8}))$";
+    // const kenyanMobileNoPattern = "^(254|0)(7([0-9]{8}))$";
+    const kenyanMobileNoPattern = /^\+(?:[0-9] ?){11,14}[0-9]$/;
     const kenyanTillNoPattern = /^[0-9]{5,7}$/;
 
     this.storeFormEdit = fb.group({
@@ -74,19 +75,10 @@ export class UpdateStoreComponent implements OnInit {
         "",
         Validators.compose([Validators.required, CustomValidators.email])
       ],
-      storeManagerMobile: [
-        "",
-        Validators.compose([
-          Validators.required,
-          Validators.pattern(kenyanMobileNoPattern)
-        ])
-      ],
+      storeManagerMobile: ["", Validators.compose([Validators.required])],
       storeContact: ["", Validators.compose([Validators.pattern(namePattern)])],
       storeContactEmail: ["", Validators.compose([CustomValidators.email])],
-      storeContactMobile: [
-        "",
-        Validators.compose([Validators.pattern(kenyanMobileNoPattern)])
-      ],
+      storeContactMobile: [""],
       storeBank: ["", Validators.compose([Validators.pattern(namePattern)])],
       storeBankAccountName: [
         "",
@@ -117,10 +109,10 @@ export class UpdateStoreComponent implements OnInit {
       storeLocation: this.editData.location,
       storeManager: this.editData.manager,
       storeManagerEmail: this.editData.manager_email,
-      storeManagerMobile: this.editData.manager_phone.slice(-12),
+      storeManagerMobile: this.editData.manager_phone,
       storeContact: this.editData.contact_person,
       storeContactEmail: this.editData.contact_person_email,
-      storeContactMobile: this.editData.contact_person_mobile.slice(-12),
+      storeContactMobile: this.editData.contact_person_mobile,
       storeDisburseEmail: this.editData.disburse_email,
       storeDisburseEmail1: this.editData.disburse_email_cc1,
       storeDisburseEmail2: this.editData.disburse_email_cc2,
@@ -182,10 +174,11 @@ export class UpdateStoreComponent implements OnInit {
         location: form.value.storeLocation,
         manager: form.value.storeManager,
         manager_email: form.value.storeManagerEmail,
-        manager_phone: "+254" + form.value.storeManagerMobile.slice(-9),
+        manager_phone: form.value.storeManagerMobile.internationalNumber,
         contact_person: form.value.storeContact,
         contact_person_email: form.value.storeContactEmail,
-        contact_person_mobile: "+254" + form.value.storeContactMobile.slice(-9),
+        contact_person_mobile:
+          form.value.storeContactMobile.internationalNumber,
         disburse_email: form.value.storeDisburseEmail,
         disburse_email_cc1: form.value.storeDisburseEmail1,
         disburse_email_cc2: form.value.storeDisburseEmail2,

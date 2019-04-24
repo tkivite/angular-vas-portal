@@ -121,16 +121,33 @@
 
                 <label class="control-label col-sm-3" for="inputName">Phone Number</label>
                 <div class="col-sm-7">
-                  <input formControlName="mobile" class="form-control validation-field" placeholder="Phone Number"
-                    type="text">
-                  <small class="text-danger"
-                    *ngIf="userFormAdd.get('mobile').touched && userFormAdd.get('mobile').hasError('required')">Phone
-                    Number is required</small>
-                  <small class="text-danger"
-                    *ngIf="userFormAdd.get('mobile').touched && userFormAdd.get('mobile').hasError('pattern')">Format
-                    should be either 2547XXXXXXX or 07XXXXXXXX</small>
+
+                  <ngx-intl-tel-input [cssClass]="' custom form-control '" [preferredCountries]="['ke', 'rw']"
+                    placeholder="722XXXXXX" [enableAutoCountrySelect]="true" name="phone" formControlName="mobile">
+                  </ngx-intl-tel-input>
+                  <small class="text-danger" *ngIf="userFormAdd.get('mobile').invalid">Phone
+                    Number Format should be 7XXXXXXXX </small>
+
+
+
                 </div>
               </div>
+              <div class="row form-group">
+
+                <label class="control-label col-sm-3" for="inputName"></label>
+                <div class="col-sm-7">
+
+                  <input value={{userFormAdd.value.mobile.internationalNumber}} readonly
+                    class="form-control validation-field">
+
+
+                </div>
+              </div>
+
+
+
+
+
               <div class="row form-group">
 
                 <label class="control-label col-sm-3" for="inputContacts">Gender</label>
@@ -147,7 +164,7 @@
 
               <div class="row form-group">
 
-                <label class="control-label col-sm-3" for="inputContacts">Store</label>
+                <label class="control-label col-sm-3" for="inputContacts">Branch</label>
                 <div class="col-sm-7">
                   <select formControlName="store_id" class="form-control validation-field">
                     <option value="">Select Store</option>

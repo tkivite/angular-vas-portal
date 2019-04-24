@@ -264,26 +264,29 @@
                       </div>
                     </div>
 
-
-
                     <div class="row form-group">
                       <label class="control-label col-sm-3" for="title"> <span class="float-right"> Manager Mobile:
                         </span> </label>
                       <div class="col-sm-7">
-                        <input type="text" formControlName="storeManagerMobile" class="form-control"
-                          [ngClass]="{ 'is-invalid': submitted && f.storeManagerMobile.errors }"
-                          placeholder="manager phone number 2547......." />
+                        <ngx-intl-tel-input [cssClass]="' custom form-control '" [preferredCountries]="['ke', 'rw']"
+                          [enablePlaceholder]="true" [enableAutoCountrySelect]="true" name="phone"
+                          formControlName="storeManagerMobile">
+                        </ngx-intl-tel-input>
                         <div *ngIf="submitted && f.storeManagerMobile.errors" class="invalid-feedback">
                           <div *ngIf="f.storeManagerMobile.errors.required">Mobile is required</div>
                         </div>
                         <small class="text-danger"
-                          *ngIf="storeFormEdit.get('storeManagerMobile').touched && storeFormEdit.get('storeManagerMobile').hasError('required')">Manager
+                          *ngIf="storeFormAdd.get('storeManagerMobile').touched && storeFormAdd.get('storeManagerMobile').hasError('required')">Manager
                           Mobile is required</small>
                         <small class="text-danger"
-                          *ngIf="storeFormEdit.get('storeManagerMobile').touched && storeFormEdit.get('storeManagerMobile').hasError('pattern')">Invalid
+                          *ngIf="storeFormAdd.get('storeManagerMobile').touched && storeFormAdd.get('storeManagerMobile').hasError('pattern')">Invalid
                           Mobile Number </small>
                       </div>
                     </div>
+
+
+
+
 
                     <div class="row form-group">
                       <label class="control-label col-sm-3" for="title"> <span class="float-right"> Email:
@@ -328,20 +331,29 @@
 
                     <div class="row form-group">
                       <label class="control-label col-sm-3" for="title"> <span class="float-right"> Contact Person
-                          Mobile: </span> </label>
+                          Mobile:
+                        </span> </label>
                       <div class="col-sm-7">
-                        <input type="text" formControlName="storeContactMobile" class="form-control"
-                          [ngClass]="{ 'is-invalid': submitted && f.storeContactMobile.errors }"
-                          placeholder="contact person phone number 2547......." />
-                        <div *ngIf="submitted && f.storeContactMobile.errors" class="invalid-feedback">
-                          <div *ngIf="f.storeContactMobile.errors.required">Mobile is required</div>
-                        </div>
-                        <small class="text-danger"
-                          *ngIf="storeFormEdit.get('storeContactMobile').touched && storeFormEdit.get('storeContactMobile').hasError('required')">Contact
-                          Person Mobile is required</small>
-                        <small class="text-danger"
-                          *ngIf="storeFormEdit.get('storeContactMobile').touched && storeFormEdit.get('storeContactMobile').hasError('pattern')">Invalid
-                          Mobile Number </small>
+                        <ngx-intl-tel-input [cssClass]="' custom form-control '" [preferredCountries]="['ke', 'rw']"
+                          [enablePlaceholder]="true" [enableAutoCountrySelect]="true" name="phone"
+                          formControlName="storeContactMobile">
+                        </ngx-intl-tel-input>
+                        <small class="text-danger" *ngIf="storeFormEdit.get('storeContactMobile').invalid">Phone
+                          Number Format should be 7XXXXXXXX </small>
+
+
+
+                      </div>
+                    </div>
+                    <div class="row form-group">
+
+                      <label class="control-label col-sm-3" for="inputName"></label>
+                      <div class="col-sm-7">
+
+                        <input value={{storeFormEdit.value.storeContactMobile.internationalNumber}} readonly
+                          class="form-control validation-field">
+
+
                       </div>
                     </div>
 

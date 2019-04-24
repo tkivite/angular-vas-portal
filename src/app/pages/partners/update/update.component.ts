@@ -42,7 +42,8 @@ export class UpdateBeComponent implements OnInit {
   ) {
     this.router = router;
     const namePattern = /^[a-zA-Z ']{2,45}$/;
-    const kenyanMobileNoPattern = "^(254|0)(7([0-9]{8}))$";
+    //const kenyanMobileNoPattern = "^(254|0)(7([0-9]{8}))$";
+    const kenyanMobileNoPattern = /^\+(?:[0-9] ?){11,14}[0-9]$/;
     this.editData = this.dataservice.EditFormData;
     console.log(this.editData);
 
@@ -103,13 +104,7 @@ export class UpdateBeComponent implements OnInit {
         Validators.compose([Validators.required, CustomValidators.email])
       ],
       orgTelephone: [""],
-      orgMobile: [
-        "",
-        Validators.compose([
-          Validators.required,
-          Validators.pattern(kenyanMobileNoPattern)
-        ])
-      ],
+      orgMobile: ["", Validators.compose([Validators.required])],
       orgYearsOfOperation: [
         "",
         Validators.compose([Validators.required, CustomValidators.number])
@@ -126,7 +121,7 @@ export class UpdateBeComponent implements OnInit {
       orgLocation: this.editData.location,
       orgEmail: this.editData.email,
       orgTelephone: this.editData.telephone,
-      orgMobile: this.editData.mobile.slice(-12),
+      orgMobile: this.editData.mobile,
       orgYearsOfOperation: this.editData.year_of_incorporation,
       orgSpeciality: this.editData.speciality,
       accountManager: this.editData.account_manager,
@@ -160,7 +155,7 @@ export class UpdateBeComponent implements OnInit {
         email: form.value.orgEmail,
         location: form.value.orgLocation,
         telephone: form.value.orgTelephone,
-        mobile: "+254" + form.value.orgMobile.slice(-9),
+        mobile: form.value.orgMobile.internationalNumber,
         year_of_incorporation: form.value.orgYearsOfOperation,
         name: form.value.orgName,
         speciality: this.selectedSpeciality

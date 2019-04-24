@@ -57,7 +57,7 @@
               </div>
 
 
-              <div class="row form-group">
+              <!--div class="row form-group">
                 <label class="control-label col-sm-3" for="title"> <span class="float-right"> Mobile: </span> </label>
                 <div class="col-sm-7">
                   <input type="text" formControlName="orgMobile" class="form-control"
@@ -72,6 +72,34 @@
                   <small class="text-danger"
                     *ngIf="beFormAdd.get('orgMobile').touched && beFormAdd.get('orgMobile').hasError('pattern')">Invalid
                     Mobile Number </small>
+                </div>
+              </div-->
+
+              <div class="row form-group">
+                <label class="control-label col-sm-3" for="title"> <span class="float-right"> Mobile: </span> </label>
+                <div class="col-sm-7">
+
+                  <ngx-intl-tel-input [cssClass]="' custom form-control '" [preferredCountries]="['ke', 'rw']"
+                    [enablePlaceholder]="true" [enableAutoCountrySelect]="true" name="phone"
+                    formControlName="orgMobile">
+                  </ngx-intl-tel-input>
+
+                  <small class="text-danger" *ngIf="beFormAdd.get('orgMobile').invalid">Phone
+                    Number Format should be 7XXXXXXXX </small>
+
+
+
+                </div>
+              </div>
+              <div class="row form-group">
+
+                <label class="control-label col-sm-3" for="inputName"></label>
+                <div class="col-sm-7">
+
+                  <input value={{beFormAdd.value.orgMobile.internationalNumber}} readonly
+                    class="form-control validation-field">
+
+
                 </div>
               </div>
 
