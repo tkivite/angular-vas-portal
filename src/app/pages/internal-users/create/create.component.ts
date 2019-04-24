@@ -47,7 +47,7 @@ export class CreateLipalaterUserComponent implements OnInit {
     ];
 
     const namePattern = /^[a-zA-Z ']{2,45}$/;
-    const kenyanMobileNoPattern = "^(254|0)(7([0-9]{8}))$";
+    const kenyanMobileNoPattern = /^\+(?:[0-9] ?){6,14}[0-9]$/;
     this.dataservice.fetchData("stores/lipalater").subscribe(
       data => {
         if (data.status === 200) {
@@ -97,13 +97,7 @@ export class CreateLipalaterUserComponent implements OnInit {
           Validators.required
         ])
       ),
-      mobile: new FormControl(
-        "",
-        Validators.compose([
-          Validators.pattern("^(254|0)(7([0-9]{8}))$"),
-          Validators.required
-        ])
-      ),
+      mobile: new FormControl("", Validators.compose([Validators.required])),
       role: new FormControl("", Validators.compose([Validators.required])),
       store_id: new FormControl("", Validators.compose([Validators.required]))
     });
@@ -135,7 +129,7 @@ export class CreateLipalaterUserComponent implements OnInit {
         firstname: form.value.firstname,
         gender: form.value.gender,
         lastname: form.value.lastname,
-        mobile: "+254" + form.value.mobile.slice(-9),
+        mobile: form.value.mobile.internationalNumber,
         password: "Admin101",
         role: form.value.role,
         id_number: form.value.id_number,

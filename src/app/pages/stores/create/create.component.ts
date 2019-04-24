@@ -36,7 +36,8 @@ export class CreateStoreComponent implements OnInit {
   ) {
     this.router = router;
     const namePattern = /^[a-zA-Z ']{2,45}$/;
-    const kenyanMobileNoPattern = "^(254|0)(7([0-9]{8}))$";
+    //const kenyanMobileNoPattern = "^(254|0)(7([0-9]{8}))$";
+    const kenyanMobileNoPattern = /^\+(?:[0-9] ?){11,14}[0-9]$/;
     const kenyanTillNoPattern = /^[0-9]{5,7}$/;
 
     this.dataservice.fetchData("partners").subscribe(
@@ -88,19 +89,10 @@ export class CreateStoreComponent implements OnInit {
         "",
         Validators.compose([Validators.required, CustomValidators.email])
       ],
-      storeManagerMobile: [
-        "",
-        Validators.compose([
-          Validators.required,
-          Validators.pattern(kenyanMobileNoPattern)
-        ])
-      ],
+      storeManagerMobile: ["", Validators.compose([Validators.required])],
       storeContact: ["", Validators.compose([Validators.pattern(namePattern)])],
       storeContactEmail: ["", Validators.compose([CustomValidators.email])],
-      storeContactMobile: [
-        "",
-        Validators.compose([Validators.pattern(kenyanMobileNoPattern)])
-      ],
+      storeContactMobile: [""],
       storeBank: ["", Validators.compose([Validators.pattern(namePattern)])],
       storeBankAccountName: [
         "",
@@ -151,10 +143,11 @@ export class CreateStoreComponent implements OnInit {
         location: form.value.storeLocation,
         manager: form.value.storeManager,
         manager_email: form.value.storeManagerEmail,
-        manager_phone: "+254" + form.value.storeManagerMobile.slice(-9),
+        manager_phone: form.value.storeManagerMobile.internationalNumber,
         contact_person: form.value.storeContact,
         contact_person_email: form.value.storeContactEmail,
-        contact_person_mobile: "+254" + form.value.storeContactMobile.slice(-9),
+        contact_person_mobile:
+          form.value.storeContactMobile.internationalNumber,
         disburse_email: form.value.storeDisburseEmail,
         disburse_email_cc1: form.value.storeDisburseEmail1,
         disburse_email_cc2: form.value.storeDisburseEmail2,

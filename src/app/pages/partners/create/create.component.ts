@@ -41,7 +41,8 @@ export class CreateBeComponent implements OnInit {
   ) {
     this.router = router;
     const namePattern = /^[a-zA-Z ']{2,45}$/;
-    const kenyanMobileNoPattern = "^(254|0)(7([0-9]{8}))$";
+    //const kenyanMobileNoPattern = "^(254|0)(7([0-9]{8}))$";
+    const kenyanMobileNoPattern = /^\+(?:[0-9] ?){11,14}[0-9]$/;
 
     this.specialityOptions = [
       { speciality_id: "1", speciality_name: "Electronics" },
@@ -91,13 +92,7 @@ export class CreateBeComponent implements OnInit {
         Validators.compose([Validators.required, CustomValidators.email])
       ],
       orgTelephone: [""],
-      orgMobile: [
-        "",
-        Validators.compose([
-          Validators.required,
-          Validators.pattern(kenyanMobileNoPattern)
-        ])
-      ],
+      orgMobile: ["", Validators.compose([Validators.required])],
       orgYearsOfOperation: [
         "",
         Validators.compose([Validators.required, CustomValidators.number])
@@ -134,7 +129,7 @@ export class CreateBeComponent implements OnInit {
         email: form.value.orgEmail,
         location: form.value.orgLocation,
         telephone: form.value.orgTelephone,
-        mobile: "+254" + form.value.orgMobile.slice(-9),
+        mobile: form.value.orgMobile.internationalNumber,
         year_of_incorporation: form.value.orgYearsOfOperation,
         name: form.value.orgName,
         speciality: this.selectedSpeciality

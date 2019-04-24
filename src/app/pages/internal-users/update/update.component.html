@@ -117,18 +117,35 @@
                     Number</small>
                 </div>
               </div>
+
+
               <div class="row form-group">
 
                 <label class="control-label col-sm-3" for="inputName">Phone Number</label>
                 <div class="col-sm-7">
-                  <input formControlName="mobile" class="form-control validation-field" placeholder="Phone Number"
-                    type="text">
+
+                  <ngx-intl-tel-input [cssClass]="' custom form-control '" [preferredCountries]="['ke', 'rw']"
+                    [enablePlaceholder]="true" [enableAutoCountrySelect]="true" name="mobile" formControlName="mobile">
+                  </ngx-intl-tel-input>
                   <small class="text-danger"
                     *ngIf="userFormEdit.get('mobile').touched && userFormEdit.get('mobile').hasError('required')">Phone
                     Number is required</small>
-                  <small class="text-danger"
-                    *ngIf="userFormEdit.get('mobile').touched && userFormEdit.get('mobile').hasError('pattern')">Format
-                    should be either 2547XXXXXXX or 07XXXXXXXX</small>
+                  <small class="text-danger" *ngIf="userFormEdit.get('mobile').invalid">Phone
+                    Number Format should be 7XXXXXXXX </small>
+
+
+
+                </div>
+              </div>
+              <div class="row form-group">
+
+                <label class="control-label col-sm-3" for="inputName"></label>
+                <div class="col-sm-7">
+
+                  <input value={{userFormEdit.value.mobile.internationalNumber}} readonly
+                    class="form-control validation-field">
+
+
                 </div>
               </div>
               <div class="row form-group">

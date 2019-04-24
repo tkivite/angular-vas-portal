@@ -2,6 +2,8 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { AngularFontAwesomeModule } from "angular-font-awesome";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { BsDropdownModule } from "ngx-bootstrap";
+import { NgxIntlTelInputModule } from "ngx-intl-tel-input";
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DataTablesModule } from "angular-datatables";
@@ -109,6 +111,8 @@ import { StaffPickupComponent } from "./pages/collections/lipalater/pickup.compo
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(),
     NgMultiSelectDropDownModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    NgxIntlTelInputModule,
     AppRoutingModule
   ],
   providers: [
