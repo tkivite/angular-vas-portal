@@ -512,7 +512,7 @@ app-dashboard {
 
 .widget-controls,
 .card-header {
-  margin-bottom: 10px !important;
+  margin-bottom: 20px !important;
 }
 
 .card-header {
@@ -582,4 +582,34 @@ ngb-tabset>.nav-tabs {
 
 .btn-info {
   color: #fff !important;
+}
+
+.has-search .form-control {
+  padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: #aaa;
+}
+
+.pagination {
+  float: right !important;
+}
+
+.search-input {
+  border-color: cadetblue !important;
+}
+
+.search-box {
+  float: right;
+  width: 50px;
+
 }
