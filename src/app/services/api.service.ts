@@ -24,8 +24,8 @@ export class ApiService {
       });
     });
   }
-  //baseUrl = "/api/";
-  baseUrl = "https://partner-portal-backend.herokuapp.com/";
+  baseUrl = "/api/";
+  //baseUrl = "https://partner-portal-backend.herokuapp.com/";
   fetchData(resource, searchKey = "", page = 1): Observable<any> {
     return this.http.get<any>(
       this.baseUrl + resource + "?searchkey=" + searchKey + "&page=" + page,
