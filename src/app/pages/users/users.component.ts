@@ -9,6 +9,7 @@ import { AuthenticationService } from "../../services/authentication.service";
 import { ConfirmationDialogService } from "../../services/confirmation-dialog/confirmation-dialog.service";
 
 import * as $ from "jquery";
+import "datatables.net";
 
 @Component({
   selector: "app-users",
@@ -23,6 +24,12 @@ export class UsersComponent implements OnInit {
   public noDataDisplay: any = { emptyMessage: "No data to display" };
   public recordCount = 0;
   currentUser: any;
+
+  searchKey = "";
+  /* currentPage = 1;
+  dataSize = 1000;
+  pageSize = 25;
+  pages = 0; */
 
   loadingIndicator: any = false;
   title = "angulardatatables";
@@ -51,18 +58,21 @@ export class UsersComponent implements OnInit {
       );
     });
     this.dtOptions = {
-      pagingType: "full_numbers",
       dom: "rtip",
-      pageLength: 10,
-      processing: true
+      pageLength: 20,
+      serverSide: false,
+      processing: false,
+      paging: true,
+      pagingType: "full_numbers"
     };
+    $("#users-table").DataTable(this.dtOptions);
   }
   // Load Grid Data
-  getData() {
+  getData(searchKey = "", currentPage = 1) {
     this.blockUI.start("Loading Users .............");
 
     this.loadingIndicator = true;
-    this.dataservice.fetchData("users/stores").subscribe(
+    this.dataservice.fetchData("users/stores", searchKey).subscribe(
       data => {
         if (data.status === 200) {
           console.log(data.body);
@@ -142,4 +152,13 @@ export class UsersComponent implements OnInit {
   onAdd() {
     this.router.navigate(["users/create"]);
   }
+  onSearch() {
+    console.log(this.searchKey);
+    this.getData(this.searchKey);
+  }
+  // loadPage(n) {
+  //   this.currentPage = n;
+  //   //console.log("Loading Page: " + n);
+  //   this.getData(this.searchKey, this.currentPage);
+  // }
 }

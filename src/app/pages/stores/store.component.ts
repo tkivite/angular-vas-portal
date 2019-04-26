@@ -6,6 +6,7 @@ import { ApiService } from "../../services/api.service";
 import { ConfirmationDialogService } from "../../services/confirmation-dialog/confirmation-dialog.service";
 
 import * as $ from "jquery";
+import "datatables.net";
 
 @Component({
   selector: "app-store",
@@ -19,6 +20,7 @@ export class StoreComponent implements OnInit {
   public currentActive: any = "GRID";
   public noDataDisplay: any = { emptyMessage: "No data to display" };
   public recordCount = 0;
+  searchKey = "";
 
   loadingIndicator: any = false;
   title = "angulardatatables";
@@ -42,19 +44,23 @@ export class StoreComponent implements OnInit {
         '<a class="btn btn-infor btn-sm mb-1" (click)="onAdd()" type="button"><i class="fa fa-plus"></i> Create a New Store</a>'
       );
     });
+
     this.dtOptions = {
-      pagingType: "full_numbers",
       dom: "rtip",
-      pageLength: 10,
-      processing: true
+      pageLength: 20,
+      serverSide: false,
+      processing: false,
+      paging: true,
+      pagingType: "full_numbers"
     };
+    $("#stores-table").DataTable(this.dtOptions);
   }
   // Load Grid Data
-  getData() {
+  getData(searchKey = "") {
     this.blockUI.start("Loading Stores");
 
     this.loadingIndicator = true;
-    this.dataservice.fetchData("stores").subscribe(
+    this.dataservice.fetchData("stores", searchKey).subscribe(
       data => {
         console.log(data);
         if (data.status === 200) {
@@ -132,5 +138,9 @@ export class StoreComponent implements OnInit {
 
   onAdd() {
     this.router.navigate(["stores/create"]);
+  }
+  onSearch() {
+    console.log(this.searchKey);
+    this.getData(this.searchKey);
   }
 }

@@ -58,7 +58,10 @@ export class LoginComponent implements OnInit {
         data => {
           console.log(data);
           // this.router.navigate([this.returnUrl]);
-          this.router.navigate(["partners"]);
+          // this.router.navigate(["dashboard"]);
+
+          window.location.reload();
+
           const firstname = data.user.firstname;
           this.blockUI.stop();
           this.toastrService.success(

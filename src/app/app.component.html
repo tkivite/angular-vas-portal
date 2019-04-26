@@ -4,13 +4,14 @@
       <img src="./assets/logo.png" />
     </div>
     <div class="container demo d-none d-md-block">
-      <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0,ngb-panel-1,ngb-panel-2" class="panel-group">
+      <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0,ngb-panel-1,ngb-panel-2" class="panel-group"
+        *ngIf="currentUser.user.role == 'Lipalater admin'">
         <ngb-panel class="panel-default">
           <ng-template ngbPanelTitle class="panel-heading">
             <h4 class="panel-title">
               <a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true"
                 aria-controls="collapseOne">
-                Navigation
+                Onboarding
               </a>
             </h4>
           </ng-template>
@@ -32,18 +33,38 @@
                   <i class="fa fa-users" style="color:#88b840"></i>
                 </a>
               </li>
-              <li class="list-group-item">
-                <a class="nav-link released-link" routerLink="/lipalater-users">Internal Users
+              <li class="list-group-item" *ngIf="currentUser.user.role == 'Lipalater Super admin'">
+                <a class=" nav-link released-link" routerLink="/lipalater-users">Internal Users
                   <i class="fa fa-users" style="color:#88b840"></i>
                 </a>
               </li>
+
+            </ul>
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+
+
+      <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0,ngb-panel-1,ngb-panel-2" class="panel-group">
+        <ngb-panel class="panel-default">
+          <ng-template ngbPanelTitle class="panel-heading">
+            <h4 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true"
+                aria-controls="collapseOne">
+                Pick-up Menu
+              </a>
+            </h4>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <ul class="list-group list-group-flush">
+
               <li class="list-group-item">
                 <a class="nav-link sales-link" routerLink="/pending">Pending
                   <i class="fa fa-gift" style="color:#88b840"></i>
                 </a>
               </li>
               <li class="list-group-item">
-                <a class="nav-link sales-link" routerLink="/collections">Collection
+                <a class="nav-link sales-link" routerLink="/collections">Collected
                   <i class="fa fa-cart-plus" style="color:#88b840"></i>
                 </a>
               </li>
@@ -55,13 +76,10 @@
                 </a>
               </li>
               <li class="list-group-item">
-                <a class="nav-link released-link" routerLink="/sales">Sales
+                <a class="nav-link released-link" routerLink="/sales">All Sales
                   <i class="fa fa-list" style="color:#88b840"></i>
                 </a>
               </li>
-
-
-
             </ul>
           </ng-template>
           <ng-template ngbPanelTitle class="panel-heading">
@@ -110,7 +128,7 @@
             </li>
             <li class="nav-item">
               <a class="top-link notification-link" routerLink="/collections">
-                <i class="fa fa-cart-plus" style="color:#88b840"></i> Collections
+                <i class="fa fa-cart-plus" style="color:#88b840"></i> Collected
               </a>
             </li>
             <li class="nav-item">
@@ -134,17 +152,7 @@
                 <i class="fa fa-sign-out" style="color:#b84040"></i> Logout
               </a>
             </li>
-            <!--li class="nav-item">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Separated link</a>
-              </div>
 
-            </li-->
           </ul>
         </div>
       </div>

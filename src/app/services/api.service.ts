@@ -26,12 +26,14 @@ export class ApiService {
   }
   //baseUrl = "/api/";
   baseUrl = "https://partner-portal-backend.herokuapp.com/";
-
-  fetchData(resource): Observable<any> {
-    return this.http.get<any>(this.baseUrl + resource, {
-      headers: this.headers,
-      observe: "response"
-    });
+  fetchData(resource, searchKey = "", page = 1): Observable<any> {
+    return this.http.get<any>(
+      this.baseUrl + resource + "?searchkey=" + searchKey + "&page=" + page,
+      {
+        headers: this.headers,
+        observe: "response"
+      }
+    );
   }
 
   getRecordById(resource, id): Observable<any> {
