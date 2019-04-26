@@ -1,11 +1,27 @@
 <block-ui>
   <div class="box box-primary">
     <div class="box-body">
-      <div class="widget-controls">
-        <a class="btn btn-info btn-sm mb-1" routerLink="/partners/create"><i class="fa fa-plus"></i> Add Partner</a>
+
+
+      <div class="widget-controls row">
+        <div class="col-sm-6">
+          <a class="btn btn-info btn-sm mb-1" routerLink="/partners/create"><i class="fa fa-plus"></i> Add Partner</a>
+        </div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-4">
+          <div class="input-group search-box">
+            <input type="text" [(ngModel)]="searchKey" class="form-control search-input"
+              placeholder="Search this content">
+            <div class="input-group-append">
+              <button class="btn btn-info" type="button" (click)="onSearch()">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
       <span id="responseText"></span>
-      <table class="table table-striped  table-sm row-border hover" datatable [dtOptions]="dtOptions">
+      <table class="table table-striped  table-sm row-border hover">
         <thead>
           <tr>
             <th></th>
@@ -19,7 +35,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of data; let i = index" title={{item.id}}>
-            <td>{{i+1}}</td>
+            <td>{{((current_page-1)*page_size)+i+1}}</td>
             <td>{{item.name}}</td>
             <td>{{item.email}}</td>
             <td>{{item.mobile}}</td>
@@ -35,6 +51,39 @@
           </tr>
         </tbody>
       </table>
+      <div class="row">
+
+        <div class="col-sm-6">
+          <span>showing {{((current_page-1)*page_size) + 1}} to {{current_page*page_size}} of {{total_records}}</span>
+        </div>
+
+        <nav aria-label="..." class="col-sm-6">
+          <ul class="pagination">
+            <li class="page-item" ng-class="{'disabled': current_page == 1}">
+              <a class="page-link" (click)="loadPage(1)" tabindex="-1">First</a>
+            </li>
+            <li class="page-item" ng-class="{'disabled': current_page == 1}">
+              <a class="page-link" (click)="loadPage(current_page-1)" tabindex="-1">Previous</a>
+            </li>
+            <button class="page-item active">
+              <a class="page-link">{{current_page}}</a>
+            </button>
+            <!--
+            <li class="page-item active">
+              <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+            <li class="page-item" ng-class="{'disabled': current_page == total_pages}">
+              <a class="page-link" (click)="loadPage(current_page+1)" tabindex="-1">Next</a>
+            </li>
+            <li class="page-item" ng-class="{'disabled': current_page == total_pages}">
+              <a class="page-link" (click)="loadPage(total_pages)" tabindex="-1">Last</a>
+            </li>
+
+          </ul>
+        </nav>
+      </div>
+
 
     </div>
   </div>

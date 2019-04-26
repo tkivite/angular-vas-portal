@@ -4,6 +4,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { BlockUI, NgBlockUI } from "ng-block-ui";
 import { ApiService } from "../../services/api.service";
 import * as $ from "jquery";
+
 import { ConfirmationDialogService } from "../../services/confirmation-dialog/confirmation-dialog.service";
 
 @Component({
@@ -19,8 +20,14 @@ export class PartnerComponent implements OnInit {
   public noDataDisplay: any = { emptyMessage: "No data to display" };
   public recordCount = 0;
   loadingIndicator: any = false;
+  searchKey = "";
   title = "angulardatatables";
-  dtOptions: DataTables.Settings = {};
+  //pagination
+  current_page = 1;
+  total_records = 1000;
+  page_size = 25;
+  total_pages = Math.ceil(this.total_records / this.page_size);
+
   @ViewChild("myTable") table: any;
   constructor(
     router: Router,
@@ -29,35 +36,25 @@ export class PartnerComponent implements OnInit {
     private confirmationDialogService: ConfirmationDialogService
   ) {
     this.router = router;
-    //this.getData();
   }
 
   ngOnInit() {
     this.getData();
-
-    $(document).ready(function() {
-      $(".dataTables_empty").html("");
-      $(".dataTables_info").html("");
-      $(".dataTables_length").html(
-        '<a class="btn btn-infor btn-sm mb-1" (click)="onAdd()" type="button"><i class="fa fa-plus"></i> Add Business Orgnisation</a>'
-      );
-    });
-    this.dtOptions = {
-      pagingType: "full_numbers",
-      dom: "rtip",
-      pageLength: 10,
-      processing: true
-    };
   }
   // Load Grid Data
-  getData() {
+  getData(searchKey = "", currentPage = 1) {
     this.blockUI.start("Loading Partners .....");
     this.loadingIndicator = true;
-    this.dataservice.fetchData("partners").subscribe(
+    this.dataservice.fetchData("partners", searchKey, currentPage).subscribe(
       data => {
+        console.log(data);
         if (data.status === 200) {
           console.log(data.body);
-          this.data = data.body;
+          this.data = data.body.partners;
+          this.total_records = data.body.total_records;
+          this.page_size = this.data.length;
+          this.total_pages = Math.ceil(this.total_records / this.page_size);
+
           this.blockUI.stop();
         } else if (data.status === 401) {
           this.router.navigate(["login"]);
@@ -138,5 +135,14 @@ export class PartnerComponent implements OnInit {
 
   onAdd() {
     this.router.navigate(["partners/create"]);
+  }
+
+  onSearch() {
+    console.log(this.searchKey);
+    this.getData(this.searchKey, 1);
+  }
+  loadPage(i) {
+    this.current_page = i;
+    this.getData(this.searchKey, i);
   }
 }
