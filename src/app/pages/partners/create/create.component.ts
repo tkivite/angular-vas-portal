@@ -102,7 +102,7 @@ export class CreateBeComponent implements OnInit {
       creditDurationInDays: ["", Validators.compose([CustomValidators.number])],
       accountManager: ["", Validators.compose([Validators.required])],
       selectedItems: [null],
-      orgSpeciality: ["", Validators.required]
+      orgSpeciality: [""]
     });
     this.activeInactive = "ENABLED";
   }
@@ -167,6 +167,16 @@ export class CreateBeComponent implements OnInit {
           );
         }
       );
+    } else {
+      const invalid = [];
+      const controls = form.controls;
+      console.log(controls);
+      for (const name in controls) {
+        if (controls[name].invalid) {
+          invalid.push(name);
+          console.log(name);
+        }
+      }
     }
   }
   // On List

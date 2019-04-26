@@ -97,13 +97,7 @@ export class CreateUserComponent implements OnInit {
           Validators.required
         ])
       ),
-      mobile: new FormControl(
-        "",
-        Validators.compose([
-          Validators.pattern("^(254|0)(7([0-9]{8}))$"),
-          Validators.required
-        ])
-      ),
+      mobile: new FormControl("", Validators.compose([Validators.required])),
       role: new FormControl("", Validators.compose([Validators.required])),
       store_id: new FormControl("", Validators.compose([Validators.required]))
     });
@@ -135,7 +129,7 @@ export class CreateUserComponent implements OnInit {
         firstname: form.value.firstname,
         gender: form.value.gender,
         lastname: form.value.lastname,
-        mobile: "+254" + form.value.mobile.slice(-9),
+        mobile: form.value.mobile.internationalNumber,
         password: "Admin101",
         role: form.value.role,
         id_number: form.value.id_number,

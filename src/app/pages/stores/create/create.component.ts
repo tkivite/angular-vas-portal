@@ -44,7 +44,7 @@ export class CreateStoreComponent implements OnInit {
       data => {
         if (data.status === 200) {
           console.log(data.body);
-          this.PartnerOptions = data.body;
+          this.PartnerOptions = data.body.partners;
           this.blockUI.stop();
         } else {
           this.blockUI.stop();
@@ -74,10 +74,7 @@ export class CreateStoreComponent implements OnInit {
       ],
       storeDisburseEmail1: ["", Validators.compose([CustomValidators.email])],
       storeDisburseEmail2: ["", Validators.compose([CustomValidators.email])],
-      storeSourceid: [
-        "",
-        Validators.compose([Validators.required, CustomValidators.email])
-      ],
+      storeSourceid: ["", Validators.compose([Validators.required])],
       storeManager: [
         "",
         Validators.compose([
@@ -152,7 +149,6 @@ export class CreateStoreComponent implements OnInit {
         disburse_email_cc1: form.value.storeDisburseEmail1,
         disburse_email_cc2: form.value.storeDisburseEmail2,
         partner_id: form.value.storePartner,
-        createdBy: 0,
         source_id: form.value.storeSourceid,
         bank: form.value.storeBank,
         bank_acct: form.value.storeBankAccountName,
@@ -190,6 +186,16 @@ export class CreateStoreComponent implements OnInit {
           );
         }
       );
+    } else {
+      const invalid = [];
+      const controls = form.controls;
+      console.log(controls);
+      for (const name in controls) {
+        if (controls[name].invalid) {
+          invalid.push(name);
+          console.log(name);
+        }
+      }
     }
   }
   // On List

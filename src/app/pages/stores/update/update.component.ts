@@ -60,10 +60,7 @@ export class UpdateStoreComponent implements OnInit {
       ],
       storeDisburseEmail1: ["", Validators.compose([CustomValidators.email])],
       storeDisburseEmail2: ["", Validators.compose([CustomValidators.email])],
-      storeSourceid: [
-        "",
-        Validators.compose([Validators.required, CustomValidators.email])
-      ],
+      storeSourceid: ["", Validators.compose([Validators.required])],
       storeManager: [
         "",
         Validators.compose([

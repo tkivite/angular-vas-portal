@@ -42,7 +42,6 @@ export class UpdateBeComponent implements OnInit {
   ) {
     this.router = router;
     const namePattern = /^[a-zA-Z ']{2,45}$/;
-    //const kenyanMobileNoPattern = "^(254|0)(7([0-9]{8}))$";
     const kenyanMobileNoPattern = /^\+(?:[0-9] ?){11,14}[0-9]$/;
     this.editData = this.dataservice.EditFormData;
     console.log(this.editData);
@@ -114,7 +113,7 @@ export class UpdateBeComponent implements OnInit {
       creditDurationInDays: ["", Validators.compose([CustomValidators.number])],
       accountManager: ["", Validators.compose([Validators.required])],
       selectedItems: [null],
-      orgSpeciality: ["", Validators.required]
+      orgSpeciality: [""]
     });
     this.beFormAdd.patchValue({
       orgName: this.editData.name,
