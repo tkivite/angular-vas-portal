@@ -614,3 +614,7 @@ ngb-tabset>.nav-tabs {
   width: 50px;
 
 }
+
+.intl-tel-input {
+  width: 100%;
+}

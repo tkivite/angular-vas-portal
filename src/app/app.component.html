@@ -5,7 +5,7 @@
     </div>
     <div class="container demo d-none d-md-block">
       <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0,ngb-panel-1,ngb-panel-2" class="panel-group"
-        *ngIf="currentUser.user.role == 'Lipalater admin'">
+        *ngIf="currentUser.user.role == 'Lipalater admin' || currentUser.user.role == 'Lipalater Super admin'">
         <ngb-panel class="panel-default">
           <ng-template ngbPanelTitle class="panel-heading">
             <h4 class="panel-title">
