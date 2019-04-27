@@ -23,6 +23,13 @@ export class CollectionsComponent implements OnInit {
   title = "angulardatatables";
   dtOptions: DataTables.Settings = {};
   @ViewChild("myTable") table: any;
+  //search and pagination
+  searchKey = "";
+  current_page = 1;
+  total_records = 0;
+  page_size = 25;
+  total_pages = 1;
+
   constructor(
     router: Router,
     public toastrService: ToastrService,
@@ -49,14 +56,19 @@ export class CollectionsComponent implements OnInit {
     };
   }
   // Load Grid Data
-  getData() {
+  getData(searchKey = "", currentPage = 1) {
     this.blockUI.start("Loading All Collections .....");
     this.loadingIndicator = true;
-    this.dataservice.fetchData("collections").subscribe(
+    this.dataservice.fetchData("collections", searchKey, currentPage).subscribe(
       data => {
         if (data.status === 200) {
           console.log(data.body);
-          this.data = data.body;
+          this.data = data.body.collections;
+          //pagination params
+          this.total_records = data.body.total_records;
+          this.page_size = this.data.length;
+          this.total_pages = Math.ceil(this.total_records / this.page_size);
+
           this.blockUI.stop();
         } else {
           this.blockUI.stop();
@@ -80,4 +92,13 @@ export class CollectionsComponent implements OnInit {
     // this.blockUI.stop();
   }
   newpickup() {}
+
+  onSearch() {
+    console.log(this.searchKey);
+    this.getData(this.searchKey, 1);
+  }
+  loadPage(i) {
+    this.current_page = i;
+    this.getData(this.searchKey, i);
+  }
 }

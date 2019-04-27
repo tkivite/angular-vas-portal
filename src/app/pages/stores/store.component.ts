@@ -24,6 +24,11 @@ export class StoreComponent implements OnInit {
 
   loadingIndicator: any = false;
   title = "angulardatatables";
+
+  current_page = 1;
+  total_records = 0;
+  page_size = 25;
+  total_pages = 1;
   dtOptions: DataTables.Settings = {};
   @ViewChild("myTable") table: any;
   constructor(
@@ -56,16 +61,20 @@ export class StoreComponent implements OnInit {
     $("#stores-table").DataTable(this.dtOptions);
   }
   // Load Grid Data
-  getData(searchKey = "") {
-    this.blockUI.start("Loading Stores");
-
+  getData(searchKey = "", currentPage = 1) {
+    this.blockUI.start("Loading Stores .....");
     this.loadingIndicator = true;
-    this.dataservice.fetchData("stores", searchKey).subscribe(
+    this.dataservice.fetchData("stores", searchKey, currentPage).subscribe(
       data => {
-        console.log(data);
+        //console.log(data);
         if (data.status === 200) {
-          console.log(data.body);
-          this.data = data.body;
+          //console.log(data.body);
+          this.data = JSON.parse(data.body.stores);
+          //pagination params
+          console.log(this.data);
+          this.total_records = data.body.total_records;
+          this.page_size = this.data.length;
+          this.total_pages = Math.ceil(this.total_records / this.page_size);
           this.blockUI.stop();
         } else {
           this.blockUI.stop();
@@ -141,6 +150,10 @@ export class StoreComponent implements OnInit {
   }
   onSearch() {
     console.log(this.searchKey);
-    this.getData(this.searchKey);
+    this.getData(this.searchKey, 1);
+  }
+  loadPage(i) {
+    this.current_page = i;
+    this.getData(this.searchKey, i);
   }
 }

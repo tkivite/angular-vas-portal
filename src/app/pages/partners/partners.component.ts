@@ -24,9 +24,10 @@ export class PartnerComponent implements OnInit {
   title = "angulardatatables";
   //pagination
   current_page = 1;
-  total_records = 1000;
+  total_records = 0;
   page_size = 25;
-  total_pages = Math.ceil(this.total_records / this.page_size);
+  total_pages = 1;
+  //Math.ceil(this.total_records / this.page_size);
 
   @ViewChild("myTable") table: any;
   constructor(
@@ -51,6 +52,7 @@ export class PartnerComponent implements OnInit {
         if (data.status === 200) {
           console.log(data.body);
           this.data = data.body.partners;
+          //pagination params
           this.total_records = data.body.total_records;
           this.page_size = this.data.length;
           this.total_pages = Math.ceil(this.total_records / this.page_size);

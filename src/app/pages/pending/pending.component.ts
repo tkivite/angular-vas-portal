@@ -18,7 +18,13 @@ export class PendingComponent implements OnInit {
   public noDataDisplay: any = { emptyMessage: "No data to display" };
   public recordCount = 0;
   loadingIndicator: any = false;
+  searchKey = "";
   title = "angulardatatables";
+  //pagination
+  current_page = 1;
+  total_records = 0;
+  page_size = 25;
+  total_pages = 1;
   dtOptions: DataTables.Settings = {};
   @ViewChild("myTable") table: any;
   constructor(
@@ -46,28 +52,39 @@ export class PendingComponent implements OnInit {
     };
   }
   // Load Grid Data
-  getData() {
-    this.blockUI.start("Loading Partners .....");
+  getData(searchKey = "", currentPage = 1) {
+    this.blockUI.start("Loading Pending Items .....");
     this.loadingIndicator = true;
-    this.dataservice.fetchData("sales/pending").subscribe(
-      data => {
-        if (data.status === 200) {
-          console.log(data.body);
-          this.data = data.body;
+    this.dataservice
+      .fetchData("sales/pending", searchKey, currentPage)
+      .subscribe(
+        data => {
+          console.log(data);
+          if (data.status === 200) {
+            console.log(data.body);
+            this.data = data.body.sales;
+            //pagination params
+            this.total_records = data.body.total_records;
+            this.page_size = this.data.length;
+            this.total_pages = Math.ceil(this.total_records / this.page_size);
+            this.data = data.body.sales;
+
+            this.blockUI.stop();
+          } else {
+            this.blockUI.stop();
+            this.toastrService.error(data.message);
+          }
+        },
+        err => {
+          console.log(
+            "Something Went Wrong, We could not complete the request"
+          );
           this.blockUI.stop();
-        } else {
-          this.blockUI.stop();
-          this.toastrService.error(data.message);
+          this.toastrService.error(
+            "Something Went Wrong, We could not complete the request"
+          );
         }
-      },
-      err => {
-        console.log("Something Went Wrong, We could not complete the request");
-        this.blockUI.stop();
-        this.toastrService.error(
-          "Something Went Wrong, We could not complete the request"
-        );
-      }
-    );
+      );
     // this.blockUI.stop();
   }
   onEdit(data) {
@@ -102,5 +119,13 @@ export class PendingComponent implements OnInit {
         );
       }
     );
+  }
+  onSearch() {
+    console.log(this.searchKey);
+    this.getData(this.searchKey, 1);
+  }
+  loadPage(i) {
+    this.current_page = i;
+    this.getData(this.searchKey, i);
   }
 }

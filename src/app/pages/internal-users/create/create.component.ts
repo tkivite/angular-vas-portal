@@ -52,7 +52,7 @@ export class CreateLipalaterUserComponent implements OnInit {
       data => {
         if (data.status === 200) {
           console.log(data.body);
-          this.storeOptions = data.body;
+          this.storeOptions = JSON.parse(data.body.stores);
           this.blockUI.stop();
         } else {
           this.blockUI.stop();

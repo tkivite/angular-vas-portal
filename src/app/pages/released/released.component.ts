@@ -18,7 +18,12 @@ export class ReleasedComponent implements OnInit {
   public noDataDisplay: any = { emptyMessage: "No data to display" };
   public recordCount = 0;
   loadingIndicator: any = false;
-  title = "angulardatatables";
+  //pagination
+  searchKey = "";
+  current_page = 1;
+  total_records = 0;
+  page_size = 25;
+  total_pages = 1;
   dtOptions: DataTables.Settings = {};
   @ViewChild("myTable") table: any;
   constructor(
@@ -46,28 +51,38 @@ export class ReleasedComponent implements OnInit {
     };
   }
   // Load Grid Data
-  getData() {
-    this.blockUI.start("Loading Sales .....");
+  getData(searchKey = "", currentPage = 1) {
+    this.blockUI.start("Loading Collected Items .....");
     this.loadingIndicator = true;
-    this.dataservice.fetchData("sales/collected").subscribe(
-      data => {
-        if (data.status === 200) {
-          console.log(data.body);
-          this.data = data.body;
+    this.dataservice
+      .fetchData("sales/collected", searchKey, currentPage)
+      .subscribe(
+        data => {
+          console.log(data);
+          if (data.status === 200) {
+            console.log(data.body);
+            this.data = data.body.sales;
+            //pagination params
+            this.total_records = data.body.total_records;
+            this.page_size = this.data.length;
+            this.total_pages = Math.ceil(this.total_records / this.page_size);
+
+            this.blockUI.stop();
+          } else {
+            this.blockUI.stop();
+            this.toastrService.error(data.message);
+          }
+        },
+        err => {
+          console.log(
+            "Something Went Wrong, We could not complete the request"
+          );
           this.blockUI.stop();
-        } else {
-          this.blockUI.stop();
-          this.toastrService.error(data.message);
+          this.toastrService.error(
+            "Something Went Wrong, We could not complete the request"
+          );
         }
-      },
-      err => {
-        console.log("Something Went Wrong, We could not complete the request");
-        this.blockUI.stop();
-        this.toastrService.error(
-          "Something Went Wrong, We could not complete the request"
-        );
-      }
-    );
+      );
     // this.blockUI.stop();
   }
   onEdit(data) {
@@ -106,5 +121,13 @@ export class ReleasedComponent implements OnInit {
 
   onAdd() {
     this.router.navigate(["sales/create"]);
+  }
+  onSearch() {
+    console.log(this.searchKey);
+    this.getData(this.searchKey, 1);
+  }
+  loadPage(i) {
+    this.current_page = i;
+    this.getData(this.searchKey, i);
   }
 }

@@ -21,7 +21,7 @@
         </div>
       </div>
       <span id="responseText"></span>
-      <table class="table table-striped  table-sm row-border hover">
+      <table class="table table-striped  table-sm row-border hover" *ngIf="total_records > 0">
         <thead>
           <tr>
             <th></th>
@@ -51,7 +51,8 @@
           </tr>
         </tbody>
       </table>
-      <div class="row">
+
+      <div class="row" *ngIf="total_records > 0">
 
         <div class="col-sm-6">
           <span>showing {{((current_page-1)*page_size) + 1}} to {{current_page*page_size}} of {{total_records}}</span>
@@ -59,29 +60,34 @@
 
         <nav aria-label="..." class="col-sm-6">
           <ul class="pagination">
-            <li class="page-item" ng-class="{'disabled': current_page == 1}">
+            <li class="page-item {{(current_page == 1)? 'disabled': ''}}">
               <a class="page-link" (click)="loadPage(1)" tabindex="-1">First</a>
             </li>
-            <li class="page-item" ng-class="{'disabled': current_page == 1}">
+            <li class="page-item {{(current_page == 1)? 'disabled': ''}}">
               <a class="page-link" (click)="loadPage(current_page-1)" tabindex="-1">Previous</a>
             </li>
-            <button class="page-item active">
+            <li class="page-item active">
               <a class="page-link">{{current_page}}</a>
-            </button>
+            </li>
             <!--
             <li class="page-item active">
               <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
             </li>
             <li class="page-item"><a class="page-link" href="#">3</a></li> -->
-            <li class="page-item" ng-class="{'disabled': current_page == total_pages}">
+
+            <li class="page-item {{(current_page == total_pages)? 'disabled': ''}}">
               <a class="page-link" (click)="loadPage(current_page+1)" tabindex="-1">Next</a>
             </li>
-            <li class="page-item" ng-class="{'disabled': current_page == total_pages}">
+            <li class="page-item {{(current_page == total_pages)? 'disabled': ''}}">
               <a class="page-link" (click)="loadPage(total_pages)" tabindex="-1">Last</a>
             </li>
 
           </ul>
         </nav>
+      </div>
+
+      <div *ngIf="total_records == 0">
+        <div class="alert alert-lg alert-warning">No data available</div>
       </div>
 
 

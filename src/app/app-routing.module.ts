@@ -22,7 +22,7 @@ import { UsersComponent } from "./pages/users/users.component";
 import { CreateUserComponent } from "./pages/users/create/create.component";
 import { UpdateUserComponent } from "./pages/users/update/update.component";
 
-import { LipalaterUsersComponent } from "./pages/internal-users/users.component";
+import { LipalaterUsersComponent } from "./pages/internal-users/lipalater-users.component";
 import { CreateLipalaterUserComponent } from "./pages/internal-users/create/create.component";
 import { UpdateLipalaterUserComponent } from "./pages/internal-users/update/update.component";
 

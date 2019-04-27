@@ -26,10 +26,11 @@ export class UsersComponent implements OnInit {
   currentUser: any;
 
   searchKey = "";
-  /* currentPage = 1;
-  dataSize = 1000;
-  pageSize = 25;
-  pages = 0; */
+  //pagination
+  current_page = 1;
+  total_records = 0;
+  page_size = 25;
+  total_pages = 1;
 
   loadingIndicator: any = false;
   title = "angulardatatables";
@@ -46,53 +47,45 @@ export class UsersComponent implements OnInit {
       x => (this.currentUser = x)
     );
     this.router = router;
-    this.getData();
   }
 
   ngOnInit() {
-    $(document).ready(function() {
-      $(".dataTables_empty").html("");
-      $(".dataTables_info").html("");
-      $(".dataTables_length").html(
-        '<a class="btn btn-infor btn-sm mb-1" (click)="onAdd()" type="button"><i class="fa fa-plus"></i> Add user</a>'
-      );
-    });
-    this.dtOptions = {
-      dom: "rtip",
-      pageLength: 20,
-      serverSide: false,
-      processing: false,
-      paging: true,
-      pagingType: "full_numbers"
-    };
-    $("#users-table").DataTable(this.dtOptions);
+    this.getData();
   }
   // Load Grid Data
   getData(searchKey = "", currentPage = 1) {
-    this.blockUI.start("Loading Users .............");
-
+    this.blockUI.start("Loading Users .....");
     this.loadingIndicator = true;
-    this.dataservice.fetchData("users/stores", searchKey).subscribe(
-      data => {
-        if (data.status === 200) {
-          console.log(data.body);
-          this.data = data.body;
-          this.blockUI.stop();
-        } else {
+    this.dataservice
+      .fetchData("users/stores", searchKey, currentPage)
+      .subscribe(
+        data => {
+          console.log(data);
+          if (data.status === 200) {
+            console.log(data.body);
+            this.data = JSON.parse(data.body.users);
+            //pagination params
+            this.total_records = data.body.total_records;
+            this.page_size = this.data.length;
+            this.total_pages = Math.ceil(this.total_records / this.page_size);
+            this.blockUI.stop();
+          } else {
+            this.blockUI.stop();
+            this.toastrService.error(
+              "Something Went Wrong, We could not complete the request"
+            );
+          }
+        },
+        err => {
+          console.log(
+            "Something Went Wrong, We could not complete the request"
+          );
           this.blockUI.stop();
           this.toastrService.error(
             "Something Went Wrong, We could not complete the request"
           );
         }
-      },
-      err => {
-        console.log("Something Went Wrong, We could not complete the request");
-        this.blockUI.stop();
-        this.toastrService.error(
-          "Something Went Wrong, We could not complete the request"
-        );
-      }
-    );
+      );
     // this.blockUI.stop();
     this.loadingIndicator = false;
   }
@@ -154,11 +147,10 @@ export class UsersComponent implements OnInit {
   }
   onSearch() {
     console.log(this.searchKey);
-    this.getData(this.searchKey);
+    this.getData(this.searchKey, 1);
   }
-  // loadPage(n) {
-  //   this.currentPage = n;
-  //   //console.log("Loading Page: " + n);
-  //   this.getData(this.searchKey, this.currentPage);
-  // }
+  loadPage(i) {
+    this.current_page = i;
+    this.getData(this.searchKey, i);
+  }
 }

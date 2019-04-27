@@ -20,7 +20,13 @@ export class SalesComponent implements OnInit {
   public noDataDisplay: any = { emptyMessage: "No data to display" };
   public recordCount = 0;
   loadingIndicator: any = false;
+  searchKey = "";
   title = "angulardatatables";
+  //pagination
+  current_page = 1;
+  total_records = 0;
+  page_size = 25;
+  total_pages = 1;
   dtOptions: DataTables.Settings = {};
   @ViewChild("myTable") table: any;
   constructor(
@@ -49,14 +55,18 @@ export class SalesComponent implements OnInit {
     };
   }
   // Load Grid Data
-  getData() {
+  getData(searchKey = "", currentPage = 1) {
     this.blockUI.start("Loading All Sales .....");
     this.loadingIndicator = true;
-    this.dataservice.fetchData("sales").subscribe(
+    this.dataservice.fetchData("sales", searchKey, currentPage).subscribe(
       data => {
         if (data.status === 200) {
           console.log(data.body);
-          this.data = data.body;
+          this.data = data.body.sales;
+          //pagination params
+          this.total_records = data.body.total_records;
+          this.page_size = this.data.length;
+          this.total_pages = Math.ceil(this.total_records / this.page_size);
           this.blockUI.stop();
         } else {
           this.blockUI.stop();
@@ -119,5 +129,13 @@ export class SalesComponent implements OnInit {
       }
     );
     // this.blockUI.stop();
+  }
+  onSearch() {
+    console.log(this.searchKey);
+    this.getData(this.searchKey, 1);
+  }
+  loadPage(i) {
+    this.current_page = i;
+    this.getData(this.searchKey, i);
   }
 }
