@@ -1,45 +1,140 @@
 <div class="box box-primary">
-	<div class="panel-heading panel-primary row">
-		<h2 class="panel-title col-sm-10 col-sm-offset-2"></h2>
-	</div>
-	<div class="box-body">
-		<span id="responseText"></span>
-		<div id ="myaccform">
-   			<form autocomplete="off" [formGroup]="formAdd" (ngSubmit)="onUserSubmit(formAdd)">
-	            <div class="row">
-	                <div class="col-sm-12">
-	                    <div class="form-group">
-	                        <label for="inputName">Entity File</label>
-	                        <input formControlName="fileName" class="form-control validation-field" id="inputName" placeholder="Name" type="text">
-	                        <small class="text-danger" *ngIf="formAdd.get('fileName').touched && formAdd.get('fileName').hasError('required')"> Entity File is required</small>
-	                    </div>
-	                </div>
-	                <div class="col-sm-12">
-	                    <div class="form-group">
-	                        <label for="inputName"> File </label>
-	                        <input id="selectFile" name="selectFile" formControlName="datafile" class="form-control validation-field" placeholder=" File" type="file">
-	                    </div>
-	                </div>
-	            </div>
+  <div class="panel-heading panel-primary row">
+    <h2 class="panel-title col-sm-10 col-sm-offset-2"></h2>
+  </div>
+  <div class="box-body">
+    <span id="responseText"></span>
+    <div id="cccform" class="container">
+      <div class="row form-heading">
+        <div class="col-md-1"></div>
+        <h4 class="col-md-11">My Account Details</h4>
+      </div>
+      <hr>
+      <div class="row">
 
-	                  <div class="row mb-4">
-	                <div class="col-sm-12">
-	                    <div class="card">
-	                        <div class="card-header">
-	                            <div class="row align-items-right">
-                                    <button [disabled]="!formAdd.valid" class="btn btn-danger" type="submit">Submit</button>
-                                </div>
-	                        </div>
-	                        <div class="card-block">
-	                            <div class="row">
-	                            </div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-			</form>
-		</div>
-	</div>
+
+        <div class="col-md-1"></div>
+        <!-- {{useraccount | json}} -->
+
+        <form autocomplete="off" class="col-md-11 form-horizontal">
+
+
+          <div class="row form-group">
+
+            <label class="control-label col-sm-3" for="inputName">First Name</label>
+            <div class="col-sm-7">
+              <input readonly class="form-control" type="text" value="{{useraccount.firstname}}">
+
+            </div>
+          </div>
+
+          <div class="row form-group">
+
+            <label class="control-label col-sm-3" for="inputName">Last Name</label>
+            <div class="col-sm-7">
+              <input readonly class="form-control" type="text" value="{{useraccount.lastname}}">
+
+            </div>
+          </div>
+
+          <div class="row form-group">
+
+            <label class="control-label col-sm-3" for="inputName">UserName</label>
+            <div class="col-sm-7">
+              <input readonly class="form-control" type="text" value="{{useraccount.username}}">
+
+            </div>
+          </div>
+
+          <div class="row form-group">
+
+            <label class="control-label col-sm-3" for="inputName">Email</label>
+            <div class="col-sm-7">
+              <input readonly class="form-control" type="text" value="{{useraccount.email}}">
+
+            </div>
+          </div>
+
+          <div class="row form-group">
+
+            <label class="control-label col-sm-3" for="inputName">Mobile</label>
+            <div class="col-sm-7">
+              <input readonly class="form-control" type="text" value="{{useraccount.mobile}}">
+
+            </div>
+          </div>
+          <div class="row form-group">
+
+            <label class="control-label col-sm-3" for="inputName">Id Number</label>
+            <div class="col-sm-7">
+              <input readonly class="form-control" type="text" value="{{useraccount.id_number}}">
+
+            </div>
+          </div>
+          <div class="row form-group">
+
+            <label class="control-label col-sm-3" for="inputName">Gender</label>
+            <div class="col-sm-7">
+              <input readonly class="form-control" type="text" value="{{useraccount.gender}}">
+
+            </div>
+          </div>
+
+          <div class="row form-group">
+
+            <label class="control-label col-sm-3" for="inputName">Role</label>
+            <div class="col-sm-7">
+              <input readonly class="form-control" type="text" value="{{useraccount.role}}">
+
+            </div>
+          </div>
+
+          <div class="row form-group">
+
+            <label class="control-label col-sm-3" for="inputName">My Store</label>
+            <div class="col-sm-7">
+              <input readonly class="form-control" type="text" value="{{store.name}}">
+
+            </div>
+          </div>
+
+
+
+
+
+
+        </form>
+
+
+
+      </div>
+
+
+      <div class="row form-heading">
+        <div class="col-md-1"></div>
+        <h4 class="col-md-11">Store Details</h4>
+      </div>
+      <hr>
+      <div class="row">
+
+
+        <div class="col-md-1"></div>
+        <!-- {{useraccount | json}} -->
+        <!--
+        <form autocomplete="off" class="col-md-11 form-horizontal">
+
+
+          <div class="row form-group">
+
+            <label class="control-label col-sm-3" for="inputName">First Name</label>
+            <div class="col-sm-7">
+              <input readonly class="form-control" type="text" value="{{store.name}}">
+
+            </div>
+          </div>
+        </form> -->
+      </div>
+
+    </div>
+  </div>
 </div>
-
-
