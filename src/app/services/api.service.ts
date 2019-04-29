@@ -149,8 +149,8 @@ export class ApiService {
         this.router.navigate(["login"]);
         return;
         //console.error(error); // log to console
-
-        // return of(result as T);
+      } else {
+        return of(result as T);
       }
     };
   }
