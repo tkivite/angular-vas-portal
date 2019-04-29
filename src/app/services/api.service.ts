@@ -1,8 +1,15 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs/index";
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpErrorResponse,
+  HttpResponse
+} from "@angular/common/http";
+import { Observable, throwError, of } from "rxjs/index";
+import { catchError } from "rxjs/operators";
 import { AuthenticationService } from "./authentication.service";
 import { headersToString } from "selenium-webdriver/http";
+import { Router } from "@angular/router";
 
 @Injectable()
 export class ApiService {
@@ -10,30 +17,40 @@ export class ApiService {
   headers: any;
   public EditFormData: any;
   public currentLoggedInUser: any;
+  public router: Router;
 
   constructor(
     private http: HttpClient,
+    router: Router,
     private authenticationService: AuthenticationService
   ) {
+    this.router = router;
+
     this.authenticationService.currentUser.subscribe(x => {
       this.currentUser = x;
-      this.headers = new HttpHeaders({
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: this.currentUser.auth_token
-      });
+      if (this.currentUser) {
+        this.headers = new HttpHeaders({
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: this.currentUser.auth_token
+        });
+      } else {
+        this.router.navigate(["login"]);
+      }
     });
   }
   //baseUrl = "/api/";
   baseUrl = "https://partner-portal-backend.herokuapp.com/";
   fetchData(resource, searchKey = "", page = 1): Observable<any> {
-    return this.http.get<any>(
-      this.baseUrl + resource + "?searchkey=" + searchKey + "&page=" + page,
-      {
-        headers: this.headers,
-        observe: "response"
-      }
-    );
+    return this.http
+      .get<any>(
+        this.baseUrl + resource + "?searchkey=" + searchKey + "&page=" + page,
+        {
+          headers: this.headers,
+          observe: "response"
+        }
+      )
+      .pipe(catchError(this.handleError("fetchData", [])));
   }
 
   getRecordById(resource, id): Observable<any> {
@@ -110,5 +127,31 @@ export class ApiService {
       headers: this.headers,
       observe: "response"
     });
+  }
+
+  private handleError1(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error("An error occurred:", error.error.message);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      console.error(
+        `Backend returned code ${error.status}, ` + `body was: ${error.error}`
+      );
+    }
+    // return an observable with a user-facing error message
+    return throwError("Something bad happened; please try again later.");
+  }
+  handleError<T>(operation = "operation", result?: T) {
+    return (error: any): Observable<T> => {
+      if (error.status === 401) {
+        this.router.navigate(["login"]);
+        return;
+        //console.error(error); // log to console
+
+        // return of(result as T);
+      }
+    };
   }
 }
