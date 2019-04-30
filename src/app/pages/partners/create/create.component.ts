@@ -100,7 +100,7 @@ export class CreateBeComponent implements OnInit {
       numberOfBranches: ["", Validators.compose([CustomValidators.number])],
       paymentTerms: ["", Validators.compose([Validators.required])],
       creditDurationInDays: ["", Validators.compose([CustomValidators.number])],
-      accountManager: ["", Validators.compose([Validators.required])],
+      accountManager: [""],
       selectedItems: [null],
       orgSpeciality: [""]
     });
