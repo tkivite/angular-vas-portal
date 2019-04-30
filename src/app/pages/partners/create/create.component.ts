@@ -27,6 +27,7 @@ export class CreateBeComponent implements OnInit {
   public FormItem: FormArray;
   public errorMessage: any = "SHOWERROR";
   public specialityOptions: any;
+  saveErrors: any;
 
   selectedSpeciality = [];
   dropdownSettings = {};
@@ -150,6 +151,7 @@ export class CreateBeComponent implements OnInit {
           } else {
             // this.toastrService.error(data.message);
             this.blockUI.stop();
+
             // this.toastrService.error(data.message);
             this.toastrService.success(
               "There was a problem creating the record"
@@ -161,6 +163,7 @@ export class CreateBeComponent implements OnInit {
             "Something Went Wrong, We could not complete the request"
           );
           console.log(err);
+          this.saveErrors = err.error.message || err.error.error;
           this.blockUI.stop();
           this.toastrService.error(
             "Something Went Wrong, We could not complete the request"

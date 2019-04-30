@@ -35,6 +35,18 @@
             <div class="col-md-1"></div>
             <form [formGroup]="beFormAdd" (ngSubmit)="onAddSubmit(beFormAdd)" class="col-md-11 form-horizontal">
 
+              <div class="row form-group" *ngIf="saveErrors">
+                <div class="alert alert-bg alert-warning">
+                  Errors! {{saveErrors}}
+
+                </div>
+
+
+
+
+
+              </div>
+
               <div class="row form-group">
                 <label class="control-label col-sm-3" for="title"><span class="float-right"> Registered Name:
                   </span></label>
@@ -230,9 +242,6 @@
                     <option value="">Select Account Manager</option>
                     <option *ngFor="let o of UserOptions" [ngValue]="o.id">{{o.firstname + ' ' + o.lastname}}</option>
                   </select>
-                  <small class="text-danger"
-                    *ngIf="beFormAdd.get('accountManager').touched && beFormAdd.get('accountManager').hasError('required')">Account
-                    Manager is required</small>
                 </div>
               </div>
 

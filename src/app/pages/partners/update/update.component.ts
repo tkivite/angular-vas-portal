@@ -28,7 +28,7 @@ export class UpdateBeComponent implements OnInit {
   public errorMessage: any = "SHOWERROR";
   public specialityOptions: any;
   public editData: any;
-
+  saveErrors: any;
   public UserOptions: any;
 
   selectedSpeciality = [];
@@ -187,6 +187,7 @@ export class UpdateBeComponent implements OnInit {
               "Something Went Wrong, We could not complete the request"
             );
             console.log(err);
+            this.saveErrors = err.error.message || err.error.error;
             this.blockUI.stop();
             this.toastrService.error(
               "Something Went Wrong, We could not complete the request"

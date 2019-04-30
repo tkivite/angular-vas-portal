@@ -29,6 +29,7 @@ export class CreateUserComponent implements OnInit {
   public storeOptions: any;
   public genderList: any;
   public roleList: any;
+  saveErrors: any;
 
   constructor(
     router: Router,
@@ -154,6 +155,7 @@ export class CreateUserComponent implements OnInit {
             "Something Went Wrong, We could not complete the request"
           );
           console.log(err);
+          this.saveErrors = err.error.message || err.error.error;
           this.blockUI.stop();
           this.toastrService.error(
             "Something Went Wrong, We could not complete the request"
