@@ -60,7 +60,7 @@ export class UpdateBeComponent implements OnInit {
       data => {
         if (data.status === 200) {
           console.log(data.body);
-          this.UserOptions = data.body;
+          this.UserOptions = JSON.parse(data.body.users);
           this.blockUI.stop();
         } else {
           this.blockUI.stop();
@@ -87,6 +87,7 @@ export class UpdateBeComponent implements OnInit {
       itemsShowLimit: 3,
       allowSearchFilter: true
     };
+    let current_year = new Date().getFullYear();
     // const specialityArray: FormArray = new FormArray([]);
     // orgMobile:   ['', Validators.compose([ Validators.required,Validators.pattern(kenyanMobileNoPattern)])],
     this.beFormAdd = fb.group({
@@ -106,11 +107,26 @@ export class UpdateBeComponent implements OnInit {
       orgMobile: ["", Validators.compose([Validators.required])],
       orgYearsOfOperation: [
         "",
-        Validators.compose([Validators.required, CustomValidators.number])
+        Validators.compose([
+          Validators.required,
+          CustomValidators.number,
+          CustomValidators.min(1000),
+          CustomValidators.max(current_year)
+        ])
       ],
-      numberOfBranches: ["", Validators.compose([CustomValidators.number])],
+      numberOfBranches: [
+        "",
+        Validators.compose([
+          CustomValidators.number,
+          CustomValidators.min(1),
+          CustomValidators.max(10000)
+        ])
+      ],
       paymentTerms: ["", Validators.compose([Validators.required])],
-      creditDurationInDays: ["", Validators.compose([CustomValidators.number])],
+      creditDurationInDays: [
+        "",
+        Validators.compose([CustomValidators.number, CustomValidators.min(0)])
+      ],
       accountManager: [""],
       selectedItems: [null],
       orgSpeciality: [""]

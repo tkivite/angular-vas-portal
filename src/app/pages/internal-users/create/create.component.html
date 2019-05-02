@@ -154,7 +154,7 @@
                 <div class="col-sm-7">
                   <select formControlName="gender" class="form-control validation-field">
                     <option value="">Select Gender</option>
-                    <option *ngFor="let o of genderList" [value]="o.name">{{o.name}}</option>
+                    <option *ngFor="let o of genderList" [value]="o.id">{{o.name}}</option>
                   </select>
                   <small class="text-danger"
                     *ngIf="userFormAdd.get('gender').touched && userFormAdd.get('gender').hasError('required')">Gender

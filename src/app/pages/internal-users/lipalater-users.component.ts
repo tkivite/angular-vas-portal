@@ -101,7 +101,7 @@ export class LipalaterUsersComponent implements OnInit {
         console.log(record);
         this.blockUI.start("Deleting User ........");
 
-        this.dataservice.deleteRecord("users", record.id).subscribe(
+        this.dataservice.deleteRecord("users/lipalater", record.id).subscribe(
           data => {
             console.log(data);
             if (data.status === 200) {

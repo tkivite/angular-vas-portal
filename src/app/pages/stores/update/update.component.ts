@@ -54,7 +54,10 @@ export class UpdateStoreComponent implements OnInit {
         ])
       ],
       storeLocation: ["", Validators.compose([Validators.required])],
-      storeTarget: [""],
+      storeTarget: [
+        "",
+        Validators.compose([CustomValidators.number, CustomValidators.min(0)])
+      ],
       storeDisburseEmail: [
         "",
         Validators.compose([Validators.required, CustomValidators.email])
@@ -98,8 +101,14 @@ export class UpdateStoreComponent implements OnInit {
 
       storeCode: ["", Validators.compose([Validators.required])],
       city: ["", Validators.compose([Validators.required])],
-      numberOfEmployees: ["", Validators.compose([CustomValidators.number])],
-      monthlyRevenue: ["", Validators.compose([CustomValidators.number])]
+      numberOfEmployees: [
+        "",
+        Validators.compose([CustomValidators.number, CustomValidators.min(0)])
+      ],
+      monthlyRevenue: [
+        "",
+        Validators.compose([CustomValidators.number, CustomValidators.min(0)])
+      ]
     });
     this.storeFormEdit.patchValue({
       storeName: this.editData.name,
@@ -144,7 +153,7 @@ export class UpdateStoreComponent implements OnInit {
       data => {
         if (data.status === 200) {
           console.log(data.body);
-          this.PartnerOptions = data.body;
+          this.PartnerOptions = data.body.partners;
           this.blockUI.stop();
         } else {
           this.blockUI.stop();

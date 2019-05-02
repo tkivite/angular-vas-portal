@@ -23,6 +23,20 @@ export class AppComponent implements OnInit {
       $("#sidebarCollapse").on("click", function() {
         $("#sidebar").toggleClass("active");
       });
+      $("#letnd").keydown(function(e) {
+        var regex = new RegExp("^[a-zA-Z]+$");
+        var key = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+
+        console.log(e.keyCode); // check for backspace, delete etc. keyCodes you need
+
+        if (e.keyCode != 8) {
+          // e.g: backspace keyCode for Backspace on OS X
+          if (!regex.test(key)) {
+            e.preventDefault();
+            return false;
+          }
+        }
+      });
     });
   }
   logout() {
