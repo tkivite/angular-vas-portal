@@ -14,11 +14,11 @@ import { ToastrService } from "ngx-toastr";
 import { ApiService } from "../../../services/api.service";
 
 @Component({
-  selector: "app-create",
-  templateUrl: "./create.component.html",
-  encapsulation: ViewEncapsulation.None
+  selector: "app-be-update",
+  templateUrl: "./view.component.html",
+  styleUrls: ["./view.component.css"]
 })
-export class CreateBeComponent implements OnInit {
+export class ViewBeComponent implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
   public router: Router;
   public beFormAdd: FormGroup;
@@ -27,12 +27,12 @@ export class CreateBeComponent implements OnInit {
   public FormItem: FormArray;
   public errorMessage: any = "SHOWERROR";
   public specialityOptions: any;
+  public editData: any;
   saveErrors: any;
+  public UserOptions: any;
 
   selectedSpeciality = [];
   dropdownSettings = {};
-
-  public UserOptions: any;
 
   constructor(
     router: Router,
@@ -42,8 +42,11 @@ export class CreateBeComponent implements OnInit {
   ) {
     this.router = router;
     const namePattern = /^[a-zA-Z ']{2,45}$/;
-    //const kenyanMobileNoPattern = "^(254|0)(7([0-9]{8}))$";
     const kenyanMobileNoPattern = /^\+(?:[0-9] ?){11,14}[0-9]$/;
+    this.editData = this.dataservice.EditFormData;
+    console.log(this.editData);
+
+    const specialityData = this.editData.speciality.split("|");
 
     this.specialityOptions = [
       { speciality_id: "1", speciality_name: "Electronics" },
@@ -51,16 +54,17 @@ export class CreateBeComponent implements OnInit {
       { speciality_id: "3", speciality_name: "Furniture" },
       { speciality_id: "4", speciality_name: "General" }
     ];
+
     this.blockUI.start("Fetching Users");
     this.dataservice.fetchData("users").subscribe(
       data => {
         if (data.status === 200) {
           console.log(data.body);
-          this.UserOptions = JSON.parse(data.body.users);
+          this.UserOptions = data.body;
           this.blockUI.stop();
         } else {
           this.blockUI.stop();
-          this.toastrService.error(data.error.message);
+          this.toastrService.error(data.message);
         }
       },
       err => {
@@ -68,6 +72,11 @@ export class CreateBeComponent implements OnInit {
         this.blockUI.stop();
       }
     );
+
+    this.selectedSpeciality = this.specialityOptions.filter(
+      x => specialityData.indexOf(x.speciality_name) != -1
+    );
+    console.log(this.selectedSpeciality);
 
     this.dropdownSettings = {
       singleSelection: false,
@@ -78,7 +87,8 @@ export class CreateBeComponent implements OnInit {
       itemsShowLimit: 3,
       allowSearchFilter: true
     };
-    let current_year = new Date().getFullYear();
+    // const specialityArray: FormArray = new FormArray([]);
+    // orgMobile:   ['', Validators.compose([ Validators.required,Validators.pattern(kenyanMobileNoPattern)])],
     this.beFormAdd = fb.group({
       orgName: [
         "",
@@ -96,27 +106,29 @@ export class CreateBeComponent implements OnInit {
       orgMobile: ["", Validators.compose([Validators.required])],
       orgYearsOfOperation: [
         "",
-        Validators.compose([
-          Validators.required,
-          CustomValidators.number,
-          CustomValidators.min(1000),
-          CustomValidators.max(current_year)
-        ])
+        Validators.compose([Validators.required, CustomValidators.number])
       ],
-      numberOfBranches: [
-        "",
-        Validators.compose([
-          CustomValidators.number,
-          CustomValidators.min(1),
-          CustomValidators.max(10000)
-        ])
-      ],
+      numberOfBranches: ["", Validators.compose([CustomValidators.number])],
       paymentTerms: ["", Validators.compose([Validators.required])],
       creditDurationInDays: ["", Validators.compose([CustomValidators.number])],
       accountManager: [""],
       selectedItems: [null],
       orgSpeciality: [""]
     });
+    this.beFormAdd.patchValue({
+      orgName: this.editData.name,
+      orgLocation: this.editData.location,
+      orgEmail: this.editData.email,
+      orgTelephone: this.editData.telephone,
+      orgMobile: this.editData.mobile,
+      orgYearsOfOperation: this.editData.year_of_incorporation,
+      orgSpeciality: this.editData.speciality,
+      accountManager: this.editData.account_manager,
+      numberOfBranches: this.editData.no_of_branches,
+      paymentTerms: this.editData.payment_terms,
+      creditDurationInDays: this.editData.credit_duration_in_days
+    });
+
     this.activeInactive = "ENABLED";
   }
 
@@ -133,10 +145,10 @@ export class CreateBeComponent implements OnInit {
     return this.beFormAdd.controls;
   }
   // Submitting Add Entity
-  public onAddSubmit(form: FormGroup) {
+  public onEditSubmit(form: FormGroup) {
     if (form.valid) {
       this.errorMessage = "SHOWERROR";
-      this.blockUI.start("Adding Partner");
+      this.blockUI.start("Updating Partner....");
 
       const postFormData = {
         email: form.value.orgEmail,
@@ -153,45 +165,35 @@ export class CreateBeComponent implements OnInit {
         payment_terms: form.value.paymentTerms,
         credit_duration_in_days: form.value.creditDurationInDays
       };
-      this.dataservice.postData("partners", postFormData).subscribe(
-        data => {
-          if (data.status === 201) {
-            this.toastrService.success(data.message);
-            this.router.navigate(["partners"]);
+      this.dataservice
+        .updateRecord("partners", this.editData.id, postFormData)
+        .subscribe(
+          data => {
+            console.log(data);
+            if (data.status === 200) {
+              this.router.navigate(["partners"]);
+              this.blockUI.stop();
+              this.toastrService.success("Record Update was successful");
+            } else {
+              this.blockUI.stop();
+              this.toastrService.error(
+                "There was a problem updating the record"
+              );
+              // this.toastrService.error(data.message);
+            }
+          },
+          err => {
+            console.log(
+              "Something Went Wrong, We could not complete the request"
+            );
+            console.log(err);
+            this.saveErrors = err.error.message || err.error.error;
             this.blockUI.stop();
-            this.toastrService.success("Record Creation was successful");
-          } else {
-            // this.toastrService.error(data.message);
-            this.blockUI.stop();
-
-            // this.toastrService.error(data.message);
-            this.toastrService.success(
-              "There was a problem creating the record"
+            this.toastrService.error(
+              "Something Went Wrong, We could not complete the request"
             );
           }
-        },
-        err => {
-          console.log(
-            "Something Went Wrong, We could not complete the request"
-          );
-          console.log(err);
-          this.saveErrors = err.error.message || err.error.error;
-          this.blockUI.stop();
-          this.toastrService.error(
-            "Something Went Wrong, We could not complete the request"
-          );
-        }
-      );
-    } else {
-      const invalid = [];
-      const controls = form.controls;
-      console.log(controls);
-      for (const name in controls) {
-        if (controls[name].invalid) {
-          invalid.push(name);
-          console.log(name);
-        }
-      }
+        );
     }
   }
   // On List
@@ -200,12 +202,12 @@ export class CreateBeComponent implements OnInit {
   }
   onSpecialitySelect(item: any) {
     console.log(item);
-    // this.selectedSpeciality.push(item);
+    //this.selectedSpeciality.push(item);
     console.log(this.selectedSpeciality);
   }
   onSelectAllSpeciality(items: any) {
     console.log(items);
-    // this.selectedSpeciality = this.specialityOptions;
+    //this.selectedSpeciality = this.specialityOptions;
     console.log(this.selectedSpeciality);
   }
   onDeSelectSpeciality(item: any) {

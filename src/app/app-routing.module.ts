@@ -12,6 +12,8 @@ import { InvoicingComponent } from "./pages/invoicing/invoicing.component";
 import { PartnerComponent } from "./pages/partners/partners.component";
 import { CreateBeComponent } from "./pages/partners/create/create.component";
 import { UpdateBeComponent } from "./pages/partners/update/update.component";
+import { ViewBeComponent } from "./pages/partners/view/view.component";
+
 import { StoreComponent } from "./pages/stores/store.component";
 import { CreateStoreComponent } from "./pages/stores/create/create.component";
 import { UpdateStoreComponent } from "./pages/stores/update/update.component";
@@ -44,6 +46,7 @@ const routes: Routes = [
   { path: "partners", component: PartnerComponent },
   { path: "partners/create", component: CreateBeComponent },
   { path: "partners/update", component: UpdateBeComponent },
+  { path: "partners/view", component: ViewBeComponent },
   { path: "stores", component: StoreComponent },
   { path: "stores/create", component: CreateStoreComponent },
   { path: "stores/update", component: UpdateStoreComponent },

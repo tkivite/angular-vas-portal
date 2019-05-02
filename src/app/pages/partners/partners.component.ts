@@ -90,6 +90,11 @@ export class PartnerComponent implements OnInit {
     this.dataservice.EditFormData = data;
     this.router.navigate(["partners/update"]);
   }
+  onView(data) {
+    console.log(data);
+    this.dataservice.EditFormData = data;
+    this.router.navigate(["partners/view"]);
+  }
   onDelete(record) {
     this.confirmationDialogService
       .confirm(

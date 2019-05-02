@@ -41,9 +41,12 @@ import { LoginComponent } from "./pages/login/login.component";
 import { PartnerComponent } from "./pages/partners/partners.component";
 import { CreateBeComponent } from "./pages/partners/create/create.component";
 import { UpdateBeComponent } from "./pages/partners/update/update.component";
+import { ViewBeComponent } from "./pages/partners/view/view.component";
+
 import { StoreComponent } from "./pages/stores/store.component";
 import { CreateStoreComponent } from "./pages/stores/create/create.component";
 import { UpdateStoreComponent } from "./pages/stores/update/update.component";
+
 import { PendingComponent } from "./pages/pending/pending.component";
 import { ApiService } from "./services/api.service";
 import { HomeComponent } from "./pages/home/home.component";
@@ -79,6 +82,7 @@ import { StaffPickupComponent } from "./pages/collections/lipalater/pickup.compo
     SidebarComponent,
     LoginComponent,
     PartnerComponent,
+    ViewBeComponent,
     CreateBeComponent,
     UpdateBeComponent,
     StoreComponent,

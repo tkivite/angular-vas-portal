@@ -42,7 +42,9 @@
             <td>{{item.location}}</td>
             <td>{{(item.speciality).replace("|",' , ')}}</td>
             <td>
-              <div class="float-right"> <button type="button" class="btn btn-xs btn-warning"
+              <div class="float-right"><button type="button" class="btn btn-xxs btn-info"
+                  title="Edit this business details" style="margin-right: 5px" (click)="onView(item)"> <i
+                    class="fa fa-eye"></i></button> <button type="button" class="btn btn-xs btn-warning"
                   title="Edit this business details" style="margin-right: 5px" (click)="onEdit(item)"> <i
                     class="fa fa-pencil"></i></button><button type="button" class="btn btn-xs btn-danger"
                   title="Trash this Business details" (click)="onDelete(item)"> <i class="fa fa-trash"></i></button>
