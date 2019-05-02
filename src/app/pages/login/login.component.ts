@@ -31,6 +31,12 @@ export class LoginComponent implements OnInit {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(["dashboard"]);
+      let user = this.authenticationService.currentUserValue;
+      this.blockUI.start("Taking you home ....");
+      let email = user.user.email;
+      let password = user.password;
+      this.login(email, password);
+      ///  console.log(this.authenticationService.currentUserValue);
     }
   }
 
@@ -47,9 +53,20 @@ export class LoginComponent implements OnInit {
   //submit login
   public onSubmit(form: FormGroup) {
     this.blockUI.start("Taking you home ....");
+
+    let email = this.f.username.value;
+    let password = this.f.password.value;
+
+    this.login(email, password);
+  }
+
+  forgotPass() {
+    this.router.navigate(["forgotPassword"]);
+  }
+  login(email, password) {
     const postFormData = {
-      email: this.f.username.value,
-      password: this.f.password.value
+      email: email,
+      password: password
     };
     this.authenticationService
       .login(postFormData)
@@ -58,9 +75,9 @@ export class LoginComponent implements OnInit {
         data => {
           console.log(data);
           // this.router.navigate([this.returnUrl]);
-          // this.router.navigate(["dashboard"]);
+          this.router.navigate(["dashboard"]);
 
-          window.location.reload();
+          // window.location.reload();
 
           const firstname = data.user.firstname;
           this.blockUI.stop();
@@ -74,19 +91,12 @@ export class LoginComponent implements OnInit {
         },
         error => {
           console.log(error);
+          this.authenticationService.logout();
           this.blockUI.stop();
-          this.toastrService.error(
-            error.error.error.user_authentication[0],
-            "Login Unsuccessful",
-            {
-              timeOut: 10000
-            }
-          );
+          this.toastrService.error(error.statusText, "Login Unsuccessful", {
+            timeOut: 10000
+          });
         }
       );
-  }
-
-  forgotPass() {
-    this.router.navigate(["forgotPassword"]);
   }
 }

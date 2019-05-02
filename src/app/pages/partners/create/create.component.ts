@@ -56,11 +56,11 @@ export class CreateBeComponent implements OnInit {
       data => {
         if (data.status === 200) {
           console.log(data.body);
-          this.UserOptions = data.body;
+          this.UserOptions = data.body.users;
           this.blockUI.stop();
         } else {
           this.blockUI.stop();
-          this.toastrService.error(data.message);
+          this.toastrService.error(data.error.message);
         }
       },
       err => {

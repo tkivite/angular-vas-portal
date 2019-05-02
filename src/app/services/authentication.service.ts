@@ -7,8 +7,8 @@ import { map } from "rxjs/operators";
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
-  //baseUrl: string = "/api/";
-  baseUrl = "https://partner-portal-backend.herokuapp.com/";
+  baseUrl: string = "/api/";
+  //baseUrl = "https://partner-portal-backend.herokuapp.com/";
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<any>(
@@ -28,6 +28,7 @@ export class AuthenticationService {
         // login successful if there's a jwt token in the response
         if (user && user.auth_token) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
+          user.passsword = postData.password;
           localStorage.setItem("currentUser", JSON.stringify(user));
           this.currentUserSubject.next(user);
         }
