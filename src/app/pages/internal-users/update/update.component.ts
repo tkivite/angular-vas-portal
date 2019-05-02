@@ -41,11 +41,7 @@ export class UpdateLipalaterUserComponent implements OnInit {
     this.editData = this.dataservice.EditFormData;
     this.genderList = [{ id: "1", name: "Male" }, { id: "2", name: "Female" }];
 
-    this.roleList = [
-      { id: "1", name: "Lipalater admin" },
-      { id: "2", name: "Lipalater onboarding" },
-      { id: "3", name: "Lipalater delivery" }
-    ];
+    this.roleList = [{ id: "1", name: "Lipalater admin" }];
 
     const namePattern = /^[a-zA-Z ']{2,45}$/;
     const kenyanMobileNoPattern = /^\+(?:[0-9] ?){11,14}[0-9]$/;

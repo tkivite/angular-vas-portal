@@ -222,6 +222,9 @@
                   <small class="text-danger"
                     *ngIf="beFormAdd.get('creditDurationInDays').touched && beFormAdd.get('creditDurationInDays').hasError('required')">Number
                     of branches is a required field</small>
+                  <small class="text-danger" *ngIf="beFormAdd.get('creditDurationInDays').invalid"> Number Must be in
+                    range
+                  </small>
 
                 </div>
               </div>

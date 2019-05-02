@@ -112,7 +112,10 @@ export class CreateBeComponent implements OnInit {
         ])
       ],
       paymentTerms: ["", Validators.compose([Validators.required])],
-      creditDurationInDays: ["", Validators.compose([CustomValidators.number])],
+      creditDurationInDays: [
+        "",
+        Validators.compose([CustomValidators.number, CustomValidators.min(0)])
+      ],
       accountManager: [""],
       selectedItems: [null],
       orgSpeciality: [""]

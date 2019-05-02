@@ -119,6 +119,9 @@
                         <small class="text-danger"
                           *ngIf="storeFormEdit.get('storeDisburseEmail').touched && storeFormEdit.get('storeDisburseEmail').hasError('required')">Disburse
                           Email is required</small>
+                        <small class="text-danger"
+                          *ngIf="storeFormEdit.get('storeDisburseEmail').touched && storeFormEdit.get('storeDisburseEmail').hasError('email')">Invalid
+                          email address</small>
                       </div>
                     </div>
 
@@ -135,6 +138,9 @@
                         <small class="text-danger"
                           *ngIf="storeFormEdit.get('storeDisburseEmail1').touched && storeFormEdit.get('storeDisburseEmail1').hasError('required')">Disburse
                           Email CC1 is required</small>
+                        <small class="text-danger"
+                          *ngIf="storeFormEdit.get('storeDisburseEmail1').touched && storeFormEdit.get('storeDisburseEmail1').hasError('email')">Invalid
+                          email address</small>
                       </div>
                     </div>
                     <div class="row form-group">
@@ -150,6 +156,9 @@
                         <small class="text-danger"
                           *ngIf="storeFormEdit.get('storeDisburseEmail2').touched && storeFormEdit.get('storeDisburseEmail2').hasError('required')">Disburse
                           Email CC2 is required</small>
+                        <small class="text-danger"
+                          *ngIf="storeFormEdit.get('storeDisburseEmail2').touched && storeFormEdit.get('storeDisburseEmail2').hasError('email')">Invalid
+                          email address</small>
                       </div>
                     </div>
 
@@ -186,7 +195,7 @@
                     </div>
 
                     <div class="row form-group">
-                      <label class="control-label col-sm-3" for="title"> <span class="float-right"> Store Target:
+                      <label class="control-label col-sm-3" for="title"> <span class="float-right"> Store Target (KES):
                         </span></label>
                       <div class="col-sm-7">
                         <input type="text" formControlName="storeTarget" class="form-control"
@@ -197,6 +206,14 @@
                         <small class="text-danger"
                           *ngIf="storeFormEdit.get('storeTarget').touched && storeFormEdit.get('storeTarget').hasError('required')">Target
                           is required</small>
+                        <small class="text-danger" *ngIf="storeFormEdit.get('storeTarget').invalid"> store target
+                          must be a number
+                        </small>
+
+                        <small class="text-danger" *ngIf="storeFormEdit.get('storeTarget').invalid"> Must be a valid
+                          number
+                        </small>
+
                       </div>
                     </div>
 
@@ -215,11 +232,19 @@
                           *ngIf="storeFormEdit.get('numberOfEmployees').touched && storeFormEdit.get('numberOfEmployees').hasError('required')">Number
                           of Employees
                           is required</small>
+                        <small class="text-danger" *ngIf="storeFormEdit.get('numberOfEmployees').invalid"> number of
+                          employees must be a number
+                        </small>
+                        <small class="text-danger" *ngIf="storeFormEdit.get('numberOfEmployees').invalid"> Must be a
+                          valid
+                          number
+                        </small>
                       </div>
                     </div>
 
                     <div class="row form-group">
-                      <label class="control-label col-sm-3" for="title"> <span class="float-right"> Monthly Revenue:
+                      <label class="control-label col-sm-3" for="title"> <span class="float-right"> Monthly Revenue
+                          (KES):
                         </span></label>
                       <div class="col-sm-7">
                         <input type="number" formControlName="monthlyRevenue" class="form-control"
@@ -232,6 +257,12 @@
                           *ngIf="storeFormEdit.get('monthlyRevenue').touched && storeFormEdit.get('monthlyRevenue').hasError('required')">Monthly
                           Revenue
                           is required
+                        </small>
+                        <small class="text-danger" *ngIf="storeFormEdit.get('monthlyRevenue').invalid"> number of
+                          employees must be a number
+                        </small>
+                        <small class="text-danger" *ngIf="storeFormEdit.get('monthlyRevenue').invalid"> Must be a valid
+                          number
                         </small>
                       </div>
                     </div>
@@ -431,7 +462,7 @@
                       <div class="col-sm-7">
                         <input type="text" formControlName="storeBankAccount" class="form-control"
                           [ngClass]="{ 'is-invalid': submitted && f.storeBankAccount.errors }"
-                          placeholder="bank account name" />
+                          placeholder="bank account number" />
                         <div *ngIf="submitted && f.storeBankAccount.errors" class="invalid-feedback">
                           <div *ngIf="f.storeBankAccount.errors.required">Mobile is required</div>
                         </div>
@@ -451,7 +482,7 @@
                       <div class="col-sm-7">
                         <input type="text" formControlName="storeBankAccountName" class="form-control"
                           [ngClass]="{ 'is-invalid': submitted && f.storeBankAccountName.errors }"
-                          placeholder="contact phone number 2547......." />
+                          placeholder="bank account number" />
                         <div *ngIf="submitted && f.storeBankAccountName.errors" class="invalid-feedback">
                           <div *ngIf="f.storeBankAccountName.errors.required">Mobile is required</div>
                         </div>
@@ -529,17 +560,21 @@
                           Mpesa Paybill Number </small>
                       </div>
                     </div>
+
                     <!--End of Mpesa Details-->
 
                   </ng-template>
                 </ngb-tab>
               </ngb-tabset>
+
+
               <div class="row form-group">
                 <div class="col-sm-3"></div>
                 <div class="col-sm-7">
                   <div class="float-right ">
+
                     <button class="btn btn-danger " type="cancel" style="margin-right: 10px;
-      min-width: 100px;" routerLink="/stores/">Cancel</button>
+                      min-width: 100px;" routerLink="/stores/">Cancel</button>
                     <button [disabled]="storeFormEdit.invalid" class="btn btn-success " type="submit"
                       style="min-width: 100px;">Submit</button>
                   </div>

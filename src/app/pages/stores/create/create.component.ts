@@ -44,7 +44,7 @@ export class CreateStoreComponent implements OnInit {
     this.dataservice.fetchData("partners").subscribe(
       data => {
         if (data.status === 200) {
-          console.log(data.body);
+          console.log(data.body.partners);
           this.PartnerOptions = data.body.partners;
           this.blockUI.stop();
         } else {
@@ -68,7 +68,10 @@ export class CreateStoreComponent implements OnInit {
         ])
       ],
       storeLocation: ["", Validators.compose([Validators.required])],
-      storeTarget: [""],
+      storeTarget: [
+        "",
+        Validators.compose([CustomValidators.number, CustomValidators.min(0)])
+      ],
       storeDisburseEmail: [
         "",
         Validators.compose([Validators.required, CustomValidators.email])
@@ -112,8 +115,14 @@ export class CreateStoreComponent implements OnInit {
 
       storeCode: ["", Validators.compose([Validators.required])],
       city: ["", Validators.compose([Validators.required])],
-      numberOfEmployees: ["", Validators.compose([CustomValidators.number])],
-      monthlyRevenue: ["", Validators.compose([CustomValidators.number])]
+      numberOfEmployees: [
+        "",
+        Validators.compose([CustomValidators.number, CustomValidators.min(0)])
+      ],
+      monthlyRevenue: [
+        "",
+        Validators.compose([CustomValidators.number, CustomValidators.min(0)])
+      ]
     });
     this.activeInactive = "ENABLED";
   }

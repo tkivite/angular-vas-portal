@@ -44,8 +44,7 @@ export class UpdateUserComponent implements OnInit {
 
     this.roleList = [
       { id: "1", name: "Store user" },
-      { id: "2", name: "Store admin" },
-      { id: "3", name: "Partner admin" }
+      { id: "2", name: "Store admin" }
     ];
 
     const namePattern = /^[a-zA-Z ']{2,45}$/;

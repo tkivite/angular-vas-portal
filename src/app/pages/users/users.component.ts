@@ -94,6 +94,8 @@ export class UsersComponent implements OnInit {
     this.dataservice.EditFormData = data;
     this.router.navigate(["users/update"]);
   }
+  //.then((confirmed) => console.log('User confirmed:', confirmed))
+  //.catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   onDelete(record) {
     this.confirmationDialogService
       .confirm(
@@ -104,7 +106,7 @@ export class UsersComponent implements OnInit {
         console.log(record);
         this.blockUI.start("Deleting User ........");
 
-        this.dataservice.deleteRecord("users", record.id).subscribe(
+        this.dataservice.deleteRecord("users/stores", record.id).subscribe(
           data => {
             console.log(data);
             if (data.status === 200) {
