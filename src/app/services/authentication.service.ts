@@ -8,16 +8,19 @@ import { environment } from "../../environments/environment";
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
-  baseUrl: string;
-  //baseUrl = "https://partner-portal-backend.herokuapp.com/";
+  //baseUrl: string;
+  baseUrl = "https://partner-portal-backend.herokuapp.com/";
 
   constructor(private http: HttpClient) {
     console.log(environment.apiUrl);
+    console.log(environment);
+    console.log(environment.production);
+    /*
     if (environment.production) {
       this.baseUrl = "https://partner-portal-backend.herokuapp.com/";
     } else {
       this.baseUrl = "/api/";
-    }
+    }*/
     this.currentUserSubject = new BehaviorSubject<any>(
       JSON.parse(localStorage.getItem("currentUser"))
     );

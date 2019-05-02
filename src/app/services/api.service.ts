@@ -19,7 +19,7 @@ export class ApiService {
   public EditFormData: any;
   public currentLoggedInUser: any;
   public router: Router;
-  baseUrl: any;
+  baseUrl = "https://partner-portal-backend.herokuapp.com/";
 
   constructor(
     private http: HttpClient,
@@ -28,12 +28,14 @@ export class ApiService {
   ) {
     this.router = router;
     console.log(environment.apiUrl);
-
+    console.log(environment);
+    console.log(environment.production);
+    /*
     if (environment.production) {
       this.baseUrl = "https://partner-portal-backend.herokuapp.com/";
     } else {
       this.baseUrl = "/api/";
-    }
+    }*/
 
     this.authenticationService.currentUser.subscribe(x => {
       this.currentUser = x;
