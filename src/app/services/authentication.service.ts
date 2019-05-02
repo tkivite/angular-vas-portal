@@ -1,24 +1,27 @@
 ﻿import { Injectable } from "@angular/core";
-import { environment } from "../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
+import { environment } from "../../environments/environment";
 
 @Injectable({ providedIn: "root" })
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
-
-  baseUrl = environment.apiUrl;
+  baseUrl: string;
+  //baseUrl = "https://partner-portal-backend.herokuapp.com/";
 
   constructor(private http: HttpClient) {
+    console.log(environment.apiUrl);
+    if (environment.production) {
+      this.baseUrl = "https://partner-portal-backend.herokuapp.com/";
+    } else {
+      this.baseUrl = "/api/";
+    }
     this.currentUserSubject = new BehaviorSubject<any>(
       JSON.parse(localStorage.getItem("currentUser"))
     );
     this.currentUser = this.currentUserSubject.asObservable();
-    if (environment.production) {
-      this.baseUrl = "https://partner-portal-backend.herokuapp.com/";
-    }
   }
 
   public get currentUserValue(): any {
@@ -26,8 +29,6 @@ export class AuthenticationService {
   }
 
   login(postData) {
-    console.log(environment.production);
-    console.log(this.baseUrl);
     return this.http.post<any>(this.baseUrl + "authenticate", postData).pipe(
       map(user => {
         console.log("from api" + user);
