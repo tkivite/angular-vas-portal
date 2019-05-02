@@ -1,4 +1,5 @@
 ﻿import { Injectable } from "@angular/core";
+import { environment } from "../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
@@ -7,8 +8,9 @@ import { map } from "rxjs/operators";
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
-  baseUrl: string = "/api/";
-  //baseUrl = "https://partner-portal-backend.herokuapp.com/";
+  //baseUrl: string = "/api/";
+  baseUrl = environment.apiUrl;
+  ///baseUrl = "https://partner-portal-backend.herokuapp.com/";
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<any>(
