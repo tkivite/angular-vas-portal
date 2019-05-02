@@ -21,6 +21,8 @@ export class ApiService {
   public currentLoggedInUser: any;
   public router: Router;
 
+  baseUrl = environment.apiUrl;
+
   constructor(
     private http: HttpClient,
     router: Router,
@@ -40,8 +42,11 @@ export class ApiService {
         this.router.navigate(["login"]);
       }
     });
+    if (environment.production) {
+      this.baseUrl = "https://partner-portal-backend.herokuapp.com/";
+    }
   }
-  baseUrl = environment.apiUrl;
+
   //baseUrl = "https://partner-portal-backend.herokuapp.com/";
   fetchData(resource, searchKey = "", page = 1): Observable<any> {
     return this.http
@@ -149,7 +154,9 @@ export class ApiService {
     return (error: any): Observable<T> => {
       if (error.status === 401) {
         this.router.navigate(["login"]);
-        return;
+        //return;
+        this.authenticationService.logout();
+        location.reload(true);
         //console.error(error); // log to console
       } else {
         return of(result as T);

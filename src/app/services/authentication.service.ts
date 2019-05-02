@@ -8,15 +8,17 @@ import { map } from "rxjs/operators";
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
-  //baseUrl: string = "/api/";
+
   baseUrl = environment.apiUrl;
-  ///baseUrl = "https://partner-portal-backend.herokuapp.com/";
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<any>(
       JSON.parse(localStorage.getItem("currentUser"))
     );
     this.currentUser = this.currentUserSubject.asObservable();
+    if (environment.production) {
+      this.baseUrl = "https://partner-portal-backend.herokuapp.com/";
+    }
   }
 
   public get currentUserValue(): any {
@@ -24,6 +26,8 @@ export class AuthenticationService {
   }
 
   login(postData) {
+    console.log(environment.production);
+    console.log(this.baseUrl);
     return this.http.post<any>(this.baseUrl + "authenticate", postData).pipe(
       map(user => {
         console.log("from api" + user);
