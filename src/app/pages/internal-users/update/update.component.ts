@@ -30,6 +30,7 @@ export class UpdateLipalaterUserComponent implements OnInit {
   public genderList: any;
   public roleList: any;
   public editData: any;
+  saveErrors: any;
 
   constructor(
     router: Router,
@@ -148,7 +149,7 @@ export class UpdateLipalaterUserComponent implements OnInit {
         .subscribe(
           data => {
             if (data.status === 200) {
-              this.router.navigate(["users"]);
+              this.router.navigate(["lipalater-users"]);
               this.blockUI.stop();
               this.toastrService.success("User Record updated successfully");
             } else {
@@ -163,6 +164,7 @@ export class UpdateLipalaterUserComponent implements OnInit {
               "Something Went Wrong, We could not complete the request"
             );
             console.log(err);
+            this.saveErrors = err.error.message || err.error.error;
             this.blockUI.stop();
             this.toastrService.error(
               "Something Went Wrong, We could not complete the request"
@@ -184,6 +186,6 @@ export class UpdateLipalaterUserComponent implements OnInit {
   }
   // On List
   onList() {
-    this.router.navigate(["users"]);
+    this.router.navigate(["lipalater-users"]);
   }
 }
