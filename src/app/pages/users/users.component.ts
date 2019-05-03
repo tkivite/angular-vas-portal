@@ -106,7 +106,7 @@ export class UsersComponent implements OnInit {
         console.log(record);
         this.blockUI.start("Deleting User ........");
 
-        this.dataservice.deleteRecord("users/stores", record.id).subscribe(
+        this.dataservice.deleteRecord("users", record.id).subscribe(
           data => {
             console.log(data);
             if (data.status === 200) {
