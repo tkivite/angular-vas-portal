@@ -29,7 +29,7 @@ export class CreateLipalaterUserComponent implements OnInit {
   public storeOptions: any;
   public genderList: any;
   public roleList: any;
-
+  saveErrors: any;
   constructor(
     router: Router,
     fb: FormBuilder,
@@ -135,7 +135,7 @@ export class CreateLipalaterUserComponent implements OnInit {
       this.dataservice.postData("users", postFormData).subscribe(
         data => {
           if (data.status === 201) {
-            this.router.navigate(["users"]);
+            this.router.navigate(["lipalater-users"]);
             this.blockUI.stop();
             this.toastrService.success("User Record created successfully");
           } else {
@@ -150,6 +150,7 @@ export class CreateLipalaterUserComponent implements OnInit {
             "Something Went Wrong, We could not complete the request"
           );
           console.log(err);
+          this.saveErrors = err.error.message || err.error.error;
           this.blockUI.stop();
           this.toastrService.error(
             "Something Went Wrong, We could not complete the request"
@@ -171,6 +172,6 @@ export class CreateLipalaterUserComponent implements OnInit {
   }
   // On List
   onList() {
-    this.router.navigate(["users"]);
+    this.router.navigate(["lipalater-users"]);
   }
 }

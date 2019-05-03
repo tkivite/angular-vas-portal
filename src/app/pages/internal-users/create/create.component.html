@@ -37,6 +37,14 @@
             <form autocomplete="off" [formGroup]="userFormAdd" (ngSubmit)="onAddSubmit(userFormAdd)"
               class="col-md-11 form-horizontal">
 
+              <div class="row form-group" *ngIf="saveErrors">
+                <div class="alert alert-bg alert-warning">
+                  Errors! {{saveErrors}}
+
+                </div>
+              </div>
+
+
 
               <div class="row form-group">
 
