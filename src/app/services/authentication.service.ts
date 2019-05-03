@@ -8,8 +8,8 @@ import { environment } from "../../environments/environment";
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
-  //baseUrl: string;
-  baseUrl = "https://partner-portal-backend.herokuapp.com/";
+  //baseUrl = "https://partner-portal-backend.herokuapp.com/";
+  baseUrl = "/api/";
 
   constructor(private http: HttpClient) {
     console.log(environment.apiUrl);

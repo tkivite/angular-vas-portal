@@ -19,7 +19,8 @@ export class ApiService {
   public EditFormData: any;
   public currentLoggedInUser: any;
   public router: Router;
-  baseUrl = "https://partner-portal-backend.herokuapp.com/";
+  //baseUrl = "https://partner-portal-backend.herokuapp.com/";
+  baseUrl = "/api/";
 
   constructor(
     private http: HttpClient,
