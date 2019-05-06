@@ -128,7 +128,7 @@ export class ChangePasswordComponent {
             this.blockUI.stop();
             // this.toastrService.error(data.message);
             this.toastrService.error(
-              "We could not find a user with search credentials"
+              "Link not valid or expired. Try generating a new link"
             );
             this.fsubmittedwitherrors = true;
           } else {
