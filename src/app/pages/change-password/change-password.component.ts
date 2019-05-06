@@ -1,4 +1,3 @@
-import { ApiService } from "../../services/api.service";
 import { AuthenticationService } from "../../services/authentication.service";
 import { Component, ViewEncapsulation } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
@@ -38,12 +37,12 @@ export class ChangePasswordComponent {
     router: Router,
     fb: FormBuilder,
     public toastrService: ToastrService,
-    public dataService: ApiService,
     private route: ActivatedRoute,
     private authenticationService: AuthenticationService
   ) {
     this.router = router;
     this.authenticationService.logout();
+    localStorage.removeItem("currentUser");
 
     //const passpattern = /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[d]){1,})(?=(.*[W]){1,})(?!.*s).{8,}$/;
     // "^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{8,20}$";
@@ -100,7 +99,7 @@ export class ChangePasswordComponent {
         new_password: form.value.password
       };
 
-      this.dataService.changepassword(postdata).subscribe(
+      this.authenticationService.changepassword(postdata).subscribe(
         data => {
           if (data.status === 200) {
             // this.toastrService.success(data.message);
