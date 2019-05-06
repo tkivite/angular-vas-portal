@@ -617,3 +617,10 @@ ngb-tabset>.nav-tabs {
 .intl-tel-input {
   width: 100%;
 }
+
+.btn-huge {
+  height: 100px;
+  padding-top: 30px;
+  font-size: 22px;
+
+}

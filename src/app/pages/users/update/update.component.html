@@ -34,58 +34,64 @@
 
             <div class="col-md-1"></div>
 
-            <form autocomplete="off" [formGroup]="userFormEdit" (ngSubmit)="onAddSubmit(userFormEdit)"
-              class="col-md-11 form-horizontal">
-
-              <div class="row form-group" *ngIf="saveErrors">
-                <div class="alert alert-bg alert-warning">
-                  Errors! {{saveErrors}}
-
-                </div>
-              </div>
+            <ngb-tabset>
+              <ngb-tab title="Update User Details">
+                <ng-template ngbTabContent>
 
 
-              <div class="row form-group">
+                  <form autocomplete="off" [formGroup]="userFormEdit" (ngSubmit)="onAddSubmit(userFormEdit)"
+                    class="col-md-11 form-horizontal">
 
-                <label class="control-label col-sm-3" for="inputName">First Name</label>
-                <div class="col-sm-7">
-                  <input formControlName="firstname" class="form-control validation-field" placeholder="First Name"
-                    type="text">
-                  <small class="text-danger"
-                    *ngIf="userFormEdit.get('firstname').touched && userFormEdit.get('firstname').hasError('required')">First
-                    Name is required</small>
-                  <small class="text-danger"
-                    *ngIf="userFormEdit.get('firstname').touched && userFormEdit.get('firstname').hasError('pattern')">Invalid
-                    First Name</small>
-                  <small class="text-danger"
-                    *ngIf="userFormEdit.get('firstname').touched && userFormEdit.get('firstname').hasError('minlength')">First
-                    Name should be at least 3 characters</small>
-                  <small class="text-danger"
-                    *ngIf="userFormEdit.get('firstname').touched && userFormEdit.get('firstname').hasError('maxlength')">First
-                    Name should be at most 45 characters</small>
-                </div>
-              </div>
-              <div class="row form-group">
 
-                <label class="control-label col-sm-3" for="inputName">Last Name</label>
-                <div class="col-sm-7">
-                  <input formControlName="lastname" class="form-control validation-field" placeholder="Last Name"
-                    type="text">
-                  <small class="text-danger"
-                    *ngIf="userFormEdit.get('lastname').touched && userFormEdit.get('lastname').hasError('required')">Last
-                    Name is required</small>
-                  <small class="text-danger"
-                    *ngIf="userFormEdit.get('lastname').touched && userFormEdit.get('lastname').hasError('pattern')">Invalid
-                    Last Name</small>
-                  <small class="text-danger"
-                    *ngIf="userFormEdit.get('lastname').touched && userFormEdit.get('lastname').hasError('minlength')">Last
-                    Name should be at least 3 characters</small>
-                  <small class="text-danger"
-                    *ngIf="userFormEdit.get('lastname').touched && userFormEdit.get('lastname').hasError('maxlength')">Last
-                    Name should be at most 45 characters</small>
-                </div>
-              </div>
-              <!---- <div class="row form-group">
+                    <div class="row form-group" *ngIf="saveErrors">
+                      <div class="alert alert-bg alert-warning">
+                        Errors! {{saveErrors}}
+
+                      </div>
+                    </div>
+
+
+                    <div class="row form-group">
+
+                      <label class="control-label col-sm-3" for="inputName">First Name</label>
+                      <div class="col-sm-7">
+                        <input formControlName="firstname" class="form-control validation-field"
+                          placeholder="First Name" type="text">
+                        <small class="text-danger"
+                          *ngIf="userFormEdit.get('firstname').touched && userFormEdit.get('firstname').hasError('required')">First
+                          Name is required</small>
+                        <small class="text-danger"
+                          *ngIf="userFormEdit.get('firstname').touched && userFormEdit.get('firstname').hasError('pattern')">Invalid
+                          First Name</small>
+                        <small class="text-danger"
+                          *ngIf="userFormEdit.get('firstname').touched && userFormEdit.get('firstname').hasError('minlength')">First
+                          Name should be at least 3 characters</small>
+                        <small class="text-danger"
+                          *ngIf="userFormEdit.get('firstname').touched && userFormEdit.get('firstname').hasError('maxlength')">First
+                          Name should be at most 45 characters</small>
+                      </div>
+                    </div>
+                    <div class="row form-group">
+
+                      <label class="control-label col-sm-3" for="inputName">Last Name</label>
+                      <div class="col-sm-7">
+                        <input formControlName="lastname" class="form-control validation-field" placeholder="Last Name"
+                          type="text">
+                        <small class="text-danger"
+                          *ngIf="userFormEdit.get('lastname').touched && userFormEdit.get('lastname').hasError('required')">Last
+                          Name is required</small>
+                        <small class="text-danger"
+                          *ngIf="userFormEdit.get('lastname').touched && userFormEdit.get('lastname').hasError('pattern')">Invalid
+                          Last Name</small>
+                        <small class="text-danger"
+                          *ngIf="userFormEdit.get('lastname').touched && userFormEdit.get('lastname').hasError('minlength')">Last
+                          Name should be at least 3 characters</small>
+                        <small class="text-danger"
+                          *ngIf="userFormEdit.get('lastname').touched && userFormEdit.get('lastname').hasError('maxlength')">Last
+                          Name should be at most 45 characters</small>
+                      </div>
+                    </div>
+                    <!---- <div class="row form-group">
 
                             <label class="control-label col-sm-3" for="inputName">User Name</label>
                                                          <div class="col-sm-7">
@@ -96,35 +102,37 @@
                             <small class="text-danger" *ngIf="userFormEdit.get('userName').touched && userFormEdit.get('userName').hasError('maxlength')">Last Name should be at most 45 characters</small>
                         </div>
                     </div>-->
-              <div class="row form-group">
+                    <div class="row form-group">
 
-                <label class="control-label col-sm-3" for="inputName">Email</label>
-                <div class="col-sm-7">
-                  <input formControlName="email" class="form-control validation-field" placeholder="Email" type="email">
-                  <small class="text-danger"
-                    *ngIf="userFormEdit.get('email').touched && userFormEdit.get('email').hasError('required')">Email is
-                    required</small>
-                  <small class="text-danger"
-                    *ngIf="userFormEdit.get('email').touched && userFormEdit.get('email').hasError('email')">Invalid
-                    email address</small>
-                </div>
-              </div>
+                      <label class="control-label col-sm-3" for="inputName">Email</label>
+                      <div class="col-sm-7">
+                        <input formControlName="email" class="form-control validation-field" placeholder="Email"
+                          type="email">
+                        <small class="text-danger"
+                          *ngIf="userFormEdit.get('email').touched && userFormEdit.get('email').hasError('required')">Email
+                          is
+                          required</small>
+                        <small class="text-danger"
+                          *ngIf="userFormEdit.get('email').touched && userFormEdit.get('email').hasError('email')">Invalid
+                          email address</small>
+                      </div>
+                    </div>
 
-              <div class="row form-group">
+                    <div class="row form-group">
 
-                <label class="control-label col-sm-3" for="inputName">Id Number</label>
-                <div class="col-sm-7">
-                  <input formControlName="id_number" class="form-control validation-field" placeholder="Id Number"
-                    type="id_number">
-                  <small class="text-danger"
-                    *ngIf="userFormEdit.get('id_number').touched && userFormEdit.get('id_number').hasError('required')">Id
-                    Number is required</small>
-                  <small class="text-danger"
-                    *ngIf="userFormEdit.get('id_number').touched && userFormEdit.get('id_number').hasError('id_number')">Id
-                    Number</small>
-                </div>
-              </div>
-              <!--<div class="row form-group">
+                      <label class="control-label col-sm-3" for="inputName">Id Number</label>
+                      <div class="col-sm-7">
+                        <input formControlName="id_number" class="form-control validation-field" placeholder="Id Number"
+                          type="id_number">
+                        <small class="text-danger"
+                          *ngIf="userFormEdit.get('id_number').touched && userFormEdit.get('id_number').hasError('required')">Id
+                          Number is required</small>
+                        <small class="text-danger"
+                          *ngIf="userFormEdit.get('id_number').touched && userFormEdit.get('id_number').hasError('id_number')">Id
+                          Number</small>
+                      </div>
+                    </div>
+                    <!--<div class="row form-group">
 
                 <label class="control-label col-sm-3" for="inputName">Phone Number</label>
                 <div class="col-sm-7">
@@ -139,88 +147,128 @@
                 </div>
               </div> -->
 
-              <div class="row form-group">
+                    <div class="row form-group">
 
-                <label class="control-label col-sm-3" for="inputName">Phone Number</label>
-                <div class="col-sm-7">
+                      <label class="control-label col-sm-3" for="inputName">Phone Number</label>
+                      <div class="col-sm-7">
 
-                  <ngx-intl-tel-input [cssClass]="' custom form-control '" [preferredCountries]="['ke', 'rw']"
-                    placeholder="722XXXXXX" [enableAutoCountrySelect]="true" name="phone" formControlName="mobile">
-                  </ngx-intl-tel-input>
-                  <small class="text-danger" *ngIf="userFormEdit.get('mobile').invalid">Phone
-                    Number Format should be 7XXXXXXXX </small>
-
-
-
-                </div>
-              </div>
-              <div class="row form-group">
-
-                <label class="control-label col-sm-3" for="inputName"></label>
-                <div class="col-sm-7">
-
-                  <input value={{userFormEdit.value.mobile.internationalNumber}} readonly
-                    class="form-control validation-field">
+                        <ngx-intl-tel-input [cssClass]="' custom form-control '" [preferredCountries]="['ke', 'rw']"
+                          placeholder="722XXXXXX" [enableAutoCountrySelect]="true" name="phone"
+                          formControlName="mobile">
+                        </ngx-intl-tel-input>
+                        <small class="text-danger" *ngIf="userFormEdit.get('mobile').invalid">Phone
+                          Number Format should be 7XXXXXXXX </small>
 
 
-                </div>
-              </div>
-              <div class="row form-group">
 
-                <label class="control-label col-sm-3" for="inputContacts">Gender</label>
-                <div class="col-sm-7">
-                  <select formControlName="gender" class="form-control validation-field">
-                    <option value="">Select Gender</option>
-                    <option *ngFor="let o of genderList" [value]="o.id">{{o.name}}</option>
-                  </select>
-                  <small class="text-danger"
-                    *ngIf="userFormEdit.get('gender').touched && userFormEdit.get('gender').hasError('required')">Gender
-                    is required</small>
-                </div>
-              </div>
+                      </div>
+                    </div>
+                    <div class="row form-group">
 
-              <div class="row form-group">
+                      <label class="control-label col-sm-3" for="inputName"></label>
+                      <div class="col-sm-7">
 
-                <label class="control-label col-sm-3" for="inputContacts">Store</label>
-                <div class="col-sm-7">
-                  <select formControlName="store_id" class="form-control validation-field">
-                    <option value="">Select Store</option>
-                    <option *ngFor="let o of storeOptions" [value]="o.id">{{o.name}}</option>
-                  </select>
-                  <small class="text-danger"
-                    *ngIf="userFormEdit.get('store_id').touched && userFormEdit.get('store_id').hasError('required')">Store
-                    is required</small>
-                </div>
-              </div>
-              <div class="row form-group">
-                <label class="control-label col-sm-3" for="inputName">Role</label>
-                <div class="col-sm-7">
-                  <select formControlName="role" class="form-control validation-field" id="inputStatus">
-                    <option value="">Select Role</option>
-                    <option *ngFor="let o of roleList" [value]="o.name">{{o.name}}</option>
-                  </select>
-                  <small class="text-danger"
-                    *ngIf="userFormEdit.get('role').touched && userFormEdit.get('role').hasError('required')">Language
-                    is required</small>
-                </div>
-              </div>
+                        <input value={{userFormEdit.value.mobile.internationalNumber}} readonly
+                          class="form-control validation-field">
 
 
-              <!---   <div class="row align-roles-right">
+                      </div>
+                    </div>
+                    <div class="row form-group">
+
+                      <label class="control-label col-sm-3" for="inputContacts">Gender</label>
+                      <div class="col-sm-7">
+                        <select formControlName="gender" class="form-control validation-field">
+                          <option value="">Select Gender</option>
+                          <option *ngFor="let o of genderList" [value]="o.id">{{o.name}}</option>
+                        </select>
+                        <small class="text-danger"
+                          *ngIf="userFormEdit.get('gender').touched && userFormEdit.get('gender').hasError('required')">Gender
+                          is required</small>
+                      </div>
+                    </div>
+
+                    <div class="row form-group">
+
+                      <label class="control-label col-sm-3" for="inputContacts">Store</label>
+                      <div class="col-sm-7">
+                        <select formControlName="store_id" class="form-control validation-field">
+                          <option value="">Select Store</option>
+                          <option *ngFor="let o of storeOptions" [value]="o.id">{{o.name}}</option>
+                        </select>
+                        <small class="text-danger"
+                          *ngIf="userFormEdit.get('store_id').touched && userFormEdit.get('store_id').hasError('required')">Store
+                          is required</small>
+                      </div>
+                    </div>
+                    <div class="row form-group">
+                      <label class="control-label col-sm-3" for="inputName">Role</label>
+                      <div class="col-sm-7">
+                        <select formControlName="role" class="form-control validation-field" id="inputStatus">
+                          <option value="">Select Role</option>
+                          <option *ngFor="let o of roleList" [value]="o.name">{{o.name}}</option>
+                        </select>
+                        <small class="text-danger"
+                          *ngIf="userFormEdit.get('role').touched && userFormEdit.get('role').hasError('required')">Language
+                          is required</small>
+                      </div>
+                    </div>
+
+
+                    <!---   <div class="row align-roles-right">
                     <button [disabled]="!userFormEdit.valid" class="btn btn-danger" type="submit">Submit</button>
                 </div>-->
-              <div class="row form-group">
-                <div class="col-sm-3"></div>
-                <div class="col-sm-7">
-                  <div class="float-right ">
-                    <button class="btn btn-danger " type="cancel" style="margin-right: 10px;
+                    <div class="row form-group">
+                      <div class="col-sm-3"></div>
+                      <div class="col-sm-7">
+                        <div class="float-right ">
+                          <button class="btn btn-danger " type="cancel" style="margin-right: 10px;
     min-width: 100px;" routerLink="/users/">Cancel</button>
-                    <button [disabled]="userFormEdit.invalid" class="btn btn-success " type="submit"
-                      style="min-width: 100px;">Submit</button>
-                  </div>
-                </div>
-              </div>
-            </form>
+                          <button [disabled]="userFormEdit.invalid" class="btn btn-success " type="submit"
+                            style="min-width: 100px;">Submit</button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </ng-template>
+              </ngb-tab>
+
+              <ngb-tab title="Resend Password Link">
+                <ng-template ngbTabContent>
+                  <form>
+
+                    <fieldset>
+                      <p *ngIf="!editData.active_status">
+                        The button below will generate a new password link and send to this user
+                      </p>
+
+                      <div class="row form-group" *ngIf="!editData.active_status">
+                        <label class="control-label col-sm-3" for="inputName"></label>
+                        <div class="col-sm-7">
+                          <button class="btn btn-lg btn-success" (click)="resendPasswordLink(editData.email)"
+                            style="min-width: 100px;">Resend
+                            New Password Link</button>
+
+                        </div>
+                      </div>
+                      <div class="row form-group" *ngIf="editData.active_status">
+                        <label class="control-label col-sm-3" for="inputName"></label>
+                        <div class="col-sm-7">
+                          <div class="alert alert-lg alert-info">
+                            The user is active. You are not allowed to reset password for active users. They can do it
+                            by clicking forgot password on the login screen.
+                          </div>
+
+                        </div>
+                      </div>
+                    </fieldset>
+                  </form>
+                </ng-template>
+              </ngb-tab>
+            </ngb-tabset>
+
+
+
             <div *ngIf="errorMessage !== 'SHOWERROR'" class="alert alert-danger alert-dismissible fade show"
               role="alert">
               <button aria-label="Close" class="close" data-dismiss="alert" type="button">

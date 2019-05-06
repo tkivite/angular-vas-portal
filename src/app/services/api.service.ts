@@ -51,7 +51,6 @@ export class ApiService {
       }
     });
   }
-
   fetchData(resource, searchKey = "", page = 1): Observable<any> {
     return this.http
       .get<any>(
@@ -98,6 +97,12 @@ export class ApiService {
   }
   forgotpassword(payload): Observable<any> {
     return this.http.post<any>(this.baseUrl + "passwords/forgot", payload, {
+      headers: this.headers,
+      observe: "response"
+    });
+  }
+  resendpassword(payload): Observable<any> {
+    return this.http.post<any>(this.baseUrl + "passwords/resend", payload, {
       headers: this.headers,
       observe: "response"
     });

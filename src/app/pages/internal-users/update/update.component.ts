@@ -32,6 +32,11 @@ export class UpdateLipalaterUserComponent implements OnInit {
   public editData: any;
   saveErrors: any;
 
+  public fsubmitted = false;
+  public rsubmitted = false;
+  public fsubmittedwitherrors = false;
+  public userMobileNumber;
+
   constructor(
     router: Router,
     fb: FormBuilder,
@@ -42,7 +47,10 @@ export class UpdateLipalaterUserComponent implements OnInit {
     this.editData = this.dataservice.EditFormData;
     this.genderList = [{ id: "1", name: "Male" }, { id: "2", name: "Female" }];
 
-    this.roleList = [{ id: "1", name: "Lipalater admin" }];
+    this.roleList = [
+      { id: "1", name: "Lipalater admin" },
+      { id: "2", name: "Lipalater_delivery" }
+    ];
 
     const namePattern = /^[a-zA-Z ']{2,45}$/;
     const kenyanMobileNoPattern = /^\+(?:[0-9] ?){11,14}[0-9]$/;
@@ -125,6 +133,52 @@ export class UpdateLipalaterUserComponent implements OnInit {
   }
   get f() {
     return this.userFormEdit.controls;
+  }
+
+  resendPasswordLink(email) {
+    this.blockUI.start("Submitting Resend Link Request");
+    this.errorMessage = "SHOWERROR";
+    const postdata = {
+      email: email
+    };
+
+    this.dataservice.resendpassword(postdata).subscribe(
+      data => {
+        if (data.status === 200) {
+          // this.toastrService.success(data.message);
+          //this.router.navigate(["login"]);
+          this.blockUI.stop();
+          this.toastrService.success(
+            "Request submitted successfully, User will receive an email with instructions"
+          );
+          this.fsubmitted = true;
+        } else {
+          // this.toastrService.error(data.message);
+          this.blockUI.stop();
+          // this.toastrService.error(data.message);
+          this.toastrService.error("There was a problem posting the request");
+        }
+      },
+      err => {
+        console.log("Something Went Wrong, We could not complete the request");
+        console.log(err);
+        this.blockUI.stop();
+
+        if (err.status === 404) {
+          // this.toastrService.error(data.message);
+          this.blockUI.stop();
+          // this.toastrService.error(data.message);
+          this.toastrService.error(
+            "We could not find a user with search credentials"
+          );
+          this.fsubmittedwitherrors = true;
+        } else {
+          this.toastrService.error(
+            "Something Went Wrong, We could not complete the request"
+          );
+        }
+      }
+    );
   }
   // Submitting Add Entity
   public onAddSubmit(form: FormGroup) {
