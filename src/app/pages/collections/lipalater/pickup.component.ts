@@ -98,7 +98,7 @@ export class StaffPickupComponent {
 
   public onSubmit(form: FormGroup) {
     if (form.valid) {
-      this.blockUI.start("Submitting Forgot Password");
+      this.blockUI.start("Submitting Pickup");
       this.errorMessage = "SHOWERROR";
       const postdata = {
         id_number: form.value.idNumber,
