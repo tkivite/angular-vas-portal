@@ -34,6 +34,7 @@
             <th>IdNumber</th>
             <th>Store</th>
             <th>Roles</th>
+            <th>Status</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -46,6 +47,7 @@
             <td>{{item.id_number}}</td>
             <td>{{item.store.name}}</td>
             <td>{{item.role}}</td>
+            <td>{{(item.active_status)?'Active':'Inactive'}}</td>
             <td>
 
               <div class="float-right" *ngIf="!(item.email == currentUser.user.email)">

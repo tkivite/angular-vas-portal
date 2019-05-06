@@ -40,7 +40,7 @@
             <td>{{item.email}}</td>
             <td>{{item.mobile}}</td>
             <td>{{item.location}}</td>
-            <td>{{(item.speciality).replace("|",' , ')}}</td>
+            <td>{{(item.speciality).split("|").join(" , ")}}</td>
             <td>
               <div class="float-right">
                 <!-- <button type="button" class="btn btn-xxs btn-info" title="Edit this business details"

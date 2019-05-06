@@ -40,7 +40,10 @@ export class CreateLipalaterUserComponent implements OnInit {
 
     this.genderList = [{ id: "1", name: "Male" }, { id: "2", name: "Female" }];
 
-    this.roleList = [{ id: "1", name: "Lipalater admin" }];
+    this.roleList = [
+      { id: "1", name: "Lipalater admin" },
+      { id: "2", name: "Lipalater_delivery" }
+    ];
 
     const namePattern = /^[a-zA-Z ']{2,45}$/;
     const kenyanMobileNoPattern = /^\+(?:[0-9] ?){6,14}[0-9]$/;

@@ -217,7 +217,7 @@ export class StaffPickupComponent {
             this.blockUI.stop();
             // this.toastrService.error(data.message);
             this.toastrService.error(
-              "We could not find an item for that id number "
+              "We could not find an items for lipalater staff pick up "
             );
             this.fsubmittedwitherrors = true;
           } else {

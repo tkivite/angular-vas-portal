@@ -32,6 +32,11 @@ export class UpdateUserComponent implements OnInit {
   public editData: any;
   saveErrors: any;
 
+  public fsubmitted = false;
+  public rsubmitted = false;
+  public fsubmittedwitherrors = false;
+  public userMobileNumber;
+
   constructor(
     router: Router,
     fb: FormBuilder,
@@ -130,6 +135,51 @@ export class UpdateUserComponent implements OnInit {
     return this.userFormEdit.controls;
   }
   // Submitting Add Entity
+  resendPasswordLink(email) {
+    this.blockUI.start("Submitting Resend Link Request");
+    this.errorMessage = "SHOWERROR";
+    const postdata = {
+      email: email
+    };
+
+    this.dataservice.resendpassword(postdata).subscribe(
+      data => {
+        if (data.status === 200) {
+          // this.toastrService.success(data.message);
+          //this.router.navigate(["login"]);
+          this.blockUI.stop();
+          this.toastrService.success(
+            "Request submitted successfully, User will receive an email with instructions"
+          );
+          this.fsubmitted = true;
+        } else {
+          // this.toastrService.error(data.message);
+          this.blockUI.stop();
+          // this.toastrService.error(data.message);
+          this.toastrService.error("There was a problem posting the request");
+        }
+      },
+      err => {
+        console.log("Something Went Wrong, We could not complete the request");
+        console.log(err);
+        this.blockUI.stop();
+
+        if (err.status === 404) {
+          // this.toastrService.error(data.message);
+          this.blockUI.stop();
+          // this.toastrService.error(data.message);
+          this.toastrService.error(
+            "We could not find a user with search credentials"
+          );
+          this.fsubmittedwitherrors = true;
+        } else {
+          this.toastrService.error(
+            "Something Went Wrong, We could not complete the request"
+          );
+        }
+      }
+    );
+  }
   public onAddSubmit(form: FormGroup) {
     if (form.valid) {
       this.errorMessage = "SHOWERROR";

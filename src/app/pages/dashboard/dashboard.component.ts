@@ -31,6 +31,7 @@ export class DashboardComponent implements OnInit {
   pending_count: any;
   collected_value: any;
   pending_value: any;
+  currentUser: any;
 
   loadingIndicator: any = false;
   title = "angulardatatables";
@@ -48,6 +49,9 @@ export class DashboardComponent implements OnInit {
     if (!this.authenticationService.currentUserValue) {
       this.router.navigate(["login"]);
     } else {
+      this.authenticationService.currentUser.subscribe(
+        x => (this.currentUser = x)
+      );
     }
   }
   ngOnInit() {
@@ -78,11 +82,19 @@ export class DashboardComponent implements OnInit {
         }
       },
       err => {
-        console.log("Something Went Wrong, We could not complete the request");
-        this.blockUI.stop();
-        this.toastrService.error(
-          "Something Went Wrong, We could not complete the request"
-        );
+        if (err.status === 401) {
+          this.router.navigate(["login"]);
+          this.blockUI.stop();
+          this.toastrService.error("Unauthorised");
+        } else {
+          console.log(
+            "Something Went Wrong, We could not complete the request"
+          );
+          this.blockUI.stop();
+          this.toastrService.error(
+            "Something Went Wrong, We could not complete the request"
+          );
+        }
       }
     );
   }
@@ -110,11 +122,19 @@ export class DashboardComponent implements OnInit {
         }
       },
       err => {
-        console.log("Something Went Wrong, We could not complete the request");
-
-        this.toastrService.error(
-          "Something Went Wrong, We could not complete the request"
-        );
+        if (err.status === 401) {
+          this.router.navigate(["login"]);
+          this.blockUI.stop();
+          this.toastrService.error("Unauthorised");
+        } else {
+          console.log(
+            "Something Went Wrong, We could not complete the request"
+          );
+          this.blockUI.stop();
+          this.toastrService.error(
+            "Something Went Wrong, We could not complete the request"
+          );
+        }
       }
     );
   }
