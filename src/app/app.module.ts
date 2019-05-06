@@ -1,5 +1,5 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { NgModule, enableProdMode } from "@angular/core";
 import { AngularFontAwesomeModule } from "angular-font-awesome";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { BsDropdownModule } from "ngx-bootstrap";
@@ -62,6 +62,8 @@ import { ChangePasswordComponent } from "./pages/change-password/change-password
 import { ForgotPasswordComponent } from "./pages/forgot-password/forgot-password.component";
 import { PickupComponent } from "./pages/collections/create/pickup.component";
 import { StaffPickupComponent } from "./pages/collections/lipalater/pickup.component";
+
+enableProdMode();
 
 @NgModule({
   declarations: [
@@ -126,6 +128,7 @@ import { StaffPickupComponent } from "./pages/collections/lipalater/pickup.compo
     //  { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     //  { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
+
   bootstrap: [AppComponent],
   entryComponents: [ConfirmationDialogComponent]
 })
