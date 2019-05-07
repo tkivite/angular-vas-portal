@@ -37,7 +37,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of data; let i = index" title="{{item.id}}">
+          <tr *ngFor="let item of data; let i = index" id="{{item.id}}">
             <td>{{item.name}}</td>
             <td>{{item.partner.name}}</td>
             <td>{{item.disburse_email}}</td>
