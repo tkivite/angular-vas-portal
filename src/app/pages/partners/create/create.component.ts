@@ -145,7 +145,7 @@ export class CreateBeComponent implements OnInit {
         email: form.value.orgEmail,
         location: form.value.orgLocation,
         telephone: form.value.orgTelephone,
-        mobile: form.value.orgMobile.internationalNumber,
+        mobile: form.value.orgMobile.internationalNumber.replace(/ /g, ""),
         year_of_incorporation: form.value.orgYearsOfOperation,
         name: form.value.orgName,
         speciality: this.selectedSpeciality

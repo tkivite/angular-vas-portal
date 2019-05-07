@@ -190,7 +190,7 @@ export class UpdateUserComponent implements OnInit {
         firstname: form.value.firstname,
         gender: form.value.gender,
         lastname: form.value.lastname,
-        mobile: form.value.mobile.internationalNumber,
+        mobile: form.value.mobile.internationalNumber.replace(/ /g, ""),
         username: form.value.email,
         password: "Admin101",
         role: form.value.role,
