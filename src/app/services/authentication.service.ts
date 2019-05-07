@@ -35,6 +35,18 @@ export class AuthenticationService {
       observe: "response"
     });
   }
+  forgotpassword(payload): Observable<any> {
+    return this.http.post<any>(this.baseUrl + "passwords/forgot", payload, {
+      headers: this.headers,
+      observe: "response"
+    });
+  }
+  fetchforgotpasswordcode(payload): Observable<any> {
+    return this.http.post<any>(this.baseUrl + "passwords/send_pin", payload, {
+      headers: this.headers,
+      observe: "response"
+    });
+  }
 
   login(postData) {
     return this.http.post<any>(this.baseUrl + "authenticate", postData).pipe(
