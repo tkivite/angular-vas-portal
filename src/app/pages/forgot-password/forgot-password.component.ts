@@ -1,4 +1,4 @@
-import { ApiService } from "../../services/api.service";
+//import { ApiService } from "../../services/api.service";
 import { AuthenticationService } from "../../services/authentication.service";
 import { Component, ViewEncapsulation } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
@@ -41,7 +41,7 @@ export class ForgotPasswordComponent {
     router: Router,
     fb: FormBuilder,
     public toastrService: ToastrService,
-    public dataService: ApiService,
+    //public dataService: ApiService,
     private route: ActivatedRoute,
     private authenticationService: AuthenticationService
   ) {
@@ -102,7 +102,7 @@ export class ForgotPasswordComponent {
         pin: form.value.forgotPasswordCode
       };
 
-      this.dataService.forgotpassword(postdata).subscribe(
+      this.authenticationService.forgotpassword(postdata).subscribe(
         data => {
           if (data.status === 200) {
             // this.toastrService.success(data.message);
@@ -151,7 +151,7 @@ export class ForgotPasswordComponent {
         email: form.value.userName
       };
 
-      this.dataService.fetchforgotpasswordcode(postdata).subscribe(
+      this.authenticationService.fetchforgotpasswordcode(postdata).subscribe(
         data => {
           console.log(data);
           if (data.status === 201) {

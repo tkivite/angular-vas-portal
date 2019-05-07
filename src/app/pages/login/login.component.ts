@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private dataservice: ApiService,
+    //private dataservice: ApiService,
     public toastrService: ToastrService,
     public alertService: ToastrService,
     private authenticationService: AuthenticationService
@@ -41,9 +41,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.toastrService.warning("Please Login to proceed", "Unauthorised", {
-      timeOut: 5000
-    });
+    this.toastrService.warning("Please Login to proceed", "Unauthorised");
     this.loginForm = this.formBuilder.group({
       username: ["", Validators.compose([Validators.required])],
       password: ["", Validators.compose([Validators.required])]
@@ -64,6 +62,7 @@ export class LoginComponent implements OnInit {
   }
 
   forgotPass() {
+    console.log("clicked forgot");
     this.router.navigate(["forgotPassword"]);
   }
   login(email, password) {
