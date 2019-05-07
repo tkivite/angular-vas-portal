@@ -135,6 +135,7 @@
               <th>Customer Phone</th> -->
               <th>Store</th>
               <th>Pickup type</th>
+              <th>Date Added</th>
             </tr>
           </thead>
           <tbody>
@@ -145,7 +146,9 @@
               <!-- <td>{{item.customer_id_number}} </td>
               <td>{{item.customer_phone_number}}</td> -->
               <td>{{item.store}}</td>
-              <td>{{(item.pick_up_type =='store_pickup')?'customer pick up':'lipalater pick up'}}</td>
+              <td>{{(item.pick_up_type =='store_pick_up')?'customer pick up':'lipalater pick up'}}</td>
+              <td>{{item.created_at | date}}</td>
+
 
             </tr>
 
@@ -176,6 +179,7 @@
               <th>item</th>
               <th>Colected By</th>
               <th>Store</th>
+              <th>Date Collected</th>
             </tr>
           </thead>
           <tbody>
@@ -187,6 +191,7 @@
               <td>{{item.item}}</td>
               <td>{{item.collected_by_name}} Id: {{item.collected_by_id_number}}</td>
               <td>{{item.store}}</td>
+              <td>{{item.created_at | date}}</td>
             </tr>
 
           </tbody>
