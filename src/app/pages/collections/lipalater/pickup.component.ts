@@ -97,57 +97,63 @@ export class StaffPickupComponent {
   }
 
   public onSubmit(form: FormGroup) {
-    if (form.valid) {
-      this.blockUI.start("Submitting Pickup");
-      this.errorMessage = "SHOWERROR";
-      const postdata = {
-        id_number: form.value.idNumber,
-        verification_code: form.value.verificationCode,
-        selected_items: this.selectedItems,
-        pickup_notes: form.value.pickupNotes,
-        item_code: this.selectedCodes,
-        pickup_type: "customer",
-        collected_by_name: this.user_collecting
-      };
+    if (this.selectedCodes.length > 0) {
+      if (form.valid) {
+        this.blockUI.start("Submitting Pickup");
+        this.errorMessage = "SHOWERROR";
+        const postdata = {
+          id_number: form.value.idNumber,
+          verification_code: form.value.verificationCode,
+          selected_items: this.selectedItems,
+          pickup_notes: form.value.pickupNotes,
+          item_code: this.selectedCodes,
+          pickup_type: "customer",
+          collected_by_name: this.user_collecting
+        };
 
-      this.dataService.completepickup(postdata).subscribe(
-        data => {
-          console.log(data);
-          if (data.status === 200) {
-            this.blockUI.stop();
-            this.toastrService.success("Pickup has been saved! awesome!");
-            this.fsubmitted = true;
-            this.router.navigate(["collections"]);
-          } else {
-            // this.toastrService.error(data.message);
-            this.blockUI.stop();
-            // this.toastrService.error(data.message);
-            this.toastrService.error(
-              "There was a problem processing your pickup request"
-            );
-          }
-        },
-        err => {
-          console.log(
-            "Something Went Wrong, We could not complete the request"
-          );
-          console.log(err);
-          this.blockUI.stop();
-
-          if (err.status === 404) {
-            // this.toastrService.error(data.message);
-            this.blockUI.stop();
-            // this.toastrService.error(data.message);
-            this.toastrService.error(
-              "Unable to validate code for thet id number"
-            );
-            this.fsubmittedwitherrors = true;
-          } else {
-            this.toastrService.error(
+        this.dataService.completepickup(postdata).subscribe(
+          data => {
+            console.log(data);
+            if (data.status === 200) {
+              this.blockUI.stop();
+              this.toastrService.success("Pickup has been saved! awesome!");
+              this.fsubmitted = true;
+              this.router.navigate(["collections"]);
+            } else {
+              // this.toastrService.error(data.message);
+              this.blockUI.stop();
+              // this.toastrService.error(data.message);
+              this.toastrService.error(
+                "There was a problem processing your pickup request"
+              );
+            }
+          },
+          err => {
+            console.log(
               "Something Went Wrong, We could not complete the request"
             );
+            console.log(err);
+            this.blockUI.stop();
+
+            if (err.status === 404) {
+              // this.toastrService.error(data.message);
+              this.blockUI.stop();
+              // this.toastrService.error(data.message);
+              this.toastrService.error(
+                "Unable to validate code for thet id number"
+              );
+              this.fsubmittedwitherrors = true;
+            } else {
+              this.toastrService.error(
+                "Something Went Wrong, We could not complete the request"
+              );
+            }
           }
-        }
+        );
+      }
+    } else {
+      this.toastrService.warning(
+        "No item selected. You have to select one or more items to complete pickup "
       );
     }
   }

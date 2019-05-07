@@ -139,7 +139,7 @@ export class PickupComponent {
               this.blockUI.stop();
               // this.toastrService.error(data.message);
               this.toastrService.error(
-                "Unable to validate code for thet id number"
+                "Unable to validate code for that id number"
               );
               this.fsubmittedwitherrors = true;
             } else {
