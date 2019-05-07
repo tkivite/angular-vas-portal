@@ -25,24 +25,28 @@
           <tr>
             <th></th>
             <th>Customer</th>
-            <th>Cust ID</th>
-            <th>Customer Mobile</th>
+            <!--  <th>Cust ID</th>
+            <th>Customer Mobile</th> -->
             <th>Item</th>
             <th>Delivery Option</th>
             <th>Store</th>
             <th>Status</th>
+            <th>Date Added</th>
+            <th>Date Collected</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let item of data; let i = index" title={{item.id}}>
             <td>{{i+1}}</td>
             <td>{{item.customer_names}}</td>
-            <td>{{item.customer_id_number}}</td>
-            <td>{{item.customer_phone_number}}</td>
+            <!-- <td>{{item.customer_id_number}}</td>
+            <td>{{item.customer_phone_number}}</td> -->
             <td>{{item.item_description}}</td>
-            <td>{{(item.pick_up_type =='store_pickup')?'customer pick up':'lipalater pick up'}}</td>
+            <td>{{(item.pick_up_type =='store_pick_up')?'customer pick up':'lipalater pick up'}}</td>
             <td>{{item.store}}</td>
             <td>{{item.status}}</td>
+            <td>{{item.created_at | date}}</td>
+            <td>{{item.updated_at | date}}</td>
 
           </tr>
         </tbody>
