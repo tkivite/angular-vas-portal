@@ -96,7 +96,7 @@ export class PickupComponent {
   }
 
   public onSubmit(form: FormGroup) {
-    if (this.selectedCodes.length > 0) {
+    if (this.selectedItems.length > 0) {
       if (form.valid) {
         this.blockUI.start("Completing Pickup");
         this.errorMessage = "SHOWERROR";
