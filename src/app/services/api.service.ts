@@ -163,7 +163,7 @@ export class ApiService {
     return (error: any): Observable<T> => {
       if (error.status === 401) {
         this.router.navigate(["login"]);
-        return;
+        return of(result as T);
         //console.error(error); // log to console
       } else {
         return of(result as T);

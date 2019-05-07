@@ -41,6 +41,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.toastrService.warning("Please Login to proceed", "Unauthorised", {
+      timeOut: 5000
+    });
     this.loginForm = this.formBuilder.group({
       username: ["", Validators.compose([Validators.required])],
       password: ["", Validators.compose([Validators.required])]

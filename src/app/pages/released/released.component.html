@@ -30,6 +30,7 @@
             <th>Item</th>
             <th>Delivery Option</th>
             <th>Store</th>
+            <th>Amount</th>
             <th>Status</th>
             <th>Date Collected</th>
           </tr>
@@ -43,6 +44,7 @@
             <td>{{item.item_description}}</td>
             <td>{{(item.pick_up_type =='store_pickup')?'customer pick up':'lipalater pick up'}}</td>
             <td>{{item.store}}</td>
+            <td>{{item.buying_price}}</td>
             <td>{{item.status}}</td>
             <td>{{item.created_at | date}}</td>
 

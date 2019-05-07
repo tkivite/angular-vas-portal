@@ -35,12 +35,13 @@
             <th>Item</th>
             <th>Delivery Option</th>
             <th>Store</th>
+            <th>Amount</th>
             <th>Status</th>
             <th>Date Added</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of data; let i = index" title={{item.id}}>
+          <tr *ngFor="let item of data; let i = index" id={{item.id}}>
             <td>{{i+1}}</td>
             <td>{{item.customer_names}}</td>
             <!-- <td>{{item.customer_id_number}}</td>
@@ -48,6 +49,7 @@
             <td>{{item.item_description}}</td>
             <td>{{(item.pick_up_type =='store_pick_up')?'customer pick up':'lipalater pick up'}}</td>
             <td>{{item.store}}</td>
+            <td>{{item.buying_price}}</td>
             <td>{{item.status}}</td>
             <td>{{item.created_at | date}}</td>
 
