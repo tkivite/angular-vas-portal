@@ -624,3 +624,7 @@ ngb-tabset>.nav-tabs {
   font-size: 22px;
 
 }
+
+.display-4 {
+  font-size: 2rem;
+}
