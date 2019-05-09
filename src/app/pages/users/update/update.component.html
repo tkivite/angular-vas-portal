@@ -180,7 +180,7 @@
                       <div class="col-sm-7">
                         <select formControlName="gender" class="form-control validation-field">
                           <option value="">Select Gender</option>
-                          <option *ngFor="let o of genderList" [value]="o.id">{{o.name}}</option>
+                          <option *ngFor="let o of genderList" [value]="o.name">{{o.name}}</option>
                         </select>
                         <small class="text-danger"
                           *ngIf="userFormEdit.get('gender').touched && userFormEdit.get('gender').hasError('required')">Gender
