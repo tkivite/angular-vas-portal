@@ -42,7 +42,8 @@ export class CreateLipalaterUserComponent implements OnInit {
 
     this.roleList = [
       { id: "1", name: "Lipalater admin" },
-      { id: "2", name: "Lipalater_delivery" }
+      { id: "2", name: "Lipalater_delivery" },
+      { id: "3", name: "Lipalater_cro" }
     ];
 
     const namePattern = /^[a-zA-Z ']{2,45}$/;
