@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule, PreloadAllModules } from "@angular/router";
 import { SalesComponent } from "./pages/sales/sales.component";
+import { ShoppersComponent } from "./pages/supermarkets/shoppers.component";
 import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 import { NotificationsComponent } from "./pages/notifications/notifications.component";
 import { CollectionsComponent } from "./pages/collections/collections.component";
@@ -42,6 +43,7 @@ const routes: Routes = [
   { path: "forgotPassword", component: ForgotPasswordComponent },
 
   { path: "sales", component: SalesComponent },
+  { path: "shoppers", component: ShoppersComponent },
   { path: "pending", component: PendingComponent },
   { path: "partners", component: PartnerComponent },
   { path: "partners/create", component: CreateBeComponent },
