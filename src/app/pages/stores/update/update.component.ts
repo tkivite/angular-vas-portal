@@ -171,6 +171,12 @@ export class UpdateStoreComponent implements OnInit {
   }
   // Submitting Store
   public onEditSubmit(form: FormGroup) {
+    let contact_mobile = "";
+    if (form.value.storeContactMobile)
+      contact_mobile = form.value.storeContactMobile.internationalNumber.replace(
+        / /g,
+        ""
+      );
     if (form.valid) {
       this.errorMessage = "SHOWERROR";
       this.blockUI.start("Updating Store....");
@@ -181,11 +187,13 @@ export class UpdateStoreComponent implements OnInit {
         location: form.value.storeLocation,
         manager: form.value.storeManager,
         manager_email: form.value.storeManagerEmail,
-        manager_phone: form.value.storeManagerMobile.internationalNumber,
+        manager_phone: form.value.storeManagerMobile.internationalNumber.replace(
+          / /g,
+          ""
+        ),
         contact_person: form.value.storeContact,
         contact_person_email: form.value.storeContactEmail,
-        contact_person_mobile:
-          form.value.storeContactMobile.internationalNumber,
+        contact_person_mobile: contact_mobile,
         disburse_email: form.value.storeDisburseEmail,
         disburse_email_cc1: form.value.storeDisburseEmail1,
         disburse_email_cc2: form.value.storeDisburseEmail2,

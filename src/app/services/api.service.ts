@@ -10,6 +10,7 @@ import { catchError } from "rxjs/operators";
 import { AuthenticationService } from "./authentication.service";
 import { headersToString } from "selenium-webdriver/http";
 import { Router } from "@angular/router";
+import { environment } from "../../environments/environment";
 
 @Injectable()
 export class ApiService {
@@ -18,6 +19,8 @@ export class ApiService {
   public EditFormData: any;
   public currentLoggedInUser: any;
   public router: Router;
+  baseUrl = "https://partner-portal-backend.herokuapp.com/";
+  //baseUrl = "/api/";
 
   constructor(
     private http: HttpClient,
@@ -25,6 +28,15 @@ export class ApiService {
     private authenticationService: AuthenticationService
   ) {
     this.router = router;
+    console.log(environment.apiUrl);
+    console.log(environment);
+    console.log(environment.production);
+    /*
+    if (environment.production) {
+      this.baseUrl = "https://partner-portal-backend.herokuapp.com/";
+    } else {
+      this.baseUrl = "/api/";
+    }*/
 
     this.authenticationService.currentUser.subscribe(x => {
       this.currentUser = x;
@@ -39,8 +51,6 @@ export class ApiService {
       }
     });
   }
-  //baseUrl = "/api/";
-  baseUrl = "https://partner-portal-backend.herokuapp.com/";
   fetchData(resource, searchKey = "", page = 1): Observable<any> {
     return this.http
       .get<any>(
@@ -153,7 +163,7 @@ export class ApiService {
     return (error: any): Observable<T> => {
       if (error.status === 401) {
         this.router.navigate(["login"]);
-        return;
+        return of(result as T);
         //console.error(error); // log to console
       } else {
         return of(result as T);

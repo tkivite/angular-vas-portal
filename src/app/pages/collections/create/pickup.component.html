@@ -94,7 +94,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let item of customerItems; let i = index" title={{item.id}}>
+                      <tr *ngFor="let item of customerItems; let i = index" id={{item.id}}>
                         <td><input type="checkbox" value="{{item.id}}" (change)="itemSelected($event)" /> </td>
                         <td>{{item.customer_names}}</td>
                         <td>{{item.item_description}}</td>
@@ -131,10 +131,10 @@
 
                 <div class="form-group" *ngIf="fsubmittedwitherrors">
 
-                  <h3>No Item was found</h3>
+                  <h3>Validation Failed</h3>
 
                   <div class="alert alert-md alert-danger">
-                    We could not find a pending item with that id number.
+                    Unable to validate code for that id number
 
                   </div>
 

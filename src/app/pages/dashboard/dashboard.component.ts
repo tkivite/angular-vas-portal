@@ -62,46 +62,61 @@ export class DashboardComponent implements OnInit {
     this.blockUI.start("Loading dashboard");
 
     this.loadingIndicator = true;
-    this.dataservice.fetchData("dashboard/onboarding").subscribe(
-      data => {
-        console.log(data);
-        if (data.status === 200) {
-          console.log(data.body);
-          this.data = data.body;
-          this.partners = data.body.partners;
-          this.stores = data.body.stores;
-          this.store_users = data.body.store_users;
-          this.internal_users = data.body.internal_users;
-          this.getSales();
-          this.blockUI.stop();
-        } else {
-          this.blockUI.stop();
-          this.toastrService.error(
-            "Something Went Wrong, We could not complete the request"
-          );
+    if (
+      this.currentUser.user.role == "Lipalater admin" ||
+      this.currentUser.user.role == "Lipalater Super admin"
+    ) {
+      this.dataservice.fetchData("dashboard/onboarding").subscribe(
+        data => {
+          console.log(data);
+          if (data.status === 200) {
+            console.log(data.body);
+            this.data = data.body;
+            this.partners = data.body.partners;
+            this.stores = data.body.stores;
+            this.store_users = data.body.store_users;
+            this.internal_users = data.body.internal_users;
+            this.getSales();
+            this.blockUI.stop();
+          } else {
+            this.blockUI.stop();
+            this.toastrService.error(
+              "Something Went Wrong, We could not complete the request"
+            );
+          }
+        },
+        err => {
+          if (err.status === 401) {
+            this.router.navigate(["login"]);
+            this.blockUI.stop();
+            this.toastrService.error("Unauthorised");
+          } else {
+            console.log(
+              "Something Went Wrong, We could not complete the request"
+            );
+            this.blockUI.stop();
+            this.toastrService.error(
+              "Something Went Wrong, We could not complete the request"
+            );
+          }
         }
-      },
-      err => {
-        if (err.status === 401) {
-          this.router.navigate(["login"]);
-          this.blockUI.stop();
-          this.toastrService.error("Unauthorised");
-        } else {
-          console.log(
-            "Something Went Wrong, We could not complete the request"
-          );
-          this.blockUI.stop();
-          this.toastrService.error(
-            "Something Went Wrong, We could not complete the request"
-          );
-        }
-      }
-    );
+      );
+    } else {
+      this.getSales();
+    }
   }
 
   getSales() {
     this.loadingIndicator = true;
-    this.dataservice.fetchData("dashboard/sales").subscribe(
+    let endpoint = "dashboard/salesbystore";
+    if (
+      this.currentUser.user.role == "Lipalater admin" ||
+      this.currentUser.user.role == "Lipalater Super admin"
+    ) {
+      endpoint = "dashboard/sales";
+    }
+
+    this.dataservice.fetchData(endpoint).subscribe(
       data => {
         console.log(data);
         if (data.status === 200) {
