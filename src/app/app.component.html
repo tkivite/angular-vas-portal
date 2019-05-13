@@ -93,6 +93,47 @@
 
 
       </ngb-accordion>
+
+
+      <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0,ngb-panel-1,ngb-panel-2" class="panel-group">
+        <ngb-panel class="panel-default">
+          <ng-template ngbPanelTitle class="panel-heading">
+            <h4 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true"
+                aria-controls="collapseOne">
+                Supermarkets
+              </a>
+            </h4>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <ul class="list-group list-group-flush">
+
+              <li class="list-group-item">
+                <a class="nav-link sales-link" routerLink="/shoppers">Shoppers
+                  <i class="fa fa-shopping-basket" style="color:#88b840"></i>
+                </a>
+              </li>
+              <li class="list-group-item">
+                <a class="nav-link sales-link" routerLink="/invoicing">Invoicing
+                  <i class="fa fa-list" style="color:#88b840"></i>
+                </a>
+              </li>
+
+
+
+            </ul>
+          </ng-template>
+          <ng-template ngbPanelTitle class="panel-heading">
+            <h4 class="panel-title">
+              <a role="button" data-toggle="collapse" aria-expanded="true" aria-controls="">
+                Navigation
+              </a>
+            </h4>
+          </ng-template>
+        </ngb-panel>
+
+
+      </ngb-accordion>
       <hr />
     </div><!-- container -->
   </nav>
