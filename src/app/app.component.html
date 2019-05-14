@@ -71,7 +71,7 @@
 
 
               <li class="list-group-item">
-                <a class="nav-link released-link" routerLink="/released">Released Items
+                <a class="nav-link released-link" routerLink="/released">Collected Items
                   <i class="fa fa-sign-out" style="color:#88b840"></i>
                 </a>
               </li>
@@ -108,7 +108,8 @@
           <ng-template ngbPanelContent>
             <ul class="list-group list-group-flush">
 
-              <li class="list-group-item">
+              <li class="list-group-item"
+                *ngIf="currentUser.user.role == 'Lipalater_cro' || currentUser.user.role == 'Lipalater admin' || currentUser.user.role == 'Lipalater Super admin'">
                 <a class="nav-link sales-link" routerLink="/shoppers">Shoppers
                   <i class="fa fa-shopping-basket" style="color:#88b840"></i>
                 </a>
@@ -174,7 +175,7 @@
             </li>
             <li class="nav-item">
               <a class="top-link released-link" routerLink="/released">
-                <i class="fa fa-sign-out" style="color:#88b840"></i> Released
+                <i class="fa fa-sign-out" style="color:#88b840"></i> Collected
               </a>
             </li>
 
