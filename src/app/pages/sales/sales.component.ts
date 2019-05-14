@@ -138,4 +138,41 @@ export class SalesComponent implements OnInit {
     this.current_page = i;
     this.getData(this.searchKey, i);
   }
+
+  public daterange: any = {};
+
+  /*private selectedDate(value: any) {
+    this.daterange.start = value.start;
+    this.daterange.end = value.end;
+  }*/
+
+  // expected output is an object containing the event and the picker.
+  // your method can be named whaterver you want.
+  // you can add multiple params to the method and pass them in the template
+  public calendarCanceled(e: any) {
+    console.log(e);
+    // e.event
+    // e.picker
+  }
+
+  public calendarApplied(e: any) {
+    console.log(e);
+    // e.event
+    // e.picker
+    console.log(this.daterange.start);
+    console.log(this.daterange.end);
+  }
+
+  public selectedDate(value: any, datepicker?: any) {
+    // this is the date the iser selected
+    console.log(value);
+    console.log(datepicker);
+    console.log(datepicker.startDate.format("YYYY-MM-DD"));
+    console.log(datepicker.endDate.format("YYYY-MM-DD"));
+    datepicker.start = value.start;
+    datepicker.end = value.end;
+    this.daterange.start = value.start;
+    this.daterange.end = value.end;
+    this.daterange.label = value.label;
+  }
 }

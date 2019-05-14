@@ -4,6 +4,7 @@ import { AngularFontAwesomeModule } from "angular-font-awesome";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { BsDropdownModule } from "ngx-bootstrap";
 import { NgxIntlTelInputModule } from "ngx-intl-tel-input";
+import { Daterangepicker } from "ng2-daterangepicker";
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DataTablesModule } from "angular-datatables";
@@ -118,6 +119,7 @@ enableProdMode();
     BlockUIModule.forRoot(),
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(),
+    Daterangepicker,
     NgMultiSelectDropDownModule.forRoot(),
     BsDropdownModule.forRoot(),
     NgxIntlTelInputModule,
