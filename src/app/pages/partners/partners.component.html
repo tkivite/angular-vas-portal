@@ -10,7 +10,7 @@
         <div class="col-sm-2"></div>
         <div class="col-sm-4">
           <div class="input-group search-box">
-            <input type="text" [(ngModel)]="searchKey" class="form-control search-input"
+            <input class="form-control" readonly type="text" [(ngModel)]="searchKey" class="form-control search-input"
               placeholder="Search this content">
             <div class="input-group-append">
               <button class="btn btn-info" type="button" (click)="onSearch()">
@@ -34,24 +34,99 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of data; let i = index" id={{item.id}}>
-            <td>{{((current_page-1)*page_size)+i+1}}</td>
-            <td>{{item.name}}</td>
-            <td>{{item.email}}</td>
-            <td>{{item.mobile}}</td>
-            <td>{{item.location}}</td>
-            <td>{{(item.speciality).split("|").join(" , ")}}</td>
-            <td>
-              <div class="float-right">
-                <!-- <button type="button" class="btn btn-xxs btn-info" title="Edit this business details"
+          <!-- <span *ngFor="let item of data; let i = index" id={{item.id}}> -->
+          <ng-template ngFor let-item [ngForOf]="data" let-i="index">
+            <tr (click)="toggleRecordDetails(item)">
+              <td>{{((current_page-1)*page_size)+i+1}}</td>
+              <td>{{item.name}}</td>
+              <td>{{item.email}}</td>
+              <td>{{item.mobile}}</td>
+              <td>{{item.location}}</td>
+              <td>{{(item.speciality).split("|").join(" , ")}}</td>
+              <td>
+                <div class="float-right">
+                  <!-- <button type="button" class="btn btn-xxs btn-info" title="Edit this business details"
                   style="margin-right: 5px" (click)="onView(item)"> <i class="fa fa-eye"></i></button> -->
-                <button type="button" class="btn btn-xs btn-warning" title="Edit this business details"
-                  style="margin-right: 5px" (click)="onEdit(item)"> <i class="fa fa-pencil"></i></button>
-                <!-- <button type="button" class="btn btn-xs btn-danger" title="Trash this Business details"
+                  <button type="button" class="btn btn-xs btn-warning" title="Edit this business details"
+                    style="margin-right: 5px" (click)="onEdit(item)"> <i class="fa fa-pencil"></i></button>
+                  <!-- <button type="button" class="btn btn-xs btn-danger" title="Trash this Business details"
                   (click)="onDelete(item)"> <i class="fa fa-trash"></i></button> -->
-              </div>
-            </td>
-          </tr>
+                </div>
+              </td>
+            </tr>
+
+            <tr *ngIf="item.showDetails">
+              <td colspan="7">
+                <p>
+                  <div>
+                    <div class="row form-heading">
+
+                      <h5 class="col-md-11">View Selected Partner Information</h5>
+                    </div>
+                    <hr>
+
+                    <table>
+
+                      <tr>
+                        <td></td>
+                        <td>
+                          <dl>
+                            <dt>Name</dt>
+                            <dd>{{item.name}}</dd>
+                            <dt>Location</dt>
+                            <dd>{{item.location}}</dd>
+                            <dt>Mobile</dt>
+                            <dd>{{item.mobile}}</dd>
+                            <dt>Email</dt>
+                            <dd>{{item.email}}</dd>
+                            <dt>Account Manager</dt>
+                            <dd>{{item.account_manager}}</dd>
+                          </dl>
+                        </td>
+                        <td>
+                          <dl>
+
+                            <dt>Telephone</dt>
+                            <dd>{{item.telephone}}</dd>
+                            <dt>Year of Incorporation</dt>
+                            <dd>{{item.year_of_incorporation}}</dd>
+                            <dt>Speciality</dt>
+                            <dd>{{item.speciality}}</dd>
+                            <dt>Number of branches</dt>
+                            <dd>{{item.no_of_branches}}</dd>
+                            <dt>Payment Terms</dt>
+                            <dd>{{item.payment_terms}}</dd>
+                            <dt>Credit duration</dt>
+                            <dd>{{item.credit_duration_in_days}}</dd>
+
+                          </dl>
+                        </td>
+                      </tr>
+                    </table>
+
+
+
+                    <dl>
+                      <dt></dt>
+                      <dd>
+                        <div class="float-right ">
+                          <a class="btn btn-danger " type="cancel" style="margin-right: 10px;
+                min-width: 100px;" (click)="toggleRecordDetails(item)">Cancel</a>
+                          <button class="btn btn-success " (click)="onEdit(item)" style="min-width: 100px;">Edit
+                            Partner</button>
+                        </div>
+                      </dd>
+                    </dl>
+
+
+
+
+
+                  </div>
+
+              </td>
+            </tr>
+          </ng-template>
         </tbody>
       </table>
 
@@ -88,6 +163,7 @@
           </ul>
         </nav>
       </div>
+
 
       <div *ngIf="total_records == 0">
         <div class="alert alert-lg alert-warning">No data available</div>

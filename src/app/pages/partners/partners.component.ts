@@ -152,4 +152,8 @@ export class PartnerComponent implements OnInit {
     this.current_page = i;
     this.getData(this.searchKey, i);
   }
+  toggleRecordDetails(item) {
+    if (item.showDetails) item.showDetails = false;
+    else item.showDetails = true;
+  }
 }
