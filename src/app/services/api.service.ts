@@ -83,6 +83,12 @@ export class ApiService {
       observe: "response"
     });
   }
+  updateOneRecord(resource, id, record): Observable<any> {
+    return this.http.put<any>(this.baseUrl + resource, record, {
+      headers: this.headers,
+      observe: "response"
+    });
+  }
   deleteRecord(resource, id): Observable<any> {
     return this.http.delete<any>(this.baseUrl + resource + "/" + id, {
       headers: this.headers,

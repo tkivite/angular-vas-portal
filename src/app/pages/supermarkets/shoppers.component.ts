@@ -83,10 +83,36 @@ export class ShoppersComponent implements OnInit {
     );
     // this.blockUI.stop();
   }
-  onEdit(data) {
+  onUpdate(data) {
     console.log(data);
-    this.dataservice.EditFormData = data;
-    this.router.navigate(["shoppers/update"]);
+    this.blockUI.start("Updating Record ........");
+    this.dataservice
+      .updateOneRecord("shoppers/update", data.id, data)
+      .subscribe(
+        data => {
+          console.log(data);
+          if (data.status === 200) {
+            console.log(data.body);
+            this.data = data.body;
+            this.blockUI.stop();
+            this.toastrService.success("Record has been updated");
+          } else {
+            this.blockUI.stop();
+            this.toastrService.error(
+              "Something Went Wrong, We could not complete the request"
+            );
+          }
+        },
+        err => {
+          console.log(
+            "Something Went Wrong, We could not complete the request"
+          );
+          this.blockUI.stop();
+          this.toastrService.error(
+            "Something Went Wrong, We could not complete the request"
+          );
+        }
+      );
   }
   onDelete(record) {
     console.log(record);
@@ -123,5 +149,11 @@ export class ShoppersComponent implements OnInit {
   loadPage(i) {
     this.current_page = i;
     this.getData(this.searchKey, i);
+  }
+  toggleRecordDetails(item) {
+    if (item.showDetails) item.showDetails = false;
+    else item.showDetails = true;
+
+    $("#togg").toggleClass("slidedown slideup");
   }
 }

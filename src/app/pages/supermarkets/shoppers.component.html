@@ -4,6 +4,10 @@
       <div class="widget-controls row">
         <div class="col-sm-6">
           <!-- <input type="text" value="" placeholder="" /> -->
+          <span class="panel-title">
+            <h5>All Shoppers</h5>
+
+          </span>
 
         </div>
         <div class=" col-sm-2"></div>
@@ -23,24 +27,119 @@
       <table class="table table-striped  table-sm row-border hover" *ngIf="total_records > 0">
         <thead>
           <tr>
-            <th></th>
+            <th style="min-width: 120px"></th>
             <th>Customer</th>
             <th>Store</th>
-            <th>Amount</th>
+            <th>Approved Amount</th>
+            <th>Utilized Amount</th>
             <th>Status</th>
             <th>Date Approved</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of data; let i = index" id={{item.id}}>
+          <ng-template ngFor let-item [ngForOf]="data" let-i="index">
+            <tr (click)="toggleRecordDetails(item)">
+              <td>
+                <div class="float-right"> <button type="button" class="btn btn-xs btn-warning"
+                    title="Edit this business details" style="margin-right: 5px"> <i class="fa fa-pencil"></i>
+                    Update</button>
+                  <!-- <button type="button" class="btn btn-xs btn-danger"
+                        title="Trash this Business details" (click)="onDelete(item)"> <i class="fa fa-trash"></i></button> -->
+                </div>
+              </td>
+
+              <td>{{item.customer_names}}</td>
+              <td>{{item.store}}</td>
+              <td>{{item.approved_amount}}</td>
+              <td>{{item.utilized_amount}}</td>
+              <td>{{item.status}}</td>
+              <td>{{item.created_at | date: 'medium'}}</td>
+
+            </tr>
+
+            <tr *ngIf="item.showDetails">
+              <td colspan="7">
+                <p>
+                  <div id="togg" class="slidedown">
+                    <div class="row form-heading">
+
+                      <h5 class="col-md-11">Detailed Shopper Information</h5>
+                    </div>
+                    <hr>
+
+                    <table>
+
+                      <tr>
+                        <td></td>
+                        <td>
+                          <dl>
+                            <dt>Name</dt>
+                            <dd>{{item.customer_names}}</dd>
+                            <dt>Id number</dt>
+                            <dd>{{item.id_number}}</dd>
+                            <dt>Mobile</dt>
+                            <dd>{{item.phone_number}}</dd>
+                            <dt>Email</dt>
+                            <dd>{{item.email}}</dd>
+                            <dt>Sales Agent</dt>
+                            <dd>{{item.sales_agent}}</dd>
+                          </dl>
+                        </td>
+                        <td>
+                          <dl>
+
+                            <dt>Store</dt>
+                            <dd>{{item.store}}</dd>
+                            <dt>Status</dt>
+                            <dd>{{item.status}}</dd>
+                            <dt>Verification Code</dt>
+                            <dd>{{item.verification_code}}</dd>
+                            <dt>Approved Amount</dt>
+                            <dd>{{item.approved_amount}}</dd>
+                            <dt>Utilized Amount</dt>
+                            <dd>
+                              <form name="utilized-amt"><input type="text" class="form-control" name="utilized_amount"
+                                  [(ngModel)]="item.utilized_amount" />
+
+                              </form>
+                            </dd>
+
+
+                          </dl>
+                        </td>
+                      </tr>
+                    </table>
+
+
+
+                    <dl>
+                      <dt></dt>
+                      <dd>
+                        <div class="float-right ">
+                          <a class="btn btn-danger " type="cancel" style="margin-right: 10px;
+                  min-width: 100px;" (click)="toggleRecordDetails(item)">Cancel</a>
+                          <button class="btn btn-success " (click)="onUpdate(item)" style="min-width: 100px;">Update
+                            Amount</button>
+                        </div>
+                      </dd>
+                    </dl>
+
+
+
+
+
+                  </div>
+
+              </td>
+            </tr>
+          </ng-template>
+          <!-- <tr *ngFor="let item of data; let i = index" id={{item.id}}>
 
             <td>
               <div class="float-right"> <button type="button" class="btn btn-xs btn-warning"
                   title="Edit this business details" style="margin-right: 5px" (click)="onEdit(item)"> <i
                     class="fa fa-pencil"></i> Update</button>
-                <!-- <button type="button" class="btn btn-xs btn-danger"
-              title="Trash this Business details" (click)="onDelete(item)"> <i class="fa fa-trash"></i></button> -->
-              </div>
+                    </div>
             </td>
 
             <td>{{item.customer_names}}</td>
@@ -49,7 +148,7 @@
             <td>{{item.status}}</td>
             <td>{{item.created_at | date: 'medium'}}</td>
 
-          </tr>
+          </tr> -->
         </tbody>
       </table>
 
