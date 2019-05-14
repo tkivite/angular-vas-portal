@@ -125,7 +125,7 @@ export class ShoppersComponent implements OnInit {
           console.log(data.body);
           this.data = data.body;
           this.blockUI.stop();
-          this.toastrService.success("Record has been trashed");
+          this.toastrService.success("Record has been updated");
         } else {
           this.blockUI.stop();
           this.toastrService.error(
@@ -154,6 +154,6 @@ export class ShoppersComponent implements OnInit {
     if (item.showDetails) item.showDetails = false;
     else item.showDetails = true;
 
-    $("#togg").toggleClass("slidedown slideup");
+    $("#togg").toggleClass("slideup slidedown");
   }
 }
