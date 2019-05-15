@@ -449,6 +449,14 @@ a[aria-expanded="true"] {
 
 }
 
+.form-inline .form-group {
+  margin-right: 10px;
+}
+
+.form-inline .form-control {
+  margin-left: 10px;
+}
+
 .card {
   overflow: hidden;
 }
@@ -503,6 +511,7 @@ app-collections,
 app-pickup,
 app-invoicing,
 app-shoppers,
+app-view,
 app-dashboard {
   width: 100%;
 }
