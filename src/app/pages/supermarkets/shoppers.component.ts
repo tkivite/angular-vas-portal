@@ -86,33 +86,29 @@ export class ShoppersComponent implements OnInit {
   onUpdate(data) {
     console.log(data);
     this.blockUI.start("Updating Record ........");
-    this.dataservice
-      .updateOneRecord("shoppers/update", data.id, data)
-      .subscribe(
-        data => {
-          console.log(data);
-          if (data.status === 200) {
-            console.log(data.body);
-            this.data = data.body;
-            this.blockUI.stop();
-            this.toastrService.success("Record has been updated");
-          } else {
-            this.blockUI.stop();
-            this.toastrService.error(
-              "Something Went Wrong, We could not complete the request"
-            );
-          }
-        },
-        err => {
-          console.log(
-            "Something Went Wrong, We could not complete the request"
-          );
+    this.dataservice.updateRecord("shoppers", data.id, data).subscribe(
+      data => {
+        console.log(data);
+        if (data.status === 200) {
+          console.log(data.body);
+          this.data = data.body;
+          this.blockUI.stop();
+          this.toastrService.success("Record has been updated");
+        } else {
           this.blockUI.stop();
           this.toastrService.error(
             "Something Went Wrong, We could not complete the request"
           );
         }
-      );
+      },
+      err => {
+        console.log("Something Went Wrong, We could not complete the request");
+        this.blockUI.stop();
+        this.toastrService.error(
+          "Something Went Wrong, We could not complete the request"
+        );
+      }
+    );
   }
   onDelete(record) {
     console.log(record);
