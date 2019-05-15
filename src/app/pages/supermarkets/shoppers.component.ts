@@ -91,9 +91,13 @@ export class ShoppersComponent implements OnInit {
         console.log(data);
         if (data.status === 200) {
           console.log(data.body);
-          this.data = data.body;
+          this.router.navigate(["shoppers"]);
+          this.data = data.body.shoppers;
           this.blockUI.stop();
-          this.toastrService.success("Record has been updated");
+          this.toastrService.success("Success", "Record has been updated", {
+            timeOut: 10000
+          });
+          data.showDetails = false;
         } else {
           this.blockUI.stop();
           this.toastrService.error(
