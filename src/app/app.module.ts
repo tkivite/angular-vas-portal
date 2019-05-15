@@ -36,6 +36,9 @@ import { MyaccountComponent } from "./pages/myaccount/myaccount.component";
 import { PaymentsComponent } from "./pages/payments/payments.component";
 import { DeliveriesComponent } from "./pages/deliveries/deliveries.component";
 import { InvoicingComponent } from "./pages/invoicing/invoicing.component";
+import { CreateInvoiceComponent } from "./pages/invoicing/create/create.component";
+import { ViewInvoiceComponent } from "./pages/invoicing/view/view.component";
+
 import { HeaderComponent } from "./components/header/header.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
@@ -82,6 +85,8 @@ enableProdMode();
     UsersComponent,
     LipalaterUsersComponent,
     InvoicingComponent,
+    CreateInvoiceComponent,
+    ViewInvoiceComponent,
     HeaderComponent,
     FooterComponent,
     SidebarComponent,

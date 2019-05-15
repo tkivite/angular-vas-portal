@@ -10,6 +10,9 @@ import { PaymentsComponent } from "./pages/payments/payments.component";
 import { DeliveriesComponent } from "./pages/deliveries/deliveries.component";
 import { MyaccountComponent } from "./pages/myaccount/myaccount.component";
 import { InvoicingComponent } from "./pages/invoicing/invoicing.component";
+import { CreateInvoiceComponent } from "./pages/invoicing/create/create.component";
+import { ViewInvoiceComponent } from "./pages/invoicing/view/view.component";
+
 import { PartnerComponent } from "./pages/partners/partners.component";
 import { CreateBeComponent } from "./pages/partners/create/create.component";
 import { UpdateBeComponent } from "./pages/partners/update/update.component";
@@ -69,7 +72,9 @@ const routes: Routes = [
 
   { path: "deliveries", component: DeliveriesComponent },
   { path: "myaccount", component: MyaccountComponent },
-  { path: "invoicing", component: InvoicingComponent }
+  { path: "invoicing", component: InvoicingComponent },
+  { path: "invoices/create", component: CreateInvoiceComponent },
+  { path: "invoices/view", component: ViewInvoiceComponent }
 ];
 
 @NgModule({
