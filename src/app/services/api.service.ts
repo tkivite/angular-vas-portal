@@ -15,13 +15,14 @@ import { environment } from "../../environments/environment";
 @Injectable()
 export class ApiService {
   currentUser: any;
+  todate: any = "";
   headers: any;
   public EditFormData: any;
   public newInvoice: any;
   public currentLoggedInUser: any;
   public router: Router;
-  baseUrl = "https://partner-portal-backend.herokuapp.com/";
-  //baseUrl = "/api/";
+  //baseUrl = "https://partner-portal-backend.herokuapp.com/";
+  baseUrl = "/api/";
 
   constructor(
     private http: HttpClient,
@@ -32,13 +33,22 @@ export class ApiService {
     console.log(environment.apiUrl);
     console.log(environment);
     console.log(environment.production);
-    /*
-    if (environment.production) {
-      this.baseUrl = "https://partner-portal-backend.herokuapp.com/";
-    } else {
-      this.baseUrl = "/api/";
-    }*/
+    let today = new Date();
+    let dd = today.getDate();
+    let stdd = "";
+    let stmm = "";
+    let sttoday = "";
 
+    let mm = today.getMonth() + 1;
+    let yyyy = today.getFullYear();
+    if (dd < 10) {
+      stdd = "0" + dd;
+    }
+
+    if (mm < 10) {
+      stmm = "0" + mm;
+    }
+    this.todate = yyyy + "-" + mm + "-" + dd;
     this.authenticationService.currentUser.subscribe(x => {
       this.currentUser = x;
       if (this.currentUser) {
@@ -52,7 +62,13 @@ export class ApiService {
       }
     });
   }
-  fetchData(resource, searchKey = "", page = 1): Observable<any> {
+  fetchData(
+    resource,
+    searchKey = "",
+    page = 1,
+    startdate = "",
+    enddate = this.todate
+  ): Observable<any> {
     return this.http
       .get<any>(
         this.baseUrl + resource + "?searchkey=" + searchKey + "&page=" + page,
