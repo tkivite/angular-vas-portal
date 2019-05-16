@@ -17,6 +17,7 @@ export class ApiService {
   currentUser: any;
   headers: any;
   public EditFormData: any;
+  public newInvoice: any;
   public currentLoggedInUser: any;
   public router: Router;
   baseUrl = "https://partner-portal-backend.herokuapp.com/";
@@ -75,6 +76,22 @@ export class ApiService {
       headers: this.headers,
       observe: "response"
     });
+  }
+  createInvoice(payload = {}): Observable<any> {
+    return this.http.post<any>(this.baseUrl + "invoices", payload, {
+      headers: this.headers,
+      observe: "response"
+    });
+  }
+  finishInvoice(id, payload = {}): Observable<any> {
+    return this.http.post<any>(
+      this.baseUrl + "invoices/" + id + "/finish",
+      payload,
+      {
+        headers: this.headers,
+        observe: "response"
+      }
+    );
   }
 
   updateRecord(resource, id, record): Observable<any> {
