@@ -39,11 +39,11 @@ export class CreateInvoiceComponent {
     router: Router,
     fb: FormBuilder,
     public toastrService: ToastrService,
-    public dataservice: ApiService,
-    private confirmationDialogService: ConfirmationDialogService
+    private dataservice: ApiService //private confirmationDialogService: ConfirmationDialogService
   ) {
     this.router = router;
     this.editData = this.dataservice.newInvoice;
+    console.log(this.editData);
 
     this.itemTypeList = [
       { id: "1", name: "Furniture" },
@@ -53,6 +53,7 @@ export class CreateInvoiceComponent {
 
     this.dataservice.fetchData("shoppers").subscribe(
       data => {
+        console.log(data);
         if (data.status === 200) {
           console.log(data.body);
           this.shopperOptions = data.body.shoppers;
@@ -68,14 +69,24 @@ export class CreateInvoiceComponent {
       }
     );
 
+    this.getData();
+
     this.invoiceEntryForm = fb.group({
       receiptNo: new FormControl("", Validators.compose([Validators.required])),
       itemDescription: new FormControl(
         "",
         Validators.compose([Validators.required])
       ),
-      itemType: new FormControl("", Validators.required),
-      shopper: new FormControl("", Validators.required)
+      itemType: new FormControl("", Validators.compose([Validators.required])),
+      shopper: new FormControl("", Validators.compose([Validators.required])),
+      totalValue: new FormControl(
+        "",
+        Validators.compose([
+          Validators.required,
+          CustomValidators.number,
+          CustomValidators.min(0)
+        ])
+      )
     });
   }
 
@@ -84,7 +95,7 @@ export class CreateInvoiceComponent {
   }
 
   public onAddSubmit(form: FormGroup) {
-    if (form.valid) {
+    if (form.valid && this.editData) {
       this.blockUI.start("Adding Invoice Entry ..............");
 
       const postFormData = {
@@ -141,59 +152,47 @@ export class CreateInvoiceComponent {
   }
   onSelect(item) {
     console.log(item.target.value);
-    this.selectedShopper = item.target.value;
+    this.selectedShopper = JSON.parse(item.target.value);
+    console.log(this.selectedShopper.customer_names);
   }
 
   onDelete(record) {
-    this.confirmationDialogService
-      .confirm(
-        "Please confirm..",
-        "Do you really want to delete the user record ?"
+    if (
+      confirm(
+        "Please confirm,Do you really want to delete the invoice record ?"
       )
-      .then(confirmed => {
-        console.log(record);
-        this.blockUI.start("Deleting User ........");
+    ) {
+      console.log(record);
+      this.blockUI.start("Deleting Invoice Entry ........");
 
-        this.dataservice.deleteRecord("invoice_details", record.id).subscribe(
-          data => {
-            console.log(data);
-            if (data.status === 200) {
-              // console.log(data.body);
-              // this.data = data.body;
-              let index = this.data.indexOf(record);
-              if (index > -1) {
-                this.data.splice(index, 1);
-              }
-              this.blockUI.stop();
-              this.toastrService.success("Record has been trashed");
-              this.router.routeReuseStrategy.shouldReuseRoute = function() {
-                return false;
-              };
-            } else {
-              this.blockUI.stop();
-              this.toastrService.error(
-                "Something Went Wrong, We could not complete the request"
-              );
-            }
-          },
-          err => {
-            console.log(
-              "Something Went Wrong, We could not complete the request"
-            );
+      this.dataservice.deleteRecord("invoice_details", record.id).subscribe(
+        data => {
+          console.log(data);
+          if (data.status === 200) {
+            this.getData();
+            this.blockUI.stop();
+            this.toastrService.success("Record has been deleted");
+            this.router.routeReuseStrategy.shouldReuseRoute = function() {
+              return false;
+            };
+          } else {
             this.blockUI.stop();
             this.toastrService.error(
               "Something Went Wrong, We could not complete the request"
             );
           }
-        );
-        // this.router.navigate(['onboarding']);
-        console.log("User confirmed:", confirmed);
-      })
-      .catch(() =>
-        console.log(
-          "User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)"
-        )
+        },
+        err => {
+          console.log(
+            "Something Went Wrong, We could not complete the request"
+          );
+          this.blockUI.stop();
+          this.toastrService.error(
+            "Something Went Wrong, We could not complete the request"
+          );
+        }
       );
+    }
   }
   onFinish() {
     this.blockUI.start();
@@ -221,5 +220,30 @@ export class CreateInvoiceComponent {
         );
       }
     );
+  }
+  getData() {
+    this.dataservice
+      .fetchData("invoices/" + this.editData.id + "/invoice_details")
+      .subscribe(
+        data => {
+          this.blockUI.start();
+          if (data.status === 200) {
+            console.log(data.body.invoice_details);
+            this.data = data.body.invoice_details;
+            this.blockUI.stop();
+          } else {
+            console.log("the error");
+            this.blockUI.stop();
+            this.toastrService.error(data.message);
+          }
+        },
+        err => {
+          console.log("Something went wrong");
+          this.blockUI.stop();
+        }
+      );
+  }
+  onCancel() {
+    this.router.navigate(["invoicing"]);
   }
 }

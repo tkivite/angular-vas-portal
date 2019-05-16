@@ -43,14 +43,20 @@
             <td>{{item.invoice_number}}</td>
 
             <td>{{item.store}}</td>
-            <td>{{item.amount}}</td>
+            <td>{{item.total_amount}}</td>
             <td>{{item.status}}</td>
             <td>{{item.created_at | date: 'medium'}}</td>
-            <td>{{item.created_by }}</td>
+
             <td>
-              <div class="float-right"> <button type="button" class="btn btn-xs btn-warning" (click)="onView(item)"
-                  title="View invoice details" style="margin-right: 5px"> <i class="fa fa-eye"></i>
+              <div *ngIf="item.status == 'complete'" class="float-right"> <button type="button"
+                  class="btn btn-xs btn-warning" (click)="onView(item)" title="View invoice details"
+                  style="margin-right: 5px"> <i class="fa fa-eye"></i>
                   View</button>
+              </div>
+              <div *ngIf="item.status == 'in_progress'" class="float-right"> <button type="button"
+                  class="btn btn-xs btn-info" (click)="onUpdate(item)" title="View invoice details"
+                  style="margin-right: 5px"> <i class="fa fa-pencil"></i>
+                  Edit</button>
               </div>
             </td>
 

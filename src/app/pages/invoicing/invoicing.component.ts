@@ -61,11 +61,16 @@ export class InvoicingComponent {
     this.dataservice.EditFormData = data;
     this.router.navigate(["invoices/view"]);
   }
+  onUpdate(data) {
+    console.log(data);
+    this.dataservice.newInvoice = data;
+    this.router.navigate(["invoices/create"]);
+  }
   onCreate() {
     this.dataservice.createInvoice().subscribe(
       data => {
         console.log(data);
-        if (data.status === 201) {
+        if (data.status === 200) {
           console.log(data.body);
           this.dataservice.newInvoice = data.body;
           this.router.navigate(["invoices/create"]);

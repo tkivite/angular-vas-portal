@@ -6,7 +6,7 @@
         <div id="cccform">
           <div class="row form-heading">
             <div class="col-md-1"></div>
-            <h4 class="col-md-11">New Invoice - </h4>
+            <h4 class="col-md-11">New Invoice -{{editData.invoice_number}} </h4>
           </div>
           <hr>
 
@@ -45,19 +45,29 @@
                   <label for="email">Item Type:</label>
                   <select formControlName="itemType" class="form-control validation-field">
                     <option value=" ">Select Item Type</option>
-                    <option *ngFor=" let o of itemTypeList" [value]="o.id">{{o.name}}</option>
+                    <option *ngFor=" let o of itemTypeList" [value]="o.name">{{o.name}}</option>
                   </select>
                 </div>
               </div>
 
               <div class="col-sm-3">
                 <div class="form-group">
-                  <label for="email">Receipt No.:</label>
+                  <label for="email">Item Description:</label>
                   <input formControlName="itemDescription" class="form-control validation-field"
                     placeholder="Item Description" type="text">
                   <small class="text-danger"
                     *ngIf="invoiceEntryForm.get('itemDescription').touched && invoiceEntryForm.get('itemDescription').hasError('required')">Item
                     Description is required</small>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label for="email">Total Price:</label>
+                  <input formControlName="totalValue" class="form-control validation-field" placeholder="Total Value"
+                    type="text">
+
+                  <small class="text-danger" *ngIf="invoiceEntryForm.get('totalValue').invalid">Total value must a value
+                    greater than 0 </small>
                 </div>
               </div>
             </div>
@@ -103,8 +113,8 @@
                   <td>{{item.total_price}}</td>
                   <td>{{item.created_at | date: 'medium'}}</td>
                   <td>
-                    <div class="float-right"> <button type="button" class="btn btn-xs btn-danger" (click)="onDelete()"
-                        title="Delete invoice entry" style="margin-right: 5px"> <i class="fa fa-cross"></i>
+                    <div> <button type="button" class="btn btn-xs btn-danger" (click)="onDelete(item)"
+                        title="Delete invoice entry" style="margin-right: 5px"> <i class="fa fa-trash"></i>
                         Delete</button>
                     </div>
                   </td>
@@ -116,14 +126,20 @@
 
 
           </div>
-
+          <hr>
           <div class="row">
-            <div class="col-sm-10">
+            <div class="col-sm-9">
 
             </div>
+            <div class="col-sm-1">
+              <div> <button type="button" class="btn btn-xs btn-danger" (click)="onCancel()" title="Cancel"
+                  style="margin-right: 5px">
+                  Cancel</button>
+              </div>
+            </div>
             <div class="col-sm-2">
-              <div class="float-right"> <button type="button" class="btn btn-xs btn-primary" (click)="onFinish()"
-                  title="Post Invoice" style="margin-right: 5px">
+              <div> <button type="button" class="btn btn-xs btn-primary" (click)="onFinish()" title="Post Invoice"
+                  style="margin-right: 5px">
                   Post Invoice</button>
               </div>
             </div>
