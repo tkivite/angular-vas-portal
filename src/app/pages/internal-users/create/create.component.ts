@@ -134,7 +134,7 @@ export class CreateLipalaterUserComponent implements OnInit {
         role: form.value.role,
         id_number: form.value.id_number,
         store_id: form.value.store_id,
-        active_status: false
+        active_status: true
       };
       this.dataservice.postData("users", postFormData).subscribe(
         data => {

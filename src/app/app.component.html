@@ -1,7 +1,7 @@
 <div class="wrapper">
   <nav id="sidebar" *ngIf="currentUser">
-    <div class="sidebar-header">
-      <img src="./assets/logo.png" />
+    <div class="sidebar-header"> <a class="nav-link sales-link" routerLink="/dashboard">
+        <img src="./assets/logo.png" /></a>
     </div>
     <div class="container demo d-none d-md-block">
       <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0,ngb-panel-1,ngb-panel-2" class="panel-group"
@@ -51,7 +51,7 @@
             <h4 class="panel-title">
               <a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true"
                 aria-controls="collapseOne">
-                Pick-up Menu
+                Sales Menu
               </a>
             </h4>
           </ng-template>
