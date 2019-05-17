@@ -22,8 +22,8 @@ export class ApiService {
   public newInvoice: any;
   public currentLoggedInUser: any;
   public router: Router;
-  //baseUrl = "https://partner-portal-backend.herokuapp.com/";
-  baseUrl = "/api/";
+  baseUrl = "https://partner-portal-backend.herokuapp.com/";
+  //baseUrl = "/api/";
 
   constructor(
     private http: HttpClient,
