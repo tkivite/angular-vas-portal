@@ -58,7 +58,6 @@
             <th>Delivery Option</th>
             <th>Store</th>
             <th>Status</th>
-            <th>Date Added</th>
             <th>Date Collected</th>
           </tr>
         </thead>
@@ -72,8 +71,13 @@
             <td>{{(item.pick_up_type =='store_pick_up')?'customer pick up':'lipalater pick up'}}</td>
             <td>{{item.store}}</td>
             <td>{{item.status}}</td>
+<<<<<<< HEAD
             <td>{{item.created_at | date:'medium'}}</td>
             <td>{{item.updated_at | date:'medium'}}</td>
+=======
+            <td>{{item.created_at | date: 'medium'}}</td>
+            <td>{{item.updated_at | date: 'medium'}}</td>
+>>>>>>> bug-fixing
 
           </tr>
         </tbody>
