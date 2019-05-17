@@ -144,6 +144,13 @@ export class CreateStoreComponent implements OnInit {
     if (form.valid) {
       this.errorMessage = "SHOWERROR";
       this.blockUI.start("Adding Store");
+      let contact_mobile = "";
+      if (form.value.storeContactMobile)
+        contact_mobile = form.value.storeContactMobile.internationalNumber.replace(
+          / /g,
+          ""
+        );
+
       const postFormData = {
         name: form.value.storeName,
         target: form.value.storeTarget,
@@ -156,10 +163,7 @@ export class CreateStoreComponent implements OnInit {
         ),
         contact_person: form.value.storeContact,
         contact_person_email: form.value.storeContactEmail,
-        contact_person_mobile: form.value.storeContactMobile.internationalNumber.replace(
-          / /g,
-          ""
-        ),
+        contact_person_mobile: contact_mobile,
         disburse_email: form.value.storeDisburseEmail,
         disburse_email_cc1: form.value.storeDisburseEmail1,
         disburse_email_cc2: form.value.storeDisburseEmail2,
