@@ -14,12 +14,13 @@ export class ShoppersComponent implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
   public router: Router;
   public data = [];
-  public currentActive: any = "GRID";
-  public noDataDisplay: any = { emptyMessage: "No data to display" };
   public recordCount = 0;
   loadingIndicator: any = false;
   searchKey = "";
-  title = "angulardatatables";
+
+  searchParams: any = {};
+  startdateRange = "";
+  enddateRange = "";
   //pagination
   current_page = 1;
   total_records = 0;
@@ -36,26 +37,12 @@ export class ShoppersComponent implements OnInit {
     this.getData();
   }
 
-  ngOnInit() {
-    $(document).ready(function() {
-      $(".dataTables_empty").html("");
-      $(".dataTables_info").html("");
-      $(".dataTables_length").html(
-        '<a class="btn btn-infor btn-sm mb-1" (click)="onAdd()" type="button"><i class="fa fa-plus"></i> Add Business Orgnisation</a>'
-      );
-    });
-    this.dtOptions = {
-      pagingType: "full_numbers",
-      dom: "rtip",
-      pageLength: 10,
-      processing: true
-    };
-  }
+  ngOnInit() {}
   // Load Grid Data
-  getData(searchKey = "", currentPage = 1) {
+  getData() {
     this.blockUI.start("Loading  .....");
     this.loadingIndicator = true;
-    this.dataservice.fetchData("shoppers", searchKey, currentPage).subscribe(
+    this.dataservice.fetchData("shoppers", this.searchParams).subscribe(
       data => {
         console.log(data);
         if (data.status === 200) {
@@ -144,11 +131,25 @@ export class ShoppersComponent implements OnInit {
   }
   onSearch() {
     console.log(this.searchKey);
-    this.getData(this.searchKey, 1);
+    this.searchParams = {
+      searchKey: this.searchKey,
+      page: 1,
+      startdate: this.startdateRange,
+      enddate: this.enddateRange
+    };
+
+    this.getData();
   }
   loadPage(i) {
     this.current_page = i;
-    this.getData(this.searchKey, i);
+    this.searchParams = {
+      searchKey: this.searchKey,
+      page: i,
+      startdate: this.startdateRange,
+      enddate: this.enddateRange
+    };
+
+    this.getData();
   }
   toggleRecordDetails(item) {
     if (item.showDetails) item.showDetails = false;

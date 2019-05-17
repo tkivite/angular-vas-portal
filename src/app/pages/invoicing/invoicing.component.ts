@@ -19,6 +19,10 @@ export class InvoicingComponent {
   page_size = 25;
   total_pages = 1;
 
+  searchParams: any = {};
+  startdateRange = "";
+  enddateRange = "";
+
   constructor(
     router: Router,
     public toastrService: ToastrService,
@@ -28,9 +32,9 @@ export class InvoicingComponent {
     this.getData();
   }
   // Load Grid Data
-  getData(searchKey = "", currentPage = 1) {
+  getData() {
     this.blockUI.start("Loading  invoices.....");
-    this.dataservice.fetchData("invoices", searchKey, currentPage).subscribe(
+    this.dataservice.fetchData("invoices", this.searchParams).subscribe(
       data => {
         console.log(data);
         if (data.status === 200) {
@@ -91,11 +95,25 @@ export class InvoicingComponent {
   }
   onSearch() {
     console.log(this.searchKey);
-    this.getData(this.searchKey, 1);
+    this.searchParams = {
+      searchKey: this.searchKey,
+      page: 1,
+      startdate: this.startdateRange,
+      enddate: this.enddateRange
+    };
+
+    this.getData();
   }
   loadPage(i) {
     this.current_page = i;
-    this.getData(this.searchKey, i);
+    this.searchParams = {
+      searchKey: this.searchKey,
+      page: i,
+      startdate: this.startdateRange,
+      enddate: this.enddateRange
+    };
+
+    this.getData();
   }
   toggleRecordDetails(item) {
     if (item.showDetails) item.showDetails = false;

@@ -16,6 +16,7 @@ import { environment } from "../../environments/environment";
 export class ApiService {
   currentUser: any;
   todate: any = "";
+  datePast: any = "";
   headers: any;
   public EditFormData: any;
   public newInvoice: any;
@@ -35,12 +36,21 @@ export class ApiService {
     console.log(environment.production);
     let today = new Date();
     let dd = today.getDate();
+    let ddPast = new Date();
+    ddPast.setDate(ddPast.getDate() - 30);
     let stdd = "";
     let stmm = "";
+    let stddPast = "";
+    let stmmPast = "";
     let sttoday = "";
 
     let mm = today.getMonth() + 1;
     let yyyy = today.getFullYear();
+
+    let dayPast = ddPast.getDate();
+    let mmPast = ddPast.getMonth() + 1;
+    let yyyyPast = ddPast.getFullYear();
+
     if (dd < 10) {
       stdd = "0" + dd;
     }
@@ -49,6 +59,8 @@ export class ApiService {
       stmm = "0" + mm;
     }
     this.todate = yyyy + "-" + mm + "-" + dd;
+    this.datePast = yyyyPast + "-" + mmPast + "-" + dayPast;
+
     this.authenticationService.currentUser.subscribe(x => {
       this.currentUser = x;
       if (this.currentUser) {
@@ -64,14 +76,25 @@ export class ApiService {
   }
   fetchData(
     resource,
-    searchKey = "",
-    page = 1,
-    startdate = "",
-    enddate = this.todate
+    searchParams = {
+      searchKey: "",
+      page: 1,
+      startdate: this.datePast,
+      enddate: this.todate
+    }
   ): Observable<any> {
+    if (this.isEmpty(searchParams)) {
+      searchParams = {
+        searchKey: "",
+        page: 1,
+        startdate: this.datePast,
+        enddate: this.todate
+      };
+    }
+    console.log(searchParams);
     return this.http
       .get<any>(
-        this.baseUrl + resource + "?searchkey=" + searchKey + "&page=" + page,
+        this.baseUrl + resource + "?dataparams=" + JSON.stringify(searchParams),
         {
           headers: this.headers,
           observe: "response"
@@ -208,5 +231,12 @@ export class ApiService {
         return of(result as T);
       }
     };
+  }
+
+  isEmpty(obj) {
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) return false;
+    }
+    return true;
   }
 }

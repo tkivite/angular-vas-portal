@@ -8,25 +8,26 @@
         </div>
         <div class="col-sm-2">
           <div class="form-group row">
-            <label class="col-sm-2">From:</label>
+            <label class="col-sm-2-text-left">From: </label>
             <div class="input-group col-sm-10">
               <input class="form-control" placeholder="yyyy-mm-dd" name="dps" [(ngModel)]="startdate" ngbDatepicker
                 #ds="ngbDatepicker">
               <div class="input-group-append">
                 <button class="btn btn-outline-secondary calendar" (click)="ds.toggle()" type="button"><i
-                    class="fa fa-calender"></i></button>
+                    class="fa fa-calendar"></i></button>
               </div>
             </div>
           </div>
         </div>
         <div class="col-sm-2">
           <div class="form-group row">
-            <label class="col-sm-2">To:</label>
+            <label class="col-sm-2-text-left">To: </label>
             <div class="input-group col-sm-10">
               <input class="form-control" placeholder="yyyy-mm-dd" name="dpe" [(ngModel)]="enddate" ngbDatepicker
                 #de="ngbDatepicker">
               <div class="input-group-append">
-                <button class="btn btn-outline-secondary calendar" (click)="de.toggle()" type="button"></button>
+                <button class="btn btn-outline-secondary calendar" (click)="de.toggle()" type="button"><i
+                    class="fa fa-calendar"></i></button>
               </div>
             </div>
           </div>
@@ -71,8 +72,8 @@
             <td>{{(item.pick_up_type =='store_pick_up')?'customer pick up':'lipalater pick up'}}</td>
             <td>{{item.store}}</td>
             <td>{{item.status}}</td>
-            <td>{{item.created_at | date}}</td>
-            <td>{{item.updated_at | date}}</td>
+            <td>{{item.created_at | date:'medium'}}</td>
+            <td>{{item.updated_at | date:'medium'}}</td>
 
           </tr>
         </tbody>

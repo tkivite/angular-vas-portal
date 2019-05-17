@@ -31,6 +31,9 @@ export class SalesComponent {
   total_records = 0;
   page_size = 25;
   total_pages = 1;
+  searchParams: any = {};
+  startdateRange = "";
+  enddateRange = "";
 
   constructor(
     private calendar: NgbCalendar,
@@ -40,44 +43,53 @@ export class SalesComponent {
     private confirmationDialogService: ConfirmationDialogService
   ) {
     this.router = router;
+    let today = new Date();
+    let dd = today.getDate();
+    let ddPast = new Date();
+    this.enddate = this.calendar.getToday();
+    ddPast.setDate(ddPast.getDate() - 30);
+    this.startdate = {
+      day: ddPast.getDate(),
+      month: ddPast.getMonth() + 1,
+      year: ddPast.getFullYear()
+    };
+
     this.getData();
   }
 
   // Load Grid Data
-  getData(searchKey = "", currentPage = 1, startdate = "", enddate = "") {
+  getData() {
     this.blockUI.start("Loading All Sales .....");
-    this.loadingIndicator = true;
-    this.dataservice
-      .fetchData("sales", searchKey, currentPage, startdate, enddate)
-      .subscribe(
-        data => {
-          if (data.status === 200) {
-            console.log(data.body);
-            this.data = data.body.sales;
-            //pagination params
-            this.total_records = data.body.total_records;
-            this.page_size = this.data.length;
-            this.total_pages = Math.ceil(this.total_records / this.page_size);
-            this.blockUI.stop();
-          } else {
-            this.blockUI.stop();
-            this.toastrService.error(data.message);
-          }
-        },
-        err => {
-          if (err.status == 401) {
-            this.router.navigate(["login"]);
-          } else {
-            console.log(
-              "Something Went Wrong, We could not complete the request"
-            );
-            this.blockUI.stop();
-            this.toastrService.error(
-              "Something Went Wrong, We could not complete the request"
-            );
-          }
+    console.log(this.searchParams);
+    this.dataservice.fetchData("sales", this.searchParams).subscribe(
+      data => {
+        if (data.status === 200) {
+          console.log(data.body);
+          this.data = data.body.sales;
+          //pagination params
+          this.total_records = data.body.total_records;
+          this.page_size = this.data.length;
+          this.total_pages = Math.ceil(this.total_records / this.page_size);
+          this.blockUI.stop();
+        } else {
+          this.blockUI.stop();
+          this.toastrService.error(data.message);
         }
-      );
+      },
+      err => {
+        if (err.status == 401) {
+          this.router.navigate(["login"]);
+        } else {
+          console.log(
+            "Something Went Wrong, We could not complete the request"
+          );
+          this.blockUI.stop();
+          this.toastrService.error(
+            "Something Went Wrong, We could not complete the request"
+          );
+        }
+      }
+    );
     // this.blockUI.stop();
   }
   downloadApps() {
@@ -123,22 +135,31 @@ export class SalesComponent {
     console.log(this.searchKey);
     console.log(this.startdate);
     console.log(this.enddate);
-    let statdate =
+    this.startdateRange =
       this.startdate.year +
       "-" +
       this.startdate.month +
       "-" +
       this.startdate.day;
-    let endate =
-      this.startdate.year +
-      "-" +
-      this.startdate.month +
-      "-" +
-      this.startdate.day;
-    this.getData(this.searchKey, 1, statdate, endate);
+    this.enddateRange =
+      this.enddate.year + "-" + this.enddate.month + "-" + this.enddate.day;
+    this.searchParams = {
+      searchKey: this.searchKey,
+      page: 1,
+      startdate: this.startdateRange,
+      enddate: this.enddateRange
+    };
+
+    this.getData();
   }
   loadPage(i) {
     this.current_page = i;
-    this.getData(this.searchKey, i);
+    this.searchParams = {
+      searchKey: this.searchKey,
+      page: i,
+      startdate: this.startdateRange,
+      enddate: this.enddateRange
+    };
+    this.getData();
   }
 }
