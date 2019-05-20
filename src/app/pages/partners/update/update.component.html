@@ -177,7 +177,7 @@
                 </div>
               </div>
 
-              <div class="row form-group">
+              <!-- <div class="row form-group">
                 <label class="control-label col-sm-3" for="title"><span class="float-right"> Year of Incorporation:
                   </span></label>
                 <div class="col-sm-7">
@@ -191,7 +191,22 @@
                     of Incorporation is required</small>
 
                 </div>
+              </div> -->
+
+              <div class="row form-group">
+                <label class="control-label col-sm-3" for="title"><span class="float-right"> Year of Incorporation:
+                  </span></label>
+                <div class="col-sm-7">
+                  <select formControlName="orgYearsOfOperation" class="form-control validation-field">
+
+                    <option *ngFor="let o of yearOfIncor" [ngValue]="o.year">{{o.year}}</option>
+                  </select>
+                  <small class="text-danger" *ngIf="beFormAdd.get('orgYearsOfOperation').invalid"> Number Must be in
+                    range
+                  </small>
+                </div>
               </div>
+
 
               <div class="row form-group">
                 <label class="control-label col-sm-3" for="title"><span class="float-right"> Number of Branches:

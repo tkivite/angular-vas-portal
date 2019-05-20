@@ -34,6 +34,8 @@ export class UpdateBeComponent implements OnInit {
   selectedSpeciality = [];
   dropdownSettings = {};
 
+  public yearOfIncor = [];
+
   constructor(
     router: Router,
     fb: FormBuilder,
@@ -52,8 +54,15 @@ export class UpdateBeComponent implements OnInit {
       { speciality_id: "1", speciality_name: "Electronics" },
       { speciality_id: "2", speciality_name: "Phones" },
       { speciality_id: "3", speciality_name: "Furniture" },
-      { speciality_id: "4", speciality_name: "General" }
+      { speciality_id: "4", speciality_name: "Other" }
     ];
+
+    let maxYear = new Date().getFullYear();
+    let minYear = maxYear - 200;
+
+    for (var i = minYear; i <= maxYear; i++) {
+      this.yearOfIncor.push({ id: "1", year: i });
+    }
 
     this.blockUI.start("Fetching Users");
     this.dataservice.fetchData("users").subscribe(
@@ -88,6 +97,7 @@ export class UpdateBeComponent implements OnInit {
       allowSearchFilter: true
     };
     let current_year = new Date().getFullYear();
+
     // const specialityArray: FormArray = new FormArray([]);
     // orgMobile:   ['', Validators.compose([ Validators.required,Validators.pattern(kenyanMobileNoPattern)])],
     this.beFormAdd = fb.group({
