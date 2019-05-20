@@ -63,7 +63,8 @@
                   <i class="fa fa-gift" style="color:#88b840"></i>
                 </a>
               </li>
-              <li class="list-group-item">
+              <li class="list-group-item"
+                *ngIf="currentUser.user.role == 'Store admin' || currentUser.user.role == 'Store user'">
                 <a class="nav-link sales-link" routerLink="/collections">Item Pickup
                   <i class="fa fa-cart-plus" style="color:#88b840"></i>
                 </a>
@@ -158,7 +159,8 @@
             <h2 class="store-name">{{currentUser.user.firstname}} @ {{currentUser.store.name}}</h2>
           </div>
           <ul class="nav navbar-nav ml-auto">
-            <li class="nav-item">
+            <li class="nav-item"
+              *ngIf="currentUser.user.role == 'Store admin' || currentUser.user.role == 'Lipalater admin' || currentUser.user.role == 'Lipalater Super admin'">
               <a class="top-link home-link" routerLink="/dashboard">
                 <i class="fa fa-home" style="color:#88b840"></i> Dashboard
               </a>
@@ -168,7 +170,8 @@
                 <i class="fa fa-gift" style="color:#88b840"></i> Pending
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item"
+              *ngIf="currentUser.user.role == 'Store admin' || currentUser.user.role == 'Store user'">
               <a class="top-link notification-link" routerLink="/collections">
                 <i class="fa fa-cart-plus" style="color:#88b840"></i> Item Pickup
               </a>
