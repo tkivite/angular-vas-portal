@@ -166,12 +166,10 @@
                 <label class="control-label col-sm-3" for="title"><span class="float-right"> Year of Incorporation:
                   </span></label>
                 <div class="col-sm-7">
-                  <input type="number" formControlName="orgYearsOfOperation" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && f.orgYearsOfOperation.errors }" />
+                  <select formControlName="orgYearsOfOperation" class="form-control validation-field">
 
-                  <small class="text-danger"
-                    *ngIf="beFormAdd.get('orgYearsOfOperation').touched && beFormAdd.get('orgYearsOfOperation').hasError('required')">Year
-                    of Incorporation is required</small>
+                    <option *ngFor="let o of yearOfIncor" [ngValue]="o.year">{{o.year}}</option>
+                  </select>
                   <small class="text-danger" *ngIf="beFormAdd.get('orgYearsOfOperation').invalid"> Number Must be in
                     range
                   </small>

@@ -71,7 +71,7 @@ export class CreateUserComponent implements OnInit {
         "",
         Validators.compose([
           Validators.required,
-          Validators.minLength(3),
+          Validators.minLength(1),
           Validators.maxLength(100),
           Validators.pattern("[a-zA-Z]*")
         ])
@@ -80,7 +80,7 @@ export class CreateUserComponent implements OnInit {
         "",
         Validators.compose([
           Validators.required,
-          Validators.minLength(3),
+          Validators.minLength(1),
           Validators.maxLength(100),
           Validators.pattern("[a-zA-Z]*")
         ])

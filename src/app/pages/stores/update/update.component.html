@@ -124,6 +124,20 @@
                           email address</small>
                       </div>
                     </div>
+                    <div class="row form-group">
+                      <label class="control-label col-sm-3" for="title"> <span class="float-right"> Disburse email CCs
+                          (comma separated):
+                        </span></label>
+                      <div class="col-sm-7">
+                        <input type="text" formControlName="storeDisburseEmailCC" class="form-control"
+                          [ngClass]="{ 'is-invalid': submitted && f.storeDisburseEmailCC.errors }"
+                          placeholder="disburse email cc 1" />
+
+                        <small class="text-danger"
+                          *ngIf="storeFormEdit.get('storeDisburseEmailCC').touched && storeFormEdit.get('storeDisburseEmailCC').invalid">Invalid
+                          email address</small>
+                      </div>
+                    </div>
 
                     <div class="row form-group">
                       <label class="control-label col-sm-3" for="title"> <span class="float-right"> Disburse email CC1:

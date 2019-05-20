@@ -85,7 +85,7 @@ export class LoginComponent implements OnInit {
           this.blockUI.stop();
           this.toastrService.success(
             "Login Successful",
-            "Welcome" + firstname,
+            "Welcome " + firstname,
             {
               timeOut: 10000
             }
