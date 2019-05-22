@@ -165,14 +165,26 @@ export class SalesComponent {
     this.getData();
   }
   download() {
-    this.searchParams = {
-      searchKey: this.searchKey,
-      action: "download",
-      page: 1,
-      startdate: this.startdateRange,
-      enddate: this.enddateRange
-    };
+    this.confirmationDialogService
+      .confirm(
+        "Download Sales",
+        "You will receive an email with attachment of the sales data in csv format"
+      )
+      .then(confirmed => {
+        this.searchParams = {
+          searchKey: this.searchKey,
+          action: "download",
+          page: 1,
+          startdate: this.startdateRange,
+          enddate: this.enddateRange
+        };
 
-    this.getData();
+        this.getData();
+      })
+      .catch(() =>
+        console.log(
+          "User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)"
+        )
+      );
   }
 }

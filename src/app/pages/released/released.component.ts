@@ -5,6 +5,7 @@ import { BlockUI, NgBlockUI } from "ng-block-ui";
 import { ApiService } from "../../services/api.service";
 import * as $ from "jquery";
 import { NgbDateStruct, NgbCalendar } from "@ng-bootstrap/ng-bootstrap";
+import { ConfirmationDialogService } from "@app/services/confirmation-dialog/confirmation-dialog.service";
 
 @Component({
   selector: "app-released",
@@ -42,7 +43,8 @@ export class ReleasedComponent implements OnInit {
     private calendar: NgbCalendar,
     router: Router,
     public toastrService: ToastrService,
-    private dataservice: ApiService
+    private dataservice: ApiService,
+    private confirmationDialogService: ConfirmationDialogService
   ) {
     this.router = router;
     let today = new Date();
@@ -163,14 +165,26 @@ export class ReleasedComponent implements OnInit {
     this.getData();
   }
   download() {
-    this.searchParams = {
-      searchKey: this.searchKey,
-      action: "download",
-      page: 1,
-      startdate: this.startdateRange,
-      enddate: this.enddateRange
-    };
+    this.confirmationDialogService
+      .confirm(
+        "Download Sales",
+        "You will receive an email with attachment of the sales data in csv format"
+      )
+      .then(confirmed => {
+        this.searchParams = {
+          searchKey: this.searchKey,
+          action: "download",
+          page: 1,
+          startdate: this.startdateRange,
+          enddate: this.enddateRange
+        };
 
-    this.getData();
+        this.getData();
+      })
+      .catch(() =>
+        console.log(
+          "User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)"
+        )
+      );
   }
 }
