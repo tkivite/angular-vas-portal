@@ -12,8 +12,8 @@ export class AuthenticationService {
     "Content-Type": "application/json",
     Accept: "application/json"
   });
-  baseUrl = "https://partner-portal-backend.herokuapp.com/";
-  //baseUrl = "/api/";
+  //baseUrl = "https://partner-portal-backend.herokuapp.com/";
+  baseUrl = "/api/";
 
   constructor(private http: HttpClient) {
     console.log(environment.apiUrl);

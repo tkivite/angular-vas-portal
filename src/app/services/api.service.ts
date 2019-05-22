@@ -22,8 +22,8 @@ export class ApiService {
   public newInvoice: any;
   public currentLoggedInUser: any;
   public router: Router;
-  baseUrl = "https://partner-portal-backend.herokuapp.com/";
-  //baseUrl = "/api/";
+  //baseUrl = "https://partner-portal-backend.herokuapp.com/";
+  baseUrl = "/api/";
 
   constructor(
     private http: HttpClient,
@@ -78,6 +78,7 @@ export class ApiService {
     resource,
     searchParams = {
       searchKey: "",
+      action: "display",
       page: 1,
       startdate: this.datePast,
       enddate: this.todate
@@ -86,6 +87,7 @@ export class ApiService {
     if (this.isEmpty(searchParams)) {
       searchParams = {
         searchKey: "",
+        action: "display",
         page: 1,
         startdate: this.datePast,
         enddate: this.todate

@@ -39,7 +39,8 @@
               <fieldset>
                 <p>
                   Enter the customer id number. If we find a pending item for pick-up,we will send a verification
-                  code to the customer's registered mobile number
+                  code to the customer's registered mobile number. The verification code will be required to complete
+                  the pickup.
                 </p>
                 <div class="form-group">
                   <label> ID Number</label>
@@ -51,7 +52,7 @@
                     number is
                     required</small>
                 </div>
-
+                <label> Customer Details</label>
                 <p *ngIf="rsubmitted">Names: {{user_collecting}} </p>
                 <p *ngIf="rsubmitted">Mobile: {{userMobileNumber}}</p>
 
@@ -83,7 +84,7 @@
                   <table class="table table-striped  table-sm row-border hover">
                     <thead>
                       <tr>
-                        <th>select</th>
+                        <th>Select</th>
                         <th>Customer</th>
                         <th>Item</th>
                         <th>Pickup type</th>

@@ -38,7 +38,7 @@
               <fieldset>
                 <p>
                   Enter the lipalater staff id number. If we find a pending item for pick-up,we will send a verification
-                  code to the staff's registered mobile number
+                  code to the staff's registered mobile number.
                 </p>
                 <div class="form-group">
                   <label> ID Number</label>
@@ -50,6 +50,7 @@
                     number is
                     required</small>
                 </div>
+                <label> Pick up staff details</label>
                 <p *ngIf="rsubmitted">Names: {{user_collecting}} </p>
                 <p *ngIf="rsubmitted">Mobile: {{userMobileNumber}}</p>
 
@@ -81,7 +82,7 @@
                   <table class="table table-striped  table-sm row-border hover">
                     <thead>
                       <tr>
-                        <th>select</th>
+                        <th>Select</th>
                         <th>Customer</th>
                         <th>Item</th>
                         <th>Pickup type</th>
