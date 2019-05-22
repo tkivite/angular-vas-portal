@@ -142,6 +142,7 @@ export class ReleasedComponent implements OnInit {
       this.enddate.year + "-" + this.enddate.month + "-" + this.enddate.day;
     this.searchParams = {
       searchKey: this.searchKey,
+      action: "display",
       page: 1,
       startdate: this.startdateRange,
       enddate: this.enddateRange
@@ -153,7 +154,19 @@ export class ReleasedComponent implements OnInit {
     this.current_page = i;
     this.searchParams = {
       searchKey: this.searchKey,
+      action: "display",
       page: i,
+      startdate: this.startdateRange,
+      enddate: this.enddateRange
+    };
+
+    this.getData();
+  }
+  download() {
+    this.searchParams = {
+      searchKey: this.searchKey,
+      action: "download",
+      page: 1,
       startdate: this.startdateRange,
       enddate: this.enddateRange
     };

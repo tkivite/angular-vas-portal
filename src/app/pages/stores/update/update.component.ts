@@ -183,8 +183,14 @@ export class UpdateStoreComponent implements OnInit {
   // Submitting Store
   public onEditSubmit(form: FormGroup) {
     let contact_mobile = "";
-    if (form.value.storeContactMobile)
+    let manager_mobile = "";
+    if (form.value.storeContactMobile.internationalNumber)
       contact_mobile = form.value.storeContactMobile.internationalNumber.replace(
+        / /g,
+        ""
+      );
+    if (form.value.storeManagerMobile.internationalNumber)
+      manager_mobile = form.value.storeManagerMobile.internationalNumber.replace(
         / /g,
         ""
       );
@@ -198,10 +204,7 @@ export class UpdateStoreComponent implements OnInit {
         location: form.value.storeLocation,
         manager: form.value.storeManager,
         manager_email: form.value.storeManagerEmail,
-        manager_phone: form.value.storeManagerMobile.internationalNumber.replace(
-          / /g,
-          ""
-        ),
+        manager_phone: manager_mobile,
         contact_person: form.value.storeContact,
         contact_person_email: form.value.storeContactEmail,
         contact_person_mobile: contact_mobile,
