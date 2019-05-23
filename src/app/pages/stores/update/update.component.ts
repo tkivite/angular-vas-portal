@@ -44,6 +44,16 @@ export class UpdateStoreComponent implements OnInit {
     const kenyanMobileNoPattern = /^\+(?:[0-9] ?){11,14}[0-9]$/;
     const kenyanTillNoPattern = /^[0-9]{5,7}$/;
 
+    const commaSepEmail = (
+      control: AbstractControl
+    ): { [key: string]: any } | null => {
+      const emails = control.value.split(",").map(e => e.trim());
+      const forbidden = emails.some(email =>
+        Validators.email(new FormControl(email))
+      );
+      return forbidden ? { toAddress: { value: control.value } } : null;
+    };
+
     this.storeFormEdit = fb.group({
       storePartner: ["", Validators.compose([Validators.required])],
       storeName: [
@@ -62,6 +72,7 @@ export class UpdateStoreComponent implements OnInit {
         "",
         Validators.compose([Validators.required, CustomValidators.email])
       ],
+      storeDisburseEmailCC: ["", commaSepEmail],
       storeDisburseEmail1: ["", Validators.compose([CustomValidators.email])],
       storeDisburseEmail2: ["", Validators.compose([CustomValidators.email])],
       storeSourceid: ["", Validators.compose([Validators.required])],
@@ -172,8 +183,14 @@ export class UpdateStoreComponent implements OnInit {
   // Submitting Store
   public onEditSubmit(form: FormGroup) {
     let contact_mobile = "";
-    if (form.value.storeContactMobile)
+    let manager_mobile = "";
+    if (form.value.storeContactMobile.internationalNumber)
       contact_mobile = form.value.storeContactMobile.internationalNumber.replace(
+        / /g,
+        ""
+      );
+    if (form.value.storeManagerMobile.internationalNumber)
+      manager_mobile = form.value.storeManagerMobile.internationalNumber.replace(
         / /g,
         ""
       );
@@ -187,15 +204,12 @@ export class UpdateStoreComponent implements OnInit {
         location: form.value.storeLocation,
         manager: form.value.storeManager,
         manager_email: form.value.storeManagerEmail,
-        manager_phone: form.value.storeManagerMobile.internationalNumber.replace(
-          / /g,
-          ""
-        ),
+        manager_phone: manager_mobile,
         contact_person: form.value.storeContact,
         contact_person_email: form.value.storeContactEmail,
         contact_person_mobile: contact_mobile,
         disburse_email: form.value.storeDisburseEmail,
-        disburse_email_cc1: form.value.storeDisburseEmail1,
+        disburse_email_cc1: form.value.storeDisburseEmailCC,
         disburse_email_cc2: form.value.storeDisburseEmail2,
         partner_id: form.value.storePartner,
         source_id: form.value.storeSourceid,

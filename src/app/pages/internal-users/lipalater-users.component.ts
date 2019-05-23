@@ -34,6 +34,11 @@ export class LipalaterUsersComponent implements OnInit {
   total_pages = 1;
   dtOptions: DataTables.Settings = {};
   @ViewChild("myTable") table: any;
+
+  searchParams: any = {};
+  startdateRange = "";
+  enddateRange = "";
+
   constructor(
     router: Router,
     public toastrService: ToastrService,
@@ -50,39 +55,35 @@ export class LipalaterUsersComponent implements OnInit {
 
   ngOnInit() {}
   // Load Grid Data
-  getData(searchKey = "", currentPage = 1) {
+  getData() {
     this.blockUI.start("Loading Users .....");
     this.loadingIndicator = true;
-    this.dataservice
-      .fetchData("users/lipalater", searchKey, currentPage)
-      .subscribe(
-        data => {
-          console.log(data);
-          if (data.status === 200) {
-            console.log(data.body);
-            this.data = JSON.parse(data.body.users);
-            //pagination params
-            this.total_records = data.body.total_records;
-            this.page_size = this.data.length;
-            this.total_pages = Math.ceil(this.total_records / this.page_size);
-            this.blockUI.stop();
-          } else {
-            this.blockUI.stop();
-            this.toastrService.error(
-              "Something Went Wrong, We could not complete the request"
-            );
-          }
-        },
-        err => {
-          console.log(
-            "Something Went Wrong, We could not complete the request"
-          );
+    this.dataservice.fetchData("users/lipalater", this.searchParams).subscribe(
+      data => {
+        console.log(data);
+        if (data.status === 200) {
+          console.log(data.body);
+          this.data = JSON.parse(data.body.users);
+          //pagination params
+          this.total_records = data.body.total_records;
+          this.page_size = this.data.length;
+          this.total_pages = Math.ceil(this.total_records / this.page_size);
+          this.blockUI.stop();
+        } else {
           this.blockUI.stop();
           this.toastrService.error(
             "Something Went Wrong, We could not complete the request"
           );
         }
-      );
+      },
+      err => {
+        console.log("Something Went Wrong, We could not complete the request");
+        this.blockUI.stop();
+        this.toastrService.error(
+          "Something Went Wrong, We could not complete the request"
+        );
+      }
+    );
     // this.blockUI.stop();
     this.loadingIndicator = false;
   }
@@ -145,10 +146,22 @@ export class LipalaterUsersComponent implements OnInit {
 
   onSearch() {
     console.log(this.searchKey);
-    this.getData(this.searchKey, 1);
+    this.searchParams = {
+      searchKey: this.searchKey,
+      page: 1,
+      startdate: this.startdateRange,
+      enddate: this.enddateRange
+    };
+    this.getData();
   }
   loadPage(i) {
     this.current_page = i;
-    this.getData(this.searchKey, i);
+    this.searchParams = {
+      searchKey: this.searchKey,
+      page: i,
+      startdate: this.startdateRange,
+      enddate: this.enddateRange
+    };
+    this.getData();
   }
 }

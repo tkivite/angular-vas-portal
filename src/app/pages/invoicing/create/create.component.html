@@ -1,0 +1,158 @@
+<block-ui>
+  <div class="box box-primary">
+    <div class="box-body">
+
+      <div widget class="card border-0 box-shadow">
+        <div id="cccform">
+          <div class="row form-heading">
+            <div class="col-md-1"></div>
+            <h4 class="col-md-11">New Invoice -{{editData.invoice_number}} </h4>
+          </div>
+          <hr>
+
+
+
+
+
+          <form autocomplete="off" [formGroup]="invoiceEntryForm" (ngSubmit)="onAddSubmit(invoiceEntryForm)"
+            class="col-md-12 ">
+
+
+            <div class="row">
+              <div class="col-sm-3">
+                <div class="form-group ">
+                  <label for="email">Customer:</label>
+                  <select formControlName="shopper" class="form-control validation-field" (change)="onSelect($event)">
+                    <option value="">Select Customer</option>
+                    <option *ngFor="let o of shopperOptions" [value]="o | json">{{o.customer_names}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group ">
+                  <label for="email">Receipt No.:</label>
+                  <input formControlName="receiptNo" class="form-control validation-field" placeholder="Receipt No"
+                    type="text">
+                  <small class="text-danger"
+                    *ngIf="invoiceEntryForm.get('receiptNo').touched && invoiceEntryForm.get('receiptNo').hasError('required')">First
+                    Receipt is required</small>
+                </div>
+              </div>
+
+              <div class="col-sm-3">
+
+                <div class="form-group">
+                  <label for="email">Item Type:</label>
+                  <select formControlName="itemType" class="form-control validation-field">
+                    <option value=" ">Select Item Type</option>
+                    <option *ngFor=" let o of itemTypeList" [value]="o.name">{{o.name}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label for="email">Item Description:</label>
+                  <input formControlName="itemDescription" class="form-control validation-field"
+                    placeholder="Item Description" type="text">
+                  <small class="text-danger"
+                    *ngIf="invoiceEntryForm.get('itemDescription').touched && invoiceEntryForm.get('itemDescription').hasError('required')">Item
+                    Description is required</small>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label for="email">Total Price:</label>
+                  <input formControlName="totalValue" class="form-control validation-field" placeholder="Total Value"
+                    type="text">
+
+                  <small class="text-danger" *ngIf="invoiceEntryForm.get('totalValue').invalid">Total value must a value
+                    greater than 0 </small>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-10"></div>
+              <div class="col-sm-2">
+                <div class="float-right">
+                  <button [disabled]="!invoiceEntryForm.valid" class="btn btn-primary" type="submit">Add Invoice
+                    Entry</button>
+                </div>
+              </div>
+            </div>
+
+          </form>
+
+          <hr>
+
+          <div class="row">
+
+            <table class="table table-striped  table-sm row-border hover">
+              <thead>
+                <tr>
+                  <th style="min-width: 120px"></th>
+                  <th>Customer</th>
+                  <th>Receipt Number</th>
+                  <th>Item Type</th>
+                  <th>Item Description</th>
+                  <th>Total Price</th>
+                  <th>Date Created</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr *ngFor="let item of data let i = index">
+                  <td>{{i+1}}
+                  </td>
+                  <td>{{item.customer_names}}</td>
+                  <td>{{item.receipt_number}}</td>
+                  <td>{{item.item_type}}</td>
+                  <td>{{item.item_description}}</td>
+                  <td>{{item.total_price}}</td>
+                  <td>{{item.created_at | date: 'medium'}}</td>
+                  <td>
+                    <div> <button type="button" class="btn btn-xs btn-danger" (click)="onDelete(item)"
+                        title="Delete invoice entry" style="margin-right: 5px"> <i class="fa fa-trash"></i>
+                        Delete</button>
+                    </div>
+                  </td>
+
+                </tr>
+
+              </tbody>
+            </table>
+
+
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-sm-9">
+
+            </div>
+            <div class="col-sm-1">
+              <div> <button type="button" class="btn btn-xs btn-danger" (click)="onCancel()" title="Cancel"
+                  style="margin-right: 5px">
+                  Cancel</button>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div> <button type="button" class="btn btn-xs btn-primary" (click)="onFinish()" title="Post Invoice"
+                  style="margin-right: 5px">
+                  Post Invoice</button>
+              </div>
+            </div>
+
+          </div>
+
+
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</block-ui>

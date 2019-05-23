@@ -3,11 +3,36 @@
     <div class="box-body">
 
       <div class="widget-controls row">
-        <div class="col-sm-6">
+        <div class="col-sm-4">
           All Items Picked from Store
         </div>
-        <div class="col-sm-2"></div>
-        <div class="col-sm-4">
+        <div class="col-sm-2">
+          <div class="form-group row">
+            <label class="col-sm-2-text-left">From: </label>
+            <div class="input-group col-sm-10">
+              <input class="form-control" placeholder="yyyy-mm-dd" name="dps" [(ngModel)]="startdate" ngbDatepicker
+                #ds="ngbDatepicker">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="ds.toggle()" type="button"><i
+                    class="fa fa-calendar"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group row">
+            <label class="col-sm-2-text-left">To: </label>
+            <div class="input-group col-sm-10">
+              <input class="form-control" placeholder="yyyy-mm-dd" name="dpe" [(ngModel)]="enddate" ngbDatepicker
+                #de="ngbDatepicker">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="de.toggle()" type="button"><i
+                    class="fa fa-calendar"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
           <div class="input-group search-box">
             <input type="text" [(ngModel)]="searchKey" class="form-control search-input"
               placeholder="Search this content">
@@ -16,6 +41,13 @@
                 <i class="fa fa-search"></i>
               </button>
             </div>
+          </div>
+        </div>
+        <div class="col-sm-1">
+          <div class="input-group-append">
+            <button class="btn btn-info" type="button" (click)="download()">
+              <i class="fa fa-download"></i>
+            </button>
           </div>
         </div>
       </div>
@@ -42,11 +74,11 @@
             <td>{{item.customer_id_number}}</td>
             <td>{{item.customer_phone_number}}</td>
             <td>{{item.item_description}}</td>
-            <td>{{(item.pick_up_type =='store_pickup')?'customer pick up':'lipalater pick up'}}</td>
+            <td>{{(item.pick_up_type =='store_pick_up')?'customer pick up':'lipalater pick up'}}</td>
             <td>{{item.store}}</td>
             <td>{{item.buying_price}}</td>
             <td>{{item.status}}</td>
-            <td>{{item.created_at | date}}</td>
+            <td>{{item.collected_at | date: 'medium'}}</td>
 
           </tr>
         </tbody>

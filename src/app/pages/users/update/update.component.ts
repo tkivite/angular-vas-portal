@@ -49,7 +49,8 @@ export class UpdateUserComponent implements OnInit {
 
     this.roleList = [
       { id: "1", name: "Store user" },
-      { id: "2", name: "Store admin" }
+      { id: "2", name: "Store admin" },
+      { id: "3", name: "Store_invoicing" }
     ];
 
     const namePattern = /^[a-zA-Z ']{2,45}$/;
@@ -76,7 +77,7 @@ export class UpdateUserComponent implements OnInit {
         "",
         Validators.compose([
           Validators.required,
-          Validators.minLength(3),
+          Validators.minLength(1),
           Validators.maxLength(100),
           Validators.pattern("[a-zA-Z]*")
         ])
@@ -85,7 +86,7 @@ export class UpdateUserComponent implements OnInit {
         "",
         Validators.compose([
           Validators.required,
-          Validators.minLength(3),
+          Validators.minLength(1),
           Validators.maxLength(100),
           Validators.pattern("[a-zA-Z]*")
         ])

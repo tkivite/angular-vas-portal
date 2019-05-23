@@ -22,6 +22,10 @@ export class StoreComponent implements OnInit {
   public recordCount = 0;
   searchKey = "";
 
+  searchParams: any = {};
+  startdateRange = "";
+  enddateRange = "";
+
   loadingIndicator: any = false;
   title = "angulardatatables";
 
@@ -41,30 +45,12 @@ export class StoreComponent implements OnInit {
     this.getData();
   }
 
-  ngOnInit() {
-    $(document).ready(function() {
-      $(".dataTables_empty").html("");
-      $(".dataTables_info").html("");
-      $(".dataTables_length").html(
-        '<a class="btn btn-infor btn-sm mb-1" (click)="onAdd()" type="button"><i class="fa fa-plus"></i> Create a New Store</a>'
-      );
-    });
-
-    this.dtOptions = {
-      dom: "rtip",
-      pageLength: 20,
-      serverSide: false,
-      processing: false,
-      paging: true,
-      pagingType: "full_numbers"
-    };
-    $("#stores-table").DataTable(this.dtOptions);
-  }
+  ngOnInit() {}
   // Load Grid Data
-  getData(searchKey = "", currentPage = 1) {
+  getData() {
     this.blockUI.start("Loading Stores .....");
     this.loadingIndicator = true;
-    this.dataservice.fetchData("stores", searchKey, currentPage).subscribe(
+    this.dataservice.fetchData("stores", this.searchParams).subscribe(
       data => {
         //console.log(data);
         if (data.status === 200) {
@@ -150,10 +136,24 @@ export class StoreComponent implements OnInit {
   }
   onSearch() {
     console.log(this.searchKey);
-    this.getData(this.searchKey, 1);
+    this.searchParams = {
+      searchKey: this.searchKey,
+      page: 1,
+      startdate: this.startdateRange,
+      enddate: this.enddateRange
+    };
+
+    this.getData();
   }
   loadPage(i) {
     this.current_page = i;
-    this.getData(this.searchKey, i);
+    this.searchParams = {
+      searchKey: this.searchKey,
+      page: i,
+      startdate: this.startdateRange,
+      enddate: this.enddateRange
+    };
+
+    this.getData();
   }
 }

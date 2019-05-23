@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule, PreloadAllModules } from "@angular/router";
 import { SalesComponent } from "./pages/sales/sales.component";
+import { ShoppersComponent } from "./pages/supermarkets/shoppers.component";
 import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 import { NotificationsComponent } from "./pages/notifications/notifications.component";
 import { CollectionsComponent } from "./pages/collections/collections.component";
@@ -9,6 +10,9 @@ import { PaymentsComponent } from "./pages/payments/payments.component";
 import { DeliveriesComponent } from "./pages/deliveries/deliveries.component";
 import { MyaccountComponent } from "./pages/myaccount/myaccount.component";
 import { InvoicingComponent } from "./pages/invoicing/invoicing.component";
+import { CreateInvoiceComponent } from "./pages/invoicing/create/create.component";
+import { ViewInvoiceComponent } from "./pages/invoicing/view/view.component";
+
 import { PartnerComponent } from "./pages/partners/partners.component";
 import { CreateBeComponent } from "./pages/partners/create/create.component";
 import { UpdateBeComponent } from "./pages/partners/update/update.component";
@@ -42,6 +46,7 @@ const routes: Routes = [
   { path: "forgotPassword", component: ForgotPasswordComponent },
 
   { path: "sales", component: SalesComponent },
+  { path: "shoppers", component: ShoppersComponent },
   { path: "pending", component: PendingComponent },
   { path: "partners", component: PartnerComponent },
   { path: "partners/create", component: CreateBeComponent },
@@ -67,7 +72,9 @@ const routes: Routes = [
 
   { path: "deliveries", component: DeliveriesComponent },
   { path: "myaccount", component: MyaccountComponent },
-  { path: "invoicing", component: InvoicingComponent }
+  { path: "invoicing", component: InvoicingComponent },
+  { path: "invoices/create", component: CreateInvoiceComponent },
+  { path: "invoices/view", component: ViewInvoiceComponent }
 ];
 
 @NgModule({

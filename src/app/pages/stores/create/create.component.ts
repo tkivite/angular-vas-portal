@@ -41,6 +41,16 @@ export class CreateStoreComponent implements OnInit {
     const kenyanMobileNoPattern = /^\+(?:[0-9] ?){11,14}[0-9]$/;
     const kenyanTillNoPattern = /^[0-9]{5,7}$/;
 
+    const commaSepEmail = (
+      control: AbstractControl
+    ): { [key: string]: any } | null => {
+      const emails = control.value.split(",").map(e => e.trim());
+      const forbidden = emails.some(email =>
+        Validators.email(new FormControl(email))
+      );
+      return forbidden ? { toAddress: { value: control.value } } : null;
+    };
+
     this.dataservice.fetchData("partners").subscribe(
       data => {
         if (data.status === 200) {
@@ -76,6 +86,7 @@ export class CreateStoreComponent implements OnInit {
         "",
         Validators.compose([Validators.required, CustomValidators.email])
       ],
+      storeDisburseEmailCC: ["", commaSepEmail],
       storeDisburseEmail1: ["", Validators.compose([CustomValidators.email])],
       storeDisburseEmail2: ["", Validators.compose([CustomValidators.email])],
       storeSourceid: ["", Validators.compose([Validators.required])],
@@ -144,6 +155,13 @@ export class CreateStoreComponent implements OnInit {
     if (form.valid) {
       this.errorMessage = "SHOWERROR";
       this.blockUI.start("Adding Store");
+      let contact_mobile = "";
+      if (form.value.storeContactMobile)
+        contact_mobile = form.value.storeContactMobile.internationalNumber.replace(
+          / /g,
+          ""
+        );
+
       const postFormData = {
         name: form.value.storeName,
         target: form.value.storeTarget,
@@ -156,12 +174,9 @@ export class CreateStoreComponent implements OnInit {
         ),
         contact_person: form.value.storeContact,
         contact_person_email: form.value.storeContactEmail,
-        contact_person_mobile: form.value.storeContactMobile.internationalNumber.replace(
-          / /g,
-          ""
-        ),
+        contact_person_mobile: contact_mobile,
         disburse_email: form.value.storeDisburseEmail,
-        disburse_email_cc1: form.value.storeDisburseEmail1,
+        disburse_email_cc1: form.value.storeDisburseEmailCC,
         disburse_email_cc2: form.value.storeDisburseEmail2,
         partner_id: form.value.storePartner,
         source_id: form.value.storeSourceid,

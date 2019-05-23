@@ -28,6 +28,7 @@ export class CreateBeComponent implements OnInit {
   public errorMessage: any = "SHOWERROR";
   public specialityOptions: any;
   saveErrors: any;
+  public yearOfIncor = [];
 
   selectedSpeciality = [];
   dropdownSettings = {};
@@ -49,8 +50,15 @@ export class CreateBeComponent implements OnInit {
       { speciality_id: "1", speciality_name: "Electronics" },
       { speciality_id: "2", speciality_name: "Phones" },
       { speciality_id: "3", speciality_name: "Furniture" },
-      { speciality_id: "4", speciality_name: "General" }
+      { speciality_id: "4", speciality_name: "Other" }
     ];
+    let maxYear = new Date().getFullYear();
+    let minYear = maxYear - 200;
+
+    for (var i = minYear; i <= maxYear; i++) {
+      this.yearOfIncor.push({ id: "1", year: i });
+    }
+
     this.blockUI.start("Fetching Users");
     this.dataservice.fetchData("users").subscribe(
       data => {
@@ -79,6 +87,7 @@ export class CreateBeComponent implements OnInit {
       allowSearchFilter: true
     };
     let current_year = new Date().getFullYear();
+
     this.beFormAdd = fb.group({
       orgName: [
         "",

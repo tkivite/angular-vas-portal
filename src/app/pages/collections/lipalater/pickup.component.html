@@ -28,51 +28,72 @@
             <div class="col-md-1"></div>
             <h4 class="col-md-11">Initiate Pickup by Lipalater Staff</h4>
           </div>
-          <hr>
+          <hr />
           <div class="row">
-
-
             <div class="col-md-1"></div>
-            <form [formGroup]="pickupForm" (ngSubmit)="onSubmit(pickupForm)" class="col-md-11 form-horizontal">
-
+            <form
+              [formGroup]="pickupForm"
+              (ngSubmit)="onSubmit(pickupForm)"
+              class="col-md-11 form-horizontal"
+            >
               <fieldset>
                 <p>
-                  Enter the lipalater staff id number. If we find a pending item for pick-up,we will send a verification
-                  code to the staff's registered mobile number
+                  Enter the lipalater staff id number. If we find a pending item
+                  for pick-up,we will send a verification code to the staff's
+                  registered mobile number.
                 </p>
                 <div class="form-group">
                   <label> ID Number</label>
 
-                  <input formControlName="idNumber" class="form-control validation-field" placeholder="Id Number"
-                    type="text">
-                  <small class="text-danger"
-                    *ngIf="pickupForm.get('idNumber').touched && pickupForm.get('idNumber').hasError('required')">Id
-                    number is
-                    required</small>
+                  <input
+                    formControlName="idNumber"
+                    class="form-control validation-field"
+                    placeholder="Id Number"
+                    type="text"
+                  />
+                  <small
+                    class="text-danger"
+                    *ngIf="
+                      pickupForm.get('idNumber').touched &&
+                      pickupForm.get('idNumber').hasError('required')
+                    "
+                    >Id number is required</small
+                  >
                 </div>
-                <p *ngIf="rsubmitted">Names: {{user_collecting}} </p>
-                <p *ngIf="rsubmitted">Mobile: {{userMobileNumber}}</p>
+                <label> Pick up staff details</label>
+                <p *ngIf="rsubmitted">Names: {{ user_collecting }}</p>
+                <p *ngIf="rsubmitted">Mobile: {{ userMobileNumber }}</p>
 
                 <p *ngIf="rsubmitted">
-                  A verification code has been sent to {{userMobileNumber}}. Input it below to complete the pickup
-                  process.
+                  A verification code has been sent to {{ userMobileNumber }}.
+                  Input it below to complete the pickup process.
                 </p>
 
                 <div class="form-group" *ngIf="!rsubmitted">
-                  <button class="btn btn-block btn-primary" (click)="getVerificationCode(pickupForm)">Generate
-                    Code</button>
+                  <button
+                    class="btn btn-block btn-primary"
+                    (click)="getVerificationCode(pickupForm)"
+                  >
+                    Generate Code
+                  </button>
                 </div>
                 <div class="form-group" *ngIf="rsubmitted">
                   <label> Verification Code </label>
 
-                  <input formControlName="verificationCode" class="form-control validation-field"
-                    placeholder="Verification Code" type="text">
-                  <small class="text-danger"
-                    *ngIf="pickupForm.get('verificationCode').touched && pickupForm.get('verificationCode').hasError('required')">Code
-                    is
-                    required</small>
-
-
+                  <input
+                    formControlName="verificationCode"
+                    class="form-control validation-field"
+                    placeholder="Verification Code"
+                    type="text"
+                  />
+                  <small
+                    class="text-danger"
+                    *ngIf="
+                      pickupForm.get('verificationCode').touched &&
+                      pickupForm.get('verificationCode').hasError('required')
+                    "
+                    >Code is required</small
+                  >
                 </div>
 
                 <div class="form-group" *ngIf="rsubmitted">
@@ -81,7 +102,7 @@
                   <table class="table table-striped  table-sm row-border hover">
                     <thead>
                       <tr>
-                        <th>select</th>
+                        <th>Select</th>
                         <th>Customer</th>
                         <th>Item</th>
                         <th>Pickup type</th>
@@ -91,58 +112,75 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let item of customerItems; let i = index" id={{item.id}}>
-                        <td><input type="checkbox" value="{{item.id}}" (change)="itemSelected($event)" /> </td>
-                        <td>{{item.customer_names}}</td>
-                        <td>{{item.item_description}}</td>
-                        <td>{{(item.pick_up_type =='store_pickup')?'customer pick up':'lipalater pick up'}}</td>
-                        <td>{{item.store}}</td>
-                        <td>{{item.created_at | date}}</td>
-                        <td>{{item.status}}</td>
-                        <td> <input id="{{item.id}}" (mouseout)="itemCodeValues($event)" placeholder="Item Code"
-                            type="text"></td>
+                      <tr
+                        *ngFor="let item of customerItems; let i = index"
+                        id="{{ item.id }}"
+                      >
+                        <td>
+                          <input
+                            type="checkbox"
+                            value="{{ item.id }}"
+                            (change)="itemSelected($event)"
+                          />
+                        </td>
+                        <td>{{ item.customer_names }}</td>
+                        <td>{{ item.item_description }}</td>
+                        <td>
+                          {{
+                            item.pick_up_type == "store_pickup"
+                              ? "customer pick up"
+                              : "lipalater pick up"
+                          }}
+                        </td>
+                        <td>{{ item.store }}</td>
+                        <td>{{ item.created_at | date }}</td>
+                        <td>{{ item.status }}</td>
+                        <td>
+                          <input
+                            id="{{ item.id }}"
+                            (mouseout)="itemCodeValues($event)"
+                            placeholder="Item Code (IMEI)"
+                            type="text"
+                          />
+                        </td>
 
                         <!--[readonly]="isCodeReadOnly()"-->
-
                       </tr>
                     </tbody>
                   </table>
-
-
+                  mmaina@odysseyafricapital.com
                 </div>
-
 
                 <div class="form-group" *ngIf="rsubmitted">
                   <label> Pickup Notes </label>
-                  <textarea formControlName="pickupNotes" class="form-control validation-field"
-                    placeholder="Pickup Notes"></textarea>
-
-
-
+                  <textarea
+                    formControlName="pickupNotes"
+                    class="form-control validation-field"
+                    placeholder="Pickup Notes"
+                  ></textarea>
                 </div>
 
                 <div class="form-group" *ngIf="rsubmitted">
-                  <button [disabled]="!pickupForm.valid" class="btn btn-block btn-primary" type="submit">Complete
-                    Pickup</button>
+                  <button
+                    [disabled]="!pickupForm.valid"
+                    class="btn btn-block btn-primary"
+                    type="submit"
+                  >
+                    Complete Pickup
+                  </button>
                 </div>
 
                 <div class="form-group" *ngIf="fusernotfound">
-
                   <h3>Invalid Id number</h3>
 
                   <div class="alert alert-md alert-danger">
-                    The Id number does not belong to a valid lipalater pick up staff. Or We could not find a pending
-                    items for collection. You can try again.
-
+                    The Id number does not belong to a valid lipalater pick up
+                    staff. Or We could not find a pending items for collection.
+                    You can try again.
                   </div>
-
-
-
-
                 </div>
 
                 <div class="form-group" *ngIf="fnopendingitems">
-
                   <h3>No pending Items</h3>
 
                   <div class="alert alert-md alert-danger">
@@ -153,9 +191,7 @@
             </form>
           </div>
 
-          <div class="panel-body" *ngIf="fsubmitted">
-
-          </div>
+          <div class="panel-body" *ngIf="fsubmitted"></div>
         </div>
       </div>
     </div>

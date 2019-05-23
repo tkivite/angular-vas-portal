@@ -27,7 +27,9 @@ export class PartnerComponent implements OnInit {
   total_records = 0;
   page_size = 25;
   total_pages = 1;
-  //Math.ceil(this.total_records / this.page_size);
+  searchParams: any = {};
+  startdateRange = "";
+  enddateRange = "";
 
   @ViewChild("myTable") table: any;
   constructor(
@@ -43,10 +45,10 @@ export class PartnerComponent implements OnInit {
     this.getData();
   }
   // Load Grid Data
-  getData(searchKey = "", currentPage = 1) {
+  getData() {
     this.blockUI.start("Loading Partners .....");
     this.loadingIndicator = true;
-    this.dataservice.fetchData("partners", searchKey, currentPage).subscribe(
+    this.dataservice.fetchData("partners", this.searchParams).subscribe(
       data => {
         console.log(data);
         if (data.status === 200) {
@@ -146,10 +148,26 @@ export class PartnerComponent implements OnInit {
 
   onSearch() {
     console.log(this.searchKey);
-    this.getData(this.searchKey, 1);
+    this.searchParams = {
+      searchKey: this.searchKey,
+      page: 1,
+      startdate: this.startdateRange,
+      enddate: this.enddateRange
+    };
+    this.getData();
   }
   loadPage(i) {
     this.current_page = i;
-    this.getData(this.searchKey, i);
+    this.searchParams = {
+      searchKey: this.searchKey,
+      page: i,
+      startdate: this.startdateRange,
+      enddate: this.enddateRange
+    };
+    this.getData();
+  }
+  toggleRecordDetails(item) {
+    if (item.showDetails) item.showDetails = false;
+    else item.showDetails = true;
   }
 }

@@ -15,8 +15,11 @@ import { environment } from "../../environments/environment";
 @Injectable()
 export class ApiService {
   currentUser: any;
+  todate: any = "";
+  datePast: any = "";
   headers: any;
   public EditFormData: any;
+  public newInvoice: any;
   public currentLoggedInUser: any;
   public router: Router;
   baseUrl = "https://partner-portal-backend.herokuapp.com/";
@@ -31,12 +34,32 @@ export class ApiService {
     console.log(environment.apiUrl);
     console.log(environment);
     console.log(environment.production);
-    /*
-    if (environment.production) {
-      this.baseUrl = "https://partner-portal-backend.herokuapp.com/";
-    } else {
-      this.baseUrl = "/api/";
-    }*/
+    let today = new Date();
+    let dd = today.getDate();
+    let ddPast = new Date();
+    ddPast.setDate(ddPast.getDate() - 30);
+    let stdd = "";
+    let stmm = "";
+    let stddPast = "";
+    let stmmPast = "";
+    let sttoday = "";
+
+    let mm = today.getMonth() + 1;
+    let yyyy = today.getFullYear();
+
+    let dayPast = ddPast.getDate();
+    let mmPast = ddPast.getMonth() + 1;
+    let yyyyPast = ddPast.getFullYear();
+
+    if (dd < 10) {
+      stdd = "0" + dd;
+    }
+
+    if (mm < 10) {
+      stmm = "0" + mm;
+    }
+    this.todate = yyyy + "-" + mm + "-" + dd;
+    this.datePast = yyyyPast + "-" + mmPast + "-" + dayPast;
 
     this.authenticationService.currentUser.subscribe(x => {
       this.currentUser = x;
@@ -51,10 +74,29 @@ export class ApiService {
       }
     });
   }
-  fetchData(resource, searchKey = "", page = 1): Observable<any> {
+  fetchData(
+    resource,
+    searchParams = {
+      searchKey: "",
+      action: "display",
+      page: 1,
+      startdate: this.datePast,
+      enddate: this.todate
+    }
+  ): Observable<any> {
+    if (this.isEmpty(searchParams)) {
+      searchParams = {
+        searchKey: "",
+        action: "display",
+        page: 1,
+        startdate: this.datePast,
+        enddate: this.todate
+      };
+    }
+    console.log(searchParams);
     return this.http
       .get<any>(
-        this.baseUrl + resource + "?searchkey=" + searchKey + "&page=" + page,
+        this.baseUrl + resource + "?dataparams=" + JSON.stringify(searchParams),
         {
           headers: this.headers,
           observe: "response"
@@ -76,9 +118,31 @@ export class ApiService {
       observe: "response"
     });
   }
+  createInvoice(payload = {}): Observable<any> {
+    return this.http.post<any>(this.baseUrl + "invoices", payload, {
+      headers: this.headers,
+      observe: "response"
+    });
+  }
+  finishInvoice(id, payload = {}): Observable<any> {
+    return this.http.post<any>(
+      this.baseUrl + "invoices/" + id + "/finish",
+      payload,
+      {
+        headers: this.headers,
+        observe: "response"
+      }
+    );
+  }
 
   updateRecord(resource, id, record): Observable<any> {
     return this.http.put<any>(this.baseUrl + resource + "/" + id, record, {
+      headers: this.headers,
+      observe: "response"
+    });
+  }
+  updateOneRecord(resource, id, record): Observable<any> {
+    return this.http.put<any>(this.baseUrl + resource, record, {
       headers: this.headers,
       observe: "response"
     });
@@ -169,5 +233,12 @@ export class ApiService {
         return of(result as T);
       }
     };
+  }
+
+  isEmpty(obj) {
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) return false;
+    }
+    return true;
   }
 }

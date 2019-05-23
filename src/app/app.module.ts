@@ -4,6 +4,7 @@ import { AngularFontAwesomeModule } from "angular-font-awesome";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { BsDropdownModule } from "ngx-bootstrap";
 import { NgxIntlTelInputModule } from "ngx-intl-tel-input";
+import { Daterangepicker } from "ng2-daterangepicker";
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DataTablesModule } from "angular-datatables";
@@ -27,6 +28,7 @@ import { AlertComponent } from "./components";
 import { AppComponent } from "./app.component";
 import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 import { SalesComponent } from "./pages/sales/sales.component";
+import { ShoppersComponent } from "./pages/supermarkets/shoppers.component";
 import { NotificationsComponent } from "./pages/notifications/notifications.component";
 import { CollectionsComponent } from "./pages/collections/collections.component";
 import { ReleasedComponent } from "./pages/released/released.component";
@@ -34,6 +36,9 @@ import { MyaccountComponent } from "./pages/myaccount/myaccount.component";
 import { PaymentsComponent } from "./pages/payments/payments.component";
 import { DeliveriesComponent } from "./pages/deliveries/deliveries.component";
 import { InvoicingComponent } from "./pages/invoicing/invoicing.component";
+import { CreateInvoiceComponent } from "./pages/invoicing/create/create.component";
+import { ViewInvoiceComponent } from "./pages/invoicing/view/view.component";
+
 import { HeaderComponent } from "./components/header/header.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
@@ -70,6 +75,7 @@ enableProdMode();
     AppComponent,
     DashboardComponent,
     SalesComponent,
+    ShoppersComponent,
     NotificationsComponent,
     CollectionsComponent,
     ReleasedComponent,
@@ -79,6 +85,8 @@ enableProdMode();
     UsersComponent,
     LipalaterUsersComponent,
     InvoicingComponent,
+    CreateInvoiceComponent,
+    ViewInvoiceComponent,
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
@@ -116,6 +124,7 @@ enableProdMode();
     BlockUIModule.forRoot(),
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(),
+    Daterangepicker,
     NgMultiSelectDropDownModule.forRoot(),
     BsDropdownModule.forRoot(),
     NgxIntlTelInputModule,

@@ -42,7 +42,8 @@ export class CreateLipalaterUserComponent implements OnInit {
 
     this.roleList = [
       { id: "1", name: "Lipalater admin" },
-      { id: "2", name: "Lipalater_delivery" }
+      { id: "2", name: "Lipalater_delivery" },
+      { id: "3", name: "Lipalater_cro" }
     ];
 
     const namePattern = /^[a-zA-Z ']{2,45}$/;
@@ -133,7 +134,7 @@ export class CreateLipalaterUserComponent implements OnInit {
         role: form.value.role,
         id_number: form.value.id_number,
         store_id: form.value.store_id,
-        active_status: false
+        active_status: true
       };
       this.dataservice.postData("users", postFormData).subscribe(
         data => {

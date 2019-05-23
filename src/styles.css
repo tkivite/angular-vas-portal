@@ -6,10 +6,24 @@
 @import '~ngx-toastr/toastr.css';
 @import '~intl-tel-input/build/css/intlTelInput.css';
 
+/*
 body {
   font-family: 'Poppins', sans-serif;
   background: #fafafa;
+}*/
+html,
+body,
+app-root {
+  height: 100%;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #fafafa;
 }
+
+
+
+
+
 
 p {
   font-family: 'Poppins', sans-serif;
@@ -295,8 +309,6 @@ a.article:hover {
   padding: 0;
   border-radius: 0;
   color: #212121;
-  background-color: #FAFAFA;
-  border-color: #EEEEEE;
 }
 
 .panel-title {
@@ -355,26 +367,6 @@ a[aria-expanded="true"] {
   display: block;
 }
 
-.login-panel {
-  margin-bottom: 20px;
-  margin-top: 25%;
-  background-color: #fff;
-  border: 1px solid transparent;
-  border-radius: 4px;
-
-}
-
-.login-panel>.panel-heading {
-  padding: 10px 15px;
-  border-bottom: 1px solid transparent;
-  border-bottom-color: transparent;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-}
-
-.login-panel>.panel-body {
-  padding: 15px
-}
 
 .dataTable {
   font-size: 0.9em;
@@ -449,6 +441,14 @@ a[aria-expanded="true"] {
 
 }
 
+.form-inline .form-group {
+  margin-right: 10px;
+}
+
+.form-inline .form-control {
+  margin-left: 10px;
+}
+
 .card {
   overflow: hidden;
 }
@@ -502,6 +502,8 @@ app-deliveries,
 app-collections,
 app-pickup,
 app-invoicing,
+app-shoppers,
+app-view,
 app-dashboard {
   width: 100%;
 }
@@ -629,24 +631,48 @@ ngb-tabset>.nav-tabs {
   font-size: 2rem;
 }
 
-.slidediv {
-  background-color: #ddd;
-  width: 400px;
-
-
+dl {
+  width: 100%;
   overflow: hidden;
-
-  -webkit-transition: max-height 1.5s cubic-bezier(0, 1.05, 0, 1);
-  -moz-transition: max-height 1.5s cubic-bezier(0, 1.05, 0, 1);
-  transition: max-height 1.5s ease cubic-bezier(0, 1.05, 0, 1);
-
-  max-height: 38px;
+  padding: 0;
+  margin-right: 0;
 }
 
-div:hover {
-  -webkit-transition: max-height 2s ease;
-  -moz-transition: max-height 2s ease;
-  transition: max-height 2s ease;
-
-  max-height: 400px;
+dt {
+  float: left;
+  width: 30%;
+  /* adjust the width; make sure the total of both is 100% */
+  padding: 0;
+  margin-left: 0;
 }
+
+dd {
+  float: left;
+  width: 50%;
+  padding: 0;
+  margin: 0;
+}
+
+tr {
+  cursor: pointer;
+}
+
+.slideup,
+.slidedown {
+  max-height: 0;
+  overflow-y: hidden;
+  -webkit-transition: max-height 0.8s ease-in-out;
+  -moz-transition: max-height 0.8s ease-in-out;
+  -o-transition: max-height 0.8s ease-in-out;
+  transition: max-height 0.8s ease-in-out;
+}
+
+.slidedown {
+  max-height: 500px;
+}
+
+
+/*
+The green colour code is #7BA73A while the blue is #28328D and the grey is #585858.
+For the fonts, I have used Proxima Nova Alt semibold for the main body text with the grey colour code #585858. In the filling boxes, I have used the same font but regular size and with a lighter grey of #A4A4A5.
+*/

@@ -37,7 +37,7 @@
             <th>Store</th>
             <th>Amount</th>
             <th>Status</th>
-            <th>Date Added</th>
+            <th>Date of Sale</th>
           </tr>
         </thead>
         <tbody>
@@ -51,7 +51,7 @@
             <td>{{item.store}}</td>
             <td>{{item.buying_price}}</td>
             <td>{{item.status}}</td>
-            <td>{{item.created_at | date}}</td>
+            <td>{{item.created_at | date: 'medium'}}</td>
 
           </tr>
         </tbody>
