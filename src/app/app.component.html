@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <nav id="sidebar" *ngIf="currentUser">
+  <!-- <nav id="sidebar" *ngIf="currentUser">
     <div class="sidebar-header"> <a class="nav-link sales-link" routerLink="/dashboard">
         <img src="./assets/logo.png" /></a>
     </div>
@@ -137,12 +137,43 @@
 
       </ngb-accordion>
       <hr />
-    </div><!-- container -->
+    </div>
+  </nav>-->
+  <nav id="sidebar" *ngIf="currentUser">
+    <div class="sidebar-header"> <a class="nav-link sales-link" routerLink="/dashboard">
+        <img src="./assets/images/DashboardLogo.png" /></a>
+    </div>
+    <div class="container demo d-none d-md-block"></div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <a class="nav-link sales-link" routerLink="/partners">Partners
+          <i class="fa fa-handshake-o" style="color:#88b840"></i>
+        </a>
+      </li>
+      <li class="list-group-item">
+        <a class="nav-link sales-link" routerLink="/stores">Stores
+          <i class="fa fa-city" style="color:#88b840"></i>
+          <i class="fa fa-industry" style="color:#88b840"></i>
+        </a>
+      </li>
+      <li class="list-group-item">
+        <a class="nav-link released-link" routerLink="/users">Store Users
+          <i class="fa fa-users" style="color:#88b840"></i>
+        </a>
+      </li>
+      <li class="list-group-item" *ngIf="currentUser.user.role == 'Lipalater Super admin'">
+        <a class=" nav-link released-link" routerLink="/lipalater-users">Internal Users
+          <i class="fa fa-users" style="color:#88b840"></i>
+        </a>
+      </li>
+
+    </ul>
   </nav>
+
   <div id="content">
     <nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="currentUser">
       <div class="container-fluid topbar">
-        <button type="button" id="sidebarCollapse" class="btn"
+        <!-- <button type="button" id="sidebarCollapse" class="btn"
           style="background: #7386D5; color:white; margin-left: -60px">
           <i class="fa fa-angle-double-left"></i>
           <i class="fa fa-angle-double-right"></i>
@@ -152,8 +183,8 @@
           aria-label="Toggle navigation">
           <i class="fa fa-align-justify"></i>
 
-        </button>
-        <!--navbar-toggler-icon -->
+        </button> -->
+        <!--Top Bar -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <div>
             <h2 class="store-name">{{currentUser.user.firstname}} @ {{currentUser.store.name}}</h2>
@@ -202,6 +233,9 @@
         </div>
       </div>
     </nav>
+    <div class="left-most"></div>
+    <div class="side-menu"></div>
+
     <div class="row dynamicContent">
 
       <alert></alert>
