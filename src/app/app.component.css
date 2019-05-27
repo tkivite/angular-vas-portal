@@ -16,7 +16,8 @@
 }
 
 #sidebar .sidebar-header {
-  padding: 2px;
+  padding-top: 10px;
+  padding-left: 2px;
   background: white;
 }
 
@@ -55,4 +56,25 @@ a[aria-expanded="true"] {
 #sidebar ul li .fa {
   float: right;
 
+}
+
+.list-group-flush {
+  padding-top: 150px;
+}
+
+.list-group-flush li a:hover {
+  color: #7386D5;
+  background: #fff;
+}
+
+#sidebar ul li a:hover {
+
+  border-right: solid 4px #7BA73A;
+
+}
+
+.top-link,
+.top-link:visited {
+  background-color: #F1F3F6;
+  color: #7BA73A;
 }

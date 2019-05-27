@@ -42,8 +42,9 @@ a:focus {
 }
 
 .dynamicContent {
-  margin-left: 0px !important;
+  margin-left: 30px !important;
   margin-right: 0px !important;
+  padding-top: 50px;
 }
 
 
@@ -187,7 +188,7 @@ a.article:hover {
 ----------------------------------------------------- */
 
 .box.box-primary {
-  border-top-color: #3c8dbc;
+  /* border-top-color: #3c8dbc; */
 }
 
 .box {
@@ -195,7 +196,7 @@ a.article:hover {
   position: relative;
   border-radius: 5px;
   background: #ffffff;
-  border-top: 5px solid #d2d6de;
+  /* border-top: 5px solid #d2d6de; */
   margin-bottom: 20px;
   width: 100%;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
@@ -450,7 +451,8 @@ app-pickup,
 app-invoicing,
 app-shoppers,
 app-view,
-app-dashboard {
+app-dashboard,
+app-onboarding {
   width: 100%;
 }
 

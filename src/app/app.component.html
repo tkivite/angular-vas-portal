@@ -145,7 +145,7 @@
     </div>
     <div class="container demo d-none d-md-block"></div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">
+      <!-- <li class="list-group-item">
         <a class="nav-link sales-link" routerLink="/partners">Partners
           <i class="fa fa-handshake-o" style="color:#88b840"></i>
         </a>
@@ -165,6 +165,23 @@
         <a class=" nav-link released-link" routerLink="/lipalater-users">Internal Users
           <i class="fa fa-users" style="color:#88b840"></i>
         </a>
+      </li> -->
+      <li class="list-group-item">
+        <a class="nav-link sales-link" routerLink="/dashboard" title="Home"
+          ng-class="{active: currentUrlPath == '#/dashboard'}" class="1{{currentUrlPath}}">
+          <img src="./assets/images/icons/HomeIcon.png" alt="Home" /></a>
+      </li>
+      <li class="list-group-item">
+        <a class="nav-link sales-link" routerLink="/onboarding" title="Onboarding">
+          <img src="./assets/images/icons/OnboardingIcon.png" alt="Onboarding" /></a>
+      </li>
+      <li class="list-group-item">
+        <a class="nav-link released-link" routerLink="/users" title="Sales">
+          <img src="./assets/images/icons/PickupmenuIcon.png" alt="Sales" /></a>
+      </li>
+      <li class="list-group-item" *ngIf="currentUser.user.role == 'Lipalater Super admin'">
+        <a class=" nav-link released-link" routerLink="/lipalater-users" title="Settings">
+          <img src="./assets/images/icons/SettingIcon.png" alt="Settings" /></a>
       </li>
 
     </ul>

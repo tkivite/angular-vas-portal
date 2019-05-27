@@ -5,6 +5,10 @@
   background-size: 100%;
   background-position: center;
   background-size: cover;
+  background-image: url('/assets/images/login-background.jpg');
+  /* -webkit-filter: grayscale(100%);
+  /* Safari 6.0 - 9.0
+  filter: grayscale(100%);*/
 }
 
 .login-panel {

@@ -37,10 +37,27 @@ import { ForgotPasswordComponent } from "./pages/forgot-password/forgot-password
 import { PickupComponent } from "./pages/collections/create/pickup.component";
 
 import { StaffPickupComponent } from "./pages/collections/lipalater/pickup.component";
+import { OnboardingComponent } from "./pages/onboarding/onboarding.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "dashboard", pathMatch: "full" },
   { path: "login", component: LoginComponent },
+  {
+    path: "onboarding",
+    component: OnboardingComponent,
+    children: [
+      { path: "", component: DashboardComponent },
+      { path: "partners", component: PartnerComponent },
+      { path: "partners/create", component: CreateBeComponent },
+      { path: "partners/update", component: UpdateBeComponent },
+      { path: "partners/view", component: ViewBeComponent },
+      { path: "stores", component: StoreComponent },
+      { path: "stores/create", component: CreateStoreComponent },
+      { path: "stores/update", component: UpdateStoreComponent },
+      { path: "users", component: UsersComponent },
+      { path: "lipalater-users", component: LipalaterUsersComponent }
+    ]
+  },
   { path: "register", component: CreateUserComponent },
   { path: "changepassword", component: ChangePasswordComponent },
   { path: "forgotPassword", component: ForgotPasswordComponent },
@@ -48,13 +65,7 @@ const routes: Routes = [
   { path: "sales", component: SalesComponent },
   { path: "shoppers", component: ShoppersComponent },
   { path: "pending", component: PendingComponent },
-  { path: "partners", component: PartnerComponent },
-  { path: "partners/create", component: CreateBeComponent },
-  { path: "partners/update", component: UpdateBeComponent },
-  { path: "partners/view", component: ViewBeComponent },
-  { path: "stores", component: StoreComponent },
-  { path: "stores/create", component: CreateStoreComponent },
-  { path: "stores/update", component: UpdateStoreComponent },
+
   { path: "dashboard", component: DashboardComponent },
   { path: "notifications", component: NotificationsComponent },
   { path: "collections", component: CollectionsComponent },
