@@ -48,7 +48,7 @@ const routes: Routes = [
     path: "onboarding",
     component: OnboardingComponent,
     children: [
-      { path: "", component: DashboardComponent },
+      { path: "", component: OnboardingDashboardComponent },
       { path: "dashboard", component: OnboardingDashboardComponent },
       { path: "partners", component: PartnerComponent },
       { path: "partners/create", component: CreateBeComponent },

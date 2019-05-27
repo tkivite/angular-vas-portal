@@ -16,21 +16,21 @@
             </li>
             <li class="list-group-item">
               <a class="nav-link sales-link" routerLink="partners">
-                Partners<p>2</p>
+                Partners<p>{{partners}}</p>
               </a>
             </li>
             <li class="list-group-item">
-              <a class="nav-link sales-link" routerLink="stores">Stores<p>2</p>
+              <a class="nav-link sales-link" routerLink="stores">Stores<p>{{stores}}</p>
               </a>
             </li>
             <li class="list-group-item">
               <a class="nav-link released-link" routerLink="users">Store Users
-                <p>2</p>
+                <p>{{store_users}}</p>
               </a>
             </li>
             <li class="list-group-item" *ngIf="currentUser.user.role == 'Lipalater Super admin'">
               <a class=" nav-link released-link" routerLink="lipalater-users">Internal Users
-                <p>2</p>
+                <p>{{internal_users}}</p>
               </a>
             </li>
           </ul>
