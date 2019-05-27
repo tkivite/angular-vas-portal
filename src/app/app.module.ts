@@ -68,6 +68,7 @@ import { ForgotPasswordComponent } from "./pages/forgot-password/forgot-password
 import { PickupComponent } from "./pages/collections/create/pickup.component";
 import { StaffPickupComponent } from "./pages/collections/lipalater/pickup.component";
 import { OnboardingComponent } from './pages/onboarding/onboarding.component';
+import { OnboardingDashboardComponent } from './pages/onboarding-dashboard/onboarding-dashboard.component';
 
 enableProdMode();
 
@@ -113,7 +114,9 @@ enableProdMode();
 
     ConfirmationDialogComponent,
 
-    OnboardingComponent
+    OnboardingComponent,
+
+    OnboardingDashboardComponent
   ],
   imports: [
     BrowserModule,

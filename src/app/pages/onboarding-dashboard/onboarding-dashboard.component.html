@@ -1,0 +1,297 @@
+<div class="box box-primary">
+  <div class="box-body">
+
+    <div class="row partner-graph">
+
+      <div class="col-sm-6"> <canvas id="lineChart"></canvas></div>
+      <div class="col-sm-6"> <canvas id="lineChart2"></canvas></div>
+    </div>
+  </div>
+</div>
+
+
+<div class="box box-primary">
+  <div class="box-body">
+    <div id="div-dashboard">
+
+
+
+      <!--<div class="row mb-3"> <canvas id="lineChart"></canvas></div>
+        <div class="row mb-3"><canvas id="barChart"></canvas></div>
+        <div class="row mb-3"><canvas id="pieChart"></canvas></div>-->
+
+      <div class="row mb-3"
+        *ngIf="currentUser.user.role == 'Lipalater admin' || currentUser.user.role == 'Lipalater Super admin'">
+
+        <a routerLink="/partners" class="col-xl-3 col-sm-6 py-2 custom-card">
+          <div class="card bg-success text-white h-100">
+            <div class="card-body bg-success">
+              <div class="rotate">
+                <i class="fa fa-users fa-4x"></i>
+              </div>
+              <h6 class="text-uppercase">Partners</h6>
+              <h1 class="display-4">{{partners}}</h1>
+            </div>
+          </div>
+        </a>
+        <a routerLink="/stores" class="col-xl-3 col-sm-6 py-2 custom-card">
+          <div class="card text-white bg-primary h-100">
+            <div class="card-body bg-primary">
+              <div class="rotate">
+                <i class="fa fa-list fa-4x"></i>
+              </div>
+              <h6 class="text-uppercase">Stores</h6>
+              <h1 class="display-4">{{stores}}</h1>
+            </div>
+          </div>
+        </a>
+        <a routerLink="/users" class="col-xl-3 col-sm-6 py-2 custom-card">
+          <div class="card text-white bg-info h-100">
+            <div class="card-body bg-info">
+              <div class="rotate">
+                <i class="fa fa-users fa-4x"></i>
+              </div>
+              <h6 class="text-uppercase">Store Users</h6>
+              <h1 class="display-4">{{store_users}}</h1>
+            </div>
+          </div>
+        </a>
+        <a routerLink="/lipalater-users" class="col-xl-3 col-sm-6 py-2 custom-card">
+
+          <div class="card text-white bg-dark h-100">
+            <div class="card-body">
+              <div class="rotate">
+                <i class="fa fa-users fa-4x"></i>
+              </div>
+              <h6 class="text-uppercase">Internal Users</h6>
+              <h1 class="display-4">{{internal_users}}</h1>
+            </div>
+          </div>
+
+        </a>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+<!-- <div class="box box-primary">
+  <div class="box-body">
+
+    <div class="row mb-3"
+      *ngIf="currentUser.user.role == 'Lipalater admin' || currentUser.user.role == 'Lipalater Super admin' || currentUser.user.role == 'Store admin'">
+      <a routerLink="/released" class="col-xl-3 col-sm-6 py-2 custom-card">
+        <div class="card bg-success text-white h-100">
+          <div class="card-body bg-success">
+            <div class="rotate">
+              <i class="fa fa-user fa-4x"></i>
+            </div>
+            <h6 class="text-uppercase">Items Picked</h6>
+            <h1 class="display-4">{{collected_count}}</h1>
+          </div>
+        </div>
+      </a>
+      <a routerLink="/released" class="col-xl-3 col-sm-6 py-2 custom-card">
+        <div class="card text-white bg-danger h-100">
+          <div class="card-body bg-danger">
+            <div class="rotate">
+              <i class="fa fa-list fa-4x"></i>
+            </div>
+            <h6 class="text-uppercase">Value Picked</h6>
+            <h1 class="display-4">{{collected_value}}</h1>
+          </div>
+        </div>
+      </a>
+      <a routerLink="/pending" class="col-xl-3 col-sm-6 py-2 custom-card">
+        <div class="card text-white bg-info h-100">
+          <div class="card-body bg-info">
+            <div class="rotate">
+              <i class="fa fa-twitter fa-4x"></i>
+            </div>
+            <h6 class="text-uppercase">Items Pending Pickup</h6>
+            <h1 class="display-4">{{pending_count}}</h1>
+          </div>
+        </div>
+      </a>
+      <a routerLink="/pending" class="col-xl-3 col-sm-6 py-2 custom-card">
+        <div class="card text-white bg-warning h-100">
+          <div class="card-body">
+            <div class="rotate">
+              <i class="fa fa-share fa-4x"></i>
+            </div>
+            <h6 class="text-uppercase">Value Pending Pickup</h6>
+            <h1 class="display-4">{{pending_value}}</h1>
+          </div>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</div> -->
+
+
+
+
+<!--
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="box box-primary">
+      <div class="box-body">
+        <div class="row mb-3" *ngIf="partners.length > 0">
+          <span class="sidebar-header">
+            Recently Added Partners
+          </span>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+
+                <th>Partners</th>
+                <th>Location</th>
+                <th>TIme Added</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of partners; let i = index" id={{item.id}}>
+
+                <td>{{item.name}}</td>
+                <td>{{item.location}} </td>
+
+                <td>{{item.created_at | date: 'medium'}}</td>
+
+              </tr>
+
+
+            </tbody>
+          </table>
+        </div>
+        <div class="row mb-3" *ngIf="pending.length == 0">
+          <div>
+            <div class="alert alert-lg alert-warning">No data available</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="box box-primary">
+      <div class="box-body">
+        <div class="row mb-3" *ngIf="pending.length > 0">
+          <span class="sidebar-header">
+            Recently Added Partners
+          </span>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+
+                <th>Item</th>
+                <th>Customer</th>
+
+                <th>Store</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of pending; let i = index" id={{item.id}}>
+
+                <td>{{item.item_description}}</td>
+                <td>{{item.customer_names}} </td>
+
+                <td>{{item.store}}</td>
+
+              </tr>
+
+
+            </tbody>
+          </table>
+        </div>
+        <div class="row mb-3" *ngIf="pending.length == 0">
+          <div>
+            <div class="alert alert-lg alert-warning">No data available</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="box box-primary">
+      <div class="box-body">
+        <div class="row mb-3" *ngIf="pending.length > 0">
+          <span class="sidebar-header">
+            Recently Added Partners
+          </span>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+
+                <th>Item</th>
+                <th>Customer</th>
+
+                <th>Store</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of pending; let i = index" id={{item.id}}>
+
+                <td>{{item.item_description}}</td>
+                <td>{{item.customer_names}} </td>
+
+                <td>{{item.store}}</td>
+
+              </tr>
+
+
+            </tbody>
+          </table>
+        </div>
+        <div class="row mb-3" *ngIf="pending.length == 0">
+          <div>
+            <div class="alert alert-lg alert-warning">No data available</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="box box-primary">
+      <div class="box-body">
+        <div class="row mb-3" *ngIf="pending.length > 0">
+          <span class="sidebar-header">
+            Recently Added Partners
+          </span>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+
+                <th>Item</th>
+                <th>Customer</th>
+
+                <th>Store</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of pending; let i = index" id={{item.id}}>
+
+                <td>{{item.item_description}}</td>
+                <td>{{item.customer_names}} </td>
+
+                <td>{{item.store}}</td>
+
+              </tr>
+
+
+            </tbody>
+          </table>
+        </div>
+        <div class="row mb-3" *ngIf="pending.length == 0">
+          <div>
+            <div class="alert alert-lg alert-warning">No data available</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+ -->

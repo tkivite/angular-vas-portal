@@ -3,6 +3,8 @@ import { Routes, RouterModule, PreloadAllModules } from "@angular/router";
 import { SalesComponent } from "./pages/sales/sales.component";
 import { ShoppersComponent } from "./pages/supermarkets/shoppers.component";
 import { DashboardComponent } from "./pages/dashboard/dashboard.component";
+
+import { OnboardingDashboardComponent } from "./pages/onboarding-dashboard/onboarding-dashboard.component";
 import { NotificationsComponent } from "./pages/notifications/notifications.component";
 import { CollectionsComponent } from "./pages/collections/collections.component";
 import { ReleasedComponent } from "./pages/released/released.component";
@@ -47,6 +49,7 @@ const routes: Routes = [
     component: OnboardingComponent,
     children: [
       { path: "", component: DashboardComponent },
+      { path: "dashboard", component: OnboardingDashboardComponent },
       { path: "partners", component: PartnerComponent },
       { path: "partners/create", component: CreateBeComponent },
       { path: "partners/update", component: UpdateBeComponent },

@@ -209,40 +209,47 @@
           <ul class="nav navbar-nav ml-auto">
             <li class="nav-item"
               *ngIf="currentUser.user.role == 'Store admin' || currentUser.user.role == 'Lipalater admin' || currentUser.user.role == 'Lipalater Super admin'">
-              <a class="top-link home-link" routerLink="/dashboard">
-                <i class="fa fa-home" style="color:#88b840"></i> Dashboard
+              <a class="top-link home-link" routerLink="/dashboard" title="Home"
+                ng-class="{active: currentUrlPath == '#/dashboard'}">
+                Dashboard
               </a>
             </li>
             <li class="nav-item">
               <a class="top-link sales-link" routerLink="/pending">
-                <i class="fa fa-gift" style="color:#88b840"></i> Pending
+                <!-- <i class="fa fa-gift" style="color:#88b840"></i> -->
+                Pending
               </a>
             </li>
             <li class="nav-item"
               *ngIf="currentUser.user.role == 'Store admin' || currentUser.user.role == 'Store user'">
               <a class="top-link notification-link" routerLink="/collections">
-                <i class="fa fa-cart-plus" style="color:#88b840"></i> Item Pickup
+                <!-- <i class="fa fa-cart-plus" style="color:#88b840"></i> -->
+                Sales
               </a>
             </li>
             <li class="nav-item">
               <a class="top-link released-link" routerLink="/released">
-                <i class="fa fa-sign-out" style="color:#88b840"></i> Collected
+                <!-- <i class="fa fa-sign-out" style="color:#88b840"></i>  -->
+                Collected
               </a>
             </li>
 
             <li class="nav-item">
               <a class="top-link sales-link" routerLink="/sales">
-                <i class="fa fa-list" style="color:#88b840"></i> Sales
+                <!-- <i class="fa fa-list" style="color:#88b840"></i>  -->
+                All Stats
               </a>
             </li>
             <li class="nav-item">
               <a class="top-link myaccount-link" routerLink="/myaccount">
-                <i class="fa fa-user" style="color:#88b840"></i> My Account
+                <!-- <i class="fa fa-user" style="color:#88b840"></i>  -->
+                My Account
               </a>
             </li>
             <li class="nav-item">
               <a class="top-link myaccount-link" routerLink="" (click)="logout()">
-                <i class="fa fa-sign-out" style="color:#b84040"></i> Logout
+                <!-- <i class="fa fa-sign-out" style="color:#b84040"></i>  -->
+                Logout
               </a>
             </li>
 

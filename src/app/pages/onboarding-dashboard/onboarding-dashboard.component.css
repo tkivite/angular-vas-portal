@@ -6,3 +6,11 @@
   padding-top: 30px !important;
   color: #585858 !important;
 }
+
+.box {
+  min-height: 50px !important;
+}
+
+.partner-graph {
+  max-height: 350px !important;
+}

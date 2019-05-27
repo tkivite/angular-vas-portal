@@ -18,6 +18,7 @@ app-root {
   margin: 0;
   font-family: 'Poppins', sans-serif;
   background: #fafafa;
+  color: #585858 !important;
 }
 
 
@@ -60,6 +61,7 @@ a:focus {
   border-radius: 0;
   margin-bottom: 21px;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  height: 80px;
 }
 
 .navbar-btn {
@@ -82,7 +84,8 @@ a:focus {
 
 .top-link,
 .top-link:visited {
-  background-color: #F1F3F6;
+  /* background-color: #F1F3F6; */
+  background-color: #fff;
   color: #1635e0;
   padding: 14px 25px;
   text-align: center;
@@ -212,15 +215,22 @@ a.article:hover {
   text-align: center;
 }
 
-.nav-link.active,
+/* .nav-link.active,
 .nav-link {
   color: blue !important;
-}
+} */
 
 .viewslink {
   margin-left: 20px;
   margin-top: 20px;
   width: 80%;
+}
+
+.sidebar-header {
+  font-size: 22px;
+  color: #7BA73A;
+  margin-top: 30px;
+  margin-bottom: 40px;
 }
 
 #views {
@@ -424,7 +434,6 @@ a[aria-expanded="true"] {
 }
 
 #div-dashboard {
-  border: 2px dashed #ddd;
   padding-top: 30px;
   border-radius: 5px;
   padding-left: 30px;
@@ -619,6 +628,10 @@ tr {
   max-height: 500px;
 }
 
+.btn-info {
+  background-color: #7BA73A;
+  border-color: #7BA73A;
+}
 
 /*
 The green colour code is #7BA73A while the blue is #28328D and the grey is #585858.
