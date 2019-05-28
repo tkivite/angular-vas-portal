@@ -1,0 +1,21 @@
+.box.box-primary {
+  border-top-color: #3c8dbc;
+}
+
+.list-group-flush .list-group-item {
+  padding-top: 30px !important;
+  color: #585858 !important;
+}
+
+.box {
+  min-height: 50px !important;
+}
+
+.partner-graph {
+  max-height: 350px !important;
+}
+
+.dash-header {
+  font-size: 22px;
+  color: #7BA73A;
+}

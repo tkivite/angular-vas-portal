@@ -35,13 +35,29 @@ export class DashboardComponent implements OnInit {
   currentUser: any;
 
   LineChart = [];
+  LineChart2 = [];
+  loadedSalesByNumber = false;
+  loadedSalesByValue = false;
+  loadedOnboarding = false;
+  loadedSales = false;
+
+  labels = [];
+  salesNumbers = [];
+  salesValues = [];
+
   BarChart = [];
   PieChart = [];
 
   loadingIndicator: any = false;
   title = "angulardatatables";
   dtOptions: DataTables.Settings = {};
-  @ViewChild("myTable") table: any;
+
+  @ViewChild("lineChart") private chartRef;
+  chart: any;
+
+  @ViewChild("lineChart2") private chartRef2;
+  chart2: any;
+
   constructor(
     router: Router,
     public toastrService: ToastrService,
@@ -61,147 +77,196 @@ export class DashboardComponent implements OnInit {
   }
   ngOnInit() {
     this.getData();
-
-    this.LineChart = new Chart("lineChart", {
-      type: "line",
-      data: {
-        labels: [
-          "Jan",
-          "Feb",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec"
-        ],
-        datasets: [
-          {
-            label: "Number of Items Sold in Months",
-            data: [9, 7, 3, 5, 2, 10, 15, 16, 19, 3, 1, 9],
-            fill: true,
-            lineTension: 0.2,
-            borderColor: "red",
-            borderWidth: 1
-          }
-        ]
-      },
-      options: {
-        title: {
-          text: "Line Chart",
-          display: true
-        },
-        scales: {
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: true
-              }
-            }
-          ]
-        }
-      }
-    });
-
-    // Bar chart:
-    this.BarChart = new Chart("barChart", {
-      type: "bar",
-      data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        datasets: [
-          {
-            label: "# of Votes",
-            data: [9, 7, 3, 5, 2, 10],
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.2)",
-              "rgba(54, 162, 235, 0.2)",
-              "rgba(255, 206, 86, 0.2)",
-              "rgba(75, 192, 192, 0.2)",
-              "rgba(153, 102, 255, 0.2)",
-              "rgba(255, 159, 64, 0.2)"
-            ],
-            borderColor: [
-              "rgba(255,99,132,1)",
-              "rgba(54, 162, 235, 1)",
-              "rgba(255, 206, 86, 1)",
-              "rgba(75, 192, 192, 1)",
-              "rgba(153, 102, 255, 1)",
-              "rgba(255, 159, 64, 1)"
-            ],
-            borderWidth: 1
-          }
-        ]
-      },
-      options: {
-        title: {
-          text: "Bar Chart",
-          display: true
-        },
-        scales: {
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: true
-              }
-            }
-          ]
-        }
-      }
-    });
-
-    // pie chart:
-    this.PieChart = new Chart("pieChart", {
-      type: "pie",
-      data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        datasets: [
-          {
-            label: "# of Votes",
-            data: [9, 7, 3, 5, 2, 10],
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.2)",
-              "rgba(54, 162, 235, 0.2)",
-              "rgba(255, 206, 86, 0.2)",
-              "rgba(75, 192, 192, 0.2)",
-              "rgba(153, 102, 255, 0.2)",
-              "rgba(255, 159, 64, 0.2)"
-            ],
-            borderColor: [
-              "rgba(255,99,132,1)",
-              "rgba(54, 162, 235, 1)",
-              "rgba(255, 206, 86, 1)",
-              "rgba(75, 192, 192, 1)",
-              "rgba(153, 102, 255, 1)",
-              "rgba(255, 159, 64, 1)"
-            ],
-            borderWidth: 1
-          }
-        ]
-      },
-      options: {
-        title: {
-          text: "Bar Chart",
-          display: true
-        },
-        scales: {
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: true
-              }
-            }
-          ]
-        }
-      }
-    });
   }
 
   getData() {
-    this.blockUI.start("Loading dashboard");
+    //this.blockUI.start("Loading dashboard");
+
+    this.loadingIndicator = true;
+    if (
+      this.currentUser.user.role == "Lipalater admin" ||
+      this.currentUser.user.role == "Lipalater Super admin"
+    ) {
+      this.dataservice.fetchData("dashboard/sales_monthly_numbers").subscribe(
+        data => {
+          console.log(data);
+          if (data.status === 200) {
+            console.log(data.body);
+            this.getSalesByValue();
+            this.data = data.body;
+            let sales_numbers = [];
+            sales_numbers = data.body.sales_numbers;
+            let sales_months = sales_numbers.map(e => e.mmyyyy);
+            let sales_all_stats = sales_numbers.map(e => e.all_stats);
+            let sales_pending = sales_numbers.map(e => e.pending);
+            let sales_collected = sales_numbers.map(e => e.collected);
+            this.labels = sales_months.reverse();
+            this.salesNumbers = sales_collected.reverse();
+            this.loadedSalesByNumber = true;
+            this.chart = new Chart(this.chartRef.nativeElement, {
+              type: "line",
+              data: {
+                labels: this.labels,
+                datasets: [
+                  {
+                    label: "Number of Items Sold in Months",
+                    data: this.salesNumbers,
+                    fill: true,
+                    lineTension: 0.2,
+                    borderColor: "red",
+                    borderWidth: 1
+                  }
+                ]
+              },
+              options: {
+                title: {
+                  text: "Number of Items Sold Per Month",
+                  display: true
+                },
+                scales: {
+                  yAxes: [
+                    {
+                      ticks: {
+                        beginAtZero: true
+                      }
+                    }
+                  ],
+                  xAxes: [
+                    {
+                      display: true,
+                      scaleLabel: {
+                        display: true,
+                        labelString: "Last 12 months"
+                      }
+                    }
+                  ]
+                }
+              }
+            });
+
+            // this.blockUI.stop();
+          } else {
+            // this.blockUI.stop();
+            this.toastrService.error(
+              "Something Went Wrong, We could not complete the request"
+            );
+          }
+        },
+        err => {
+          if (err.status === 401) {
+            this.router.navigate(["login"]);
+            //this.blockUI.stop();
+            this.toastrService.error("Unauthorised");
+          } else {
+            console.log(
+              "Something Went Wrong, We could not complete the request"
+            );
+            this.blockUI.stop();
+            this.toastrService.error(
+              "Something Went Wrong, We could not complete the request"
+            );
+          }
+        }
+      );
+    } else {
+      this.getSales();
+    }
+  }
+  getSalesByValue() {
+    //  this.blockUI.start("Loading dashboard");
+
+    this.loadingIndicator = true;
+    if (
+      this.currentUser.user.role == "Lipalater admin" ||
+      this.currentUser.user.role == "Lipalater Super admin"
+    ) {
+      this.dataservice.fetchData("dashboard/sales_monthly_value").subscribe(
+        data => {
+          console.log(data);
+          if (data.status === 200) {
+            console.log(data.body);
+            //this.data = data.body;
+            let sales_values = [];
+            sales_values = data.body.sales_value;
+            let sales_months = sales_values.map(v => v.mmyyyy);
+            let sales_all_stats = sales_values.map(v => v.all_stats);
+            let sales_pending = sales_values.map(v => v.pending);
+            let value_collected = sales_values.map(v => v.collected);
+
+            this.salesValues = value_collected.reverse();
+            this.loadedSalesByValue = true;
+            this.getStats();
+
+            this.chart2 = new Chart(this.chartRef2.nativeElement, {
+              type: "line",
+              data: {
+                labels: sales_months.reverse(),
+                datasets: [
+                  {
+                    label: "Value Sold in Months",
+                    data: this.salesValues,
+                    fill: true,
+                    lineTension: 0.2,
+                    borderColor: "red",
+                    borderWidth: 1
+                  }
+                ]
+              },
+              options: {
+                title: {
+                  text: "Sales By Value Per Month",
+                  display: true
+                },
+                scales: {
+                  yAxes: [
+                    {
+                      ticks: {
+                        beginAtZero: true
+                      }
+                    }
+                  ],
+                  xAxes: [
+                    {
+                      display: true,
+                      scaleLabel: {
+                        display: true,
+                        labelString: "Last 12 months"
+                      }
+                    }
+                  ]
+                }
+              }
+            });
+          } else {
+            // this.blockUI.stop();
+            this.toastrService.error(
+              "Something Went Wrong, We could not complete the request"
+            );
+          }
+        },
+        err => {
+          if (err.status === 401) {
+            this.router.navigate(["login"]);
+            // this.blockUI.stop();
+            this.toastrService.error("Unauthorised");
+          } else {
+            console.log(
+              "Something Went Wrong, We could not complete the request"
+            );
+            // this.blockUI.stop();
+            this.toastrService.error(
+              "Something Went Wrong, We could not complete the request"
+            );
+          }
+        }
+      );
+    } else {
+      this.getSales();
+    }
+  }
+
+  getStats() {
+    //  this.blockUI.start("Loading dashboard");
 
     this.loadingIndicator = true;
     if (
@@ -219,7 +284,8 @@ export class DashboardComponent implements OnInit {
             this.store_users = data.body.store_users;
             this.internal_users = data.body.internal_users;
             this.getSales();
-            this.blockUI.stop();
+            //this.blockUI.stop();
+            this.loadedOnboarding = true;
           } else {
             this.blockUI.stop();
             this.toastrService.error(
@@ -230,13 +296,13 @@ export class DashboardComponent implements OnInit {
         err => {
           if (err.status === 401) {
             this.router.navigate(["login"]);
-            this.blockUI.stop();
+            //this.blockUI.stop();
             this.toastrService.error("Unauthorised");
           } else {
             console.log(
               "Something Went Wrong, We could not complete the request"
             );
-            this.blockUI.stop();
+            // this.blockUI.stop();
             this.toastrService.error(
               "Something Went Wrong, We could not complete the request"
             );
@@ -270,8 +336,8 @@ export class DashboardComponent implements OnInit {
           this.pending_value = data.body.pending_value;
           this.collected_count = data.body.collected_count;
           this.collected_value = data.body.collected_value;
-
-          this.blockUI.stop();
+          //this.blockUI.stop();
+          this.loadedSales = true;
         } else {
           this.toastrService.error(
             "Something Went Wrong, We could not complete the request"
@@ -281,13 +347,13 @@ export class DashboardComponent implements OnInit {
       err => {
         if (err.status === 401) {
           this.router.navigate(["login"]);
-          this.blockUI.stop();
+          //this.blockUI.stop();
           this.toastrService.error("Unauthorised");
         } else {
           console.log(
             "Something Went Wrong, We could not complete the request"
           );
-          this.blockUI.stop();
+          // this.blockUI.stop();
           this.toastrService.error(
             "Something Went Wrong, We could not complete the request"
           );
