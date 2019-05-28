@@ -139,42 +139,6 @@
                       </div>
                     </div>
 
-                    <div class="row form-group">
-                      <label class="control-label col-sm-3" for="title"> <span class="float-right"> Disburse email CC1:
-                        </span></label>
-                      <div class="col-sm-7">
-                        <input type="text" formControlName="storeDisburseEmail1" class="form-control"
-                          [ngClass]="{ 'is-invalid': submitted && f.storeDisburseEmail1.errors }"
-                          placeholder="disburse email cc 1" />
-                        <div *ngIf="submitted && f.storeDisburseEmail1.errors" class="invalid-feedback">
-                          <div *ngIf="f.storeDisburseEmail1.errors.required">Disburse email cc1 is required</div>
-                        </div>
-                        <small class="text-danger"
-                          *ngIf="storeFormEdit.get('storeDisburseEmail1').touched && storeFormEdit.get('storeDisburseEmail1').hasError('required')">Disburse
-                          Email CC1 is required</small>
-                        <small class="text-danger"
-                          *ngIf="storeFormEdit.get('storeDisburseEmail1').touched && storeFormEdit.get('storeDisburseEmail1').hasError('email')">Invalid
-                          email address</small>
-                      </div>
-                    </div>
-                    <div class="row form-group">
-                      <label class="control-label col-sm-3" for="title"> <span class="float-right"> Disburse email CC2:
-                        </span></label>
-                      <div class="col-sm-7">
-                        <input type="text" formControlName="storeDisburseEmail2" class="form-control"
-                          [ngClass]="{ 'is-invalid': submitted && f.storeDisburseEmail2.errors }"
-                          placeholder="disburse email cc 2" />
-                        <div *ngIf="submitted && f.storeDisburseEmail2.errors" class="invalid-feedback">
-                          <div *ngIf="f.storeDisburseEmail2.errors.required">Disburse email cc2 is required</div>
-                        </div>
-                        <small class="text-danger"
-                          *ngIf="storeFormEdit.get('storeDisburseEmail2').touched && storeFormEdit.get('storeDisburseEmail2').hasError('required')">Disburse
-                          Email CC2 is required</small>
-                        <small class="text-danger"
-                          *ngIf="storeFormEdit.get('storeDisburseEmail2').touched && storeFormEdit.get('storeDisburseEmail2').hasError('email')">Invalid
-                          email address</small>
-                      </div>
-                    </div>
 
                     <div class="row form-group">
                       <label class="control-label col-sm-3" for="title"> <span class="float-right"> Region:
