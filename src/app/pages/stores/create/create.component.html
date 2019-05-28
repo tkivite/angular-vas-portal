@@ -74,7 +74,7 @@
                       </div>
                     </div>
 
-                    <div class="row form-group">
+                    <!-- <div class="row form-group">
                       <label class="control-label col-sm-3" for="title"> <span class="float-right"> Store identifier
                           (from Core): </span></label>
                       <div class="col-sm-7">
@@ -88,7 +88,26 @@
                           *ngIf="storeFormAdd.get('storeSourceid').touched && storeFormAdd.get('storeSourceid').hasError('required')">Source
                           Id is required</small>
                       </div>
+                    </div> -->
+
+                    <div class="row form-group">
+                      <label class="control-label col-sm-3" for="title"> <span class="float-right"> Store identifier
+                          (from Core): </span></label>
+                      <div class="col-sm-7">
+                        <input type="text" formControlName="storeSourceid" placeholder="store identifier as in asana"
+                          ngxTypeahead class="col-sm-12 form-control" [value]="query3" [taList]="staticList"
+                          (taSelected)="handleStaticResultSelected($event)">
+                        <div *ngIf="submitted && f.storeSourceid.errors" class="invalid-feedback">
+                          <div *ngIf="f.storeSourceid.errors.required">Store Id is required</div>
+                        </div>
+                        <small class="text-danger"
+                          *ngIf="storeFormAdd.get('storeSourceid').touched && storeFormAdd.get('storeSourceid').hasError('required')">Source
+                          Id is required</small>
+                      </div>
                     </div>
+
+
+
 
                     <div class="row form-group">
                       <label class="control-label col-sm-3" for="title"> <span class="float-right"> Store Code:
@@ -138,7 +157,7 @@
                           email address</small>
                       </div>
                     </div>
-
+                    <!--
                     <div class="row form-group">
                       <label class="control-label col-sm-3" for="title"> <span class="float-right"> Disburse email CC1:
                         </span></label>
@@ -174,7 +193,7 @@
                           *ngIf="storeFormAdd.get('storeDisburseEmail2').touched && storeFormAdd.get('storeDisburseEmail2').hasError('email')">Invalid
                           email address</small>
                       </div>
-                    </div>
+                    </div>-->
 
                     <div class="row form-group">
                       <label class="control-label col-sm-3" for="title"> <span class="float-right"> Region:

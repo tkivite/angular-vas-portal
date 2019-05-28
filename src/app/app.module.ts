@@ -67,6 +67,7 @@ import { ChangePasswordComponent } from "./pages/change-password/change-password
 import { ForgotPasswordComponent } from "./pages/forgot-password/forgot-password.component";
 import { PickupComponent } from "./pages/collections/create/pickup.component";
 import { StaffPickupComponent } from "./pages/collections/lipalater/pickup.component";
+import { NgxTypeaheadModule } from "ngx-typeahead";
 
 enableProdMode();
 
@@ -128,7 +129,8 @@ enableProdMode();
     NgMultiSelectDropDownModule.forRoot(),
     BsDropdownModule.forRoot(),
     NgxIntlTelInputModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxTypeaheadModule
   ],
   providers: [
     DatePipe,
