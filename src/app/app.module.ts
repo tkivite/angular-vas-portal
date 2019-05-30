@@ -69,6 +69,8 @@ import { PickupComponent } from "./pages/collections/create/pickup.component";
 import { StaffPickupComponent } from "./pages/collections/lipalater/pickup.component";
 import { OnboardingComponent } from './pages/onboarding/onboarding.component';
 import { OnboardingDashboardComponent } from './pages/onboarding-dashboard/onboarding-dashboard.component';
+import { SalesDashboardComponent } from './pages/sales-dashboard/sales-dashboard.component';
+import { SalesMenuComponent } from './pages/sales-menu/sales-menu.component';
 
 enableProdMode();
 
@@ -116,7 +118,11 @@ enableProdMode();
 
     OnboardingComponent,
 
-    OnboardingDashboardComponent
+    OnboardingDashboardComponent,
+
+    SalesDashboardComponent,
+
+    SalesMenuComponent
   ],
   imports: [
     BrowserModule,

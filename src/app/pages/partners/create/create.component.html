@@ -28,7 +28,7 @@
             <div class="col-md-1"></div>
             <h4 class="col-md-11">Adding New Partner</h4>
           </div>
-          <hr>
+
           <div class="row">
 
 
@@ -62,25 +62,6 @@
 
                 </div>
               </div>
-
-
-              <!-- <div class="row form-group">
-                <label class="control-label col-sm-3" for="title"> <span class="float-right"> Mobile: </span> </label>
-                <div class="col-sm-7">
-                  <input type="text" formControlName="orgMobile" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && f.orgMobile.errors }"
-                    placeholder="contact phone number 2547......." />
-                  <div *ngIf="submitted && f.orgMobile.errors" class="invalid-feedback">
-                    <div *ngIf="f.orgMobile.errors.required">Mobile is required</div>
-                  </div>
-                  <small class="text-danger"
-                    *ngIf="beFormAdd.get('orgMobile').touched && beFormAdd.get('orgMobile').hasError('required')">Mobile
-                    is required</small>
-                  <small class="text-danger"
-                    *ngIf="beFormAdd.get('orgMobile').touched && beFormAdd.get('orgMobile').hasError('pattern')">Invalid
-                    Mobile Number </small>
-                </div>
-              </div> -->
               <div class="row form-group">
                 <label class="control-label col-sm-3" for="title"> <span class="float-right"> Mobile: </span> </label>
                 <div class="col-sm-7">
@@ -243,7 +224,7 @@
                 <div class="col-sm-7">
                   <div class="float-right ">
                     <button class="btn btn-danger " type="cancel" style="margin-right: 10px;
-    min-width: 100px;" routerLink="/partners/">Cancel</button>
+    min-width: 100px;" routerLink="/onboarding/partners">Cancel</button>
                     <button [disabled]="beFormAdd.invalid" class="btn btn-success " type="submit"
                       style="min-width: 100px;">Submit</button>
                   </div>

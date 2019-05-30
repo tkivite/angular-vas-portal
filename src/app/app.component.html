@@ -1,171 +1,11 @@
 <div class="wrapper">
-  <!-- <nav id="sidebar" *ngIf="currentUser">
-    <div class="sidebar-header"> <a class="nav-link sales-link" routerLink="/dashboard">
-        <img src="./assets/logo.png" /></a>
-    </div>
-    <div class="container demo d-none d-md-block">
-      <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0,ngb-panel-1,ngb-panel-2" class="panel-group"
-        *ngIf="currentUser.user.role == 'Lipalater admin' || currentUser.user.role == 'Lipalater Super admin'">
-        <ngb-panel class="panel-default">
-          <ng-template ngbPanelTitle class="panel-heading">
-            <h4 class="panel-title">
-              <a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true"
-                aria-controls="collapseOne">
-                Onboarding
-              </a>
-            </h4>
-          </ng-template>
-          <ng-template ngbPanelContent>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <a class="nav-link sales-link" routerLink="/partners">Partners
-                  <i class="fa fa-handshake-o" style="color:#88b840"></i>
-                </a>
-              </li>
-              <li class="list-group-item">
-                <a class="nav-link sales-link" routerLink="/stores">Stores
-                  <i class="fa fa-city" style="color:#88b840"></i>
-                  <i class="fa fa-industry" style="color:#88b840"></i>
-                </a>
-              </li>
-              <li class="list-group-item">
-                <a class="nav-link released-link" routerLink="/users">Store Users
-                  <i class="fa fa-users" style="color:#88b840"></i>
-                </a>
-              </li>
-              <li class="list-group-item" *ngIf="currentUser.user.role == 'Lipalater Super admin'">
-                <a class=" nav-link released-link" routerLink="/lipalater-users">Internal Users
-                  <i class="fa fa-users" style="color:#88b840"></i>
-                </a>
-              </li>
-
-            </ul>
-          </ng-template>
-        </ngb-panel>
-      </ngb-accordion>
-
-
-      <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0,ngb-panel-1,ngb-panel-2" class="panel-group">
-        <ngb-panel class="panel-default">
-          <ng-template ngbPanelTitle class="panel-heading">
-            <h4 class="panel-title">
-              <a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true"
-                aria-controls="collapseOne">
-                Sales Menu
-              </a>
-            </h4>
-          </ng-template>
-          <ng-template ngbPanelContent>
-            <ul class="list-group list-group-flush">
-
-              <li class="list-group-item">
-                <a class="nav-link sales-link" routerLink="/pending">Pending
-                  <i class="fa fa-gift" style="color:#88b840"></i>
-                </a>
-              </li>
-              <li class="list-group-item"
-                *ngIf="currentUser.user.role == 'Store admin' || currentUser.user.role == 'Store user'">
-                <a class="nav-link sales-link" routerLink="/collections">Item Pickup
-                  <i class="fa fa-cart-plus" style="color:#88b840"></i>
-                </a>
-              </li>
-
-
-              <li class="list-group-item">
-                <a class="nav-link released-link" routerLink="/released">Collected Items
-                  <i class="fa fa-sign-out" style="color:#88b840"></i>
-                </a>
-              </li>
-              <li class="list-group-item">
-                <a class="nav-link released-link" routerLink="/sales">All Sales
-                  <i class="fa fa-list" style="color:#88b840"></i>
-                </a>
-              </li>
-            </ul>
-          </ng-template>
-          <ng-template ngbPanelTitle class="panel-heading">
-            <h4 class="panel-title">
-              <a role="button" data-toggle="collapse" aria-expanded="true" aria-controls="">
-                Navigation
-              </a>
-            </h4>
-          </ng-template>
-        </ngb-panel>
-
-
-      </ngb-accordion>
-
-
-      <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0,ngb-panel-1,ngb-panel-2" class="panel-group">
-        <ngb-panel class="panel-default">
-          <ng-template ngbPanelTitle class="panel-heading">
-            <h4 class="panel-title">
-              <a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="true"
-                aria-controls="collapseOne">
-                Supermarkets
-              </a>
-            </h4>
-          </ng-template>
-          <ng-template ngbPanelContent>
-            <ul class="list-group list-group-flush">
-
-              <li class="list-group-item"
-                *ngIf="currentUser.user.role == 'Lipalater_cro' || currentUser.user.role == 'Lipalater admin' || currentUser.user.role == 'Lipalater Super admin'">
-                <a class="nav-link sales-link" routerLink="/shoppers">Shoppers
-                  <i class="fa fa-shopping-basket" style="color:#88b840"></i>
-                </a>
-              </li>
-              <li class="list-group-item">
-                <a class="nav-link sales-link" routerLink="/invoicing">Invoicing
-                  <i class="fa fa-list" style="color:#88b840"></i>
-                </a>
-              </li>
-
-
-
-            </ul>
-          </ng-template>
-          <ng-template ngbPanelTitle class="panel-heading">
-            <h4 class="panel-title">
-              <a role="button" data-toggle="collapse" aria-expanded="true" aria-controls="">
-                Navigation
-              </a>
-            </h4>
-          </ng-template>
-        </ngb-panel>
-
-
-      </ngb-accordion>
-      <hr />
-    </div>
-  </nav>-->
   <nav id="sidebar" *ngIf="currentUser">
     <div class="sidebar-header"> <a class="nav-link sales-link" routerLink="/dashboard">
         <img src="./assets/images/DashboardLogo.png" /></a>
     </div>
     <div class="container demo d-none d-md-block"></div>
     <ul class="list-group list-group-flush">
-      <!-- <li class="list-group-item">
-        <a class="nav-link sales-link" routerLink="/partners">Partners
-          <i class="fa fa-handshake-o" style="color:#88b840"></i>
-        </a>
-      </li>
-      <li class="list-group-item">
-        <a class="nav-link sales-link" routerLink="/stores">Stores
-          <i class="fa fa-city" style="color:#88b840"></i>
-          <i class="fa fa-industry" style="color:#88b840"></i>
-        </a>
-      </li>
-      <li class="list-group-item">
-        <a class="nav-link released-link" routerLink="/users">Store Users
-          <i class="fa fa-users" style="color:#88b840"></i>
-        </a>
-      </li>
-      <li class="list-group-item" *ngIf="currentUser.user.role == 'Lipalater Super admin'">
-        <a class=" nav-link released-link" routerLink="/lipalater-users">Internal Users
-          <i class="fa fa-users" style="color:#88b840"></i>
-        </a>
-      </li> -->
+
       <li class="list-group-item">
         <a class="nav-link sales-link" routerLink="/dashboard" title="Home"
           ng-class="{active: currentUrlPath == '#/dashboard'}" class="1{{currentUrlPath}}">
@@ -176,12 +16,12 @@
           <img src="./assets/images/icons/OnboardingIcon.png" alt="Onboarding" /></a>
       </li>
       <li class="list-group-item">
-        <a class="nav-link released-link" routerLink="/users" title="Sales">
+        <a class="nav-link released-link" routerLink="/sales-menu" title="Sales">
           <img src="./assets/images/icons/PickupmenuIcon.png" alt="Sales" /></a>
       </li>
       <li class="list-group-item" *ngIf="currentUser.user.role == 'Lipalater Super admin'">
-        <a class=" nav-link released-link" routerLink="/lipalater-users" title="Settings">
-          <img src="./assets/images/icons/SettingIcon.png" alt="Settings" /></a>
+        <a class=" nav-link released-link" routerLink="/myaccount" title="My Account">
+          <img src="./assets/images/icons/SettingIcon.png" alt="Myaccount" /></a>
       </li>
 
     </ul>
@@ -190,17 +30,7 @@
   <div id="content">
     <nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="currentUser">
       <div class="container-fluid topbar">
-        <!-- <button type="button" id="sidebarCollapse" class="btn"
-          style="background: #7386D5; color:white; margin-left: -60px">
-          <i class="fa fa-angle-double-left"></i>
-          <i class="fa fa-angle-double-right"></i>
-        </button>
-        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
-          data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-          aria-label="Toggle navigation">
-          <i class="fa fa-align-justify"></i>
 
-        </button> -->
         <!--Top Bar -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <div>
@@ -215,27 +45,27 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="top-link sales-link" routerLink="/pending">
+              <a class="top-link sales-link" routerLink="sales-menu/pending">
                 <!-- <i class="fa fa-gift" style="color:#88b840"></i> -->
                 Pending
               </a>
             </li>
             <li class="nav-item"
               *ngIf="currentUser.user.role == 'Store admin' || currentUser.user.role == 'Store user'">
-              <a class="top-link notification-link" routerLink="/collections">
+              <a class="top-link notification-link" routerLink="sales-menu/collections">
                 <!-- <i class="fa fa-cart-plus" style="color:#88b840"></i> -->
                 Sales
               </a>
             </li>
             <li class="nav-item">
-              <a class="top-link released-link" routerLink="/released">
+              <a class="top-link released-link" routerLink="sales-menu/released">
                 <!-- <i class="fa fa-sign-out" style="color:#88b840"></i>  -->
                 Collected
               </a>
             </li>
 
             <li class="nav-item">
-              <a class="top-link sales-link" routerLink="/sales">
+              <a class="top-link sales-link" routerLink="sales-menu/sales">
                 <!-- <i class="fa fa-list" style="color:#88b840"></i>  -->
                 All Stats
               </a>

@@ -8,11 +8,11 @@ import { AuthenticationService } from "../../services/authentication.service";
 import { Chart } from "chart.js";
 
 @Component({
-  selector: "app-dashboard",
-  templateUrl: "./dashboard.component.html",
-  styleUrls: ["./dashboard.component.css"]
+  selector: "app-sales-dashboard",
+  templateUrl: "./sales-dashboard.component.html",
+  styleUrls: ["./sales-dashboard.component.css"]
 })
-export class DashboardComponent implements OnInit {
+export class SalesDashboardComponent implements OnInit {
   @BlockUI() blockUI: NgBlockUI;
   public router: Router;
   public data = [];
@@ -52,11 +52,11 @@ export class DashboardComponent implements OnInit {
   title = "angulardatatables";
   dtOptions: DataTables.Settings = {};
 
-  @ViewChild("lineChart5") private chartRef;
-  chart5: any;
+  @ViewChild("lineChart") private chartRef;
+  chart: any;
 
-  @ViewChild("lineChart6") private chartRef2;
-  chart6: any;
+  @ViewChild("lineChart2") private chartRef2;
+  chart2: any;
 
   constructor(
     router: Router,
@@ -100,31 +100,49 @@ export class DashboardComponent implements OnInit {
             let sales_all_stats = sales_numbers.map(e => e.all_stats);
             let sales_pending = sales_numbers.map(e => e.pending);
             let sales_collected = sales_numbers.map(e => e.collected);
-            // this.labels = sales_months.reverse();
+
             this.salesNumbers = sales_collected.reverse();
             this.loadedSalesByNumber = true;
             let labels = sales_months
               .reverse()
               .map(e => this.dataservice.monthNumToName(e.split("-")[1]));
-            this.chart5 = new Chart(this.chartRef.nativeElement, {
+            this.chart = new Chart(this.chartRef.nativeElement, {
               type: "line",
               data: {
                 labels: labels,
                 datasets: [
                   {
-                    label: "Number of Items Sold Per Month",
+                    label: "All Items Sold",
                     data: this.salesNumbers,
                     fill: true,
                     lineTension: 0.2,
-                    borderColor: "#C83D71",
+                    borderColor: "#7BA73A",
+                    backgroundColor: "#7BA73A",
+                    borderWidth: 1
+                  },
+                  {
+                    label: "All Pending Items",
+                    data: sales_pending.reverse(),
+                    fill: true,
+                    lineTension: 0.2,
+                    borderColor: "#DB5F8A",
                     backgroundColor: "#DB5F8A",
+                    borderWidth: 1
+                  },
+                  {
+                    label: "All Items Added",
+                    data: sales_all_stats.reverse(),
+                    fill: true,
+                    lineTension: 0.2,
+                    borderColor: "#E2AE9D",
+                    backgroundColor: "#E2AE9D",
                     borderWidth: 1
                   }
                 ]
               },
               options: {
                 title: {
-                  text: "Items Chart",
+                  text: "Sales Item Chart",
                   display: true
                 },
                 scales: {
@@ -162,7 +180,6 @@ export class DashboardComponent implements OnInit {
             //this.blockUI.stop();
             this.toastrService.error("Unauthorised");
           } else {
-            this.getSalesByValue();
             console.log(
               "Something Went Wrong, We could not complete the request"
             );
@@ -174,7 +191,7 @@ export class DashboardComponent implements OnInit {
         }
       );
     } else {
-      this.getSalesByValue();
+      this.getSales();
     }
   }
   getSalesByValue() {
@@ -201,22 +218,39 @@ export class DashboardComponent implements OnInit {
             this.salesValues = value_collected.reverse();
             this.loadedSalesByValue = true;
             this.getStats();
-
             let labels = sales_months
               .reverse()
               .map(e => this.dataservice.monthNumToName(e.split("-")[1]));
 
-            this.chart6 = new Chart(this.chartRef2.nativeElement, {
+            this.chart2 = new Chart(this.chartRef2.nativeElement, {
               type: "line",
               data: {
                 labels: labels,
                 datasets: [
                   {
-                    label: "Value Sold Per Month",
+                    label: "All Sales By Value",
                     data: this.salesValues,
                     fill: true,
                     lineTension: 0.2,
-                    borderColor: "#C83D71",
+                    borderColor: "#7BA73A",
+                    backgroundColor: "#7BA73A",
+                    borderWidth: 1
+                  },
+                  {
+                    label: "All Pending Sales",
+                    data: sales_pending.reverse(),
+                    fill: true,
+                    lineTension: 0.2,
+                    borderColor: "#DB5F8A",
+                    backgroundColor: "#DB5F8A",
+                    borderWidth: 1
+                  },
+                  {
+                    label: "All Value Added",
+                    data: sales_all_stats.reverse(),
+                    fill: true,
+                    lineTension: 0.2,
+                    borderColor: "#E2AE9D",
                     backgroundColor: "#E2AE9D",
                     borderWidth: 1
                   }
@@ -224,7 +258,7 @@ export class DashboardComponent implements OnInit {
               },
               options: {
                 title: {
-                  text: "Sales Chart",
+                  text: "Sales Value Chart",
                   display: true
                 },
                 scales: {
@@ -248,14 +282,13 @@ export class DashboardComponent implements OnInit {
               }
             });
           } else {
-            this.getStats();
+            // this.blockUI.stop();
             this.toastrService.error(
               "Something Went Wrong, We could not complete the request"
             );
           }
         },
         err => {
-          this.getStats();
           if (err.status === 401) {
             this.router.navigate(["login"]);
             // this.blockUI.stop();
@@ -272,7 +305,7 @@ export class DashboardComponent implements OnInit {
         }
       );
     } else {
-      this.getStats();
+      this.getSales();
     }
   }
 

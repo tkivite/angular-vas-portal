@@ -3,10 +3,10 @@
     <div class="box-body">
 
       <div class="widget-controls row">
-        <div class="col-sm-4">
-          All Items Picked from Store
+        <div class="col-sm-3">
+          <span class="dash-header"> All Items Picked from Store</span>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-3">
           <div class="form-group row">
             <label class="col-sm-2-text-left">From: </label>
             <div class="input-group col-sm-10">
@@ -57,8 +57,8 @@
           <tr>
             <th></th>
             <th>Customer</th>
-            <th>Customer ID</th>
-            <th>Customer Mobile</th>
+            <!-- <th>Customer ID</th>
+            <th>Customer Mobile</th> -->
             <th>Item</th>
             <th>Delivery Option</th>
             <th>Store</th>
@@ -69,9 +69,9 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of data; let i = index" title={{item.id}}>
-            <td>{{i+1}}</td>
-            <td>{{item.customer_names}}</td>
-            <td>{{item.customer_id_number}}</td>
+            <td>{{((current_page-1)*25)+i+1}}</td>
+            <!-- <td>{{item.customer_names}}</td>
+            <td>{{item.customer_id_number}}</td> -->
             <td>{{item.customer_phone_number}}</td>
             <td>{{item.item_description}}</td>
             <td>{{(item.pick_up_type =='store_pick_up')?'customer pick up':'lipalater pick up'}}</td>
@@ -93,10 +93,10 @@
         <nav aria-label="..." class="col-sm-6">
           <ul class="pagination">
             <li class="page-item {{(current_page == 1)? 'disabled': ''}}">
-              <a class="page-link" (click)="loadPage(1)" tabindex="-1">First</a>
+              <a class="page-link" (click)="loadPage(1)">First</a>
             </li>
             <li class="page-item {{(current_page == 1)? 'disabled': ''}}">
-              <a class="page-link" (click)="loadPage(current_page-1)" tabindex="-1">Previous</a>
+              <a class="page-link" (click)="loadPage(current_page-1)">Previous</a>
             </li>
             <li class="page-item active">
               <a class="page-link">{{current_page}}</a>
@@ -108,10 +108,10 @@
                   <li class="page-item"><a class="page-link" href="#">3</a></li> -->
 
             <li class="page-item {{(current_page == total_pages)? 'disabled': ''}}">
-              <a class="page-link" (click)="loadPage(current_page+1)" tabindex="-1">Next</a>
+              <a class="page-link" (click)="loadPage(current_page+1)">Next</a>
             </li>
             <li class="page-item {{(current_page == total_pages)? 'disabled': ''}}">
-              <a class="page-link" (click)="loadPage(total_pages)" tabindex="-1">Last</a>
+              <a class="page-link" (click)="loadPage(total_pages)">Last</a>
             </li>
 
           </ul>

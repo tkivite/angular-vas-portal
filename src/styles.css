@@ -11,12 +11,27 @@ body {
   font-family: 'Poppins', sans-serif;
   background: #fafafa;
 }*/
+
+
+
+@font-face {
+  font-family: "Proxima-Nova-Alt-Semibold";
+  src: url('/assets/fonts/MarkSimonsonProximaNovaAltSemibold.woff') format('woff2');
+}
+
+@font-face {
+  font-family: "Proxima-Nova-Regular";
+  src: url('/assets/fonts/MarkSimonsonProximaNovaRegular.woff') format('woff2');
+}
+
+
 html,
 body,
 app-root {
   height: 100%;
   margin: 0;
-  font-family: 'Poppins', sans-serif;
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: "Proxima-Nova-Alt-Semibold";
   background: #fafafa;
   color: #585858 !important;
 }
@@ -24,11 +39,9 @@ app-root {
 
 
 
-
-
 p {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.1em;
+  font-family: "Proxima-Nova-Alt-Semibold";
+
   font-weight: 300;
   line-height: 1.7em;
   color: #999;
@@ -233,6 +246,13 @@ a.article:hover {
   margin-bottom: 40px;
 }
 
+.dash-header {
+  font-size: 22px;
+  color: #7BA73A;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 #views {
   margin-left: 20px;
 
@@ -392,9 +412,9 @@ a[aria-expanded="true"] {
 
 #cccform,
 #myaccform {
-  border: 2px dashed #ddd;
+  /* border: 2px dashed #ddd;
   border-radius: 5px;
-  background-color: aliceblue;
+  background-color: aliceblue; */
 
 }
 
@@ -461,7 +481,9 @@ app-invoicing,
 app-shoppers,
 app-view,
 app-dashboard,
-app-onboarding {
+app-onboarding,
+app-sales-menu,
+app-sales-dashboard {
   width: 100%;
 }
 
@@ -481,14 +503,13 @@ app-onboarding {
 
 .form-heading {
   padding-top: 10px;
-  background-color: #d0e2ec;
-  margin-bottom: -15px;
+  margin-bottom: 35px;
 
 }
 
 .form-heading>h4 {
-  font-size: 1.4em !important;
-  color: mediumblue;
+  font-size: 22px !important;
+  color: #7BA73A;
 }
 
 hr {
@@ -628,9 +649,37 @@ tr {
   max-height: 500px;
 }
 
-.btn-info {
+.btn-info,
+.btn-success {
   background-color: #7BA73A;
   border-color: #7BA73A;
+}
+
+
+.page-item.active .page-link {
+  background-color: #7BA73A !important;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.page-link:hover {
+  cursor: pointer;
+}
+
+.table {
+  color: #585858;
+  font-family: "Proxima-Nova-Alt-Semibold";
+}
+
+input[type=text] {
+  color: #A4A4A5;
+  font-family: "Proxima-Nova-Regular";
+}
+
+.table>thead {
+  font-size: 1.2em;
+  font-weight: bolder;
+  color: black;
 }
 
 /*

@@ -81,7 +81,7 @@ export class StoreComponent implements OnInit {
   onEdit(data) {
     console.log(data);
     this.dataservice.EditFormData = data;
-    this.router.navigate(["stores/update"]);
+    this.router.navigate(["onboarding/stores/update"]);
   }
   onDelete(record) {
     this.confirmationDialogService

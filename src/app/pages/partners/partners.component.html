@@ -5,12 +5,12 @@
 
       <div class="widget-controls row">
         <div class="col-sm-6">
-          <a class="btn btn-info btn-sm mb-1" routerLink="create"><i class="fa fa-plus"></i> Add Partner</a>
+          <a class="btn btn-info btn-md mb-1" routerLink="create"><i class="fa fa-plus"></i> Add Partner</a>
         </div>
         <div class="col-sm-2"></div>
         <div class="col-sm-4">
           <div class="input-group search-box">
-            <input class="form-control" readonly type="text" [(ngModel)]="searchKey" class="form-control search-input"
+            <input class="form-control" type="text" [(ngModel)]="searchKey" class="form-control search-input"
               placeholder="Search this content">
             <div class="input-group-append">
               <button class="btn btn-info" type="button" (click)="onSearch()">
