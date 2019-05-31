@@ -126,4 +126,43 @@ export class PendingComponent implements OnInit {
     };
     this.getData();
   }
+  downloadApps() {
+    this.blockUI.start("Downloading recent sales .....");
+    this.loadingIndicator = true;
+    this.dataservice.fetchData("sales/fetchapps").subscribe(
+      data => {
+        console.log(data);
+        if (data.status === 200) {
+          this.getData();
+          this.blockUI.stop();
+          this.toastrService.success(data.body.msg);
+        } else if (data.status === 204) {
+          console.log(data.body);
+          this.data = data.body;
+          this.getData();
+          this.blockUI.stop();
+          this.toastrService.info("There are no recent sales");
+        } else {
+          this.getData();
+          this.blockUI.stop();
+          this.toastrService.warning(
+            "We could not download recent sales.Check the connection to core."
+          );
+        }
+      },
+      err => {
+        if (err.status == 401) {
+          this.router.navigate(["login"]);
+        } else {
+          console.log(err);
+          console.log("Something Went Wrong");
+          this.blockUI.stop();
+          this.toastrService.warning(
+            "We could not download recent sales.Check the connection to core."
+          );
+        }
+      }
+    );
+    // this.blockUI.stop();
+  }
 }

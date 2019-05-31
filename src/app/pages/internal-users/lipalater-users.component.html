@@ -6,7 +6,7 @@
 
       <div class="widget-controls row">
         <div class="col-sm-6">
-          <a class="btn btn-info btn-sm mb-1" routerLink="/lipalater-users/create"><i class="fa fa-plus"></i> Add
+          <a class="btn btn-info btn-md mb-1" routerLink="create"><i class="fa fa-plus"></i> Add
             Internal
             User</a>
         </div>
@@ -78,11 +78,6 @@
             <li class="page-item active">
               <a class="page-link">{{current_page}}</a>
             </li>
-            <!--
-              <li class="page-item active">
-                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li> -->
 
             <li class="page-item {{(current_page == total_pages)? 'disabled': ''}}">
               <a class="page-link" (click)="loadPage(current_page+1)" tabindex="-1">Next</a>

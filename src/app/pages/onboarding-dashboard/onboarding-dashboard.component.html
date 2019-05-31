@@ -1,0 +1,153 @@
+<div class="box box-primary">
+  <div class="box-body">
+
+    <div class="row partner-graph">
+
+      <div class="col-sm-6"> <canvas #lineChart3>{{ chart3 }}</canvas></div>
+      <div class="col-sm-6"> <canvas #lineChart4>{{ chart4 }}</canvas></div>
+    </div>
+  </div>
+</div>
+
+
+<div class="box box-primary">
+  <div class="box-body">
+    <div id="div-dashboard">
+
+
+
+      <!--<div class="row mb-3"> <canvas id="lineChart"></canvas></div>
+        <div class="row mb-3"><canvas id="barChart"></canvas></div>
+        <div class="row mb-3"><canvas id="pieChart"></canvas></div>-->
+
+      <div class="row mb-3"
+        *ngIf="currentUser.user.role == 'Lipalater admin' || currentUser.user.role == 'Lipalater Super admin'">
+
+        <a routerLink="/onboarding/partners" class="col-xl-3 col-sm-6 py-2 custom-card">
+          <div class="card bg-success text-white h-100">
+            <div class="card-body bg-success">
+              <div class="rotate">
+                <i class="fa fa-users fa-4x"></i>
+              </div>
+              <h6 class="text-uppercase">Partners</h6>
+              <h1 class="display-4">{{partners}}</h1>
+            </div>
+          </div>
+        </a>
+        <a routerLink="/onboarding/stores" class="col-xl-3 col-sm-6 py-2 custom-card">
+          <div class="card text-white bg-primary h-100">
+            <div class="card-body bg-primary">
+              <div class="rotate">
+                <i class="fa fa-list fa-4x"></i>
+              </div>
+              <h6 class="text-uppercase">Stores</h6>
+              <h1 class="display-4">{{stores}}</h1>
+            </div>
+          </div>
+        </a>
+        <a routerLink="/onboarding/users" class="col-xl-3 col-sm-6 py-2 custom-card">
+          <div class="card text-white bg-info h-100">
+            <div class="card-body bg-info">
+              <div class="rotate">
+                <i class="fa fa-users fa-4x"></i>
+              </div>
+              <h6 class="text-uppercase">Store Users</h6>
+              <h1 class="display-4">{{store_users}}</h1>
+            </div>
+          </div>
+        </a>
+        <a routerLink="/onboarding/lipalater-users" class="col-xl-3 col-sm-6 py-2 custom-card">
+
+          <div class="card text-white bg-dark h-100">
+            <div class="card-body">
+              <div class="rotate">
+                <i class="fa fa-users fa-4x"></i>
+              </div>
+              <h6 class="text-uppercase">Internal Users</h6>
+              <h1 class="display-4">{{internal_users}}</h1>
+            </div>
+          </div>
+
+        </a>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div class="row">
+
+  <div class="col-sm-6">
+    <div class="box box-primary">
+      <div class="box-body">
+        <div class="row mb-3" *ngIf="partnersdata.length > 0">
+          <span class="sidebar-header">
+            Recently Added Partners
+          </span>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+
+                <th></th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of partnersdata; let i = index" id={{item.id}}>
+                <td>{{i+1}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.mobile}}</td>
+              </tr>
+
+
+            </tbody>
+          </table>
+        </div>
+        <div class="row mb-3" *ngIf="partnersdata.length == 0">
+          <div>
+            <div class="alert alert-lg alert-warning">No data available</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="box box-primary">
+      <div class="box-body">
+        <div class="row mb-3" *ngIf="storesdata.length > 0">
+          <span class="sidebar-header">
+            Recently Added Stores
+          </span>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Partner</th>
+                <th>Manager</th>
+                <th>Manager Mobile</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of storesdata; let i = index" id="{{item.id}}">
+                <td>{{item.name}}</td>
+                <td>{{item.partner.name}}</td>
+                <td>{{item.manager}}</td>
+                <td>{{item.manager_phone}}</td>
+            </tbody>
+          </table>
+        </div>
+        <div class="row mb-3" *ngIf="storesdata.length == 0">
+          <div>
+            <div class="alert alert-lg alert-warning">No data available</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

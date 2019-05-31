@@ -22,8 +22,8 @@ export class ApiService {
   public newInvoice: any;
   public currentLoggedInUser: any;
   public router: Router;
-  baseUrl = "https://partner-portal-backend.herokuapp.com/";
-  //baseUrl = "/api/";
+  //baseUrl = "https://partner-portal-backend.herokuapp.com/";
+  baseUrl = "/api/";
 
   constructor(
     private http: HttpClient,
@@ -240,5 +240,37 @@ export class ApiService {
       if (obj.hasOwnProperty(key)) return false;
     }
     return true;
+  }
+
+  monthNumToName(monthnum) {
+    let months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ];
+    let shortmonths = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ];
+    return shortmonths[monthnum - 1] || "";
   }
 }

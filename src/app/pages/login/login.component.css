@@ -1,0 +1,173 @@
+.login-body {
+  position: fixed;
+  min-width: 100%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+  background-size: cover;
+  background-image: url('/assets/images/login-background.jpg');
+  /* -webkit-filter: grayscale(100%);
+  /* Safari 6.0 - 9.0
+  filter: grayscale(100%);*/
+}
+
+.login-panel {
+  margin-bottom: 20px;
+  margin-top: 25%;
+  background-color: #fff;
+  border-radius: 4px;
+
+}
+
+.login-panel>.panel-heading {
+  padding: 10px 15px;
+  border-bottom: 1px solid transparent;
+  border-bottom-color: transparent;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.panel-default>.panel-heading {
+  padding: 0;
+  border-radius: 0;
+  color: #212121;
+}
+
+.login-panel>.panel-body {
+  padding: 15px;
+  margin-top: -50px;
+}
+
+.panel-heading>img {
+  transform: scale(0.5);
+  vertical-align: middle;
+  border-style: none;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  zoom: 80%;
+}
+
+.group {
+  position: relative;
+  margin: 35px 0;
+}
+
+textarea {
+  resize: none;
+}
+
+input,
+textarea {
+  background: none;
+  color: #c6c6c6;
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #c6c6c6;
+  text-align: center;
+  width: 100%;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+}
+
+input:focus~label,
+input:valid~label,
+textarea:focus~label,
+textarea:valid~label {
+  top: -14px;
+  font-size: 12px;
+  color: #2196F3;
+}
+
+input:focus~.bar:before,
+textarea:focus~.bar:before {
+  width: 100%;
+}
+
+input[type="password"] {
+  letter-spacing: 0.3em;
+}
+
+label {
+  color: #c6c6c6;
+  font-size: 16px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  transition: 300ms ease all;
+}
+
+.bar {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.bar:before {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 0px;
+  position: absolute;
+  background: #2196F3;
+  transition: 300ms ease all;
+  left: 0%;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #7BA73A;
+  border-color: #7BA73A;
+}
+
+.btn-link {
+  font-weight: 400;
+  color: #7BA73A;
+  text-decoration: none;
+}
+
+/*
+element.style {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.btn-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+.btn:hover {
+    color: #212529;
+    text-decoration: none;
+}
+.btn-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+.btn:hover {
+    color: #212529;
+    text-decoration: none;
+}
+a, a:hover, a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+*/

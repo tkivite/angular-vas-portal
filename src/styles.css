@@ -6,14 +6,42 @@
 @import '~ngx-toastr/toastr.css';
 @import '~intl-tel-input/build/css/intlTelInput.css';
 
+/*
 body {
   font-family: 'Poppins', sans-serif;
   background: #fafafa;
+}*/
+
+
+
+@font-face {
+  font-family: "Proxima-Nova-Alt-Semibold";
+  src: url('/assets/fonts/MarkSimonsonProximaNovaAltSemibold.woff') format('woff2');
 }
 
+@font-face {
+  font-family: "Proxima-Nova-Regular";
+  src: url('/assets/fonts/MarkSimonsonProximaNovaRegular.woff') format('woff2');
+}
+
+
+html,
+body,
+app-root {
+  height: 100%;
+  margin: 0;
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: "Proxima-Nova-Alt-Semibold";
+  background: #fafafa;
+  color: #585858 !important;
+}
+
+
+
+
 p {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.1em;
+  font-family: "Proxima-Nova-Alt-Semibold";
+
   font-weight: 300;
   line-height: 1.7em;
   color: #999;
@@ -28,8 +56,9 @@ a:focus {
 }
 
 .dynamicContent {
-  margin-left: 0px !important;
+  margin-left: 30px !important;
   margin-right: 0px !important;
+  padding-top: 50px;
 }
 
 
@@ -45,6 +74,7 @@ a:focus {
   border-radius: 0;
   margin-bottom: 21px;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  height: 80px;
 }
 
 .navbar-btn {
@@ -67,7 +97,8 @@ a:focus {
 
 .top-link,
 .top-link:visited {
-  background-color: #F1F3F6;
+  /* background-color: #F1F3F6; */
+  background-color: #fff;
   color: #1635e0;
   padding: 14px 25px;
   text-align: center;
@@ -95,60 +126,6 @@ a:focus {
   display: flex;
   width: 100%;
   align-items: stretch;
-}
-
-#sidebar {
-  min-width: 250px;
-  max-width: 250px;
-  background: #7386D5;
-  color: #fff;
-  transition: all 0.3s;
-}
-
-#sidebar.active {
-  margin-left: -250px;
-}
-
-#sidebar .sidebar-header {
-  padding: 20px;
-  background: #6d7fcc;
-}
-
-#sidebar ul.components {
-  padding: 20px 0;
-  border-bottom: 1px solid #47748b;
-}
-
-#sidebar ul p {
-  color: #fff;
-  padding: 10px;
-}
-
-#sidebar ul li a {
-  padding: 10px;
-  font-size: 1.1em;
-  display: block;
-}
-
-#sidebar ul li a:hover {
-  color: #7386D5;
-  background: #fff;
-}
-
-#sidebar ul li.active>a,
-a[aria-expanded="true"] {
-  color: #fff;
-  background: #6d7fcc;
-}
-
-#sidebar ul li svg:not(:root).svg-inline--fa {
-  float: right;
-
-}
-
-#sidebar ul li .fa {
-  float: right;
-
 }
 
 
@@ -227,7 +204,7 @@ a.article:hover {
 ----------------------------------------------------- */
 
 .box.box-primary {
-  border-top-color: #3c8dbc;
+  /* border-top-color: #3c8dbc; */
 }
 
 .box {
@@ -235,7 +212,7 @@ a.article:hover {
   position: relative;
   border-radius: 5px;
   background: #ffffff;
-  border-top: 5px solid #d2d6de;
+  /* border-top: 5px solid #d2d6de; */
   margin-bottom: 20px;
   width: 100%;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
@@ -251,15 +228,29 @@ a.article:hover {
   text-align: center;
 }
 
-.nav-link.active,
+/* .nav-link.active,
 .nav-link {
   color: blue !important;
-}
+} */
 
 .viewslink {
   margin-left: 20px;
   margin-top: 20px;
   width: 80%;
+}
+
+.sidebar-header {
+  font-size: 22px;
+  color: #7BA73A;
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+
+.dash-header {
+  font-size: 22px;
+  color: #7BA73A;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 #views {
@@ -295,8 +286,6 @@ a.article:hover {
   padding: 0;
   border-radius: 0;
   color: #212121;
-  background-color: #FAFAFA;
-  border-color: #EEEEEE;
 }
 
 .panel-title {
@@ -355,26 +344,6 @@ a[aria-expanded="true"] {
   display: block;
 }
 
-.login-panel {
-  margin-bottom: 20px;
-  margin-top: 25%;
-  background-color: #fff;
-  border: 1px solid transparent;
-  border-radius: 4px;
-
-}
-
-.login-panel>.panel-heading {
-  padding: 10px 15px;
-  border-bottom: 1px solid transparent;
-  border-bottom-color: transparent;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-}
-
-.login-panel>.panel-body {
-  padding: 15px
-}
 
 .dataTable {
   font-size: 0.9em;
@@ -443,9 +412,9 @@ a[aria-expanded="true"] {
 
 #cccform,
 #myaccform {
-  border: 2px dashed #ddd;
+  /* border: 2px dashed #ddd;
   border-radius: 5px;
-  background-color: aliceblue;
+  background-color: aliceblue; */
 
 }
 
@@ -485,7 +454,6 @@ a[aria-expanded="true"] {
 }
 
 #div-dashboard {
-  border: 2px dashed #ddd;
   padding-top: 30px;
   border-radius: 5px;
   padding-left: 30px;
@@ -512,7 +480,10 @@ app-pickup,
 app-invoicing,
 app-shoppers,
 app-view,
-app-dashboard {
+app-dashboard,
+app-onboarding,
+app-sales-menu,
+app-sales-dashboard {
   width: 100%;
 }
 
@@ -532,14 +503,13 @@ app-dashboard {
 
 .form-heading {
   padding-top: 10px;
-  background-color: #d0e2ec;
-  margin-bottom: -15px;
+  margin-bottom: 35px;
 
 }
 
 .form-heading>h4 {
-  font-size: 1.4em !important;
-  color: mediumblue;
+  font-size: 22px !important;
+  color: #7BA73A;
 }
 
 hr {
@@ -678,3 +648,41 @@ tr {
 .slidedown {
   max-height: 500px;
 }
+
+.btn-info,
+.btn-success {
+  background-color: #7BA73A;
+  border-color: #7BA73A;
+}
+
+
+.page-item.active .page-link {
+  background-color: #7BA73A !important;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.page-link:hover {
+  cursor: pointer;
+}
+
+.table {
+  color: #585858;
+  font-family: "Proxima-Nova-Alt-Semibold";
+}
+
+input[type=text] {
+  color: #A4A4A5;
+  font-family: "Proxima-Nova-Regular";
+}
+
+.table>thead {
+  font-size: 1.2em;
+  font-weight: bolder;
+  color: black;
+}
+
+/*
+The green colour code is #7BA73A while the blue is #28328D and the grey is #585858.
+For the fonts, I have used Proxima Nova Alt semibold for the main body text with the grey colour code #585858. In the filling boxes, I have used the same font but regular size and with a lighter grey of #A4A4A5.
+*/

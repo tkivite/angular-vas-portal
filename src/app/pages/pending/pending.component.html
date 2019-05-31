@@ -2,17 +2,19 @@
   <div class="box box-primary">
     <div class="box-body">
       <div class="widget-controls row">
-        <div class="col-sm-6">
-          <a class="btn btn-info btn-sm mb-1" routerLink="/collections/create"><i class="fa fa-user"></i> Customer
+        <div class="col-sm-4">
+          <!-- <a class="btn btn-info btn-sm mb-1" routerLink="/collections/create"><i class="fa fa-user"></i> Customer
             Pickup</a>
           &nbsp;&nbsp;&nbsp;
           <a class="btn btn-info btn-sm mb-1" routerLink="/collections/lipalater"><i class="fa fa-shopping-cart"></i>
             Lipalater
-            Pickup</a>
+            Pickup</a> -->
+          <a class="btn btn-info btn-md mb-1" (click)="downloadApps()"><i class="fa fa-refresh"></i> Update
+            List</a>
 
         </div>
         <div class="col-sm-2"></div>
-        <div class="col-sm-4">
+        <div class="col-sm-6">
           <div class="input-group search-box">
             <input type="text" [(ngModel)]="searchKey" class="form-control search-input"
               placeholder="Search this content">
@@ -30,8 +32,6 @@
           <tr>
             <th></th>
             <th>Customer</th>
-            <!-- <th>Cust ID</th>
-            <th>Customer Mobile</th> -->
             <th>Item</th>
             <th>Delivery Option</th>
             <th>Store</th>
@@ -44,8 +44,6 @@
           <tr *ngFor="let item of data; let i = index" id={{item.id}}>
             <td>{{i+1}}</td>
             <td>{{item.customer_names}}</td>
-            <!-- <td>{{item.customer_id_number}}</td>
-            <td>{{item.customer_phone_number}}</td> -->
             <td>{{item.item_description}}</td>
             <td>{{(item.pick_up_type =='store_pick_up')?'customer pick up':'lipalater pick up'}}</td>
             <td>{{item.store}}</td>

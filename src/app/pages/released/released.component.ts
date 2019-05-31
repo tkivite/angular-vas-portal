@@ -30,6 +30,7 @@ export class ReleasedComponent implements OnInit {
   //pagination
   searchKey = "";
   current_page = 1;
+  requested_Page = 1;
   total_records = 0;
   page_size = 25;
   total_pages = 1;
@@ -70,6 +71,7 @@ export class ReleasedComponent implements OnInit {
       data => {
         console.log(data);
         if (data.status === 200) {
+          this.current_page = this.requested_Page;
           console.log(data.body);
           this.data = data.body.sales;
           //pagination params
@@ -153,7 +155,7 @@ export class ReleasedComponent implements OnInit {
     this.getData();
   }
   loadPage(i) {
-    this.current_page = i;
+    this.requested_Page = i;
     this.searchParams = {
       searchKey: this.searchKey,
       action: "display",

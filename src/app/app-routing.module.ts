@@ -3,6 +3,8 @@ import { Routes, RouterModule, PreloadAllModules } from "@angular/router";
 import { SalesComponent } from "./pages/sales/sales.component";
 import { ShoppersComponent } from "./pages/supermarkets/shoppers.component";
 import { DashboardComponent } from "./pages/dashboard/dashboard.component";
+
+import { OnboardingDashboardComponent } from "./pages/onboarding-dashboard/onboarding-dashboard.component";
 import { NotificationsComponent } from "./pages/notifications/notifications.component";
 import { CollectionsComponent } from "./pages/collections/collections.component";
 import { ReleasedComponent } from "./pages/released/released.component";
@@ -37,44 +39,73 @@ import { ForgotPasswordComponent } from "./pages/forgot-password/forgot-password
 import { PickupComponent } from "./pages/collections/create/pickup.component";
 
 import { StaffPickupComponent } from "./pages/collections/lipalater/pickup.component";
+import { OnboardingComponent } from "./pages/onboarding/onboarding.component";
 
+import { SalesMenuComponent } from "./pages/sales-menu/sales-menu.component";
+import { SalesDashboardComponent } from "./pages/sales-dashboard/sales-dashboard.component";
 const routes: Routes = [
   { path: "", redirectTo: "dashboard", pathMatch: "full" },
   { path: "login", component: LoginComponent },
+  {
+    path: "onboarding",
+    component: OnboardingComponent,
+    children: [
+      { path: "", component: OnboardingDashboardComponent },
+      { path: "dashboard", component: OnboardingDashboardComponent },
+      { path: "partners", component: PartnerComponent },
+      { path: "partners/create", component: CreateBeComponent },
+      { path: "partners/update", component: UpdateBeComponent },
+      { path: "partners/view", component: ViewBeComponent },
+      { path: "stores", component: StoreComponent },
+      { path: "stores/create", component: CreateStoreComponent },
+      { path: "stores/update", component: UpdateStoreComponent },
+      { path: "users", component: UsersComponent },
+      { path: "users/create", component: CreateUserComponent },
+      { path: "users/update", component: UpdateUserComponent },
+      { path: "lipalater-users", component: LipalaterUsersComponent },
+      {
+        path: "lipalater-users/create",
+        component: CreateLipalaterUserComponent
+      },
+      {
+        path: "lipalater-users/update",
+        component: UpdateLipalaterUserComponent
+      }
+    ]
+  },
+  {
+    path: "sales-menu",
+    component: SalesMenuComponent,
+    children: [
+      { path: "", component: SalesDashboardComponent },
+      { path: "dashboard", component: SalesDashboardComponent },
+      { path: "sales", component: SalesComponent },
+      { path: "pending", component: PendingComponent },
+      { path: "collections", component: CollectionsComponent },
+      { path: "collections/create", component: PickupComponent },
+      { path: "collections/lipalater", component: StaffPickupComponent },
+      { path: "released", component: ReleasedComponent },
+      { path: "deliveries", component: DeliveriesComponent }
+    ]
+  },
+  {
+    path: "supermakets",
+    component: SalesMenuComponent,
+    children: [
+      { path: "", component: SalesDashboardComponent },
+      { path: "invoicing", component: InvoicingComponent },
+      { path: "invoices/create", component: CreateInvoiceComponent },
+      { path: "invoices/view", component: ViewInvoiceComponent }
+    ]
+  },
+  { path: "myaccount", component: MyaccountComponent },
   { path: "register", component: CreateUserComponent },
   { path: "changepassword", component: ChangePasswordComponent },
   { path: "forgotPassword", component: ForgotPasswordComponent },
-
-  { path: "sales", component: SalesComponent },
   { path: "shoppers", component: ShoppersComponent },
-  { path: "pending", component: PendingComponent },
-  { path: "partners", component: PartnerComponent },
-  { path: "partners/create", component: CreateBeComponent },
-  { path: "partners/update", component: UpdateBeComponent },
-  { path: "partners/view", component: ViewBeComponent },
-  { path: "stores", component: StoreComponent },
-  { path: "stores/create", component: CreateStoreComponent },
-  { path: "stores/update", component: UpdateStoreComponent },
   { path: "dashboard", component: DashboardComponent },
   { path: "notifications", component: NotificationsComponent },
-  { path: "collections", component: CollectionsComponent },
-  { path: "collections/create", component: PickupComponent },
-  { path: "collections/lipalater", component: StaffPickupComponent },
-  { path: "released", component: ReleasedComponent },
-  { path: "payments", component: PaymentsComponent },
-  { path: "users", component: UsersComponent },
-  { path: "users/create", component: CreateUserComponent },
-  { path: "users/update", component: UpdateUserComponent },
-
-  { path: "lipalater-users", component: LipalaterUsersComponent },
-  { path: "lipalater-users/create", component: CreateLipalaterUserComponent },
-  { path: "lipalater-users/update", component: UpdateLipalaterUserComponent },
-
-  { path: "deliveries", component: DeliveriesComponent },
-  { path: "myaccount", component: MyaccountComponent },
-  { path: "invoicing", component: InvoicingComponent },
-  { path: "invoices/create", component: CreateInvoiceComponent },
-  { path: "invoices/view", component: ViewInvoiceComponent }
+  { path: "payments", component: PaymentsComponent }
 ];
 
 @NgModule({

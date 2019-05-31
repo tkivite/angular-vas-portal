@@ -90,7 +90,7 @@ export class LipalaterUsersComponent implements OnInit {
   onEdit(data) {
     console.log(data);
     this.dataservice.EditFormData = data;
-    this.router.navigate(["lipalater-users/update"]);
+    this.router.navigate(["/onboarding/lipalater-users/update"]);
   }
   onDelete(record) {
     this.confirmationDialogService

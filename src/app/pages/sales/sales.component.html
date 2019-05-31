@@ -2,11 +2,11 @@
   <div class="box box-primary">
     <div class="box-body">
       <div class="widget-controls row">
-        <div class="col-sm-4">
-          <a class="btn btn-info btn-sm mb-1" (click)="downloadApps()"><i class="fa fa-refresh"></i> Update Sales
-            List</a>
+        <div class="col-sm-3">
+          <span class="dash-header"> All Items</span>
+
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-3">
           <div class="form-group row">
             <label class="col-sm-2-text-left">From: </label>
             <div class="input-group col-sm-10">
@@ -85,8 +85,8 @@
             <td>{{(item.pick_up_type =='store_pick_up')?'customer pick up':'lipalater pick up'}}</td>
             <td>{{item.store}}</td>
             <td>{{item.status}}</td>
-            <td>{{item.created_at | date: 'medium'}}</td>
-            <td>{{item.collected_at | date: 'medium'}}</td>
+            <td>{{item.created_at | date}}</td>
+            <td>{{item.collected_at | date}}</td>
 
           </tr>
         </tbody>

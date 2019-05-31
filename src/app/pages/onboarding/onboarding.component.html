@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-sm-2 onboarding-menu">
+    <div class="box box-primary">
+      <div class="box-body">
+
+        <nav id="sidebar" *ngIf="currentUser">
+          <div class="sidebar-header"> Onboarding Menu
+          </div>
+          <div class="container demo d-none d-md-block"></div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <a class="nav-link sales-link" routerLink="dashboard">
+                Onboarding
+                <p>stats</p>
+              </a>
+            </li>
+            <li class="list-group-item">
+              <a class="nav-link sales-link" routerLink="partners">
+                Partners<p>{{partners}}</p>
+              </a>
+            </li>
+            <li class="list-group-item">
+              <a class="nav-link sales-link" routerLink="stores">Stores<p>{{stores}}</p>
+              </a>
+            </li>
+            <li class="list-group-item">
+              <a class="nav-link released-link" routerLink="users">Store Users
+                <p>{{store_users}}</p>
+              </a>
+            </li>
+            <li class="list-group-item" *ngIf="currentUser.user.role == 'Lipalater Super admin'">
+              <a class=" nav-link released-link" routerLink="lipalater-users">Internal Users
+                <p>{{internal_users}}</p>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-sm-10">
+    <router-outlet></router-outlet>
+  </div>
+</div>

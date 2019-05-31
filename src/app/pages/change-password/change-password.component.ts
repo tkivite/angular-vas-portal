@@ -15,7 +15,7 @@ import { BlockUI, NgBlockUI } from "ng-block-ui";
 @Component({
   selector: "app-change-password",
   templateUrl: "./change-password.component.html",
-  styleUrls: ["./change-password.component.scss"],
+  styleUrls: ["./change-password.component.css"],
   encapsulation: ViewEncapsulation.None
 })
 export class ChangePasswordComponent {

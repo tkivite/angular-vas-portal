@@ -86,7 +86,7 @@ export class UsersComponent implements OnInit {
   onEdit(data) {
     console.log(data);
     this.dataservice.EditFormData = data;
-    this.router.navigate(["users/update"]);
+    this.router.navigate(["/onboarding/users/update"]);
   }
   //.then((confirmed) => console.log('User confirmed:', confirmed))
   //.catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));

@@ -90,7 +90,7 @@ export class PartnerComponent implements OnInit {
   onEdit(data) {
     console.log(data);
     this.dataservice.EditFormData = data;
-    this.router.navigate(["partners/update"]);
+    this.router.navigate(["onboarding/partners/update"]);
   }
   onView(data) {
     console.log(data);
