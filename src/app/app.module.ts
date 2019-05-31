@@ -67,14 +67,11 @@ import { ChangePasswordComponent } from "./pages/change-password/change-password
 import { ForgotPasswordComponent } from "./pages/forgot-password/forgot-password.component";
 import { PickupComponent } from "./pages/collections/create/pickup.component";
 import { StaffPickupComponent } from "./pages/collections/lipalater/pickup.component";
-<<<<<<< HEAD
 import { NgxTypeaheadModule } from "ngx-typeahead";
-=======
-import { OnboardingComponent } from './pages/onboarding/onboarding.component';
-import { OnboardingDashboardComponent } from './pages/onboarding-dashboard/onboarding-dashboard.component';
-import { SalesDashboardComponent } from './pages/sales-dashboard/sales-dashboard.component';
-import { SalesMenuComponent } from './pages/sales-menu/sales-menu.component';
->>>>>>> ui-revamp
+import { OnboardingComponent } from "./pages/onboarding/onboarding.component";
+import { OnboardingDashboardComponent } from "./pages/onboarding-dashboard/onboarding-dashboard.component";
+import { SalesDashboardComponent } from "./pages/sales-dashboard/sales-dashboard.component";
+import { SalesMenuComponent } from "./pages/sales-menu/sales-menu.component";
 
 enableProdMode();
 
