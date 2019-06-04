@@ -342,6 +342,7 @@ export class DashboardComponent implements OnInit {
           console.log(data.body);
           this.sales = data.body;
           this.pending = data.body.pending.slice(0, 5);
+
           this.collected = data.body.collected.slice(0, 5);
           this.pending_count = data.body.pending_count;
           this.pending_value = data.body.pending_value;

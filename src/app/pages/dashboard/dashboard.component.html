@@ -79,7 +79,7 @@
 <div class="box box-primary">
   <div class="box-body">
     <div class="row mb-3"
-      *ngIf="currentUser.user.role == 'Lipalater admin' || currentUser.user.role == 'Lipalater Super admin' || currentUser.user.role == 'Store admin' ">
+      *ngIf="loadedSales && (currentUser.user.role == 'Lipalater admin' || currentUser.user.role == 'Lipalater Super admin' || currentUser.user.role == 'Store admin') ">
       <span class="dash-header">
         Sales Stats
       </span>
@@ -143,10 +143,10 @@
 <div class="row">
   <div class="col-sm-6">
     <div class="box box-primary">
-      <div class="box-body">
+      <div class="box-body" *ngIf="loadedSales">
         <div class="row mb-3">
           <span class="dash-header">
-            Recently Added Items
+            Recently Added Items {{pending.length}}
           </span>
         </div>
         <div class="row mb-3" *ngIf="pending.length > 0">
@@ -191,7 +191,7 @@
 
   <div class="col-sm-6">
     <div class="box box-primary">
-      <div class="box-body">
+      <div class="box-body" *ngIf="loadedSales">
 
         <div class="row mb-3">
           <span class="dash-header">

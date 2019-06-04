@@ -80,7 +80,7 @@
 
   <div class="col-sm-6">
     <div class="box box-primary">
-      <div class="box-body">
+      <div class="box-body" *ngIf="loadedPartnersData">
         <div class="row mb-3" *ngIf="partnersdata.length > 0">
           <span class="sidebar-header">
             Recently Added Partners
@@ -117,7 +117,7 @@
   </div>
   <div class="col-sm-6">
     <div class="box box-primary">
-      <div class="box-body">
+      <div class="box-body" *ngIf="loadedStoresData">
         <div class="row mb-3" *ngIf="storesdata.length > 0">
           <span class="sidebar-header">
             Recently Added Stores

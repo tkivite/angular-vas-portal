@@ -35,6 +35,8 @@ export class OnboardingDashboardComponent implements OnInit {
   pending_value: any;
   currentUser: any;
   partnersdata: any;
+  loadedPartnersData = false;
+  loadedStoresData = false;
   storesdata: any;
 
   LineChart = [];
@@ -311,6 +313,7 @@ export class OnboardingDashboardComponent implements OnInit {
         if (data.status === 200) {
           console.log(data.body);
           this.partnersdata = data.body.partners.slice(0, 5);
+          this.loadedPartnersData = true;
           this.blockUI.stop();
         } else if (data.status === 401) {
           this.router.navigate(["login"]);
@@ -344,6 +347,7 @@ export class OnboardingDashboardComponent implements OnInit {
       data => {
         if (data.status === 200) {
           this.storesdata = JSON.parse(data.body.stores).slice(0, 5);
+          this.loadedStoresData = true;
           console.log(this.data);
 
           this.blockUI.stop();
