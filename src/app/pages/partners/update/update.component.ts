@@ -197,7 +197,7 @@ export class UpdateBeComponent implements OnInit {
           data => {
             console.log(data);
             if (data.status === 200) {
-              this.router.navigate(["partners"]);
+              this.router.navigate(["/onboarding/partners"]);
               this.blockUI.stop();
               this.toastrService.success("Record Update was successful");
             } else {

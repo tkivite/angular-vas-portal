@@ -169,7 +169,7 @@ export class CreateBeComponent implements OnInit {
         data => {
           if (data.status === 201) {
             this.toastrService.success(data.message);
-            this.router.navigate(["partners"]);
+            this.router.navigate(["/onboarding/partners"]);
             this.blockUI.stop();
             this.toastrService.success("Record Creation was successful");
           } else {
