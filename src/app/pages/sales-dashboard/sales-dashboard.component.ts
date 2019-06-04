@@ -114,7 +114,7 @@ export class SalesDashboardComponent implements OnInit {
                   {
                     label: "All Items Sold",
                     data: this.salesNumbers,
-                    fill: true,
+                    fill: false,
                     lineTension: 0.2,
                     borderColor: "#7BA73A",
                     backgroundColor: "#7BA73A",
@@ -123,7 +123,7 @@ export class SalesDashboardComponent implements OnInit {
                   {
                     label: "All Pending Items",
                     data: sales_pending.reverse(),
-                    fill: true,
+                    fill: false,
                     lineTension: 0.2,
                     borderColor: "#DB5F8A",
                     backgroundColor: "#DB5F8A",
@@ -132,7 +132,7 @@ export class SalesDashboardComponent implements OnInit {
                   {
                     label: "All Items Added",
                     data: sales_all_stats.reverse(),
-                    fill: true,
+                    fill: false,
                     lineTension: 0.2,
                     borderColor: "#E2AE9D",
                     backgroundColor: "#E2AE9D",
@@ -230,7 +230,7 @@ export class SalesDashboardComponent implements OnInit {
                   {
                     label: "All Sales By Value",
                     data: this.salesValues,
-                    fill: true,
+                    fill: false,
                     lineTension: 0.2,
                     borderColor: "#7BA73A",
                     backgroundColor: "#7BA73A",
@@ -239,7 +239,7 @@ export class SalesDashboardComponent implements OnInit {
                   {
                     label: "All Pending Sales",
                     data: sales_pending.reverse(),
-                    fill: true,
+                    fill: false,
                     lineTension: 0.2,
                     borderColor: "#DB5F8A",
                     backgroundColor: "#DB5F8A",
@@ -248,7 +248,7 @@ export class SalesDashboardComponent implements OnInit {
                   {
                     label: "All Value Added",
                     data: sales_all_stats.reverse(),
-                    fill: true,
+                    fill: false,
                     lineTension: 0.2,
                     borderColor: "#E2AE9D",
                     backgroundColor: "#E2AE9D",
