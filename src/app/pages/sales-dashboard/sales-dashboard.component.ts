@@ -32,6 +32,10 @@ export class SalesDashboardComponent implements OnInit {
   pending_count: any;
   collected_value: any;
   pending_value: any;
+
+  cancelled_count: any;
+  cancelled_value: any;
+
   currentUser: any;
 
   LineChart = [];
@@ -380,6 +384,9 @@ export class SalesDashboardComponent implements OnInit {
           this.pending_value = data.body.pending_value;
           this.collected_count = data.body.collected_count;
           this.collected_value = data.body.collected_value;
+
+          this.cancelled_count = data.body.cancelled_count;
+          this.cancelled_value = data.body.cancelled_value;
           //this.blockUI.stop();
           this.loadedSales = true;
         } else {

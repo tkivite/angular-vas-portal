@@ -91,7 +91,7 @@
                 <th>Customer</th>
                 <th>Item</th>
                 <th>Store</th>
-                <th>Amount</th>
+
                 <th>Pickup type</th>
                 <th>Date Added</th>
               </tr>
@@ -101,7 +101,7 @@
                 <td>{{item.customer_names}} </td>
                 <td>{{item.item_description}}</td>
                 <td>{{item.store}}</td>
-                <td>{{item.buying_price}}</td>
+
                 <td>{{(item.pick_up_type =='store_pick_up')?'customer':'lipalater'}}</td>
                 <td>{{item.created_at | date: 'medium'}}</td>
 
