@@ -204,7 +204,7 @@ export class UpdateLipalaterUserComponent implements OnInit {
         .subscribe(
           data => {
             if (data.status === 200) {
-              this.router.navigate(["lipalater-users"]);
+              this.router.navigate(["/onboarding/lipalater-users/"]);
               this.blockUI.stop();
               this.toastrService.success("User Record updated successfully");
             } else {

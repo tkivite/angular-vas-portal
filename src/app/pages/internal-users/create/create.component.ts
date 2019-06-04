@@ -139,7 +139,7 @@ export class CreateLipalaterUserComponent implements OnInit {
       this.dataservice.postData("users", postFormData).subscribe(
         data => {
           if (data.status === 201) {
-            this.router.navigate(["lipalater-users"]);
+            this.router.navigate(["/onboarding/lipalater-users/"]);
             this.blockUI.stop();
             this.toastrService.success("User Record created successfully");
           } else {
