@@ -33,6 +33,7 @@ export class PendingComponent implements OnInit {
   title = "angulardatatables";
   //pagination
   current_page = 1;
+  requested_page = 1;
   total_records = 0;
   page_size = 25;
   total_pages = 1;
@@ -62,6 +63,15 @@ export class PendingComponent implements OnInit {
       year: ddPast.getFullYear()
     };
 
+    this.startdateRange =
+      this.startdate.year +
+      "-" +
+      this.startdate.month +
+      "-" +
+      this.startdate.day;
+    this.enddateRange =
+      this.enddate.year + "-" + this.enddate.month + "-" + this.enddate.day;
+
     this.getData();
   }
 
@@ -74,6 +84,7 @@ export class PendingComponent implements OnInit {
       data => {
         console.log(data);
         if (data.status === 200) {
+          this.current_page = this.requested_page;
           console.log(data.body);
           this.data = data.body.sales;
           //pagination params
@@ -150,11 +161,11 @@ export class PendingComponent implements OnInit {
       startdate: this.startdateRange,
       enddate: this.enddateRange
     };
-
+    this.requested_page = 1;
     this.getData();
   }
   loadPage(i) {
-    this.current_page = i;
+    this.requested_page = i;
     this.searchParams = {
       searchKey: this.searchKey,
       action: "display",
@@ -175,8 +186,8 @@ export class PendingComponent implements OnInit {
           searchKey: this.searchKey,
           action: "download",
           page: 1,
-          startdate: this.startdateRange,
-          enddate: this.enddateRange
+          startdate: this.startdate,
+          enddate: this.enddate
         };
 
         this.getData();

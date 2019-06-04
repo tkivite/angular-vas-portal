@@ -30,7 +30,7 @@ export class ReleasedComponent implements OnInit {
   //pagination
   searchKey = "";
   current_page = 1;
-  requested_Page = 1;
+  requested_page = 1;
   total_records = 0;
   page_size = 25;
   total_pages = 1;
@@ -59,6 +59,15 @@ export class ReleasedComponent implements OnInit {
       year: ddPast.getFullYear()
     };
 
+    this.startdateRange =
+      this.startdate.year +
+      "-" +
+      this.startdate.month +
+      "-" +
+      this.startdate.day;
+    this.enddateRange =
+      this.enddate.year + "-" + this.enddate.month + "-" + this.enddate.day;
+
     this.getData();
   }
 
@@ -71,7 +80,7 @@ export class ReleasedComponent implements OnInit {
       data => {
         console.log(data);
         if (data.status === 200) {
-          this.current_page = this.requested_Page;
+          this.current_page = this.requested_page;
           console.log(data.body);
           this.data = data.body.sales;
           //pagination params
@@ -151,11 +160,11 @@ export class ReleasedComponent implements OnInit {
       startdate: this.startdateRange,
       enddate: this.enddateRange
     };
-
+    this.requested_page = 1;
     this.getData();
   }
   loadPage(i) {
-    this.requested_Page = i;
+    this.requested_page = i;
     this.searchParams = {
       searchKey: this.searchKey,
       action: "display",

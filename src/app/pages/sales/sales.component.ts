@@ -28,6 +28,7 @@ export class SalesComponent {
   searchKey = "";
   //pagination
   current_page = 1;
+  requested_page = 1;
   total_records = 0;
   page_size = 25;
   total_pages = 1;
@@ -54,6 +55,15 @@ export class SalesComponent {
       year: ddPast.getFullYear()
     };
 
+    this.startdateRange =
+      this.startdate.year +
+      "-" +
+      this.startdate.month +
+      "-" +
+      this.startdate.day;
+    this.enddateRange =
+      this.enddate.year + "-" + this.enddate.month + "-" + this.enddate.day;
+
     this.getData();
   }
 
@@ -64,6 +74,7 @@ export class SalesComponent {
     this.dataservice.fetchData("sales", this.searchParams).subscribe(
       data => {
         if (data.status === 200) {
+          this.current_page = this.requested_page;
           console.log(data.body);
           this.data = data.body.sales;
           //pagination params
@@ -150,11 +161,11 @@ export class SalesComponent {
       startdate: this.startdateRange,
       enddate: this.enddateRange
     };
-
+    this.requested_page = 1;
     this.getData();
   }
   loadPage(i) {
-    this.current_page = i;
+    this.requested_page = i;
     this.searchParams = {
       searchKey: this.searchKey,
       action: "display",
