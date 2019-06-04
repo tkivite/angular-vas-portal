@@ -73,6 +73,8 @@ import { OnboardingDashboardComponent } from "./pages/onboarding-dashboard/onboa
 import { SalesDashboardComponent } from "./pages/sales-dashboard/sales-dashboard.component";
 import { SalesMenuComponent } from "./pages/sales-menu/sales-menu.component";
 
+import { CancelledComponent } from "./pages/cancelled/cancelled.component";
+
 enableProdMode();
 
 @NgModule({
@@ -123,7 +125,8 @@ enableProdMode();
 
     SalesDashboardComponent,
 
-    SalesMenuComponent
+    SalesMenuComponent,
+    CancelledComponent
   ],
   imports: [
     BrowserModule,

@@ -43,6 +43,9 @@ import { OnboardingComponent } from "./pages/onboarding/onboarding.component";
 
 import { SalesMenuComponent } from "./pages/sales-menu/sales-menu.component";
 import { SalesDashboardComponent } from "./pages/sales-dashboard/sales-dashboard.component";
+
+import { CancelledComponent } from "./pages/cancelled/cancelled.component";
+
 const routes: Routes = [
   { path: "", redirectTo: "dashboard", pathMatch: "full" },
   { path: "login", component: LoginComponent },
@@ -81,6 +84,7 @@ const routes: Routes = [
       { path: "dashboard", component: SalesDashboardComponent },
       { path: "sales", component: SalesComponent },
       { path: "pending", component: PendingComponent },
+      { path: "cancelled", component: CancelledComponent },
       { path: "collections", component: CollectionsComponent },
       { path: "collections/create", component: PickupComponent },
       { path: "collections/lipalater", component: StaffPickupComponent },
