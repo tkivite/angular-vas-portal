@@ -140,7 +140,7 @@ export class CreateUserComponent implements OnInit {
       this.dataservice.postData("users", postFormData).subscribe(
         data => {
           if (data.status === 201) {
-            this.router.navigate(["users"]);
+            this.router.navigate(["/onboarding/users/"]);
             this.blockUI.stop();
             this.toastrService.success("User Record created successfully");
           } else {

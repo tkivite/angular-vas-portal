@@ -203,7 +203,7 @@ export class UpdateUserComponent implements OnInit {
         .subscribe(
           data => {
             if (data.status === 200) {
-              this.router.navigate(["users"]);
+              this.router.navigate(["/onboarding/users/"]);
               this.blockUI.stop();
               this.toastrService.success("User Record updated successfully");
             } else {
