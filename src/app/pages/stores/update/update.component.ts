@@ -228,7 +228,7 @@ export class UpdateStoreComponent implements OnInit {
           data => {
             console.log(data);
             if (data.status === 200) {
-              this.router.navigate(["stores"]);
+              this.router.navigate(["/onboarding/stores/"]);
               this.blockUI.stop();
               this.toastrService.success("Store Record updated successfully");
             } else {

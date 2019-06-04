@@ -306,7 +306,7 @@ export class CreateStoreComponent implements OnInit {
       this.dataservice.postData("stores", postFormData).subscribe(
         data => {
           if (data.status === 201) {
-            this.router.navigate(["stores"]);
+            this.router.navigate(["/onboarding/stores/"]);
             this.blockUI.stop();
             this.toastrService.success("Store Record created successfully");
           } else {
