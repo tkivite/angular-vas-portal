@@ -11,7 +11,8 @@
           ng-class="{active: currentUrlPath == '#/dashboard'}" class="1{{currentUrlPath}}">
           <img src="./assets/images/icons/HomeIcon.png" alt="Home" /></a>
       </li>
-      <li class="list-group-item">
+      <li class="list-group-item"
+        *ngIf="currentUser.user.role == 'Lipalater Super admin' || currentUser.user.role == 'Lipalater admin'">
         <a class="nav-link sales-link" routerLink="/onboarding" title="Onboarding">
           <img src="./assets/images/icons/OnboardingIcon.png" alt="Onboarding" /></a>
       </li>

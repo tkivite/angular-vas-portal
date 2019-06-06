@@ -30,9 +30,9 @@ export class LoginComponent implements OnInit {
     //authenticationService.logout();
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(["dashboard"]);
+      //this.router.navigate(["dashboard"]);
       let user = this.authenticationService.currentUserValue;
-      this.blockUI.start("Taking you home ....");
+      //this.blockUI.start("Taking you home ....");
       let email = user.user.email;
       let password = user.password;
       this.login(email, password);
@@ -53,8 +53,6 @@ export class LoginComponent implements OnInit {
   }
   //submit login
   public onSubmit(form: FormGroup) {
-    this.blockUI.start("Taking you home ....");
-
     let email = this.f.username.value;
     let password = this.f.password.value;
 
@@ -66,6 +64,7 @@ export class LoginComponent implements OnInit {
     this.router.navigate(["forgotPassword"]);
   }
   login(email, password) {
+    this.blockUI.start("Authenticating ....");
     const postFormData = {
       email: email,
       password: password

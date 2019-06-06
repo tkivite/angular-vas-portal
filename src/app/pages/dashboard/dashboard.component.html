@@ -1,4 +1,5 @@
-<div class="box box-primary">
+<div class="box box-primary"
+  *ngIf="currentUser.user.role == 'Lipalater admin' || currentUser.user.role == 'Lipalater Super admin' || currentUser.user.role == 'Store admin' ">
   <div class="box-body">
     <div class="row partner-graph">
 
@@ -7,12 +8,12 @@
     </div>
   </div>
 </div>
-<div class="box box-primary">
+<div class="box box-primary"
+  *ngIf="currentUser.user.role == 'Lipalater admin' || currentUser.user.role == 'Lipalater Super admin'">
   <div class="box-body">
 
 
-    <div class="row mb-3"
-      *ngIf="currentUser.user.role == 'Lipalater admin' || currentUser.user.role == 'Lipalater Super admin'">
+    <div class="row mb-3">
       <span class="dash-header">
         Onboarding Stats
       </span>
@@ -70,16 +71,17 @@
 
       </a>
     </div>
-    <div class="row mb-3" *ngIf="!loadedOnboarding">
+    <div class="row mb-3"
+      *ngIf="!loadedOnboarding && currentUser.user.role == 'Lipalater admin' || currentUser.user.role == 'Lipalater Super admin'">
       <img src="../../../assets/loading.gif" /> Loading Onboarding Stats
     </div>
   </div>
 </div>
 
-<div class="box box-primary">
+<div class="box box-primary"
+  *ngIf="loadedSales && (currentUser.user.role == 'Lipalater admin' || currentUser.user.role == 'Lipalater Super admin' || currentUser.user.role == 'Store admin') ">
   <div class="box-body">
-    <div class="row mb-3"
-      *ngIf="loadedSales && (currentUser.user.role == 'Lipalater admin' || currentUser.user.role == 'Lipalater Super admin' || currentUser.user.role == 'Store admin') ">
+    <div class="row mb-3">
       <span class="dash-header">
         Sales Stats
       </span>
@@ -132,7 +134,8 @@
         </div>
       </a>
     </div>
-    <div class="row mb-3" *ngIf="!loadedSales">
+    <div class="row mb-3"
+      *ngIf="!loadedSales && currentUser.user.role == 'Lipalater admin' || currentUser.user.role == 'Lipalater Super admin'">
       <img src="../../../assets/loading.gif" /> Loading Onboarding Stats
     </div>
 
@@ -140,10 +143,10 @@
 </div>
 
 
-<div class="row">
+<div class="row" *ngIf="loadedSales">
   <div class="col-sm-6">
     <div class="box box-primary">
-      <div class="box-body" *ngIf="loadedSales">
+      <div class="box-body">
         <div class="row mb-3">
           <span class="dash-header">
             Recently Added Items {{pending.length}}
@@ -191,7 +194,7 @@
 
   <div class="col-sm-6">
     <div class="box box-primary">
-      <div class="box-body" *ngIf="loadedSales">
+      <div class="box-body">
 
         <div class="row mb-3">
           <span class="dash-header">

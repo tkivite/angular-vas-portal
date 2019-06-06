@@ -1,4 +1,6 @@
-<div class="box box-primary">
+<div class="box box-primary"
+  *ngIf="currentUser.user.role == 'Lipalater admin' || currentUser.user.role == 'Lipalater Super admin' || currentUser.user.role == 'Store admin' ">
+
   <div class="box-body">
     <div class="row partner-graph">
 
@@ -10,10 +12,10 @@
     </div>
   </div>
 </div>
-<div class="box box-primary">
+<div class="box box-primary"
+  *ngIf="currentUser.user.role == 'Lipalater admin' || currentUser.user.role == 'Lipalater Super admin' || currentUser.user.role == 'Store admin' ">
   <div class="box-body">
-    <div class="row mb-3"
-      *ngIf="currentUser.user.role == 'Lipalater admin' || currentUser.user.role == 'Lipalater Super admin' || currentUser.user.role == 'Store admin' ">
+    <div class="row mb-3">
       <span class="dash-header">
         Sales Stats
       </span>
