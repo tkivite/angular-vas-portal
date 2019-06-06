@@ -62,12 +62,6 @@ export class PickupComponent {
     });
   }
 
-  public forgotPass() {
-    this.fsubmitted = false;
-    this.rsubmitted = false;
-    this.fsubmittedwitherrors = false;
-  }
-
   public login() {
     this.router.navigate(["login"]);
   }
@@ -96,8 +90,8 @@ export class PickupComponent {
   }
 
   public onSubmit(form: FormGroup) {
-    if (this.selectedItems.length > 0) {
-      if (form.valid) {
+    if (form.valid) {
+      if (this.selectedItems.length > 0) {
         this.blockUI.start("Completing Pickup");
         this.errorMessage = "SHOWERROR";
         const postdata = {
@@ -149,11 +143,11 @@ export class PickupComponent {
             }
           }
         );
+      } else {
+        this.toastrService.warning(
+          "No item selected. You have to select one or more items to complete pickup "
+        );
       }
-    } else {
-      this.toastrService.warning(
-        "No item selected. You have to select one or more items to complete pickup "
-      );
     }
   }
 

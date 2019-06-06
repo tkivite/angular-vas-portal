@@ -1,29 +1,9 @@
 <block-ui>
   <div class="box box-primary">
     <div class="box-body">
-      <!-- <div class="row mb-4" *ngIf="currentActive === 'DISABLED'">
-        <div class="col">
-          <div class="card border-0 box-shadow" widget="">
-            <div class="card-header transparent border-0 text-muted">
-              <h5 class="mb-0">Access Denied</h5>
-            </div>
-            <div class="card-block pt-0 widget-body">
-              <div class="row">
-                <div class="col-xl-12">
-                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                      <span aria-hidden="true">×</span>
-                    </button>
-                    <strong>Error!</strong> You Do not have access to this page.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
+
       <div widget class="card border-0 box-shadow">
-        <div id="cccform" class="container">
+        <div *ngIf="!fsubmitted">
           <div class="row form-heading">
             <div class="col-md-1"></div>
             <h4 class="col-md-11">Initiate Pickup by Lipalater Staff</h4>
@@ -150,6 +130,29 @@
           </div>
 
           <div class="panel-body" *ngIf="fsubmitted"></div>
+        </div>
+
+        <div class="panel-body" *ngIf="fsubmitted">
+          <div>
+            <div class="alert alert-lg alert-success">
+              <h3>We have successfully saved the pickup <i class="fa fa-check"></i></h3>
+              <p>
+                <a class="btn btn-md btn-success" routerLink="/collections/lipalater"> Next Lipalater Pickup
+                </a>
+              </p>
+              <p>
+                <a class="btn btn-md btn-success" routerLink="/collections/create"> Next Customer Pickup
+                </a>
+              </p>
+
+              <p>
+                <a class="btn btn-md btn-success" routerLink="/sales-menu/released"> View Released Items
+                </a>
+              </p>
+            </div>
+
+          </div>
+
         </div>
       </div>
     </div>

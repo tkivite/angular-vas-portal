@@ -64,12 +64,6 @@ export class StaffPickupComponent {
     });
   }
 
-  public forgotPass() {
-    this.fsubmitted = false;
-    this.rsubmitted = false;
-    this.fsubmittedwitherrors = false;
-  }
-
   public login() {
     this.router.navigate(["login"]);
   }
@@ -97,8 +91,9 @@ export class StaffPickupComponent {
   }
 
   public onSubmit(form: FormGroup) {
-    if (this.selectedCodes.length > 0) {
-      if (form.valid) {
+    console.log(form.valid);
+    if (form.valid) {
+      if (this.selectedCodes.length > 0) {
         this.blockUI.start("Submitting Pickup");
         this.errorMessage = "SHOWERROR";
         const postdata = {
@@ -150,11 +145,11 @@ export class StaffPickupComponent {
             }
           }
         );
+      } else {
+        this.toastrService.warning(
+          "No item selected. You have to select one or more items to complete pickup "
+        );
       }
-    } else {
-      this.toastrService.warning(
-        "No item selected. You have to select one or more items to complete pickup "
-      );
     }
   }
 
