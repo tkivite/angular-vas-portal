@@ -70,9 +70,7 @@
         <tbody>
           <tr *ngFor="let item of data; let i = index" title={{item.id}}>
             <td>{{((current_page-1)*25)+i+1}}</td>
-            <!-- <td>{{item.customer_names}}</td>
-            <td>{{item.customer_id_number}}</td> -->
-            <td>{{item.customer_phone_number}}</td>
+            <td>{{item.customer_names}}</td>
             <td>{{item.item_description}}</td>
             <td>{{(item.pick_up_type =='store_pick_up')?'customer pick up':'lipalater pick up'}}</td>
             <td>{{item.store}}</td>
