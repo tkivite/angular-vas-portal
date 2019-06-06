@@ -28,14 +28,9 @@
             <div class="col-md-1"></div>
             <h4 class="col-md-11">Initiate Pickup by Lipalater Staff</h4>
           </div>
-          <hr />
           <div class="row">
             <div class="col-md-1"></div>
-            <form
-              [formGroup]="pickupForm"
-              (ngSubmit)="onSubmit(pickupForm)"
-              class="col-md-11 form-horizontal"
-            >
+            <form [formGroup]="pickupForm" (ngSubmit)="onSubmit(pickupForm)" class="col-md-11 form-horizontal">
               <fieldset>
                 <p>
                   Enter the lipalater staff id number. If we find a pending item
@@ -45,20 +40,12 @@
                 <div class="form-group">
                   <label> ID Number</label>
 
-                  <input
-                    formControlName="idNumber"
-                    class="form-control validation-field"
-                    placeholder="Id Number"
-                    type="text"
-                  />
-                  <small
-                    class="text-danger"
-                    *ngIf="
+                  <input formControlName="idNumber" class="form-control validation-field" placeholder="Id Number"
+                    type="text" />
+                  <small class="text-danger" *ngIf="
                       pickupForm.get('idNumber').touched &&
                       pickupForm.get('idNumber').hasError('required')
-                    "
-                    >Id number is required</small
-                  >
+                    ">Id number is required</small>
                 </div>
                 <label> Pick up staff details</label>
                 <p *ngIf="rsubmitted">Names: {{ user_collecting }}</p>
@@ -70,30 +57,19 @@
                 </p>
 
                 <div class="form-group" *ngIf="!rsubmitted">
-                  <button
-                    class="btn btn-block btn-primary"
-                    (click)="getVerificationCode(pickupForm)"
-                  >
+                  <button class="btn btn-block btn-primary" (click)="getVerificationCode(pickupForm)">
                     Generate Code
                   </button>
                 </div>
                 <div class="form-group" *ngIf="rsubmitted">
                   <label> Verification Code </label>
 
-                  <input
-                    formControlName="verificationCode"
-                    class="form-control validation-field"
-                    placeholder="Verification Code"
-                    type="text"
-                  />
-                  <small
-                    class="text-danger"
-                    *ngIf="
+                  <input formControlName="verificationCode" class="form-control validation-field"
+                    placeholder="Verification Code" type="text" />
+                  <small class="text-danger" *ngIf="
                       pickupForm.get('verificationCode').touched &&
                       pickupForm.get('verificationCode').hasError('required')
-                    "
-                    >Code is required</small
-                  >
+                    ">Code is required</small>
                 </div>
 
                 <div class="form-group" *ngIf="rsubmitted">
@@ -112,16 +88,9 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr
-                        *ngFor="let item of customerItems; let i = index"
-                        id="{{ item.id }}"
-                      >
+                      <tr *ngFor="let item of customerItems; let i = index" id="{{ item.id }}">
                         <td>
-                          <input
-                            type="checkbox"
-                            value="{{ item.id }}"
-                            (change)="itemSelected($event)"
-                          />
+                          <input type="checkbox" value="{{ item.id }}" (change)="itemSelected($event)" />
                         </td>
                         <td>{{ item.customer_names }}</td>
                         <td>{{ item.item_description }}</td>
@@ -136,12 +105,8 @@
                         <td>{{ item.created_at | date }}</td>
                         <td>{{ item.status }}</td>
                         <td>
-                          <input
-                            id="{{ item.id }}"
-                            (mouseout)="itemCodeValues($event)"
-                            placeholder="Item Code (IMEI)"
-                            type="text"
-                          />
+                          <input id="{{ item.id }}" (mouseout)="itemCodeValues($event)" placeholder="Item Code (IMEI)"
+                            type="text" />
                         </td>
 
                         <!--[readonly]="isCodeReadOnly()"-->
@@ -153,19 +118,12 @@
 
                 <div class="form-group" *ngIf="rsubmitted">
                   <label> Pickup Notes </label>
-                  <textarea
-                    formControlName="pickupNotes"
-                    class="form-control validation-field"
-                    placeholder="Pickup Notes"
-                  ></textarea>
+                  <textarea formControlName="pickupNotes" class="form-control validation-field"
+                    placeholder="Pickup Notes"></textarea>
                 </div>
 
                 <div class="form-group" *ngIf="rsubmitted">
-                  <button
-                    [disabled]="!pickupForm.valid"
-                    class="btn btn-block btn-primary"
-                    type="submit"
-                  >
+                  <button [disabled]="!pickupForm.valid" class="btn btn-block btn-primary" type="submit">
                     Complete Pickup
                   </button>
                 </div>

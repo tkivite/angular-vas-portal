@@ -18,7 +18,11 @@
       </li>
       <li class="list-group-item">
         <a class="nav-link released-link" routerLink="/sales-menu" title="Sales">
-          <img src="./assets/images/icons/PickupmenuIcon.png" alt="Sales" /></a>
+          <img src="./assets/images/icons/SupermarketIcon.png" alt="Sales" /></a>
+      </li>
+      <li class="list-group-item">
+        <a class="nav-link pickup-link" routerLink="/collections" title="Pickup">
+          <img src="./assets/images/icons/PickupmenuIcon.png" alt="Pickup" /></a>
       </li>
       <li class="list-group-item" *ngIf="currentUser.user.role == 'Lipalater Super admin'">
         <a class=" nav-link released-link" routerLink="/myaccount" title="My Account">

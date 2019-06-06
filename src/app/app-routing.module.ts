@@ -85,13 +85,22 @@ const routes: Routes = [
       { path: "sales", component: SalesComponent },
       { path: "pending", component: PendingComponent },
       { path: "cancelled", component: CancelledComponent },
-      { path: "collections", component: CollectionsComponent },
-      { path: "collections/create", component: PickupComponent },
-      { path: "collections/lipalater", component: StaffPickupComponent },
+
       { path: "released", component: ReleasedComponent },
       { path: "deliveries", component: DeliveriesComponent }
     ]
   },
+  {
+    path: "collections",
+    component: CollectionsComponent,
+    children: [
+      { path: "", component: PickupComponent },
+      { path: "pending", component: PendingComponent },
+      { path: "create", component: PickupComponent },
+      { path: "lipalater", component: StaffPickupComponent }
+    ]
+  },
+
   {
     path: "supermakets",
     component: SalesMenuComponent,
