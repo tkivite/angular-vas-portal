@@ -28,8 +28,7 @@
                 <p>{{pending_count + collected_count}}</p>
               </a>
             </li>
-            <li class="list-group-item"
-              *ngIf="currentUser.user.role == 'Lipalater Super admin' || currentUser.user.role == 'Lipalater admin'">
+            <li class="list-group-item">
               <a class=" nav-link released-link" routerLink="cancelled">Cancelled
                 <p>{{cancelled_count}}</p>
               </a>
